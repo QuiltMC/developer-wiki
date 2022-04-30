@@ -41,6 +41,7 @@ public class GenerateContentTask extends DefaultTask {
 
             input = matcher.replaceAll(matchResult -> replaceMatch(matchResult, entry));
 
+            WikiBuildPlugin.currentEntry = entry;
             Node node = WikiBuildPlugin.PARSER.parse(input);
             String html = WikiBuildPlugin.RENDERER.render(node);
             generated.put(entry.file(), html);

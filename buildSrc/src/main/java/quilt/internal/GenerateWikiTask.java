@@ -26,7 +26,6 @@ public class GenerateWikiTask extends DefaultTask {
         File output = getProject().file("output");
         output.mkdir();
 
-
         List<GenerateWikiTreeTask.FileEntry> subWikis = root.subEntries();
 
         for (GenerateWikiTreeTask.FileEntry subWiki : subWikis) {
@@ -49,6 +48,14 @@ public class GenerateWikiTask extends DefaultTask {
                     .replace("${SIDEBAR}", sidebar);
 
             Files.writeString(output.toPath(), template);
+
+            File[] images = tree.project().file("images").listFiles();
+            if (!tree.project().equals(tree.parent().project()) && images != null) {
+                Files.createDirectory(current.toPath().resolve("images"));
+                for (File image : images) {
+                    Files.copy(image.toPath(), current.toPath().resolve("images").resolve(tree.project().file("images").toPath().relativize(image.toPath())));
+                }
+            }
         }
 
         for (GenerateWikiTreeTask.FileEntry entry : tree.subEntries()) {

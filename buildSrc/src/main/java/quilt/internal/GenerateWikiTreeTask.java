@@ -40,7 +40,7 @@ public class GenerateWikiTreeTask extends DefaultTask {
             }
 
             for (File subFile : subproject.fileTree("markdown")) {
-                if (subFile.equals(index)) {
+                if (subFile.equals(index) || !subFile.getParent().endsWith("markdown")) {
                     continue;
                 }
 
@@ -51,7 +51,6 @@ public class GenerateWikiTreeTask extends DefaultTask {
                         subproject));
             }
             FileEntry entry = new FileEntry(subproject.getName(), index, subEntries, subproject);
-
             toAdd.add(entry);
         }
     }
@@ -60,7 +59,77 @@ public class GenerateWikiTreeTask extends DefaultTask {
         return project.getSubprojects().stream().filter(it -> Objects.equals(it.getParent(), project)).toList();
     }
 
-    public record FileEntry(String name, @Nullable File file, List<FileEntry> subEntries, Project project) {
+    public static final class FileEntry {
+        private final String name;
+        @Nullable
+        private final File file;
+        private final List<FileEntry> subEntries;
+        private final Project project;
+        private FileEntry parent;
+
+        public FileEntry(String name, @Nullable File file, List<FileEntry> subEntries, Project project) {
+            this.name = name;
+            this.file = file;
+            this.subEntries = subEntries;
+            this.project = project;
+            this.subEntries.forEach(sub -> sub.setParent(this));
+        }
+
+        private void setParent(FileEntry parent) {
+            this.parent = parent;
+        }
+
+        @Override
+        public String toString() {
+            return toString(0);
+        }
+
+        public String toString(int depth) {
+            return "FileEntry{" +
+                   "name='" + name + '\'' +
+                   ", file=" + file +
+                   ", subEntries=[" + (subEntries.isEmpty() ? "" : "\n" + "\t".repeat(depth + 1)) + String.join(",\n" + "\t".repeat(depth + 1), subEntries.stream().map(fileEntry -> fileEntry.toString(depth + 1)).toList()) +
+                   "], " + (subEntries.isEmpty() ? "" : "\n" + "\t".repeat(depth)) + "project=" + project +
+                   '}';
+        }
+
+        public String name() {
+            return name;
+        }
+
+        @Nullable
+        public File file() {
+            return file;
+        }
+
+        public FileEntry parent() {
+            return parent;
+        }
+
+        public List<FileEntry> subEntries() {
+            return subEntries;
+        }
+
+        public Project project() {
+            return project;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == this) return true;
+            if (obj == null || obj.getClass() != this.getClass()) return false;
+            var that = (FileEntry) obj;
+            return Objects.equals(this.name, that.name) &&
+                   Objects.equals(this.file, that.file) &&
+                   Objects.equals(this.subEntries, that.subEntries) &&
+                   Objects.equals(this.project, that.project) &&
+                   Objects.equals(this.parent, that.parent);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, file, subEntries, project, parent);
+        }
     }
 
     private String getNameWithoutExtension(File f) {
