@@ -1,15 +1,21 @@
 package quilt.internal;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 
+import com.mitchellbosecke.pebble.PebbleEngine;
+import com.mitchellbosecke.pebble.template.PebbleTemplate;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
 
 public class GenerateWikiTask extends DefaultTask {
+    private final PebbleEngine engine = new PebbleEngine.Builder().autoEscaping(false).build();
+
     public GenerateWikiTask() {
         setGroup("wiki");
 
@@ -41,13 +47,12 @@ public class GenerateWikiTask extends DefaultTask {
             File output = new File(current, "index.html");
             output.createNewFile();
 
-            String template = Files.readString(getProject().file("templates/tutorial_page.html").toPath());
+            PebbleTemplate compiled = engine.getTemplate("templates/tutorial_page.html");
 
-            template = template.replace("${TITLE}", tree.name())
-                    .replace("${CONTENT}", content.get(tree.file()))
-                    .replace("${SIDEBAR}", sidebar);
-
-            Files.writeString(output.toPath(), template);
+            Map<String, Object> context = Map.of("title", tree.name(), "content", content.get(tree.file()), "sidebar", sidebar);
+            Writer writer = new FileWriter(output);
+            compiled.evaluate(writer, context);
+            writer.close();
 
             File[] images = tree.project().file("images").listFiles();
             if (!tree.project().equals(tree.parent().project()) && images != null) {

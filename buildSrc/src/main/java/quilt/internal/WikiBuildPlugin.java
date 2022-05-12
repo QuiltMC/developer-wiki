@@ -27,7 +27,7 @@ public class WikiBuildPlugin implements Plugin<Project> {
     public static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(Extensions.GITHUB_DOCUMENT_COMPATIBLE, new MdLinkParserExtension());
 
     public static final Parser PARSER = Parser.builder(OPTIONS).build();
-    public static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+    public static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).indentSize(4).build();
 
     public static GenerateWikiTreeTask.FileEntry currentEntry;
 

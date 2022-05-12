@@ -36,9 +36,15 @@ public class GenerateSidebarsTask extends DefaultTask {
         String indent = "\t".repeat(i);
 
         if (tree.file() != null) {
-            sidebar.append(indent).append("- ").append("[" + tree.name() + "](/" + getProject().property("wiki_path") + path + "/)").append("\n");
+            sidebar.append(indent)
+                    .append("- ")
+                    .append("[" + tree.name() + "](/" + getProject().property("wiki_path") + path + "/)")
+                    .append("\n");
         } else {
-            sidebar.append(indent).append("- ").append("~~" + tree.name() + "~~").append("\n");
+            sidebar.append(indent)
+                    .append("- ")
+                    .append("~~" + tree.name() + "~~")
+                    .append("\n");
         }
 
         for (GenerateWikiTreeTask.FileEntry entry : tree.subEntries()) {

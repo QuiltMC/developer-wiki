@@ -9,6 +9,7 @@ repositories {
 
 dependencies {
     implementation("com.vladsch.flexmark:flexmark-all:0.62.2")
+    implementation("io.pebbletemplates:pebble:3.1.5")
 }
 
 gradlePlugin {
