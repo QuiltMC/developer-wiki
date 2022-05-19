@@ -27,7 +27,8 @@ public class GenerateSidebarsTask extends DefaultTask {
         List<GenerateWikiTreeTask.FileEntry> subWikis = root.subEntries();
 
         for (GenerateWikiTreeTask.FileEntry subWiki : subWikis) {
-            sidebars.put(subWiki.name(), WikiBuildPlugin.RENDERER.render(WikiBuildPlugin.PARSER.parse(generateMdSidebar(subWiki, subWiki.name(), 0))));
+            String rendered = WikiBuildPlugin.RENDERER.render(WikiBuildPlugin.PARSER.parse(generateMdSidebar(subWiki, subWiki.name(), 0)));
+            sidebars.put(subWiki.name(), rendered.substring(rendered.indexOf("\n") + 1, rendered.lastIndexOf("\n") + 1));
         }
     }
 
