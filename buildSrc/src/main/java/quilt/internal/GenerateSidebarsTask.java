@@ -39,7 +39,7 @@ public class GenerateSidebarsTask extends DefaultTask {
         if (tree.file() != null) {
             sidebar.append(indent)
                     .append("- ")
-                    .append("[" + tree.name() + "](/" + getProject().property("wiki_path") + path + "/)")
+                    .append("[" + tree.name() + "](" + getProject().property("wiki_path")+ "/" + path + "/)")
                     .append("\n");
         } else {
             sidebar.append(indent)

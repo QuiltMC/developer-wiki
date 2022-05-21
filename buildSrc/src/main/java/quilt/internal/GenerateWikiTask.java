@@ -4,7 +4,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.FileVisitResult;
+import java.nio.file.FileVisitor;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +42,16 @@ public class GenerateWikiTask extends DefaultTask {
         for (GenerateWikiTreeTask.FileEntry subWiki : subWikis) {
             outputFile(subWiki, output, content, sidebars.get(subWiki.name()));
         }
+
+        Path staticFiles = this.getProject().getRootDir().toPath().resolve("static");
+        Files.walkFileTree(staticFiles, new SimpleFileVisitor<>() {
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                Path outputPath = output.toPath().resolve(staticFiles.relativize(file));
+                Files.copy(file, outputPath);
+                return super.visitFile(file, attrs);
+            }
+        });
     }
 
     private void outputFile(GenerateWikiTreeTask.FileEntry tree, File parent, Map<File, String> content, String sidebar) throws IOException {
@@ -49,7 +64,7 @@ public class GenerateWikiTask extends DefaultTask {
 
             PebbleTemplate compiled = engine.getTemplate("templates/tutorial_page.html");
 
-            Map<String, Object> context = Map.of("title", tree.name(), "content", content.get(tree.file()), "sidebar", sidebar);
+            Map<String, Object> context = Map.of("title", tree.name(), "content", content.get(tree.file()), "sidebar", sidebar, "wiki_path", getProject().property("wiki_path"));
             Writer writer = new FileWriter(output);
             compiled.evaluate(writer, context);
             writer.close();
