@@ -91,8 +91,15 @@ public class WikiBuildPlugin implements Plugin<Project> {
 
                 // Image link processing
                 if (resolvedLink.getUrl().endsWith(".png")){
-                    // Removes the ".." from the links
-                    return resolvedLink.withUrl(resolvedLink.getUrl().substring(2));
+                    // Removes the "../" from the links
+                    String url = resolvedLink.getUrl().substring(3);
+
+                    // Makes sub entries point to the right image
+                    if (currentEntry.project() == currentEntry.parent().project()) {
+                        url = "../" + url;
+                    }
+
+                    return resolvedLink.withUrl(url);
                 }
             }
 
