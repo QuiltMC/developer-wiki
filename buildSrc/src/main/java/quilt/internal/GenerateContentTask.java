@@ -3,6 +3,7 @@ package quilt.internal;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.MatchResult;
@@ -16,7 +17,7 @@ import org.gradle.api.tasks.TaskAction;
 
 public class GenerateContentTask extends DefaultTask {
     @Internal
-    private Map<File, String> generated;
+    private Map<GenerateWikiTreeTask.FileEntry, String> generated;
 
     public GenerateContentTask() {
         setGroup("wiki");
@@ -30,23 +31,27 @@ public class GenerateContentTask extends DefaultTask {
         GenerateWikiTreeTask.FileEntry root = wikiTreeTask.getRoot();
 
         generated = new HashMap<>();
-
         generateContent(root);
     }
 
     private void generateContent(GenerateWikiTreeTask.FileEntry entry) throws IOException {
-        if (entry.file() != null) {
-            String input = Files.readString(entry.file().toPath()).replace("\r", "");
+        if (entry.path() != null) {
+            // Read the path
+            String input = Files.readString(entry.path()).replace("\r", "");
+            // Parse the path includes
             Matcher matcher = Pattern.compile("```file:(.+?)(?:@(.+?))?\\n").matcher(input);
-
             input = matcher.replaceAll(matchResult -> replaceMatch(matchResult, entry));
 
+            // Set the current entry for link parsing
             WikiBuildPlugin.currentEntry = entry;
+
+            // Parse and save the path
             Node node = WikiBuildPlugin.PARSER.parse(input);
             String html = WikiBuildPlugin.RENDERER.render(node);
-            generated.put(entry.file(), html);
+            generated.put(entry, html);
         }
 
+        // Generate the sub files
         for (GenerateWikiTreeTask.FileEntry subEntry : entry.subEntries()) {
             generateContent(subEntry);
         }
@@ -56,15 +61,17 @@ public class GenerateContentTask extends DefaultTask {
         String requestedFile = matchResult.group(1);
         String region = matchResult.group(2);
 
-        File file = entry.project().file(requestedFile);
+        Path file = entry.project().file(requestedFile).toPath();
 
+        // Read the path
         String fileText;
         try {
-            fileText = Files.readString(file.toPath());
+            fileText = Files.readString(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+        // Parse if the region is set
         if (region != null) {
             int startRegion = fileText.indexOf("// @start " + region);
             int endRegion = fileText.indexOf("// @end " + region);
@@ -73,11 +80,13 @@ public class GenerateContentTask extends DefaultTask {
             fileText = "// ..." + fileText + "// ...\n";
         }
 
+        String filePath = getProject().file(".").toPath().relativize(file).toString().replace("\\", "/");
+        String fileType = requestedFile.substring(requestedFile.lastIndexOf(".") + 1);
 
-        return "From [`"+requestedFile.substring(requestedFile.lastIndexOf("/") + 1)+"`](https://github.com/QuiltMC/wiki/tree/"+requestedFile+"):\n```" + requestedFile.substring(requestedFile.lastIndexOf(".") + 1) + "\n" + fileText;
+        return "From [`" + requestedFile.substring(requestedFile.lastIndexOf("/") + 1) + "`](https://github.com/QuiltMC/wiki/tree/" + filePath + "):\n```" + fileType + "\n" + fileText;
     }
 
-    public Map<File, String> getGenerated() {
+    public Map<GenerateWikiTreeTask.FileEntry, String> getGenerated() {
         return generated;
     }
 }

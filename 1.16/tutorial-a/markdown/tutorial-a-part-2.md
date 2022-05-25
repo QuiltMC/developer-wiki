@@ -8,6 +8,8 @@ List:
 - B
 - C
 
+![Logo Dark](../images/quilt_logo_dark.png)
+
 ```file:src/main/java/org/quiltmc/wiki/tutorial_a/part2/File.java
 ```
 

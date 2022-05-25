@@ -36,10 +36,10 @@ public class GenerateSidebarsTask extends DefaultTask {
         StringBuilder sidebar = new StringBuilder();
         String indent = "\t".repeat(i);
 
-        if (tree.file() != null) {
+        if (tree.path() != null) {
             sidebar.append(indent)
                     .append("- ")
-                    .append("[" + tree.name() + "](" + getProject().property("wiki_path")+ "/" + path + "/)")
+                    .append("[" + tree.name() + "](" + getProject().property("wiki_path")+ "/" + path.replace("\\", "/") + "/)")
                     .append("\n");
         } else {
             sidebar.append(indent)

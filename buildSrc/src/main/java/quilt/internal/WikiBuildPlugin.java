@@ -55,34 +55,45 @@ public class WikiBuildPlugin implements Plugin<Project> {
 
         @Override
         public @NotNull ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext linkResolverBasicContext, @NotNull ResolvedLink resolvedLink) {
-            if (!resolvedLink.getUrl().startsWith("https://") && resolvedLink.getUrl().endsWith(".md")) {
-                String strippedMd = resolvedLink.getUrl().substring(0, resolvedLink.getUrl().length() - 3);
-                if (strippedMd.startsWith("..")) {
-                    strippedMd = strippedMd.substring(3);
-                    String[] path = strippedMd.split("/");
-                    GenerateWikiTreeTask.FileEntry entry = currentEntry;
-                    for (int i = 0; i < path.length; i++) {
-                        if (path[i].equals("markdown")) {
-                            path[i] = null;
-                        } else if (path[i].equals(entry.name())) {
-                            path[i] = null;
-                        } else if (path[i].equals(".")) {
-                            // no op
-                        } else if (path[i].equals("..")) {
-                            entry = entry.parent();
-                        } else {
-                            int finalI = i;
-                            entry = entry.subEntries().stream().filter(subEntry -> subEntry.name().equals(path[finalI])).findFirst()
-                                    .orElseThrow(() -> new RuntimeException("Unknown path " + resolvedLink.getUrl()));
+            // Don't process external links
+            if (!resolvedLink.getUrl().startsWith("https://")) {
+                // Link resolving for .md files
+                if (resolvedLink.getUrl().endsWith(".md")) {
+                    // remove the ".md" at the end
+                    String strippedMd = resolvedLink.getUrl().substring(0, resolvedLink.getUrl().length() - 3);
+                    if (strippedMd.startsWith("..")) { // File is in a super tree, requires more advanced processing, otherwise it is an adjacent path and is simple
+                        // Remove the "../"
+                        strippedMd = strippedMd.substring(3);
+                        // Break path into separate parts
+                        String[] path = strippedMd.split("/");
+                        // Start with the currentEntry
+                        GenerateWikiTreeTask.FileEntry entry = currentEntry;
+                        for (int i = 0; i < path.length; i++) {
+                            if (path[i].equals("markdown")) { // If path includes "markdown", remove that path section
+                                path[i] = null;
+                            } else if (path[i].equals(entry.name())) { // If path includes the entry name, such as when entering a subtree, remove that path section
+                                path[i] = null;
+                            } else if (path[i].equals(".")) { // Do nothing with "."
+                                // no op
+                            } else if (path[i].equals("..")) { // If path includes "..", move to the parent entry
+                                entry = entry.parent();
+                            } else { // Need to traverse down a level and find the subtree
+                                int finalI = i; // Make i final because java
+                                entry = entry.subEntries().stream()
+                                        .filter(subEntry -> subEntry.name().equals(path[finalI])).findFirst() // Find the sub entry with the same name as the path section
+                                        .orElseThrow(() -> new RuntimeException("Unknown path " + resolvedLink.getUrl())); // Error
+                            }
                         }
+                        strippedMd = Arrays.stream(path).filter(Predicate.not(Objects::isNull)).collect(Collectors.joining("/")); // Combine the path into one string
                     }
-                    strippedMd = Arrays.stream(path).filter(Predicate.not(Objects::isNull)).collect(Collectors.joining("/"));
+                    return resolvedLink.withUrl(strippedMd);
                 }
-                return resolvedLink.withUrl(strippedMd);
-            }
 
-            if (!resolvedLink.getUrl().startsWith("https://") && resolvedLink.getUrl().endsWith(".png")) {
-                return resolvedLink.withUrl(resolvedLink.getUrl().substring(2));
+                // Image link processing
+                if (resolvedLink.getUrl().endsWith(".png")){
+                    // Removes the ".." from the links
+                    return resolvedLink.withUrl(resolvedLink.getUrl().substring(2));
+                }
             }
 
             return resolvedLink;

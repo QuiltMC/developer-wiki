@@ -1,6 +1,8 @@
 package quilt.internal;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,113 +24,64 @@ public class GenerateWikiTreeTask extends DefaultTask {
     @TaskAction
     public void generateTree() {
         List<FileEntry> subTree = new ArrayList<>();
-        recurseTree(getProject(), subTree);
-        root = new FileEntry("/", null, subTree, getProject());
+        root = new FileEntry("/", null, subTree, getProject(), null);
+        subTree.addAll(recurseTree(getProject(), root));
     }
 
-    private void recurseTree(Project root, List<FileEntry> toAdd) {
+    private List<FileEntry> recurseTree(Project root, FileEntry parent) {
+        // List of entries to return
+        List<FileEntry> newEntries = new ArrayList<>();
+
         List<Project> directSubprojects = getDirectSubprojects(root);
-
         for (Project subproject : directSubprojects) {
+            // List of entries for the current entry being built
             List<FileEntry> subEntries = new ArrayList<>();
-            recurseTree(subproject, subEntries);
 
-            File index = subproject.file("markdown/" + subproject.getName() + ".md");
-            if(!index.exists()){
-                this.getLogger().error("[Warning]: File " + index + " does not exist. This file should exist.");
+            // Make sure the path exists for the entry
+            Path index = subproject.file("markdown/" + subproject.getName() + ".md").toPath();
+            if (!Files.exists(index)) {
+                this.getLogger().error("[Warning]: File " + index + " does not exist. This path should exist.");
                 index = null;
             }
 
+            // Create the entry
+            FileEntry entry = new FileEntry(subproject.getName(), index, subEntries, subproject, parent);
+
+            // Add all the entries from subprojects
+            subEntries.addAll(recurseTree(subproject, entry));
+
+            // Add all additional entries from the project
             for (File subFile : subproject.fileTree("markdown")) {
-                if (subFile.equals(index) || !subFile.getParent().endsWith("markdown")) {
+                if (subFile.toPath().equals(index) || !subFile.getParent().endsWith("markdown")) {
                     continue;
                 }
-
-                subEntries.add(new FileEntry(
-                        getNameWithoutExtension(subFile),
-                        subFile,
-                        List.of(),
-                        subproject));
+                subEntries.add(new FileEntry(getNameWithoutExtension(subFile), subFile.toPath(), List.of(), subproject, entry));
             }
-            FileEntry entry = new FileEntry(subproject.getName(), index, subEntries, subproject);
-            toAdd.add(entry);
+
+            newEntries.add(entry);
         }
+
+        return newEntries;
     }
 
     private List<Project> getDirectSubprojects(Project project) {
         return project.getSubprojects().stream().filter(it -> Objects.equals(it.getParent(), project)).toList();
     }
 
-    public static final class FileEntry {
-        private final String name;
-        @Nullable
-        private final File file;
-        private final List<FileEntry> subEntries;
-        private final Project project;
-        private FileEntry parent;
-
-        public FileEntry(String name, @Nullable File file, List<FileEntry> subEntries, Project project) {
-            this.name = name;
-            this.file = file;
-            this.subEntries = subEntries;
-            this.project = project;
-            this.subEntries.forEach(sub -> sub.setParent(this));
-        }
-
-        private void setParent(FileEntry parent) {
-            this.parent = parent;
-        }
-
+    public record FileEntry(String name, @Nullable Path path, List<FileEntry> subEntries, Project project,
+                            GenerateWikiTreeTask.FileEntry parent) {
         @Override
         public String toString() {
             return toString(0);
         }
 
         public String toString(int depth) {
-            return "FileEntry{" +
-                   "name='" + name + '\'' +
-                   ", file=" + file +
-                   ", subEntries=[" + (subEntries.isEmpty() ? "" : "\n" + "\t".repeat(depth + 1)) + String.join(",\n" + "\t".repeat(depth + 1), subEntries.stream().map(fileEntry -> fileEntry.toString(depth + 1)).toList()) +
-                   "], " + (subEntries.isEmpty() ? "" : "\n" + "\t".repeat(depth)) + "project=" + project +
-                   '}';
-        }
-
-        public String name() {
-            return name;
-        }
-
-        @Nullable
-        public File file() {
-            return file;
-        }
-
-        public FileEntry parent() {
-            return parent;
-        }
-
-        public List<FileEntry> subEntries() {
-            return subEntries;
-        }
-
-        public Project project() {
-            return project;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == this) return true;
-            if (obj == null || obj.getClass() != this.getClass()) return false;
-            var that = (FileEntry) obj;
-            return Objects.equals(this.name, that.name) &&
-                   Objects.equals(this.file, that.file) &&
-                   Objects.equals(this.subEntries, that.subEntries) &&
-                   Objects.equals(this.project, that.project) &&
-                   Objects.equals(this.parent, that.parent);
+            return "FileEntry{" + "name='" + name + '\'' + ", path=" + path + ", subEntries=[" + (subEntries.isEmpty() ? "" : "\n" + "\t".repeat(depth + 1)) + String.join(",\n" + "\t".repeat(depth + 1), subEntries.stream().map(fileEntry -> fileEntry.toString(depth + 1)).toList()) + "], " + (subEntries.isEmpty() ? "" : "\n" + "\t".repeat(depth)) + "project=" + project + '}';
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(name, file, subEntries, project, parent);
+            return Objects.hash(name, path, subEntries, project);
         }
     }
 
