@@ -16,7 +16,6 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
             private String name;
             private String title;
             private String content;
-            private String sidebar;
             private Path path;
             private List<WikiSubEntry> wikis;
 
@@ -39,11 +38,6 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
                 return this;
             }
 
-            public Builder withSidebar(String sidebar) {
-                this.sidebar = sidebar;
-                return this;
-            }
-
             public Builder withPath(Path path) {
                 this.path = path;
                 return this;
@@ -54,8 +48,34 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
                 return this;
             }
 
-            public WikiType build() {
-                return new WikiType(name, title, content, sidebar, path, wikis);
+            public WikiType build(String path) {
+                String sidebar = "- [" + this.title + "](" + path.replace("\\", "/") + "/)\n" +
+                        wikis.stream().map(wiki -> generateMdSidebar(wiki, path, 1)).collect(Collectors.joining(""));
+                System.out.println(sidebar);
+                String rendered = WikiBuildPlugin.RENDERER.render(WikiBuildPlugin.PARSER.parse(sidebar));
+                return new WikiType(name, title, content, rendered.substring(rendered.indexOf("\n") + 1, rendered.lastIndexOf("\n") + 1), this.path, wikis);
+            }
+
+            private String generateMdSidebar(WikiEntry tree, String path, int i) {
+                StringBuilder sidebar = new StringBuilder();
+                String indent = "\t".repeat(i);
+
+                if (tree.path() != null) {
+                    sidebar.append(indent)
+                            .append("- ")
+                            .append("[" + tree.title() + "](" + path.replace("\\", "/") + "/)")
+                            .append("\n");
+                } else {
+                    sidebar.append(indent)
+                            .append("- ")
+                            .append("~~" + tree.title() + "~~")
+                            .append("\n");
+                }
+
+                for (WikiEntry entry : tree.wikis()) {
+                    sidebar.append(generateMdSidebar(entry, path + "/" + entry.name(), i + 1));
+                }
+                return sidebar.toString();
             }
         }
     }

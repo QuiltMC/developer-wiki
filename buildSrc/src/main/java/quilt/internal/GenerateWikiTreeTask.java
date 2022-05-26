@@ -23,7 +23,6 @@ public class GenerateWikiTreeTask extends DefaultTask {
     public void generateTree() {
         // Get the built values
         Map<GenerateWikiFileTreeTask.FileEntry, String> content = ((GenerateContentTask) getProject().getTasks().getByPath("generateContent")).getGenerated();
-        Map<String, String> sidebars = ((GenerateSidebarsTask) getProject().getTasks().getByPath("generateSidebars")).getSidebars();
         GenerateWikiFileTreeTask.FileEntry root = ((GenerateWikiFileTreeTask) getProject().getTasks().getByPath("generateWikiFileTree")).getRoot();
 
         WikiStructure.Builder builder = new WikiStructure.Builder();
@@ -31,22 +30,22 @@ public class GenerateWikiTreeTask extends DefaultTask {
         GenerateWikiFileTreeTask.FileEntry versionsEntry = root.subEntries().stream().filter(fileEntry -> fileEntry.name().equals("versions")).findFirst().get();
         GenerateWikiFileTreeTask.FileEntry librariesEntry = root.subEntries().stream().filter(fileEntry -> fileEntry.name().equals("libraries")).findFirst().get();
 
-        buildRootEntries(versionsEntry, content, sidebars).forEach(builder::addVersion);
-        buildRootEntries(librariesEntry, content, sidebars).forEach(builder::addLibrary);
+        buildRootEntries(versionsEntry, content).forEach(builder::addVersion);
+        buildRootEntries(librariesEntry, content).forEach(builder::addLibrary);
 
         structure = builder.build((String) getProject().property("wiki_path"));
     }
 
-    private List<WikiStructure.WikiType> buildRootEntries(GenerateWikiFileTreeTask.FileEntry root, Map<GenerateWikiFileTreeTask.FileEntry, String> content, Map<String, String> sidebars) {
+    private List<WikiStructure.WikiType> buildRootEntries(GenerateWikiFileTreeTask.FileEntry root, Map<GenerateWikiFileTreeTask.FileEntry, String> content) {
         return root.subEntries().stream().map(entry -> {
             WikiStructure.WikiType.Builder builder = new WikiStructure.WikiType.Builder();
-            builder.withName(entry.name()).withPath(entry.path()).withContent(content.getOrDefault(entry, "")).withSidebar(sidebars.get(entry.name()));
+            builder.withName(entry.name()).withPath(entry.path()).withContent(content.getOrDefault(entry, ""));
 
             builder.withTitle(getEntryTitle(content, entry));
 
             buildSubEntries(entry, content).forEach(builder::withWiki);
 
-            return builder.build();
+            return builder.build(getProject().property("wiki_path") + "/" + root.name() + "/" + entry.name());
         }).toList();
     }
 
