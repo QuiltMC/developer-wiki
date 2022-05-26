@@ -91,7 +91,7 @@ public class GenerateContentTask extends DefaultTask {
         String filePath = getProject().file(".").toPath().relativize(file).toString().replace("\\", "/");
         String fileType = requestedFile.substring(requestedFile.lastIndexOf(".") + 1);
 
-        return "From [`" + requestedFile.substring(requestedFile.lastIndexOf("/") + 1) + "`](https://github.com/QuiltMC/wiki/tree/" + filePath + "):\n```" + fileType + "\n" + fileText;
+        return "From [`" + requestedFile.substring(requestedFile.lastIndexOf("/") + 1) + "`](" + getProject().property("git_repo_tree") + "/" + filePath + "):\n```" + fileType + "\n" + fileText;
     }
 
     public Map<GenerateWikiFileTreeTask.FileEntry, String> getGenerated() {
