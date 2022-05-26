@@ -42,20 +42,24 @@ public class GenerateWikiTreeTask extends DefaultTask {
 
             builder.withTitle(getEntryTitle(content, entry));
 
-            buildSubEntries(entry, content).forEach(builder::withWiki);
+            buildSubEntries(entry, content, 0).forEach(builder::withWiki);
 
             return builder.build(getProject().property("wiki_path") + "/" + root.name() + "/" + entry.name());
         }).toList();
     }
 
-    private List<WikiStructure.WikiSubEntry> buildSubEntries(GenerateWikiFileTreeTask.FileEntry root, Map<GenerateWikiFileTreeTask.FileEntry, String> content) {
+    private List<WikiStructure.WikiSubEntry> buildSubEntries(GenerateWikiFileTreeTask.FileEntry root, Map<GenerateWikiFileTreeTask.FileEntry, String> content, int depth) {
+        if (depth >= 3) {
+            throw new RuntimeException("Wiki tree is too deep, unable to add file: " + root.path());
+        }
+
         return root.subEntries().stream().map(entry -> {
             WikiStructure.WikiSubEntry.Builder builder = new WikiStructure.WikiSubEntry.Builder();
             builder.withName(entry.name()).withPath(entry.path()).withContent(content.getOrDefault(entry, "")).isProjectRoot(root.project() != entry.project());
 
             builder.withTitle(getEntryTitle(content, entry));
 
-            buildSubEntries(entry, content).forEach(builder::withWiki);
+            buildSubEntries(entry, content, depth + 1).forEach(builder::withWiki);
 
             return builder.build();
         }).toList();
