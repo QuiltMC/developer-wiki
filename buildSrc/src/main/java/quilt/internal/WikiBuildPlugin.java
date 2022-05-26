@@ -34,7 +34,6 @@ public class WikiBuildPlugin implements Plugin<Project> {
     @Override
     public void apply(Project target) {
         target.getTasks().register("generateWikiFileTree", GenerateWikiFileTreeTask.class);
-        target.getTasks().register("generateSidebars", GenerateSidebarsTask.class);
         target.getTasks().register("generateContent", GenerateContentTask.class);
         target.getTasks().register("generateWikiTree", GenerateWikiTreeTask .class);
         target.getTasks().register("generateWiki", GenerateWikiTask.class);

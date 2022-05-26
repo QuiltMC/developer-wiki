@@ -16,7 +16,7 @@ public class GenerateWikiTreeTask extends DefaultTask {
 
     public GenerateWikiTreeTask() {
         setGroup("wiki");
-        dependsOn("generateContent", "generateSidebars");
+        dependsOn("generateContent");
     }
 
     @TaskAction
