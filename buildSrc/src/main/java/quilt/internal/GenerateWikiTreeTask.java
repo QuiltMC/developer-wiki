@@ -1,97 +1,81 @@
 package quilt.internal;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import javax.annotation.Nullable;
 import org.gradle.api.DefaultTask;
-import org.gradle.api.Project;
 import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
 
 public class GenerateWikiTreeTask extends DefaultTask {
     @Internal
-    protected FileEntry root;
+    private WikiStructure structure;
 
     public GenerateWikiTreeTask() {
         setGroup("wiki");
+        dependsOn("generateContent", "generateSidebars");
     }
 
     @TaskAction
     public void generateTree() {
-        List<FileEntry> subTree = new ArrayList<>();
-        root = new FileEntry("/", null, subTree, getProject(), null);
-        subTree.addAll(recurseTree(getProject(), root));
+        // Get the built values
+        Map<GenerateWikiFileTreeTask.FileEntry, String> content = ((GenerateContentTask) getProject().getTasks().getByPath("generateContent")).getGenerated();
+        Map<String, String> sidebars = ((GenerateSidebarsTask) getProject().getTasks().getByPath("generateSidebars")).getSidebars();
+        GenerateWikiFileTreeTask.FileEntry root = ((GenerateWikiFileTreeTask) getProject().getTasks().getByPath("generateWikiFileTree")).getRoot();
+
+        WikiStructure.Builder builder = new WikiStructure.Builder();
+
+        GenerateWikiFileTreeTask.FileEntry versionsEntry = root.subEntries().stream().filter(fileEntry -> fileEntry.name().equals("versions")).findFirst().get();
+        GenerateWikiFileTreeTask.FileEntry librariesEntry = root.subEntries().stream().filter(fileEntry -> fileEntry.name().equals("libraries")).findFirst().get();
+
+        buildRootEntries(versionsEntry, content, sidebars).forEach(builder::addVersion);
+        buildRootEntries(librariesEntry, content, sidebars).forEach(builder::addLibrary);
+
+        structure = builder.build((String) getProject().property("wiki_path"));
     }
 
-    private List<FileEntry> recurseTree(Project root, FileEntry parent) {
-        // List of entries to return
-        List<FileEntry> newEntries = new ArrayList<>();
+    private List<WikiStructure.WikiType> buildRootEntries(GenerateWikiFileTreeTask.FileEntry root, Map<GenerateWikiFileTreeTask.FileEntry, String> content, Map<String, String> sidebars) {
+        return root.subEntries().stream().map(entry -> {
+            WikiStructure.WikiType.Builder builder = new WikiStructure.WikiType.Builder();
+            builder.withName(entry.name()).withPath(entry.path()).withContent(content.getOrDefault(entry, "")).withSidebar(sidebars.get(entry.name()));
 
-        List<Project> directSubprojects = getDirectSubprojects(root);
-        for (Project subproject : directSubprojects) {
-            // List of entries for the current entry being built
-            List<FileEntry> subEntries = new ArrayList<>();
+            builder.withTitle(getEntryTitle(content, entry));
 
-            // Make sure the path exists for the entry
-            Path index = subproject.file("markdown/" + subproject.getName() + ".md").toPath();
-            if (!Files.exists(index)) {
-                this.getLogger().error("[Warning]: File " + index + " does not exist. This path should exist.");
-                index = null;
+            buildSubEntries(entry, content).forEach(builder::withWiki);
+
+            return builder.build();
+        }).toList();
+    }
+
+    private List<WikiStructure.WikiSubEntry> buildSubEntries(GenerateWikiFileTreeTask.FileEntry root, Map<GenerateWikiFileTreeTask.FileEntry, String> content) {
+        return root.subEntries().stream().map(entry -> {
+            WikiStructure.WikiSubEntry.Builder builder = new WikiStructure.WikiSubEntry.Builder();
+            builder.withName(entry.name()).withPath(entry.path()).withContent(content.getOrDefault(entry, "")).isProjectRoot(root.project() != entry.project());
+
+            builder.withTitle(getEntryTitle(content, entry));
+
+            buildSubEntries(entry, content).forEach(builder::withWiki);
+
+            return builder.build();
+        }).toList();
+    }
+
+    private String getEntryTitle(Map<GenerateWikiFileTreeTask.FileEntry, String> content, GenerateWikiFileTreeTask.FileEntry entry) {
+        if (content.containsKey(entry)) {
+            String fileContent = content.get(entry);
+            Pattern p = Pattern.compile("<h1><a href=\".+?\" id=\".+?\">(.+?)<");
+            Matcher matcher = p.matcher(fileContent);
+            if (matcher.find()) {
+                return matcher.group(1);
             }
-
-            // Create the entry
-            FileEntry entry = new FileEntry(subproject.getName(), index, subEntries, subproject, parent);
-
-            // Add all the entries from subprojects
-            subEntries.addAll(recurseTree(subproject, entry));
-
-            // Add all additional entries from the project
-            for (File subFile : subproject.fileTree("markdown")) {
-                if (subFile.toPath().equals(index) || !subFile.getParent().endsWith("markdown")) {
-                    continue;
-                }
-                subEntries.add(new FileEntry(getNameWithoutExtension(subFile), subFile.toPath(), List.of(), subproject, entry));
-            }
-
-            newEntries.add(entry);
         }
-
-        return newEntries;
+        return entry.name();
     }
 
-    private List<Project> getDirectSubprojects(Project project) {
-        return project.getSubprojects().stream().filter(it -> Objects.equals(it.getParent(), project)).toList();
-    }
-
-    public record FileEntry(String name, @Nullable Path path, List<FileEntry> subEntries, Project project,
-                            GenerateWikiTreeTask.FileEntry parent) {
-        @Override
-        public String toString() {
-            return toString(0);
-        }
-
-        public String toString(int depth) {
-            return "FileEntry{" + "name='" + name + '\'' + ", path=" + path + ", subEntries=[" + (subEntries.isEmpty() ? "" : "\n" + "\t".repeat(depth + 1)) + String.join(",\n" + "\t".repeat(depth + 1), subEntries.stream().map(fileEntry -> fileEntry.toString(depth + 1)).toList()) + "], " + (subEntries.isEmpty() ? "" : "\n" + "\t".repeat(depth)) + "project=" + project + '}';
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(name, path, subEntries, project);
-        }
-    }
-
-    private String getNameWithoutExtension(File f) {
-        String name = f.getName();
-        int index = name.lastIndexOf(".");
-        return index == -1 ? name : name.substring(0, index);
-    }
-
-    public FileEntry getRoot() {
-        return root;
+    public WikiStructure getStructure() {
+        return structure;
     }
 }

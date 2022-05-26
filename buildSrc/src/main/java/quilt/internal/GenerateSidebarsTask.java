@@ -14,25 +14,26 @@ public class GenerateSidebarsTask extends DefaultTask {
 
     public GenerateSidebarsTask() {
         setGroup("wiki");
-        this.dependsOn("generateWikiTree");
+        this.dependsOn("generateWikiFileTree");
     }
 
     @TaskAction
     public void generateSidebars() {
-        GenerateWikiTreeTask wikiTreeTask = (GenerateWikiTreeTask) getProject().getTasks().getByName("generateWikiTree");
-        GenerateWikiTreeTask.FileEntry root = wikiTreeTask.getRoot();
+        GenerateWikiFileTreeTask wikiTreeTask = (GenerateWikiFileTreeTask) getProject().getTasks().getByName("generateWikiFileTree");
+        GenerateWikiFileTreeTask.FileEntry root = wikiTreeTask.getRoot();
 
         sidebars = new HashMap<>();
 
-        List<GenerateWikiTreeTask.FileEntry> subWikis = root.subEntries();
 
-        for (GenerateWikiTreeTask.FileEntry subWiki : subWikis) {
-            String rendered = WikiBuildPlugin.RENDERER.render(WikiBuildPlugin.PARSER.parse(generateMdSidebar(subWiki, subWiki.name(), 0)));
-            sidebars.put(subWiki.name(), rendered.substring(rendered.indexOf("\n") + 1, rendered.lastIndexOf("\n") + 1));
+        for (GenerateWikiFileTreeTask.FileEntry wikiType : root.subEntries()) {
+            for (GenerateWikiFileTreeTask.FileEntry subWiki : wikiType.subEntries()) {
+                String rendered = WikiBuildPlugin.RENDERER.render(WikiBuildPlugin.PARSER.parse(generateMdSidebar(subWiki, wikiType.name() + "/" + subWiki.name(), 0)));
+                sidebars.put(subWiki.name(), rendered.substring(rendered.indexOf("\n") + 1, rendered.lastIndexOf("\n") + 1));
+            }
         }
     }
 
-    private String generateMdSidebar(GenerateWikiTreeTask.FileEntry tree, String path, int i) {
+    private String generateMdSidebar(GenerateWikiFileTreeTask.FileEntry tree, String path, int i) {
         StringBuilder sidebar = new StringBuilder();
         String indent = "\t".repeat(i);
 
@@ -48,7 +49,7 @@ public class GenerateSidebarsTask extends DefaultTask {
                     .append("\n");
         }
 
-        for (GenerateWikiTreeTask.FileEntry entry : tree.subEntries()) {
+        for (GenerateWikiFileTreeTask.FileEntry entry : tree.subEntries()) {
             sidebar.append(generateMdSidebar(entry, path + "/" + entry.name(), i + 1));
         }
         return sidebar.toString();

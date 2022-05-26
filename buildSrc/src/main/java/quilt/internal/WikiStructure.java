@@ -1,0 +1,150 @@
+package quilt.internal;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, String librariesNavbar, String versionsNavbar) {
+    public record WikiType(String name, String title, String content, String sidebar, Path path, List<WikiSubEntry> wikis) implements WikiEntry {
+        @Override
+        public boolean isProjectRoot() {
+            return true;
+        }
+
+        public static final class Builder {
+            private String name;
+            private String title;
+            private String content;
+            private String sidebar;
+            private Path path;
+            private List<WikiSubEntry> wikis;
+
+            public Builder() {
+                wikis = new ArrayList<>();
+            }
+
+            public Builder withName(String name) {
+                this.name = name;
+                return this;
+            }
+
+            public Builder withTitle(String title) {
+                this.title = title;
+                return this;
+            }
+
+            public Builder withContent(String content) {
+                this.content = content;
+                return this;
+            }
+
+            public Builder withSidebar(String sidebar) {
+                this.sidebar = sidebar;
+                return this;
+            }
+
+            public Builder withPath(Path path) {
+                this.path = path;
+                return this;
+            }
+
+            public Builder withWiki(WikiSubEntry wiki) {
+                this.wikis.add(wiki);
+                return this;
+            }
+
+            public WikiType build() {
+                return new WikiType(name, title, content, sidebar, path, wikis);
+            }
+        }
+    }
+
+    public record WikiSubEntry(String name, String title, String content, Path path, boolean isProjectRoot, List<WikiSubEntry> wikis) implements WikiEntry {
+        public static final class Builder {
+            private String name;
+            private String title;
+            private String content;
+            private Path path;
+            private boolean isProjectRoot;
+            private List<WikiSubEntry> wikis;
+
+            public Builder() {
+                this.wikis = new ArrayList<>();
+            }
+
+            public Builder withName(String name) {
+                this.name = name;
+                return this;
+            }
+
+            public Builder withTitle(String title) {
+                this.title = title;
+                return this;
+            }
+
+            public Builder withContent(String content) {
+                this.content = content;
+                return this;
+            }
+
+            public Builder withPath(Path path) {
+                this.path = path;
+                return this;
+            }
+
+            public Builder isProjectRoot(boolean isProjectRoot) {
+                this.isProjectRoot = isProjectRoot;
+                return this;
+            }
+
+            public Builder withWiki(WikiSubEntry wiki) {
+                this.wikis.add(wiki);
+                return this;
+            }
+
+            public WikiSubEntry build() {
+                return new WikiSubEntry(name, title, content, path, isProjectRoot, wikis);
+            }
+        }
+    }
+
+    public interface WikiEntry {
+        String name();
+        String title();
+        String content();
+        Path path();
+        boolean isProjectRoot();
+        List<WikiSubEntry> wikis();
+    }
+
+    public static final class Builder {
+        private final List<WikiType> libraries;
+        private final List<WikiType> versions;
+
+        public Builder() {
+            libraries = new ArrayList<>();
+            versions = new ArrayList<>();
+        }
+
+        public Builder addLibrary(WikiType library) {
+            this.libraries.add(library);
+            return this;
+        }
+
+        public Builder addVersion(WikiType version) {
+            this.versions.add(version);
+            return this;
+        }
+
+        public WikiStructure build(String wikiPath) {
+            String versionNavbar = versions.stream()
+                    .map(entry -> "<a href=\""+wikiPath+"/versions/" + entry.name + "/\" class = \"navbar-item\"> <span>" + entry.title + "</span></a>")
+                    .collect(Collectors.joining(" "));
+            String librariesNavbar = libraries.stream()
+                    .map(entry -> "<a href=\""+wikiPath+"/libraries/" + entry.name + "/\" class = \"navbar-item\"> <span>" + entry.title + "</span></a>")
+                    .collect(Collectors.joining(" "));
+            return new WikiStructure(libraries, versions, librariesNavbar, versionNavbar);
+        }
+    }
+}

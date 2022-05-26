@@ -29,13 +29,14 @@ public class WikiBuildPlugin implements Plugin<Project> {
     public static final Parser PARSER = Parser.builder(OPTIONS).build();
     public static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).indentSize(4).build();
 
-    public static GenerateWikiTreeTask.FileEntry currentEntry;
+    public static GenerateWikiFileTreeTask.FileEntry currentEntry;
 
     @Override
     public void apply(Project target) {
-        target.getTasks().register("generateWikiTree", GenerateWikiTreeTask.class);
+        target.getTasks().register("generateWikiFileTree", GenerateWikiFileTreeTask.class);
         target.getTasks().register("generateSidebars", GenerateSidebarsTask.class);
         target.getTasks().register("generateContent", GenerateContentTask.class);
+        target.getTasks().register("generateWikiTree", GenerateWikiTreeTask .class);
         target.getTasks().register("generateWiki", GenerateWikiTask.class);
     }
 
@@ -56,7 +57,7 @@ public class WikiBuildPlugin implements Plugin<Project> {
         @Override
         public @NotNull ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext linkResolverBasicContext, @NotNull ResolvedLink resolvedLink) {
             // Don't process external links
-            if (!resolvedLink.getUrl().startsWith("https://")) {
+            if (!resolvedLink.getUrl().startsWith("http")) {
                 // Link resolving for .md files
                 if (resolvedLink.getUrl().endsWith(".md")) {
                     // remove the ".md" at the end
@@ -67,7 +68,7 @@ public class WikiBuildPlugin implements Plugin<Project> {
                         // Break path into separate parts
                         String[] path = strippedMd.split("/");
                         // Start with the currentEntry
-                        GenerateWikiTreeTask.FileEntry entry = currentEntry;
+                        GenerateWikiFileTreeTask.FileEntry entry = currentEntry;
                         for (int i = 0; i < path.length; i++) {
                             if (path[i].equals("markdown")) { // If path includes "markdown", remove that path section
                                 path[i] = null;

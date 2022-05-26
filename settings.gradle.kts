@@ -1,9 +1,16 @@
 rootProject.name = "wiki-prototype"
 
-include("1.16")
-include("1.16:tutorial-b")
-include("1.16:tutorial-a")
+fun addProjects(root: String, gradlePath: String) {
+	rootProject.projectDir.toPath().resolve(root).toFile().listFiles()?.forEach {
+		if (it.isDirectory && File(it, "build.gradle").exists()) {
+			include("$gradlePath:${it.name}")
+			val project = project("$gradlePath:${it.name}")
+			project.projectDir = it;
 
-include("1.17")
-include("1.17:tutorial-a")
-include("1.17:tutorial-b")
+			addProjects(it.path, "$gradlePath:${it.name}");
+		}
+	}
+}
+
+addProjects("wiki/versions", ":versions")
+addProjects("wiki/libraries", ":libraries")

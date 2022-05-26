@@ -1,6 +1,5 @@
 package quilt.internal;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,25 +16,31 @@ import org.gradle.api.tasks.TaskAction;
 
 public class GenerateContentTask extends DefaultTask {
     @Internal
-    private Map<GenerateWikiTreeTask.FileEntry, String> generated;
+    private Map<GenerateWikiFileTreeTask.FileEntry, String> generated;
 
     public GenerateContentTask() {
         setGroup("wiki");
 
-        dependsOn("generateWikiTree");
+        dependsOn("generateWikiFileTree");
     }
 
     @TaskAction
-    public void generateContent() throws IOException {
-        GenerateWikiTreeTask wikiTreeTask = (GenerateWikiTreeTask) getProject().getTasks().getByName("generateWikiTree");
-        GenerateWikiTreeTask.FileEntry root = wikiTreeTask.getRoot();
+    public void generateContent() {
+        GenerateWikiFileTreeTask wikiTreeTask = (GenerateWikiFileTreeTask) getProject().getTasks().getByName("generateWikiFileTree");
+        GenerateWikiFileTreeTask.FileEntry root = wikiTreeTask.getRoot();
 
         generated = new HashMap<>();
-        generateContent(root);
+        root.subEntries().forEach(entry -> {
+            try {
+                this.generateContent(entry);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
-    private void generateContent(GenerateWikiTreeTask.FileEntry entry) throws IOException {
-        if (entry.path() != null) {
+    private void generateContent(GenerateWikiFileTreeTask.FileEntry entry) throws IOException {
+        if (Files.exists(entry.path())) {
             // Read the path
             String input = Files.readString(entry.path()).replace("\r", "");
             // Parse the path includes
@@ -52,16 +57,19 @@ public class GenerateContentTask extends DefaultTask {
         }
 
         // Generate the sub files
-        for (GenerateWikiTreeTask.FileEntry subEntry : entry.subEntries()) {
+        for (GenerateWikiFileTreeTask.FileEntry subEntry : entry.subEntries()) {
             generateContent(subEntry);
         }
     }
 
-    private String replaceMatch(MatchResult matchResult, GenerateWikiTreeTask.FileEntry entry) {
+    private String replaceMatch(MatchResult matchResult, GenerateWikiFileTreeTask.FileEntry entry) {
         String requestedFile = matchResult.group(1);
         String region = matchResult.group(2);
 
         Path file = entry.project().file(requestedFile).toPath();
+
+        // TODO: Strip extra region comments
+        // TODO: have different file type be able to set the single line comment character(s)
 
         // Read the path
         String fileText;
@@ -86,7 +94,7 @@ public class GenerateContentTask extends DefaultTask {
         return "From [`" + requestedFile.substring(requestedFile.lastIndexOf("/") + 1) + "`](https://github.com/QuiltMC/wiki/tree/" + filePath + "):\n```" + fileType + "\n" + fileText;
     }
 
-    public Map<GenerateWikiTreeTask.FileEntry, String> getGenerated() {
+    public Map<GenerateWikiFileTreeTask.FileEntry, String> getGenerated() {
         return generated;
     }
 }
