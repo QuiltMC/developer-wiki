@@ -103,6 +103,10 @@ public class WikiBuildPlugin implements Plugin<Project> {
                 }
             }
 
+            if (!resolvedLink.getUrl().startsWith((String) currentEntry.project().property("wiki_path"))) {
+                return resolvedLink.withTarget("_blank");
+            }
+
             return resolvedLink;
         }
 
