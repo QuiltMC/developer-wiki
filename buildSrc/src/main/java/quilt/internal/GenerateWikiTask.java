@@ -2,6 +2,7 @@ package quilt.internal;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -39,7 +40,8 @@ public class GenerateWikiTask extends DefaultTask {
         Map<String, Object> defaultOptions = Map.of(
                 "version_navbar", wiki.versionsNavbar(),
                 "libraries_navbar", wiki.librariesNavbar(),
-                "wiki_path", getProject().property("wiki_path"));
+                "wiki_path", getProject().property("wiki_path"),
+                "git_repo_tree", getProject().property("git_repo_tree"));
 
         // Generate the files
         Path versionsPath = Files.createDirectory(output.resolve("versions"));
@@ -53,8 +55,9 @@ public class GenerateWikiTask extends DefaultTask {
         }
 
         PebbleTemplate compiled = engine.getTemplate("wiki/templates/index.html");
-        Writer writer = Files.newBufferedWriter(output.resolve("index.html"));
+        StringWriter writer = new StringWriter();
         compiled.evaluate(writer, defaultOptions);
+        compileHtmlFile(defaultOptions, output.resolve("index.html"), writer.toString());
         writer.close();
 
         // Copy static files
@@ -86,8 +89,9 @@ public class GenerateWikiTask extends DefaultTask {
                     "sidebar", sidebar);
             context = new HashMap<>(context);
             context.putAll(defaultOptions);
-            Writer writer = Files.newBufferedWriter(output);
+            StringWriter writer = new StringWriter();
             compiled.evaluate(writer, context);
+            compileHtmlFile(defaultOptions, output, writer.toString());
             writer.close();
 
             // Copy the image if and only if the tree is the root entry in the project
@@ -110,5 +114,15 @@ public class GenerateWikiTask extends DefaultTask {
         for (WikiStructure.WikiSubEntry wiki : tree.wikis()) {
             outputFile(wiki, current, sidebar, defaultOptions);
         }
+    }
+
+    private void compileHtmlFile(Map<String, Object> defaultOptions, Path output, String body) throws IOException {
+        PebbleTemplate compiled = engine.getTemplate("wiki/templates/master_template.html");
+        Map<String, Object> context = Map.of("body", body);
+        context = new HashMap<>(context);
+        context.putAll(defaultOptions);
+        Writer writer = Files.newBufferedWriter(output);
+        compiled.evaluate(writer, context);
+        writer.close();
     }
 }

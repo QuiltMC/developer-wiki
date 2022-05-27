@@ -1,71 +1,16 @@
-<html lang="en-us">
-<head>
-    <title>Quilt Developer Wiki</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-    <link rel="stylesheet" href="https://quiltmc.org/assets/css/style.css">
-    <link rel="stylesheet" href="{{ wiki_path }}/dracula.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
-</head>
-<body>
-<div class="hero-head">
-    <nav class="navbar no-style" role="navigation" aria-label="main navigation" data-controller="navbar">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="{{ wiki_path }}/">
-                <img src="https://quiltmc.org/assets/img/logo.svg" alt="Quilt Logo">
-
-                <span class="ml-3">QuiltMC Developer Wiki</span>
-            </a>
-
-            <a role="button" data-navbar-target="menu" data-action="click->navbar#toggle"
-               class="navbar-burger is-active" aria-label="menu" aria-expanded="false">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-
-        <div class="navbar-menu is-active" data-navbar-target="menu">
-            <div class="navbar-end">
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a href="/versions/" class="navbar-link is-arrowless ">
-                        Versions
-                    </a>
-
-                    <div class="navbar-dropdown is-boxed">
-                        {{ version_navbar }}
-                    </div>
-                </div>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a href="/libraries/" class="navbar-link is-arrowless ">
-                        Libraries
-                    </a>
-
-                    <div class="navbar-dropdown is-boxed">
-                        {{ libraries_navbar }}
-                    </div>
-                </div>
+<div class="columns">
+    <div class="column is-narrow" data-controller="sidebar">
+        <div class="box" data-sidebar-target="sidebar">
+            <div class="menu">
+                <ul class="menu-list">
+                    <!--                        {{ sidebar }}-->
+                    PLACE COOL SIDEBAR FOR THE ENTIRE WIKI HERE
+                </ul>
             </div>
-        </div>
-    </nav>
-</div>
-<section class="section">
-    <div class="columns">
-        <div class="column is-narrow" data-controller="sidebar">
-            <div class="box" data-sidebar-target="sidebar">
-                <div class="menu">
-                    <ul class="menu-list">
-                        <!--                        {{ sidebar }}-->
-                        PLACE COOL SIDEBAR FOR THE ENTIRE WIKI HERE
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="content column">
-            <h1>Quilt Developer Wiki</h1>
-            <p>Give summary of the wiki, similar to readme.</p>
         </div>
     </div>
-</section>
-</body>
-</html>
+    <div class="content column">
+        <h1>Quilt Developer Wiki</h1>
+        <p>Give summary of the wiki, similar to readme.</p>
+    </div>
+</div>
