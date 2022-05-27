@@ -91,7 +91,7 @@ public class GenerateWikiTask extends DefaultTask {
             context.putAll(defaultOptions);
             StringWriter writer = new StringWriter();
             compiled.evaluate(writer, context);
-            compileHtmlFile(defaultOptions, output, writer.toString());
+            compileHtmlFile(context, output, writer.toString());
             writer.close();
 
             // Copy the image if and only if the tree is the root entry in the project
