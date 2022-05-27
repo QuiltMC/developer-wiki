@@ -56,8 +56,10 @@ public class GenerateWikiTask extends DefaultTask {
 
         PebbleTemplate compiled = engine.getTemplate("wiki/templates/index.html");
         StringWriter writer = new StringWriter();
-        compiled.evaluate(writer, defaultOptions);
-        compileHtmlFile(defaultOptions, output.resolve("index.html"), writer.toString());
+        Map<String, Object> indexOptions = new HashMap<>(defaultOptions);
+        indexOptions.put("sidebar", wiki.masterSidebar());
+        compiled.evaluate(writer, indexOptions);
+        compileHtmlFile(defaultOptions, output.resolve("index.html"), writer.toString(), "Quilt Developer Wiki");
         writer.close();
 
         // Copy static files
@@ -84,14 +86,13 @@ public class GenerateWikiTask extends DefaultTask {
 
             // Parse the template and write to the path
             PebbleTemplate compiled = engine.getTemplate("wiki/templates/tutorial_page.html");
-            Map<String, Object> context = Map.of("title", tree.title(),
-                    "content", tree.content(),
+            Map<String, Object> context = Map.of("content", tree.content(),
                     "sidebar", sidebar);
             context = new HashMap<>(context);
             context.putAll(defaultOptions);
             StringWriter writer = new StringWriter();
             compiled.evaluate(writer, context);
-            compileHtmlFile(context, output, writer.toString());
+            compileHtmlFile(defaultOptions, output, writer.toString(), tree.title());
             writer.close();
 
             // Copy the image if and only if the tree is the root entry in the project
@@ -116,9 +117,10 @@ public class GenerateWikiTask extends DefaultTask {
         }
     }
 
-    private void compileHtmlFile(Map<String, Object> defaultOptions, Path output, String body) throws IOException {
+    private void compileHtmlFile(Map<String, Object> defaultOptions, Path output, String body, String title) throws IOException {
         PebbleTemplate compiled = engine.getTemplate("wiki/templates/master_template.html");
-        Map<String, Object> context = Map.of("body", body);
+        Map<String, Object> context = Map.of("body", body,
+            "title", title);
         context = new HashMap<>(context);
         context.putAll(defaultOptions);
         Writer writer = Files.newBufferedWriter(output);

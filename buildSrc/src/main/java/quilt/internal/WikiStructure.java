@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, String librariesNavbar, String versionsNavbar) {
-    public record WikiType(String name, String title, String content, String sidebar, Path path, List<WikiSubEntry> wikis) implements WikiEntry {
+public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, String librariesNavbar,
+                            String versionsNavbar, String masterSidebar) {
+    public record WikiType(String name, String title, String content, String sidebar, Path path,
+                           List<WikiSubEntry> wikis) implements WikiEntry {
         @Override
         public boolean isProjectRoot() {
             return true;
@@ -78,7 +80,8 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
         }
     }
 
-    public record WikiSubEntry(String name, String title, String content, Path path, boolean isProjectRoot, List<WikiSubEntry> wikis) implements WikiEntry {
+    public record WikiSubEntry(String name, String title, String content, Path path, boolean isProjectRoot,
+                               List<WikiSubEntry> wikis) implements WikiEntry {
         public static final class Builder {
             private String name;
             private String title;
@@ -129,10 +132,15 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
 
     public interface WikiEntry {
         String name();
+
         String title();
+
         String content();
+
         Path path();
+
         boolean isProjectRoot();
+
         List<WikiSubEntry> wikis();
     }
 
@@ -157,12 +165,22 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
 
         public WikiStructure build(String wikiPath) {
             String versionNavbar = versions.stream()
-                    .map(entry -> "<a href=\""+wikiPath+"/versions/" + entry.name + "/\" class = \"navbar-item\"> <span>" + entry.title + "</span></a>")
+                    .map(entry -> "<a href=\"" + wikiPath + "/versions/" + entry.name + "/\" class = \"navbar-item\"> <span>" + entry.title + "</span></a>")
                     .collect(Collectors.joining(" "));
             String librariesNavbar = libraries.stream()
-                    .map(entry -> "<a href=\""+wikiPath+"/libraries/" + entry.name + "/\" class = \"navbar-item\"> <span>" + entry.title + "</span></a>")
+                    .map(entry -> "<a href=\"" + wikiPath + "/libraries/" + entry.name + "/\" class = \"navbar-item\"> <span>" + entry.title + "</span></a>")
                     .collect(Collectors.joining(" "));
-            return new WikiStructure(libraries, versions, librariesNavbar, versionNavbar);
+
+            String masterSidebar =
+                    "- Versions:\n"
+                    + versions.stream().map(wikiType -> "\t- [" + wikiType.title + "](" + wikiPath + "/versions/" + wikiType.name + ")").collect(Collectors.joining("\n"))
+                    + "\n- Libraries:\n"
+                    + libraries.stream().map(wikiType -> "\t- [" + wikiType.title + "](" + wikiPath + "/libraries/" + wikiType.name + ")").collect(Collectors.joining("\n"));
+
+            String renderedSidebar = WikiBuildPlugin.RENDERER.render(WikiBuildPlugin.PARSER.parse(masterSidebar));
+
+
+            return new WikiStructure(libraries, versions, librariesNavbar, versionNavbar, renderedSidebar.substring(renderedSidebar.indexOf("\n") + 1, renderedSidebar.lastIndexOf("\n") + 1));
         }
     }
 }
