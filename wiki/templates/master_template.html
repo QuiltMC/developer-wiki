@@ -6,6 +6,36 @@
     <link rel="stylesheet" href="{{ wiki_path }}/dracula.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
+    <style>
+        .site-warning {
+            background-color: #ff6f6f;
+            color: white;
+            padding: 1em;
+        }
+
+        .site-warning a {
+            color: #000000;
+        }
+
+        .site-warning a:hover {
+            color: #555;
+        }
+        @media (prefers-color-scheme: dark) {
+            .site-warning {
+                background-color: #c40000;
+                color: white;
+                padding: 1em;
+            }
+
+            .site-warning a {
+                color: #000;
+            }
+
+            .site-warning a:hover {
+                color: #555;
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="hero-head">
@@ -54,7 +84,7 @@
         </div>
     </nav>
 </div>
-<div style="background-color: #c40000; padding: 1em" class="has-text-centered">
+<div class="has-text-centered site-warning">
     <h1>Notice: This website is still under development. Please report any issues at <a href="https://github.com/QuiltMC/developer-wiki">https://github.com/QuiltMC/developer-wiki</a></h1>
 </div>
 <section class="section">
