@@ -51,7 +51,8 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
             }
 
             public WikiType build(String path) {
-                String sidebar = wikis.stream().map(wiki -> generateMdSidebar(wiki, path + "/" + wiki.name, 0)).collect(Collectors.joining(""));
+                String sidebar = "- [" + this.title + "](" + path + ")\n" +
+                        wikis.stream().map(wiki -> generateMdSidebar(wiki, path + "/" + wiki.name, 0)).collect(Collectors.joining(""));
                 String rendered = WikiBuildPlugin.RENDERER.render(WikiBuildPlugin.PARSER.parse(sidebar));
                 return new WikiType(name, title, content, rendered.substring(rendered.indexOf("\n") + 1, rendered.lastIndexOf("\n") + 1), this.path, wikis);
             }
