@@ -201,3 +201,7 @@ public class JumpStick extends Item {
 By default, NBT and hard-coded modifiers don't mix. If you've ever applied a modifier via NBT on a sword, for example, you might have noticed that your modifier gets applied, but the item suddenly doesn't have any attack damage or speed. You can see why in `ItemStack#getAttributeModifiers`: it straight up ignores any hard-coded ones like in the previous example if the stack has any modifiers in its NBT.
 
 [Here's a mod that fixes this](https://modrinth.com/mod/cmods). It's basically a one-line mixin, but, hey, someone had to do it.
+
+## Further Reading
+
+Check out the [Minecraft Wiki page](https://minecraft.fandom.com/wiki/Attribute) for a comprehensive list of vanilla attributes, modifiers, and features.
