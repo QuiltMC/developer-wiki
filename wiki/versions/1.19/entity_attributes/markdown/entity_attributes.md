@@ -71,7 +71,7 @@ This builder is still mutable at this point, so other entities call `LivingEntit
 
 Each entity that does something different with attributes has their own attribute creation method, which you can find in `DefaultAttributeRegistry`. Since we want our attribute on all entities, we'll mix into the `LivingEntity.createLivingAttributes` method shown in the previous section.
 
-Remember, at this point, the builder is still immutable - and a reference - so our mixin is very straightforward.
+Remember, at this point, the builder is still mutable - and a reference - so our mixin is very straightforward.
 
 ```file:src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java@Add-Attribute-Mixin
 ```

@@ -5,6 +5,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.command.CommandManager;
@@ -13,8 +14,9 @@ import net.minecraft.server.command.ServerCommandSource;
 public class JumpBoostCommand {
 
 	public static int add(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+		PlayerEntity player = context.getSource().getPlayer();
 		// @start Apply-Direct
-		EntityAttributeInstance instance = context.getSource().getPlayer().getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST);
+		EntityAttributeInstance instance = player.getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST);
 		instance.addTemporaryModifier(AttributesExample.SOME_MODIFIER);
 		// @end Apply-Direct
 		return 0;
