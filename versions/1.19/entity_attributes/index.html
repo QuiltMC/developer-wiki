@@ -1,0 +1,345 @@
+<html lang="en-us">
+<head>
+    <title>Entity Attributes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+    <link rel="stylesheet" href="https://quiltmc.org/assets/css/style.css">
+    <link rel="stylesheet" href="https://modder.wiki.quiltmc.org/dracula.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <style>
+        .site-warning {
+            background-color: #ff6f6f;
+            color: white;
+            padding: 1em;
+        }
+
+        .site-warning a {
+            color: #000000;
+        }
+
+        .site-warning a:hover {
+            color: #555;
+        }
+        @media (prefers-color-scheme: dark) {
+            .site-warning {
+                background-color: #c40000;
+                color: white;
+                padding: 1em;
+            }
+
+            .site-warning a {
+                color: #000;
+            }
+
+            .site-warning a:hover {
+                color: #555;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="hero-head">
+    <nav class="navbar no-style" role="navigation" aria-label="main navigation" data-controller="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://modder.wiki.quiltmc.org/">
+                <img src="https://quiltmc.org/assets/img/logo.svg" alt="Quilt Logo">
+
+                <span class="ml-3">QuiltMC Developer Wiki</span>
+            </a>
+
+            <a role="button" data-navbar-target="menu" data-action="click->navbar#toggle"
+               class="navbar-burger is-active" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu is-active" data-navbar-target="menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a href="/versions/" class="navbar-link is-arrowless ">
+                        Versions
+                    </a>
+
+                    <div class="navbar-dropdown is-boxed">
+                        <a href="https://modder.wiki.quiltmc.org/versions/1.19/" class = "navbar-item"> <span>Minecraft Version 1.19</span></a>                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a href="/libraries/" class="navbar-link is-arrowless ">
+                        Libraries
+                    </a>
+
+                    <div class="navbar-dropdown is-boxed">
+                        <a href="https://modder.wiki.quiltmc.org/libraries/brigadier/" class = "navbar-item"> <span>Brigadier</span></a>                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a href="https://github.com/QuiltMC/developer-wiki/tree/master" class="navbar-link is-arrowless" target="_blank">
+                        <span class="icon"><svg class="svg-inline--fa fa-github" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fab fa-github"></i> --></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="has-text-centered site-warning">
+    <h1>Notice: This website is still under development. Please report any issues at <a href="https://github.com/QuiltMC/developer-wiki">https://github.com/QuiltMC/developer-wiki</a></h1>
+</div>
+<section class="section">
+    <div class="columns">
+    <div class="column is-narrow" data-controller="sidebar">
+        <div class="box" data-sidebar-target="sidebar">
+            <div class="menu">
+                <ul class="menu-list">
+                        <li><a href="https://modder.wiki.quiltmc.org/versions/1.19">Minecraft Version 1.19</a></li>
+    <li><a href="https://modder.wiki.quiltmc.org/versions/1.19/entity_attributes/">Entity Attributes</a></li>
+</ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content column">
+        <h1><a href="#entity-attributes" id="entity-attributes">Entity Attributes</a></h1>
+<p>Attributes describe the preset yet fluctuating properties of an entity. Every living entity shares a few attributes, such as movement speed, maximum health, and attack damage, and some entities have attributes specific to their type, like a player entity's attack speed.</p>
+<p>In this guide, we will create a Jump Boost attribute that controls the jump height of an entity.</p>
+<h2><a href="#creating-an-attribute" id="creating-an-attribute">Creating an Attribute</a></h2>
+<p>To create an attribute, we'll construct a <code>ClampedEntityAttribute</code>. This extends the base <code>EntityAttribute</code> and allows min and max values for its modifiers, which is useful if there's a certain range of values that make sense. All vanilla attributes are clamped.</p>
+<p>Additionally, all numerical values in the constructor are doubles. This doesn't make sense for some attributes, but as long as you have a whole number, it will display as a regular integer.</p>
+<p>The constructor takes:</p>
+<ul>
+    <li>A translation key</li>
+    <li>A 'fallback' value: the base value before any external attribute modifiers are applied</li>
+    <li>A min and max value, clamping the <strong>end result</strong> of the modifier calculations (after all modifiers are applied)</li>
+</ul>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
+<pre><code class="language-java">// ...
+	public static final EntityAttribute GENERIC_JUMP_BOOST = new ClampedEntityAttribute(&quot;attribute.name.generic_jump_boost&quot;, 1.0, 0.0, 2.0).setTracked(true);
+// ...
+</code></pre>
+<p>The <code>generic</code> preceding the attribute name is a convention meaning 'applying to multiple living entities (and players).' Specific attributes get their own prefixes, such as <code>horse</code> in <code>horse_jump_strength</code>.</p>
+<p>You might notice the <code>setTracked</code> call; this ensures that the value of this attribute will be synchronized between the server and client. Since we're dealing with player movement, it's important to have this set to <code>true</code>, which is what you'll want in most cases regardless.</p>
+<p>At this point, we might want to add a language entry:</p>
+<pre><code class="language-json">{
+  &quot;attribute.name.generic_jump_boost&quot;: &quot;Jump Boost&quot;
+}
+</code></pre>
+<p>With our <code>EntityAttribute</code> instance created, we can go ahead and register it.</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
+<pre><code class="language-java">// ...
+		Registry.register(Registry.ATTRIBUTE, new Identifier(&quot;example&quot;, &quot;generic.jump_boost&quot;), GENERIC_JUMP_BOOST);
+// ...
+</code></pre>
+<p>This identifier doesn't follow normal conventions, but it's what the vanilla attributes use.</p>
+<h2><a href="#registering-attributes-on-entities" id="registering-attributes-on-entities">Registering Attributes on Entities</a></h2>
+<p>The next step is letting certain entities know that they accept our new attribute. Let's walk through how entities do this in the first place.</p>
+<h3><a href="#how-entities-know-their-attributes" id="how-entities-know-their-attributes">How Entities Know Their Attributes</a></h3>
+<ul>
+    <li>Each entity class has some sort of static attribute creation method returning a <code>DefaultAttributeContainer.Builder</code>. Here's what the one in <code>LivingEntity</code> looks like:</li>
+</ul>
+<pre><code class="language-java">public static DefaultAttributeContainer.Builder createLivingAttributes() {
+    return DefaultAttributeContainer.builder()
+        .add(EntityAttributes.GENERIC_MAX_HEALTH)
+        .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE)
+        .add(EntityAttributes.GENERIC_MOVEMENT_SPEED)
+        .add(EntityAttributes.GENERIC_ARMOR)
+        .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS);
+}
+</code></pre>
+<p>This builder is still mutable at this point, so other entities call <code>LivingEntity.createLivingAttributes</code> and build off of it when defining their own accepted attributes.</p>
+<ul>
+    <li>This method gets called in the <code>DefaultAttributeRegistry</code> class when creating its namesake map (<code>DEFAULT_ATTRIBUTE_REGISTRY</code>). This maps entity types to their corresponding <code>DefaultAttributeContainers</code>, now built and immutable. This map is immutable <em>and</em> private, but the class has wrappers for <code>get</code> and <code>containsKey</code>.</li>
+</ul>
+<blockquote>
+    <p>When creating your own entity classes, you can use <code>FabricDefaultAttributeRegistry.register</code> to take care of this without your own mixins.</p>
+</blockquote>
+<ul>
+    <li>
+        <p>During play, the <code>LivingEntity</code> constructor initializes the <code>attributes</code> field as a new <code>AttributeContainer</code> instance based on the result of the getter in <code>DefaultAttributeRegistry</code> mentioned prior. This is the value returned in the <code>LivingEntity#getAttributes</code> getter.</p>
+    </li>
+    <li>
+        <p>When <em>using</em> an attribute's value stored in an entity, you need to retrieve its corresponding <code>EntityAttributeInstance</code>; we'll go over this in more detail later. For now, all you should know is that <strong>if the entity doesn't have an attribute in its <code>attributes</code> field, it won't have that attribute instance</strong>, and you won't be able to apply a modifier.</p>
+    </li>
+</ul>
+<h3><a href="#mixing-into-attribute-creation" id="mixing-into-attribute-creation">Mixing Into Attribute Creation</a></h3>
+<p>Each entity that does something different with attributes has their own attribute creation method, which you can find in <code>DefaultAttributeRegistry</code>. Since we want our attribute on all entities, we'll mix into the <code>LivingEntity.createLivingAttributes</code> method shown in the previous section.</p>
+<p>Remember, at this point, the builder is still mutable - and a reference - so our mixin is very straightforward.</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java" target="_blank"><code>LivingEntityMixin.java</code></a>:</p>
+<pre><code class="language-java">// ...
+	@Inject(method = &quot;createLivingAttributes&quot;, at = @At(value = &quot;RETURN&quot;))
+	private static void addCustomAttribute(CallbackInfoReturnable&lt;DefaultAttributeContainer.Builder&gt; cir) {
+		cir.getReturnValue().add(AttributesExample.GENERIC_JUMP_BOOST);
+	}
+// ...
+</code></pre>
+<h2><a href="#using-attributes" id="using-attributes">Using Attributes</a></h2>
+<p>We've registered our attribute and let all living entities know that they have it. The next step is to actually use it somewhere: in our case, to modify jump height.</p>
+<p><code>LivingEntity#getAttributes</code> gets the <em>possible</em> attributes that the entity knows it has, but not the actual values. Instead, each attribute has its own 'instance' on an entity known as an <code>EntityAttributeInstance</code>, which has all the logic for controlling attribute values. You can use the <code>LivingEntity#getAttributeInstance</code> method for getting one of these instances.</p>
+<p>We'll need another mixin into <code>LivingEntity</code>, this time for the <code>getJumpVelocity</code> method. Since our initial fallback value is <code>1.0</code>, we can feel free to just multiply the end result by the attribute value.</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java" target="_blank"><code>LivingEntityMixin.java</code></a>:</p>
+<pre><code class="language-java">// ...
+	@Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(EntityAttribute attribute);
+
+	@Inject(method = &quot;getJumpVelocity&quot;, at = @At(value = &quot;RETURN&quot;), cancellable = true)
+	private void applyJumpBoost(CallbackInfoReturnable&lt;Float&gt; cir) {
+		EntityAttributeInstance instance = getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST);
+		cir.setReturnValue(cir.getReturnValue() * (float) instance.getValue());
+	}
+// ...
+</code></pre>
+<h2><a href="#attribute-modifiers" id="attribute-modifiers">Attribute Modifiers</a></h2>
+<p>Now that we've given our attribute functionality, it's time to modify its value in some way. The next section will discuss three methods you might use to do so, but they all have one thing in common: <code>EntityAttributeModifier</code>.</p>
+<p>Attribute modifiers are completely disconnected from any particular attribute and are only concerned with numbers, operations, and identities. The constructor takes:</p>
+<ul>
+    <li>A UUID to uniquely identify this modifier... yes, not even an <code>Identifier</code>, a UUID that you need to hard-code or generate randomly if you don't care about identifying the modifier afterwards
+        <ul>
+            <li>Modifiers with the same UUIDs will simply overwrite each other on the same attribute instance. You can see how this is all handled in <code>LivingEntity#getEquipment</code>.</li>
+        </ul>
+    </li>
+    <li>A string representing the modifier's 'name' - only used for NBT and when <code>StatusEffect</code>s link to attributes, notably showing up in potion tooltips</li>
+    <li>A double value and an <code>EntityAttributeModifier.Operation</code> that specifies how the modifier should be applied and by what magnitude</li>
+</ul>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
+<pre><code class="language-java">// ...
+	public static final UUID SOME_MODIFIER_ID = UUID.fromString(&quot;de17612a-adec-11ec-b909-0242ac120002&quot;);
+
+	public static final EntityAttributeModifier SOME_MODIFIER = new EntityAttributeModifier(
+			SOME_MODIFIER_ID,
+			&quot;Jump stick modifier&quot;,
+			0.5,
+			EntityAttributeModifier.Operation.ADDITION
+	);
+// ...
+</code></pre>
+<p>It's important to note that all attribute modifiers are calculated in order based on type, with the order being <code>ADDITION</code>, <code>MULTIPLY_BASE</code>, then <code>MULTIPLY_TOTAL</code>. You can see the exact behavior in <code>EntityAttributeInstance#computeValue</code>.</p>
+<h2><a href="#applying-modifiers" id="applying-modifiers">Applying Modifiers</a></h2>
+<p>The final step is to apply this modifier. These examples use the <code>SOME_MODIFIER</code> field created in the previous section.</p>
+<h3><a href="#via-code" id="via-code">Via Code</a></h3>
+<p>It's as simple as getting the attribute instance and calling <code>addTemporaryModifier</code> (or <code>addPersistentModifier</code> if you want it to be serialized in the instance's NBT).</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
+<pre><code class="language-java">// ...
+		EntityAttributeInstance instance = player.getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST);
+		instance.addTemporaryModifier(AttributesExample.SOME_MODIFIER);
+// ...
+</code></pre>
+<p>This is also the most appropriate case where you would remove the modifier at some other point in time. You can either use the UUID associated with the modifier or the modifier itself.</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
+<pre><code class="language-java">// ...
+		instance.removeModifier(AttributesExample.SOME_MODIFIER_ID);
+// ...
+</code></pre>
+<h3><a href="#via-items" id="via-items">Via Items</a></h3>
+<p>Upon equipping an item, the game checks if it has any attribute modifiers marked in the slot it was equipped in. If so, it applies those modifiers to the entity. There are two ways items can achieve this: through <code>ItemStack</code> NBT or custom <code>Item</code> instance behavior.</p>
+<h4><a href="#nbt" id="nbt">NBT</a></h4>
+<p>You can use the <code>ItemStack#addAttributeModifier</code> method to apply a modifier via NBT.</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
+<pre><code class="language-java">// ...
+		ItemStack stack = new ItemStack(Items.STICK);
+		stack.addAttributeModifier(
+				AttributesExample.GENERIC_JUMP_BOOST,
+				AttributesExample.SOME_MODIFIER,
+				EquipmentSlot.MAINHAND
+		);
+// ...
+</code></pre>
+<h4><a href="#hard-coded" id="hard-coded">Hard-coded</a></h4>
+<p>The <code>Item</code> class contains a <code>getAttributeModifiers</code> method which returns a multimap of modifiers to apply when the item is equipped in the specified slot. We can override this in our own item class.</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpStick.java" target="_blank"><code>JumpStick.java</code></a>:</p>
+<pre><code class="language-java">package org.quiltmc.wiki.entity_attributes;
+
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.item.Item;
+
+public class JumpStick extends Item {
+
+	public JumpStick(Settings settings) {
+		super(settings);
+	}
+
+	@Override
+	public Multimap&lt;EntityAttribute, EntityAttributeModifier&gt; getAttributeModifiers(EquipmentSlot slot) {
+		// If held in main hand, return our modifier, otherwise nothing
+		if (slot == EquipmentSlot.MAINHAND) {
+			ImmutableMultimap.Builder&lt;EntityAttribute, EntityAttributeModifier&gt; builder = ImmutableMultimap.builder();
+			builder.put(AttributesExample.GENERIC_JUMP_BOOST, AttributesExample.SOME_MODIFIER);
+			return builder.build();
+		}
+		return super.getAttributeModifiers(slot);
+	}
+}
+</code></pre>
+<h4><a href="#conflicts" id="conflicts">Conflicts</a></h4>
+<p>By default, NBT and hard-coded modifiers don't mix. If you've ever applied a modifier via NBT on a sword, for example, you might have noticed that your modifier <em>does</em> get applied, but the item suddenly doesn't have any attack damage or attack speed. You can see why in <code>ItemStack#getAttributeModifiers</code>: it completely ignores any hard-coded ones like in the previous example if the stack has any modifiers in its NBT.</p>
+<p><a href="https://modrinth.com/mod/cmods" target="_blank">Here's a mod that fixes this</a>. It's basically a one-line mixin, but, hey, someone had to do it.</p>
+<h2><a href="#further-reading" id="further-reading">Further Reading</a></h2>
+<p>Check out the <a href="https://minecraft.fandom.com/wiki/Attribute" target="_blank">Minecraft Wiki page</a> for a comprehensive list of vanilla attributes, modifiers, and features.</p>
+    </div>
+</div>
+</section>
+<footer class="footer">
+    <div class="content">
+        <div class="columns">
+            <div class="column is-half is-offset-one-quarter">
+                <div class="button-grid">
+                    <a title="Discord" class="button is-discord is-rounded" target="_blank" href="https://discord.quiltmc.org">
+                        <span class="icon"><svg class="svg-inline--fa fa-discord" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="discord" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z"></path></svg><!-- <i class="fab fa-discord"></i> --></span>
+                    </a>
+
+                    <a title="Forum" class="button is-gradle is-rounded" target="_blank" href="https://forum.quiltmc.org">
+                        <span class="icon"><svg class="svg-inline--fa fa-discourse" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="discourse" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M225.9 32C103.3 32 0 130.5 0 252.1 0 256 .1 480 .1 480l225.8-.2c122.7 0 222.1-102.3 222.1-223.9C448 134.3 348.6 32 225.9 32zM224 384c-19.4 0-37.9-4.3-54.4-12.1L88.5 392l22.9-75c-9.8-18.1-15.4-38.9-15.4-61 0-70.7 57.3-128 128-128s128 57.3 128 128-57.3 128-128 128z"></path></svg><!-- <i class="fab fa-discourse"></i> --></span>
+                    </a>
+
+                    <a title="GitHub" class="button is-github is-rounded" target="_blank" href="https://github.com/QuiltMC">
+                        <span class="icon"><svg class="svg-inline--fa fa-github" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fab fa-github"></i> --></span>
+                    </a>
+
+                    <a title="Twitter" class="button is-twitter is-rounded" target="_blank" href="https://twitter.com/quilt_mc">
+                        <span class="icon"><svg class="svg-inline--fa fa-twitter" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg><!-- <i class="fab fa-twitter"></i> --></span>
+                    </a>
+
+                    <a title="Mastodon" class="button is-mastodon is-rounded" target="_blank" rel="me" href="https://tech.lgbt/@quiltmc">
+                        <span class="icon"><svg class="svg-inline--fa fa-mastodon" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="mastodon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"></path></svg><!-- <i class="fab fa-mastodon"></i> --></span>
+                    </a>
+
+                    <a title="Twitch" class="button is-primary is-rounded" target="_blank" href="https://twitch.tv/quiltmc">
+                        <span class="icon"><svg class="svg-inline--fa fa-twitch" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitch" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M391.17,103.47H352.54v109.7h38.63ZM285,103H246.37V212.75H285ZM120.83,0,24.31,91.42V420.58H140.14V512l96.53-91.42h77.25L487.69,256V0ZM449.07,237.75l-77.22,73.12H294.61l-67.6,64v-64H140.14V36.58H449.07Z"></path></svg><!-- <i class="fab fa-twitch"></i> --></span>
+                    </a>
+
+                    <a title="RSS" class="button is-rss is-rounded" target="_blank" href="https://quiltmc.org/feed.xml">
+                        <span class="icon"><svg class="svg-inline--fa fa-rss" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M25.57 176.1C12.41 175.4 .9117 185.2 .0523 198.4s9.173 24.65 22.39 25.5c120.1 7.875 225.7 112.7 233.6 233.6C256.9 470.3 267.4 480 279.1 480c.5313 0 1.062-.0313 1.594-.0625c13.22-.8438 23.25-12.28 22.39-25.5C294.6 310.3 169.7 185.4 25.57 176.1zM32 32C14.33 32 0 46.31 0 64s14.33 32 32 32c194.1 0 352 157.9 352 352c0 17.69 14.33 32 32 32s32-14.31 32-32C448 218.6 261.4 32 32 32zM63.1 351.9C28.63 351.9 0 380.6 0 416s28.63 64 63.1 64s64.08-28.62 64.08-64S99.37 351.9 63.1 351.9z"></path></svg><!-- <i class="fa-solid fa-rss"></i> --></span>
+                    </a>
+                </div>
+
+                <br>
+
+                <div class="has-text-centered">
+                    <p>
+                        <strong>Copyright &copy; 2022 Quilt Project</strong>
+                    </p>
+
+                    <p>
+                        Quilt is not an official Minecraft product, and is not
+                        approved by or associated with Mojang Studios.
+                        "Minecraft" is a trademark of Mojang AB and any usage
+                        of the Minecraft brand on this site is used in
+                        accordance with Mojang Studios'
+                        <a href="https://account.mojang.com/terms?ref=ft#brand" target="_blank">Brand and Asset
+                            Guidelines</a>.
+                    </p>
+
+                    <p>
+                        All logos used on this site are the property of their respective owners. The
+                        CurseForge logo recreation we use in a few places on this site
+                        <a href="https://gist.github.com/thecodewarrior/110057b210551c4ecf2c9be6d58ff824" target="_blank">was
+                            created by thecodewarrior</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
