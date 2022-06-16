@@ -94,15 +94,7 @@ specifies the identifier of the recipe type - so in our case, `"example:my_recip
 are dependent on the serializer.
 
 For instance, a recipe of ours that inputs an iron ingot and outputs two apples would be:
-```json
-{
-  "type": "example:my_recipe",
-  "input": {
-    "item": "minecraft:iron_ingot"
-  },
-  "output": "minecraft:apple",
-  "count": 2
-}
+```file:src/main/resources/data/recipes/recipes/fun.json
 ```
 
 #### Retrieving your recipes
