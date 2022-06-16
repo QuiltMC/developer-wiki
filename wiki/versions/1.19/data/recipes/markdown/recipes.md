@@ -101,6 +101,7 @@ For instance, a recipe of ours that inputs an iron ingot and outputs two apples 
 
 Recipes must be retrieved from the `RecipeManager`, which can be fetched from either a `World` or the `MinecraftServer`.
 The recipe manager has a few methods for recipe retrieving, such as:
+
 - `getFirstMatch` - Gets the first recipe of a type that returned `true` for `matches`.
 - `listAllOfType` - Gets all recipes from a type.
 - `getAllMatches` - Gets all recipes of a type that returned `true` for `matches`.
