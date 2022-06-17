@@ -1,0 +1,8 @@
+{
+  "type": "example:my_recipe",
+  "input": {
+    "item": "minecraft:iron_ingot"
+  },
+  "output": "minecraft:apple",
+  "count": 2
+}
