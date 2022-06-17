@@ -2,7 +2,7 @@
 
 A Quilt Standard Libraries module that aims to help to manipulate recipes.
 
-It has three parts, `QuiltRecipeSerializer` (Which was briefly covered in the [Recipe Creation Tutorial](recipes.md)),
+It has three parts, `QuiltRecipeSerializer` (Which was briefly covered in the [Recipe Creation Tutorial](./recipes.md)),
 recipe manager manipulation (Addition, Removal and Modification of recipes) and utilities.
 
 ## QuiltRecipeSerializer
