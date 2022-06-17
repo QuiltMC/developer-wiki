@@ -49,7 +49,7 @@ public class GenerateWikiTreeTask extends DefaultTask {
     }
 
     private List<WikiStructure.WikiSubEntry> buildSubEntries(GenerateWikiFileTreeTask.FileEntry root, Map<GenerateWikiFileTreeTask.FileEntry, String> content, int depth) {
-        if (depth >= 3) {
+        if (depth > 3) {
             throw new RuntimeException("Wiki tree is too deep, unable to add file: " + root.path());
         }
 

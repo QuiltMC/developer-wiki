@@ -37,6 +37,7 @@ public class WikiBuildPlugin implements Plugin<Project> {
         target.getTasks().register("generateContent", GenerateContentTask.class);
         target.getTasks().register("generateWikiTree", GenerateWikiTreeTask .class);
         target.getTasks().register("generateWiki", GenerateWikiTask.class);
+		target.getTasks().register("testWiki", TestWikiTask.class);
     }
 
     private static class MdLinkParserExtension implements HtmlRenderer.HtmlRendererExtension {
