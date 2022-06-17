@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Minecraft Version 1.19</title>
+    <title>Entity Attributes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
     <link rel="stylesheet" href="https://quiltmc.org/assets/css/style.css">
     <link rel="stylesheet" href="https://modder.wiki.quiltmc.org/dracula.css">
@@ -116,8 +116,183 @@
         </div>
     </div>
     <div class="content column">
-        <h1><a href="#minecraft-version-119" id="minecraft-version-119">Minecraft Version 1.19</a></h1>
-<p>// TODO: Fill this in</p>
+        <h1><a href="#entity-attributes" id="entity-attributes">Entity Attributes</a></h1>
+<p>Attributes describe the preset yet fluctuating properties of an entity. Every living entity shares a few attributes, such as movement speed, maximum health, and attack damage, and some entities have attributes specific to their type, like a player entity's attack speed.</p>
+<p>In this guide, we will create a Jump Boost attribute that controls the jump height of an entity.</p>
+<h2><a href="#creating-an-attribute" id="creating-an-attribute">Creating an Attribute</a></h2>
+<p>To create an attribute, we'll construct a <code>ClampedEntityAttribute</code>. This extends the base <code>EntityAttribute</code> and allows min and max values for its modifiers, which is useful if there's a certain range of values that make sense. All vanilla attributes are clamped.</p>
+<p>Additionally, all numerical values in the constructor are doubles. This doesn't make sense for some attributes, but as long as you have a whole number, it will display as a regular integer.</p>
+<p>The constructor takes:</p>
+<ul>
+    <li>A translation key</li>
+    <li>A 'fallback' value: the base value before any external attribute modifiers are applied</li>
+    <li>A min and max value, clamping the <strong>end result</strong> of the modifier calculations (after all modifiers are applied)</li>
+</ul>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
+<pre><code class="language-java">// ...
+	public static final EntityAttribute GENERIC_JUMP_BOOST = new ClampedEntityAttribute(&quot;attribute.name.generic_jump_boost&quot;, 1.0, 0.0, 2.0).setTracked(true);
+// ...
+</code></pre>
+<p>The <code>generic</code> preceding the attribute name is a convention meaning 'applying to multiple living entities (and players).' Specific attributes get their own prefixes, such as <code>horse</code> in <code>horse_jump_strength</code>.</p>
+<p>You might notice the <code>setTracked</code> call; this ensures that the value of this attribute will be synchronized between the server and client. Since we're dealing with player movement, it's important to have this set to <code>true</code>, which is what you'll want in most cases regardless.</p>
+<p>At this point, we might want to add a language entry:</p>
+<pre><code class="language-json">{
+  &quot;attribute.name.generic_jump_boost&quot;: &quot;Jump Boost&quot;
+}
+</code></pre>
+<p>With our <code>EntityAttribute</code> instance created, we can go ahead and register it.</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
+<pre><code class="language-java">// ...
+		Registry.register(Registry.ATTRIBUTE, new Identifier(&quot;example&quot;, &quot;generic.jump_boost&quot;), GENERIC_JUMP_BOOST);
+// ...
+</code></pre>
+<p>This identifier doesn't follow normal conventions, but it's what the vanilla attributes use.</p>
+<h2><a href="#registering-attributes-on-entities" id="registering-attributes-on-entities">Registering Attributes on Entities</a></h2>
+<p>The next step is letting certain entities know that they accept our new attribute. Let's walk through how entities do this in the first place.</p>
+<h3><a href="#how-entities-know-their-attributes" id="how-entities-know-their-attributes">How Entities Know Their Attributes</a></h3>
+<ul>
+    <li>Each entity class has some sort of static attribute creation method returning a <code>DefaultAttributeContainer.Builder</code>. Here's what the one in <code>LivingEntity</code> looks like:</li>
+</ul>
+<pre><code class="language-java">public static DefaultAttributeContainer.Builder createLivingAttributes() {
+    return DefaultAttributeContainer.builder()
+        .add(EntityAttributes.GENERIC_MAX_HEALTH)
+        .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE)
+        .add(EntityAttributes.GENERIC_MOVEMENT_SPEED)
+        .add(EntityAttributes.GENERIC_ARMOR)
+        .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS);
+}
+</code></pre>
+<p>This builder is still mutable at this point, so other entities call <code>LivingEntity.createLivingAttributes</code> and build off of it when defining their own accepted attributes.</p>
+<ul>
+    <li>This method gets called in the <code>DefaultAttributeRegistry</code> class when creating its namesake map (<code>DEFAULT_ATTRIBUTE_REGISTRY</code>). This maps entity types to their corresponding <code>DefaultAttributeContainers</code>, now built and immutable. This map is immutable <em>and</em> private, but the class has wrappers for <code>get</code> and <code>containsKey</code>.</li>
+</ul>
+<blockquote>
+    <p>When creating your own entity classes, you can use <code>FabricDefaultAttributeRegistry.register</code> to take care of this without your own mixins.</p>
+</blockquote>
+<ul>
+    <li>
+        <p>During play, the <code>LivingEntity</code> constructor initializes the <code>attributes</code> field as a new <code>AttributeContainer</code> instance based on the result of the getter in <code>DefaultAttributeRegistry</code> mentioned prior. This is the value returned in the <code>LivingEntity#getAttributes</code> getter.</p>
+    </li>
+    <li>
+        <p>When <em>using</em> an attribute's value stored in an entity, you need to retrieve its corresponding <code>EntityAttributeInstance</code>; we'll go over this in more detail later. For now, all you should know is that <strong>if the entity doesn't have an attribute in its <code>attributes</code> field, it won't have that attribute instance</strong>, and you won't be able to apply a modifier.</p>
+    </li>
+</ul>
+<h3><a href="#mixing-into-attribute-creation" id="mixing-into-attribute-creation">Mixing Into Attribute Creation</a></h3>
+<p>Each entity that does something different with attributes has their own attribute creation method, which you can find in <code>DefaultAttributeRegistry</code>. Since we want our attribute on all entities, we'll mix into the <code>LivingEntity.createLivingAttributes</code> method shown in the previous section.</p>
+<p>Remember, at this point, the builder is still mutable - and a reference - so our mixin is very straightforward.</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java" target="_blank"><code>LivingEntityMixin.java</code></a>:</p>
+<pre><code class="language-java">// ...
+	@Inject(method = &quot;createLivingAttributes&quot;, at = @At(value = &quot;RETURN&quot;))
+	private static void addCustomAttribute(CallbackInfoReturnable&lt;DefaultAttributeContainer.Builder&gt; cir) {
+		cir.getReturnValue().add(AttributesExample.GENERIC_JUMP_BOOST);
+	}
+// ...
+</code></pre>
+<h2><a href="#using-attributes" id="using-attributes">Using Attributes</a></h2>
+<p>We've registered our attribute and let all living entities know that they have it. The next step is to actually use it somewhere: in our case, to modify jump height.</p>
+<p><code>LivingEntity#getAttributes</code> gets the <em>possible</em> attributes that the entity knows it has, but not the actual values. Instead, each attribute has its own 'instance' on an entity known as an <code>EntityAttributeInstance</code>, which has all the logic for controlling attribute values. You can use the <code>LivingEntity#getAttributeInstance</code> method for getting one of these instances.</p>
+<p>We'll need another mixin into <code>LivingEntity</code>, this time for the <code>getJumpVelocity</code> method. Since our initial fallback value is <code>1.0</code>, we can feel free to just multiply the end result by the attribute value.</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java" target="_blank"><code>LivingEntityMixin.java</code></a>:</p>
+<pre><code class="language-java">// ...
+	@Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(EntityAttribute attribute);
+
+	@Inject(method = &quot;getJumpVelocity&quot;, at = @At(value = &quot;RETURN&quot;), cancellable = true)
+	private void applyJumpBoost(CallbackInfoReturnable&lt;Float&gt; cir) {
+		EntityAttributeInstance instance = getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST);
+		cir.setReturnValue(cir.getReturnValue() * (float) instance.getValue());
+	}
+// ...
+</code></pre>
+<h2><a href="#attribute-modifiers" id="attribute-modifiers">Attribute Modifiers</a></h2>
+<p>Now that we've given our attribute functionality, it's time to modify its value in some way. The next section will discuss three methods you might use to do so, but they all have one thing in common: <code>EntityAttributeModifier</code>.</p>
+<p>Attribute modifiers are completely disconnected from any particular attribute and are only concerned with numbers, operations, and identities. The constructor takes:</p>
+<ul>
+    <li>A UUID to uniquely identify this modifier... yes, not even an <code>Identifier</code>, a UUID that you need to hard-code or generate randomly if you don't care about identifying the modifier afterwards
+        <ul>
+            <li>Modifiers with the same UUIDs will simply overwrite each other on the same attribute instance. You can see how this is all handled in <code>LivingEntity#getEquipment</code>.</li>
+        </ul>
+    </li>
+    <li>A string representing the modifier's 'name' - only used for NBT and when <code>StatusEffect</code>s link to attributes, notably showing up in potion tooltips</li>
+    <li>A double value and an <code>EntityAttributeModifier.Operation</code> that specifies how the modifier should be applied and by what magnitude</li>
+</ul>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
+<pre><code class="language-java">// ...
+	public static final UUID SOME_MODIFIER_ID = UUID.fromString(&quot;de17612a-adec-11ec-b909-0242ac120002&quot;);
+
+	public static final EntityAttributeModifier SOME_MODIFIER = new EntityAttributeModifier(
+			SOME_MODIFIER_ID,
+			&quot;Jump stick modifier&quot;,
+			0.5,
+			EntityAttributeModifier.Operation.ADDITION
+	);
+// ...
+</code></pre>
+<p>It's important to note that all attribute modifiers are calculated in order based on type, with the order being <code>ADDITION</code>, <code>MULTIPLY_BASE</code>, then <code>MULTIPLY_TOTAL</code>. You can see the exact behavior in <code>EntityAttributeInstance#computeValue</code>.</p>
+<h2><a href="#applying-modifiers" id="applying-modifiers">Applying Modifiers</a></h2>
+<p>The final step is to apply this modifier. These examples use the <code>SOME_MODIFIER</code> field created in the previous section.</p>
+<h3><a href="#via-code" id="via-code">Via Code</a></h3>
+<p>It's as simple as getting the attribute instance and calling <code>addTemporaryModifier</code> (or <code>addPersistentModifier</code> if you want it to be serialized in the instance's NBT).</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
+<pre><code class="language-java">// ...
+		EntityAttributeInstance instance = player.getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST);
+		instance.addTemporaryModifier(AttributesExample.SOME_MODIFIER);
+// ...
+</code></pre>
+<p>This is also the most appropriate case where you would remove the modifier at some other point in time. You can either use the UUID associated with the modifier or the modifier itself.</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
+<pre><code class="language-java">// ...
+		instance.removeModifier(AttributesExample.SOME_MODIFIER_ID);
+// ...
+</code></pre>
+<h3><a href="#via-items" id="via-items">Via Items</a></h3>
+<p>Upon equipping an item, the game checks if it has any attribute modifiers marked in the slot it was equipped in. If so, it applies those modifiers to the entity. There are two ways items can achieve this: through <code>ItemStack</code> NBT or custom <code>Item</code> instance behavior.</p>
+<h4><a href="#nbt" id="nbt">NBT</a></h4>
+<p>You can use the <code>ItemStack#addAttributeModifier</code> method to apply a modifier via NBT.</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
+<pre><code class="language-java">// ...
+		ItemStack stack = new ItemStack(Items.STICK);
+		stack.addAttributeModifier(
+				AttributesExample.GENERIC_JUMP_BOOST,
+				AttributesExample.SOME_MODIFIER,
+				EquipmentSlot.MAINHAND
+		);
+// ...
+</code></pre>
+<h4><a href="#hard-coded" id="hard-coded">Hard-coded</a></h4>
+<p>The <code>Item</code> class contains a <code>getAttributeModifiers</code> method which returns a multimap of modifiers to apply when the item is equipped in the specified slot. We can override this in our own item class.</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpStick.java" target="_blank"><code>JumpStick.java</code></a>:</p>
+<pre><code class="language-java">package org.quiltmc.wiki.entity_attributes;
+
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.item.Item;
+
+public class JumpStick extends Item {
+
+	public JumpStick(Settings settings) {
+		super(settings);
+	}
+
+	@Override
+	public Multimap&lt;EntityAttribute, EntityAttributeModifier&gt; getAttributeModifiers(EquipmentSlot slot) {
+		// If held in main hand, return our modifier, otherwise nothing
+		if (slot == EquipmentSlot.MAINHAND) {
+			ImmutableMultimap.Builder&lt;EntityAttribute, EntityAttributeModifier&gt; builder = ImmutableMultimap.builder();
+			builder.put(AttributesExample.GENERIC_JUMP_BOOST, AttributesExample.SOME_MODIFIER);
+			return builder.build();
+		}
+		return super.getAttributeModifiers(slot);
+	}
+}
+</code></pre>
+<h4><a href="#conflicts" id="conflicts">Conflicts</a></h4>
+<p>By default, NBT and hard-coded modifiers don't mix. If you've ever applied a modifier via NBT on a sword, for example, you might have noticed that your modifier <em>does</em> get applied, but the item suddenly doesn't have any attack damage or attack speed. You can see why in <code>ItemStack#getAttributeModifiers</code>: it completely ignores any hard-coded ones like in the previous example if the stack has any modifiers in its NBT.</p>
+<p><a href="https://modrinth.com/mod/cmods" target="_blank">Here's a mod that fixes this</a>. It's basically a one-line mixin, but, hey, someone had to do it.</p>
+<h2><a href="#further-reading" id="further-reading">Further Reading</a></h2>
+<p>Check out the <a href="https://minecraft.fandom.com/wiki/Attribute" target="_blank">Minecraft Wiki page</a> for a comprehensive list of vanilla attributes, modifiers, and features.</p>
     </div>
 </div>
 </section>
