@@ -30,6 +30,8 @@ public class TestWikiTask extends DefaultTask {
 				sendWebpageFile(exchange, url.substring(1) + "index.html", "text/html;charset=utf-8");
 			} else if (url.endsWith(".css")) {
 				sendWebpageFile(exchange, url.substring(1), "text/css;charset=utf-8");
+			} else if (url.endsWith(".ico")) {
+				sendWebpageFile(exchange, url.substring(1), "image/png");
 			}
 			System.out.println("Served");
 		});
