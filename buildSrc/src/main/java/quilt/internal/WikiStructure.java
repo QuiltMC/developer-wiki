@@ -51,7 +51,7 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
             }
 
             public WikiType build(String path) {
-                String sidebar = "- [" + this.title + "](" + path + ")\n" +
+                String sidebar = "- [" + this.title + "](" + path + "/)\n" +
                         wikis.stream().map(wiki -> generateMdSidebar(wiki, path + "/" + wiki.name, 0)).collect(Collectors.joining(""));
                 String rendered = WikiBuildPlugin.RENDERER.render(WikiBuildPlugin.PARSER.parse(sidebar));
                 return new WikiType(name, title, content, rendered.substring(rendered.indexOf("\n") + 1, rendered.lastIndexOf("\n") + 1), this.path, wikis);
@@ -174,9 +174,9 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
 
             String masterSidebar =
                     "- Versions:\n"
-                    + versions.stream().map(wikiType -> "\t- [" + wikiType.title + "](" + wikiPath + "/versions/" + wikiType.name + ")").collect(Collectors.joining("\n"))
+                    + versions.stream().map(wikiType -> "\t- [" + wikiType.title + "](" + wikiPath + "/versions/" + wikiType.name + "/)").collect(Collectors.joining("\n"))
                     + "\n- Libraries:\n"
-                    + libraries.stream().map(wikiType -> "\t- [" + wikiType.title + "](" + wikiPath + "/libraries/" + wikiType.name + ")").collect(Collectors.joining("\n"));
+                    + libraries.stream().map(wikiType -> "\t- [" + wikiType.title + "](" + wikiPath + "/libraries/" + wikiType.name + "/)").collect(Collectors.joining("\n"));
 
             String renderedSidebar = WikiBuildPlugin.RENDERER.render(WikiBuildPlugin.PARSER.parse(masterSidebar));
 
