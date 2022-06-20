@@ -92,7 +92,7 @@ public class GenerateWikiTask extends DefaultTask {
             context.putAll(defaultOptions);
             StringWriter writer = new StringWriter();
             compiled.evaluate(writer, context);
-            String outputUrl = (String)getProject().property("wiki_path") + current.toString().split((String)getProject().property("output_path"))[1].replace("\\", "/");
+            String outputUrl = (String)getProject().property("wiki_path") + current.toString().replace("\\", "/").replaceAll(".+/" + (String)getProject().property("output_path"), "");
             compileHtmlFile(defaultOptions, output, writer.toString(), tree.title(), outputUrl);
             writer.close();
 
