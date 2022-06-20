@@ -18,105 +18,105 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
 
 public class GenerateWikiTask extends DefaultTask {
-    private final PebbleEngine engine = new PebbleEngine.Builder().autoEscaping(false).build();
+	private final PebbleEngine engine = new PebbleEngine.Builder().autoEscaping(false).build();
 
-    public GenerateWikiTask() {
-        setGroup("wiki");
+	public GenerateWikiTask() {
+		setGroup("wiki");
 
-        dependsOn("generateWikiTree");
-    }
+		dependsOn("generateWikiTree");
+	}
 
-    @TaskAction
-    public void generateWiki() throws IOException {
-        // Get the built values
-        WikiStructure wiki = ((GenerateWikiTreeTask) getProject().getTasks().getByPath("generateWikiTree")).getStructure();
+	@TaskAction
+	public void generateWiki() throws IOException {
+		// Get the built values
+		WikiStructure wiki = ((GenerateWikiTreeTask) getProject().getTasks().getByPath("generateWikiTree")).getStructure();
 
-        // Clean the output
-        String outputPath = (String) getProject().property("output_path");
-        getProject().delete(outputPath);
-        Path output = getProject().file(outputPath).toPath();
-        Files.createDirectory(output);
+		// Clean the output
+		String outputPath = (String) getProject().property("output_path");
+		getProject().delete(outputPath);
+		Path output = getProject().file(outputPath).toPath();
+		Files.createDirectory(output);
 
-        Map<String, Object> defaultOptions = Map.of(
-                "version_navbar", wiki.versionsNavbar(),
-                "libraries_navbar", wiki.librariesNavbar(),
-                "wiki_path", getProject().property("wiki_path"),
-                "git_repo_tree", getProject().property("git_repo_tree"));
+		Map<String, Object> defaultOptions = Map.of(
+				"version_navbar", wiki.versionsNavbar(),
+				"libraries_navbar", wiki.librariesNavbar(),
+				"wiki_path", getProject().property("wiki_path"),
+				"git_repo_tree", getProject().property("git_repo_tree"));
 
-        // Generate the files
-        Path versionsPath = Files.createDirectory(output.resolve("versions"));
-        for (WikiStructure.WikiType wikiType : wiki.versions()) {
-            outputFile(wikiType, versionsPath, wikiType.sidebar(), defaultOptions);
-        }
+		// Generate the files
+		Path versionsPath = Files.createDirectory(output.resolve("versions"));
+		for (WikiStructure.WikiType wikiType : wiki.versions()) {
+			outputFile(wikiType, versionsPath, wikiType.sidebar(), defaultOptions);
+		}
 
-        Path librariesPath = Files.createDirectory(output.resolve("libraries"));
-        for (WikiStructure.WikiType wikiType : wiki.libraries()) {
-            outputFile(wikiType, librariesPath, wikiType.sidebar(), defaultOptions);
-        }
+		Path librariesPath = Files.createDirectory(output.resolve("libraries"));
+		for (WikiStructure.WikiType wikiType : wiki.libraries()) {
+			outputFile(wikiType, librariesPath, wikiType.sidebar(), defaultOptions);
+		}
 
-        PebbleTemplate compiled = engine.getTemplate("wiki/templates/index.html");
-        StringWriter writer = new StringWriter();
-        Map<String, Object> indexOptions = new HashMap<>(defaultOptions);
-        indexOptions.put("sidebar", wiki.masterSidebar());
-        compiled.evaluate(writer, indexOptions);
+		PebbleTemplate compiled = engine.getTemplate("wiki/templates/index.html");
+		StringWriter writer = new StringWriter();
+		Map<String, Object> indexOptions = new HashMap<>(defaultOptions);
+		indexOptions.put("sidebar", wiki.masterSidebar());
+		compiled.evaluate(writer, indexOptions);
 		compileHtmlFile(defaultOptions, output.resolve("index.html"), writer.toString(), "Quilt Developer Wiki", (String)getProject().property("wiki_path"));
 		writer.close();
 
-        // Copy static files
-        Path staticFiles = this.getProject().getRootDir().toPath().resolve("wiki/static");
-        Files.walkFileTree(staticFiles, new SimpleFileVisitor<>() {
-            @Override
-            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                Path outputPath = output.resolve(staticFiles.relativize(file));
-                Files.copy(file, outputPath);
-                return super.visitFile(file, attrs);
-            }
-        });
-    }
+		// Copy static files
+		Path staticFiles = this.getProject().getRootDir().toPath().resolve("wiki/static");
+		Files.walkFileTree(staticFiles, new SimpleFileVisitor<>() {
+			@Override
+			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+				Path outputPath = output.resolve(staticFiles.relativize(file));
+				Files.copy(file, outputPath);
+				return super.visitFile(file, attrs);
+			}
+		});
+	}
 
-    private void outputFile(WikiStructure.WikiEntry tree, Path parent, String sidebar, Map<String, Object> defaultOptions) throws IOException {
-        // Create the path to the current tree
-        Path current = parent.resolve(tree.name());
-        Files.createDirectory(current);
+	private void outputFile(WikiStructure.WikiEntry tree, Path parent, String sidebar, Map<String, Object> defaultOptions) throws IOException {
+		// Create the path to the current tree
+		Path current = parent.resolve(tree.name());
+		Files.createDirectory(current);
 
-        if (Files.exists(tree.path())) {
-            // Create the wiki path
-            Path output = current.resolve("index.html");
-            Files.createFile(output);
+		if (Files.exists(tree.path())) {
+			// Create the wiki path
+			Path output = current.resolve("index.html");
+			Files.createFile(output);
 
-            // Parse the template and write to the path
-            PebbleTemplate compiled = engine.getTemplate("wiki/templates/tutorial_page.html");
-            Map<String, Object> context = Map.of("content", tree.content(),
-                    "sidebar", sidebar);
-            context = new HashMap<>(context);
-            context.putAll(defaultOptions);
-            StringWriter writer = new StringWriter();
-            compiled.evaluate(writer, context);
+			// Parse the template and write to the path
+			PebbleTemplate compiled = engine.getTemplate("wiki/templates/tutorial_page.html");
+			Map<String, Object> context = Map.of("content", tree.content(),
+					"sidebar", sidebar);
+			context = new HashMap<>(context);
+			context.putAll(defaultOptions);
+			StringWriter writer = new StringWriter();
+			compiled.evaluate(writer, context);
 			String outputUrl = (String)getProject().property("wiki_path") + current.toString().split((String)getProject().property("output_path"))[1].replace("\\", "/");
 			compileHtmlFile(defaultOptions, output, writer.toString(), tree.title(), outputUrl);
-            writer.close();
+			writer.close();
 
-            // Copy the image if and only if the tree is the root entry in the project
-            if (tree.isProjectRoot()) {
-                Path inputImages = tree.path().getParent().getParent().resolve("images");
-                if (Files.exists(inputImages)) {
-                    Path outputImages = current.resolve("images");
-                    Files.createDirectory(outputImages);
-                    Files.walkFileTree(inputImages, new SimpleFileVisitor<>() {
-                        @Override
-                        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                            Files.copy(file, outputImages.resolve(inputImages.relativize(file)));
-                            return super.visitFile(file, attrs);
-                        }
-                    });
-                }
-            }
-        }
+			// Copy the image if and only if the tree is the root entry in the project
+			if (tree.isProjectRoot()) {
+				Path inputImages = tree.path().getParent().getParent().resolve("images");
+				if (Files.exists(inputImages)) {
+					Path outputImages = current.resolve("images");
+					Files.createDirectory(outputImages);
+					Files.walkFileTree(inputImages, new SimpleFileVisitor<>() {
+						@Override
+						public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+							Files.copy(file, outputImages.resolve(inputImages.relativize(file)));
+							return super.visitFile(file, attrs);
+						}
+					});
+				}
+			}
+		}
 
-        for (WikiStructure.WikiSubEntry wiki : tree.wikis()) {
-            outputFile(wiki, current, sidebar, defaultOptions);
-        }
-    }
+		for (WikiStructure.WikiSubEntry wiki : tree.wikis()) {
+			outputFile(wiki, current, sidebar, defaultOptions);
+		}
+	}
 
 	private void compileHtmlFile(Map<String, Object> defaultOptions, Path output, String body, String title, String url) throws IOException {
 		PebbleTemplate compiled = engine.getTemplate("wiki/templates/master_template.html");
