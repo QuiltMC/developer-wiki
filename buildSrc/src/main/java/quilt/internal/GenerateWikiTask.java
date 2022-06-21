@@ -59,7 +59,7 @@ public class GenerateWikiTask extends DefaultTask {
         Map<String, Object> indexOptions = new HashMap<>(defaultOptions);
         indexOptions.put("sidebar", wiki.masterSidebar());
         compiled.evaluate(writer, indexOptions);
-        compileHtmlFile(defaultOptions, output.resolve("index.html"), writer.toString(), "Quilt Developer Wiki");
+        compileHtmlFile(defaultOptions, output.resolve("index.html"), writer.toString(), "Quilt Developer Wiki", (String)getProject().property("wiki_path"), "The Quilt Developer Wiki.");
         writer.close();
 
         // Copy static files
@@ -92,7 +92,8 @@ public class GenerateWikiTask extends DefaultTask {
             context.putAll(defaultOptions);
             StringWriter writer = new StringWriter();
             compiled.evaluate(writer, context);
-            compileHtmlFile(defaultOptions, output, writer.toString(), tree.title());
+            String outputUrl = getProject().property("wiki_path") + current.toString().replace("\\", "/").replaceAll(".+/" + (String)getProject().property("output_path"), "");
+            compileHtmlFile(defaultOptions, output, writer.toString(), tree.title(), outputUrl, tree.description());
             writer.close();
 
             // Copy the image if and only if the tree is the root entry in the project
@@ -117,10 +118,12 @@ public class GenerateWikiTask extends DefaultTask {
         }
     }
 
-    private void compileHtmlFile(Map<String, Object> defaultOptions, Path output, String body, String title) throws IOException {
+    private void compileHtmlFile(Map<String, Object> defaultOptions, Path output, String body, String title, String url, String description) throws IOException {
         PebbleTemplate compiled = engine.getTemplate("wiki/templates/master_template.html");
         Map<String, Object> context = Map.of("body", body,
-            "title", title);
+			"title", title,
+			"url", url,
+			"description", description);
         context = new HashMap<>(context);
         context.putAll(defaultOptions);
         Writer writer = Files.newBufferedWriter(output);

@@ -1,5 +1,7 @@
 package quilt.internal;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -41,6 +43,7 @@ public class GenerateWikiTreeTask extends DefaultTask {
             builder.withName(entry.name()).withPath(entry.path()).withContent(content.getOrDefault(entry, ""));
 
             builder.withTitle(getEntryTitle(content, entry));
+			builder.withDescription(getFileDescription(entry));
 
             buildSubEntries(entry, content, 0).forEach(builder::withWiki);
 
@@ -58,6 +61,7 @@ public class GenerateWikiTreeTask extends DefaultTask {
             builder.withName(entry.name()).withPath(entry.path()).withContent(content.getOrDefault(entry, "")).isProjectRoot(root.project() != entry.project());
 
             builder.withTitle(getEntryTitle(content, entry));
+			builder.withDescription(getFileDescription(entry));
 
             buildSubEntries(entry, content, depth + 1).forEach(builder::withWiki);
 
@@ -65,7 +69,7 @@ public class GenerateWikiTreeTask extends DefaultTask {
         }).toList();
     }
 
-    private String getEntryTitle(Map<GenerateWikiFileTreeTask.FileEntry, String> content, GenerateWikiFileTreeTask.FileEntry entry) {
+	private String getEntryTitle(Map<GenerateWikiFileTreeTask.FileEntry, String> content, GenerateWikiFileTreeTask.FileEntry entry) {
         if (content.containsKey(entry)) {
             String fileContent = content.get(entry);
             Pattern p = Pattern.compile("<h1><a href=\".+?\" id=\".+?\">(.+?)<");
@@ -76,6 +80,25 @@ public class GenerateWikiTreeTask extends DefaultTask {
         }
         return entry.name();
     }
+
+	private String getFileDescription(GenerateWikiFileTreeTask.FileEntry entry) {
+		try {
+			List<String> lines = Files.readAllLines(entry.path());
+			for (String line : lines) {
+				if (line.isEmpty() || line.startsWith("#")) {
+					continue;
+				}
+
+				if (line.length() < 160) {
+					return line;
+				}
+
+				return line.substring(0, 157) + "...";
+			}
+		} catch (IOException ignored) {
+		}
+		return "The Quilt Developer Wiki";
+	}
 
     public WikiStructure getStructure() {
         return structure;

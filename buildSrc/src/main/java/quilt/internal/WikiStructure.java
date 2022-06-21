@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, String librariesNavbar,
                             String versionsNavbar, String masterSidebar) {
     public record WikiType(String name, String title, String content, String sidebar, Path path,
-                           List<WikiSubEntry> wikis) implements WikiEntry {
+                           List<WikiSubEntry> wikis, String description) implements WikiEntry {
         @Override
         public boolean isProjectRoot() {
             return true;
@@ -20,6 +20,7 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
             private String content;
             private Path path;
             private List<WikiSubEntry> wikis;
+			private String description;
 
             public Builder() {
                 wikis = new ArrayList<>();
@@ -50,11 +51,16 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
                 return this;
             }
 
+			public Builder withDescription(String description) {
+				this.description = description;
+				return this;
+			}
+
             public WikiType build(String path) {
                 String sidebar = "- [" + this.title + "](" + path + "/)\n" +
                         wikis.stream().map(wiki -> generateMdSidebar(wiki, path + "/" + wiki.name, 0)).collect(Collectors.joining(""));
                 String rendered = WikiBuildPlugin.RENDERER.render(WikiBuildPlugin.PARSER.parse(sidebar));
-                return new WikiType(name, title, content, rendered.substring(rendered.indexOf("\n") + 1, rendered.lastIndexOf("\n") + 1), this.path, wikis);
+                return new WikiType(name, title, content, rendered.substring(rendered.indexOf("\n") + 1, rendered.lastIndexOf("\n") + 1), this.path, wikis, description);
             }
 
             private String generateMdSidebar(WikiEntry tree, String path, int i) {
@@ -82,7 +88,7 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
     }
 
     public record WikiSubEntry(String name, String title, String content, Path path, boolean isProjectRoot,
-                               List<WikiSubEntry> wikis) implements WikiEntry {
+                               List<WikiSubEntry> wikis, String description) implements WikiEntry {
         public static final class Builder {
             private String name;
             private String title;
@@ -90,6 +96,7 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
             private Path path;
             private boolean isProjectRoot;
             private List<WikiSubEntry> wikis;
+			private String description;
 
             public Builder() {
                 this.wikis = new ArrayList<>();
@@ -125,8 +132,13 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
                 return this;
             }
 
+			public Builder withDescription(String description) {
+				this.description = description;
+				return this;
+			}
+
             public WikiSubEntry build() {
-                return new WikiSubEntry(name, title, content, path, isProjectRoot, wikis);
+                return new WikiSubEntry(name, title, content, path, isProjectRoot, wikis, description);
             }
         }
     }
@@ -137,6 +149,8 @@ public record WikiStructure(List<WikiType> libraries, List<WikiType> versions, S
         String title();
 
         String content();
+
+		String description();
 
         Path path();
 
