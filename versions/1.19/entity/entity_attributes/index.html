@@ -96,7 +96,7 @@
                         <a href="https://modder.wiki.quiltmc.org/libraries/brigadier/" class = "navbar-item"> <span>Brigadier</span></a>                    </div>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a href="https://github.com/QuiltMC/developer-wiki/tree/master" class="navbar-link is-arrowless" target="_blank">
+                    <a href="https://github.com/QuiltMC/developer-wiki/tree/main" class="navbar-link is-arrowless" target="_blank">
                         <span class="icon"><svg class="svg-inline--fa fa-github" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fab fa-github"></i> --></span>
                     </a>
                 </div>
@@ -146,7 +146,7 @@
     <li>A 'fallback' value: the base value before any external attribute modifiers are applied</li>
     <li>A min and max value, clamping the <strong>end result</strong> of the modifier calculations (after all modifiers are applied)</li>
 </ul>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
 <pre><code class="language-java">// ...
 	public static final EntityAttribute GENERIC_JUMP_BOOST = new ClampedEntityAttribute(&quot;attribute.name.generic_jump_boost&quot;, 1.0, 0.0, 2.0).setTracked(true);
 // ...
@@ -159,7 +159,7 @@
 }
 </code></pre>
 <p>With our <code>EntityAttribute</code> instance created, we can go ahead and register it.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
 <pre><code class="language-java">// ...
 		Registry.register(Registry.ATTRIBUTE, new Identifier(&quot;example&quot;, &quot;generic.jump_boost&quot;), GENERIC_JUMP_BOOST);
 // ...
@@ -198,7 +198,7 @@
 <h3><a href="#mixing-into-attribute-creation" id="mixing-into-attribute-creation">Mixing Into Attribute Creation</a></h3>
 <p>Each entity that does something different with attributes has their own attribute creation method, which you can find in <code>DefaultAttributeRegistry</code>. Since we want our attribute on all entities, we'll mix into the <code>LivingEntity.createLivingAttributes</code> method shown in the previous section.</p>
 <p>Remember, at this point, the builder is still mutable - and a reference - so our mixin is very straightforward.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java" target="_blank"><code>LivingEntityMixin.java</code></a>:</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java" target="_blank"><code>LivingEntityMixin.java</code></a>:</p>
 <pre><code class="language-java">// ...
 	@Inject(method = &quot;createLivingAttributes&quot;, at = @At(value = &quot;RETURN&quot;))
 	private static void addCustomAttribute(CallbackInfoReturnable&lt;DefaultAttributeContainer.Builder&gt; cir) {
@@ -210,7 +210,7 @@
 <p>We've registered our attribute and let all living entities know that they have it. The next step is to actually use it somewhere: in our case, to modify jump height.</p>
 <p><code>LivingEntity#getAttributes</code> gets the <em>possible</em> attributes that the entity knows it has, but not the actual values. Instead, each attribute has its own 'instance' on an entity known as an <code>EntityAttributeInstance</code>, which has all the logic for controlling attribute values. You can use the <code>LivingEntity#getAttributeInstance</code> method for getting one of these instances.</p>
 <p>We'll need another mixin into <code>LivingEntity</code>, this time for the <code>getJumpVelocity</code> method. Since our initial fallback value is <code>1.0</code>, we can feel free to just multiply the end result by the attribute value.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java" target="_blank"><code>LivingEntityMixin.java</code></a>:</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java" target="_blank"><code>LivingEntityMixin.java</code></a>:</p>
 <pre><code class="language-java">// ...
 	@Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(EntityAttribute attribute);
 
@@ -233,7 +233,7 @@
     <li>A string representing the modifier's 'name' - only used for NBT and when <code>StatusEffect</code>s link to attributes, notably showing up in potion tooltips</li>
     <li>A double value and an <code>EntityAttributeModifier.Operation</code> that specifies how the modifier should be applied and by what magnitude</li>
 </ul>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
 <pre><code class="language-java">// ...
 	public static final UUID SOME_MODIFIER_ID = UUID.fromString(&quot;de17612a-adec-11ec-b909-0242ac120002&quot;);
 
@@ -250,14 +250,14 @@
 <p>The final step is to apply this modifier. These examples use the <code>SOME_MODIFIER</code> field created in the previous section.</p>
 <h3><a href="#via-code" id="via-code">Via Code</a></h3>
 <p>It's as simple as getting the attribute instance and calling <code>addTemporaryModifier</code> (or <code>addPersistentModifier</code> if you want it to be serialized in the instance's NBT).</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
 <pre><code class="language-java">// ...
 		EntityAttributeInstance instance = player.getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST);
 		instance.addTemporaryModifier(AttributesExample.SOME_MODIFIER);
 // ...
 </code></pre>
 <p>This is also the most appropriate case where you would remove the modifier at some other point in time. You can either use the UUID associated with the modifier or the modifier itself.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
 <pre><code class="language-java">// ...
 		instance.removeModifier(AttributesExample.SOME_MODIFIER_ID);
 // ...
@@ -266,7 +266,7 @@
 <p>Upon equipping an item, the game checks if it has any attribute modifiers marked in the slot it was equipped in. If so, it applies those modifiers to the entity. There are two ways items can achieve this: through <code>ItemStack</code> NBT or custom <code>Item</code> instance behavior.</p>
 <h4><a href="#nbt" id="nbt">NBT</a></h4>
 <p>You can use the <code>ItemStack#addAttributeModifier</code> method to apply a modifier via NBT.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
 <pre><code class="language-java">// ...
 		ItemStack stack = new ItemStack(Items.STICK);
 		stack.addAttributeModifier(
@@ -278,7 +278,7 @@
 </code></pre>
 <h4><a href="#hard-coded" id="hard-coded">Hard-coded</a></h4>
 <p>The <code>Item</code> class contains a <code>getAttributeModifiers</code> method which returns a multimap of modifiers to apply when the item is equipped in the specified slot. We can override this in our own item class.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/master/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpStick.java" target="_blank"><code>JumpStick.java</code></a>:</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpStick.java" target="_blank"><code>JumpStick.java</code></a>:</p>
 <pre><code class="language-java">package org.quiltmc.wiki.entity_attributes;
 
 import com.google.common.collect.ImmutableMultimap;
