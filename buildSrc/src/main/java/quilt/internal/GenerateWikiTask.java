@@ -54,13 +54,11 @@ public class GenerateWikiTask extends DefaultTask {
             outputFile(wikiType, librariesPath, wikiType.sidebar(), defaultOptions);
         }
 
-        PebbleTemplate compiled = engine.getTemplate("wiki/templates/index.html");
-        StringWriter writer = new StringWriter();
-        Map<String, Object> indexOptions = new HashMap<>(defaultOptions);
-        indexOptions.put("sidebar", wiki.masterSidebar());
-        compiled.evaluate(writer, indexOptions);
-        compileHtmlFile(defaultOptions, output.resolve("index.html"), writer.toString(), "Quilt Developer Wiki", (String)getProject().property("wiki_path"), "The Quilt Developer Wiki.");
-        writer.close();
+		Map<String, Object> indexOptions = new HashMap<>(defaultOptions);
+		indexOptions.put("sidebar", wiki.masterSidebar());
+
+		generateStaticPage("wiki/templates/index.html", defaultOptions, indexOptions, output, "index.html", "Quilt Developer Wiki", "The Quilt Developer Wiki.", (String)getProject().property("wiki_path"));
+		generateStaticPage("wiki/templates/404.html", defaultOptions, indexOptions, output, "404.html", "Page not found", "The Quilt Developer Wiki.", (String)getProject().property("wiki_path") + "/404");
 
         // Copy static files
         Path staticFiles = this.getProject().getRootDir().toPath().resolve("wiki/static");
@@ -73,6 +71,14 @@ public class GenerateWikiTask extends DefaultTask {
             }
         });
     }
+
+	private void generateStaticPage(String templateName, Map<String, Object> defaultOptions, Map<String, Object> indexOptions, Path output, String outputUrl, String title, String description, String url) throws IOException {
+		PebbleTemplate compiled = engine.getTemplate(templateName);
+		StringWriter writer = new StringWriter();
+		compiled.evaluate(writer, indexOptions);
+		compileHtmlFile(defaultOptions, output.resolve(outputUrl), writer.toString(), title, url, description);
+		writer.close();
+	}
 
     private void outputFile(WikiStructure.WikiEntry tree, Path parent, String sidebar, Map<String, Object> defaultOptions) throws IOException {
         // Create the path to the current tree
