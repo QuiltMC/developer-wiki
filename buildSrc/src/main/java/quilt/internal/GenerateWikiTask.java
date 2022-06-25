@@ -54,14 +54,13 @@ public class GenerateWikiTask extends DefaultTask {
             outputFile(wikiType, librariesPath, wikiType.sidebar(), defaultOptions);
         }
 
+        PebbleTemplate compiled = engine.getTemplate("wiki/templates/index.html");
+		StringWriter writer = new StringWriter();
 		Map<String, Object> indexOptions = new HashMap<>(defaultOptions);
 		indexOptions.put("sidebar", wiki.masterSidebar());
-
-        PebbleTemplate compiled = engine.getTemplate("wiki/templates/index.html");
-        StringWriter writer = new StringWriter();
-        compiled.evaluate(writer, indexOptions);
-        compileHtmlFile(defaultOptions, output.resolve("index.html"), writer.toString(), "Quilt Developer Wiki", (String)getProject().property("wiki_path"), "The Quilt Developer Wiki.");
-        writer.close();
+		compiled.evaluate(writer, indexOptions);
+		compileHtmlFile(defaultOptions, output.resolve("index.html"), writer.toString(), "Quilt Developer Wiki", (String)getProject().property("wiki_path"), "The Quilt Developer Wiki.");
+		writer.close();
 
 		PebbleTemplate compiled404 = engine.getTemplate("wiki/templates/404.html");
 		StringWriter writer404 = new StringWriter();
