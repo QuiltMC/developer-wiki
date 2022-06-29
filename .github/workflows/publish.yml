@@ -18,6 +18,12 @@ jobs:
         with:
           java-version: 17
 
+      - name: Cache Gradle files
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
