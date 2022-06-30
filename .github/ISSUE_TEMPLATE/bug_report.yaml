@@ -4,7 +4,7 @@ labels: ["bug"]
 body:
   - type: textarea
     attributes:
-      label: What would you like the wiki to cover?
-      description: A short description of the feature you wish the wiki would cover
+      label: Issue description
+      description: A short description of the issue
     validations:
       required: true
