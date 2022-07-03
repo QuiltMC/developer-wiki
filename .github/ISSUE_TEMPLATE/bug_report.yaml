@@ -10,8 +10,17 @@ body:
         - Windows
         - MacOS
         - Linux
+        - Android
+        - IOS
+        - Other
     validations:
       required: true
+  - type: input
+    attributes:
+      label: Other
+      description: What is your operating system (for people how choose Other)?
+    validations:
+      required: false
   - type: input
     attributes:
       label: Web Browser
