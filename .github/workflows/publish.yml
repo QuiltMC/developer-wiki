@@ -32,9 +32,8 @@ jobs:
           ./gradlew generateWiki -Pwiki_path=https://modder.wiki.quiltmc.org
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        uses: JamesIves/github-pages-deploy-action@v4.3.4
         with:
-          branch: gh-pages
           folder: docs
           clean-exclude: pr-preview/
           force: false
