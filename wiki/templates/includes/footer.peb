@@ -4,7 +4,7 @@
             <div class="column is-half is-offset-one-quarter">
                 <div class="button-grid">
                     <a title="Discord" class="button is-discord is-rounded" target="_blank"
-                       href="{{ site.discord_community }}">
+                       href="https://discord.quiltmc.org">
                         <span class="icon"><i class="fab fa-discord"></i></span>
                     </a>
 
@@ -16,13 +16,13 @@
 
                     <a title="GitHub" class="button is-github is-rounded"
                        target="_blank"
-                       href="https://github.com/{{ site.github_username }}">
+                       href="https://github.com/QuiltMC">
                         <span class="icon"><i class="fab fa-github"></i></span>
                     </a>
 
                     <a title="Twitter" class="button is-twitter is-rounded"
                        target="_blank"
-                       href="https://twitter.com/{{ site.twitter_username }}">
+                       href="https://twitter.com/quilt_mc">
                         <span class="icon"><i class="fab fa-twitter"></i></span>
                     </a>
 
@@ -34,7 +34,7 @@
                     </a>
 
                     <a title="Twitch" class="button is-primary is-rounded" target="_blank"
-                       href="https://twitch.tv/{{ site.twitch_username }}">
+                       href="https://twitch.tv/quiltmc">
                         <span class="icon"><i class="fab fa-twitch"></i></span>
                     </a>
 
