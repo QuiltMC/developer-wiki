@@ -1,0 +1,73 @@
+{# @pebvariable name="description" type="String" #}
+{# @pebvariable name="title" type="String" #}
+{# @pebvariable name="url" type="String" #}
+{# @pebvariable name="wiki_path" type="String" #}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+    <link rel="stylesheet" href="https://quiltmc.org/assets/css/style.css">
+    <link rel="stylesheet" href="{{ wiki_path }}/dracula.css">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://quiltmc.org/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://quiltmc.org/favicon/favicon-16x16.png">
+    <link rel="shortcut icon" href="https://quiltmc.org/favicon/favicon.ico">
+    <link rel="canonical" href="{{ url }}"/>
+
+    <meta property="og:title" content="{{ title }}"/>
+    <meta name="author" content="QuiltMC"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta name="description" content="{{ description }}"/>
+    <meta property="og:description" content="{{ description }}"/>
+    <meta property="og:url" content="{{ url }}"/>
+    <meta property="og:site_name" content="{{ title }}"/>
+    <meta property="og:image" content="https://quiltmc.org/assets/img/logo-square.png"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta property="twitter:image" content="https://quiltmc.org/assets/img/logo-square.png"/>
+    <meta property="twitter:title" content="{{ title }}"/>
+    <meta name="twitter:site" content="@quilt_mc"/>
+    <meta name="twitter:creator" content="@QuiltMC"/>
+
+    <script src="https://kit.fontawesome.com/b1b70f724e.js" crossorigin="anonymous"></script>
+    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+
+    <script>hljs.highlightAll();</script>
+
+    <style>
+        .site-warning {
+            background-color: #ff6f6f;
+            color: white;
+            padding: 1em;
+        }
+
+        .site-warning a {
+            color: #000000;
+        }
+
+        .site-warning a:hover {
+            color: #555;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .site-warning {
+                background-color: #c40000;
+                color: white;
+                padding: 1em;
+            }
+
+            .site-warning a {
+                color: #000;
+            }
+
+            .site-warning a:hover {
+                color: #555;
+            }
+        }
+    </style>
+</head>

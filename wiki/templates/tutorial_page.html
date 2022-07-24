@@ -1,6 +1,16 @@
 <div class="columns">
     <div class="column is-narrow" data-controller="sidebar">
-        <div class="box" data-sidebar-target="sidebar">
+        <div class="is-hidden-tablet">
+            <button data-action="click->sidebar#toggle" class="button is-primary">
+                <span class="icon"><i class="fas fa-ellipsis-h"></i></span>
+                <span>Menu</span>
+            </button>
+
+            <br/>
+            <br/>
+        </div>
+
+        <div class="box is-hidden-mobile is-sticky" data-sidebar-target="sidebar">
             <div class="menu">
                 <ul class="menu-list">
                     {{ sidebar }}
@@ -8,6 +18,7 @@
             </div>
         </div>
     </div>
+
     <div class="content column">
         {{ content }}
     </div>
