@@ -2,25 +2,12 @@ name: Bug report
 description: Reporting an issue
 labels: ["bug"]
 body:
-  - type: dropdown
+  - type: input
     attributes:
       label: Operating System
       description: On which operating system do you have a problem?
-      options:
-        - Windows
-        - MacOS
-        - Linux
-        - Android
-        - IOS
-        - Other
     validations:
       required: true
-  - type: input
-    attributes:
-      label: Other
-      description: What is your operating system (for peoples who have chosen **Other**)?
-    validations:
-      required: false
   - type: input
     attributes:
       label: Web Browser
