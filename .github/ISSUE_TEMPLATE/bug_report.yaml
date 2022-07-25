@@ -2,6 +2,18 @@ name: Bug report
 description: Reporting an issue
 labels: ["bug"]
 body:
+  - type: input
+    attributes:
+      label: Operating System
+      description: On which operating system do you have a problem?
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Web Browser
+      description: On which web browser do you have a problem?
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Issue description
