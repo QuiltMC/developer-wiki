@@ -7,20 +7,22 @@
 
 {% include "includes/navbar.peb" %}
 
-<article class="message is-danger mx-3 mt-3 mb-0">
-    <div class="message-body has-text-centered">
-        <h1>
-            Notice: This website is still under development. Please report any issues at
-            <a href="https://github.com/QuiltMC/developer-wiki">https://github.com/QuiltMC/developer-wiki</a>
-        </h1>
-    </div>
-</article>
+<div> {# Required for the grid layout (which sticks the footer at the bottom) to work #}
+	<article class="message is-danger mx-3 mt-3 mb-0">
+		<div class="message-body has-text-centered">
+			<h1>
+				Notice: This website is still under development. Please report any issues at
+				<a href="https://github.com/QuiltMC/developer-wiki">https://github.com/QuiltMC/developer-wiki</a>
+			</h1>
+		</div>
+	</article>
 
-<main class="container">
-    <section class="section">
-        {{ body }}
-    </section>
-</main>
+	<section class="section">
+	    <main class="container">
+	        {{ body }}
+	    </main>
+	</section>
+</div>
 
 {% include "includes/footer.peb" %}
 
