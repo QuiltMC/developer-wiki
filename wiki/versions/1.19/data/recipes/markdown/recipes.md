@@ -7,3 +7,8 @@ usually resulting in an item stack output.
 
 - [Creating a new simple recipe type](./recipe_type.md)
 - [Recipe API](./recipe_api.md)
+
+## See Also
+
+- **[Minecraft's Wiki Recipe Page](https://minecraft.fandom.com/wiki/Recipe)**
+- **[Recipe Generator](https://misode.github.io/recipe)** - A web page that can generate recipe files, of vanilla types, with ease.
