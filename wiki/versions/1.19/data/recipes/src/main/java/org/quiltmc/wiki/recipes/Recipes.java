@@ -34,8 +34,8 @@ public class Recipes implements ModInitializer {
 		RecipeManagerHelper.registerStaticRecipe(
 				VanillaRecipeBuilders.shapedRecipe("IAI") // Shaped recipe with the IAI pattern
 						.output(new ItemStack(Items.CHAINMAIL_CHESTPLATE)) // That outputs a chestplate
-						.ingredient('I', Items.IRON_INGOT) // I being an ingot
-						.ingredient('A', Items.APPLE) // and A an Apple
+						.ingredient('I', Items.IRON_INGOT) // 'I' being an ingot
+						.ingredient('A', Items.APPLE) // and 'A' an apple
 						.build(new Identifier("example", "apple_iron_ingot_fun"), "")
 		);
 		// @end Static-Recipe
@@ -43,8 +43,8 @@ public class Recipes implements ModInitializer {
 		// @start Adding
 		RecipeManagerHelper.addRecipes(handler -> handler.register(new Identifier("example", "random"), id ->
 				VanillaRecipeBuilders.shapelessRecipe(new ItemStack(
-						// We can't know which item it's going to output in advance, therefore, it's impossible
-						// to create a JSON for this recipe.
+						// We can't know which item it's going to output in advance, therefore
+						// it's impossible to create a JSON for this recipe.
 						Registry.ITEM.getRandom(RandomGenerator.createLegacy()).orElseThrow().value()))
 					.ingredient(Items.ACACIA_BUTTON)
 					.build(id, "")));
