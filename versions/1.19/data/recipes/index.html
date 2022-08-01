@@ -21,8 +21,8 @@
     <meta property="og:title" content="Recipes"/>
     <meta name="author" content="QuiltMC"/>
     <meta property="og:locale" content="en_US"/>
-    <meta name="description" content="Recipes are a data-driven Minecraft system that allows for matching between inventories and item inputs, resulting in outputs."/>
-    <meta property="og:description" content="Recipes are a data-driven Minecraft system that allows for matching between inventories and item inputs, resulting in outputs."/>
+    <meta name="description" content="Recipes are a data-driven Minecraft system that is used to specify behaviors of representation of items in an inventory"/>
+    <meta property="og:description" content="Recipes are a data-driven Minecraft system that is used to specify behaviors of representation of items in an inventory"/>
     <meta property="og:url" content="https://modder.wiki.quiltmc.org/versions/1.19/data/recipes"/>
     <meta property="og:site_name" content="Recipes"/>
     <meta property="og:image" content="https://quiltmc.org/assets/img/logo-square.png"/>
@@ -162,6 +162,7 @@
         <ul>
             <li><a href="https://modder.wiki.quiltmc.org/versions/1.19/data/recipes/">Recipes</a>
                 <ul>
+                    <li><a href="https://modder.wiki.quiltmc.org/versions/1.19/data/recipes/recipe_type/">Recipe Type</a></li>
                     <li><a href="https://modder.wiki.quiltmc.org/versions/1.19/data/recipes/recipe_api/">Recipe API</a></li>
                 </ul>
             </li>
@@ -180,170 +181,17 @@
 
     <div class="content column">
         <h1><a href="#recipes" id="recipes">Recipes</a></h1>
-<p>Recipes are a data-driven Minecraft system that allows for matching between inventories and item inputs, resulting in outputs.</p>
-<h2><a href="#concepts" id="concepts">Concepts</a></h2>
+<p>Recipes are a data-driven Minecraft system that is used to specify behaviors of representation of items in an inventory usually resulting in an item stack output.</p>
+<h2><a href="#tutorials" id="tutorials">Tutorials</a></h2>
 <ul>
-    <li><code>Recipe</code> - Specifies the behavior and logic of a recipe - its inputs, outputs and matching.</li>
-    <li><code>RecipeType</code> - Represents a group of recipes.</li>
-    <li><code>RecipeSerializer</code> - Deserialization of JSON files to a recipe object, and serialization and deserialization of a recipe to a packet.</li>
+    <li><a href="./recipe_type">Creating a new simple recipe type</a></li>
+    <li><a href="./recipe_api">Recipe API</a></li>
 </ul>
-<h2><a href="#creating-a-simple-recipe" id="creating-a-simple-recipe">Creating a simple recipe</a></h2>
-<p>To start to create a recipe, create a class that implements the <code>Recipe</code> interface, the generic type of it represents the kind of <code>Inventory</code> where this recipe will work.</p>
-<!--- TODO: Refer to Inventory/BlockEntity tutorial -->
-<p>The conventional way of specifying inputs and output, is to utilize <code>Ingredient</code> and <code>ItemStack</code> respectively - <code>Ingredient</code> is a generalized object that can match against stacks being backed by either a stack or tags. <!--- TODO: Link to Tags page --></p>
-<p>You should also store the recipe identifier for identification and filling values.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java" target="_blank"><code>MyRecipe.java</code></a>:</p>
-<pre><code class="language-java">// ...
-	private final Identifier id;
-	private final Ingredient input;
-	private final ItemStack output;
-
-	public MyRecipe(Identifier id, Ingredient input, ItemStack output) {
-		this.id = id;
-		this.input = input;
-		this.output = output;
-	}
-
-	@Override
-	public Identifier getId() {
-		return this.id;
-	}
-// ...
-</code></pre>
-<h3><a href="#matching" id="matching">Matching</a></h3>
-<p>The method <code>matches</code> returns whether this current recipe should be matched when retrieved via the <code>RecipeManager</code> - Match the inventory contents against the inputs here.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java" target="_blank"><code>MyRecipe.java</code></a>:</p>
-<pre><code class="language-java">// ...
-	@Override
-	public boolean matches(Inventory inventory, World world) {
-		return this.input.test(inventory.getStack(0));
-	}
-// ...
-</code></pre>
-<h3><a href="#outputs" id="outputs">Outputs</a></h3>
-<p>Outputting has two parts, <code>getOutput</code> and <code>craft</code>, the first being a view of the output and the latter being a copy of the output that may be modified.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java" target="_blank"><code>MyRecipe.java</code></a>:</p>
-<pre><code class="language-java">// ...
-	@Override
-	public ItemStack getOutput() {
-		return this.output;
-	}
-
-	@Override
-	public ItemStack craft(Inventory inventory) {
-		return this.output.copy();
-	}
-// ...
-</code></pre>
-<h3><a href="#serializer" id="serializer">Serializer</a></h3>
-<p>To start to create a serializer, create a class that implements <code>QuiltRecipeSerializer</code> (<em>An extended version of <code>RecipeSerializer</code> that allows for serialization of recipe objects into JSON</em>).</p>
-<h4><a href="#json" id="json">JSON</a></h4>
-<p>In <code>read</code> you must read the JSON object and convert it into a new recipe object of your type.</p>
-<p>In <code>toJson</code> you must convert the recipe object into a valid equivalent JSON object - You can check if it's being serialized correctly via dumping the recipes with the <code>quilt.recipe.dump</code> property (<code>-Dquilt.recipe.dump=true</code> in the VM options) and checking the outputted recipes.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java" target="_blank"><code>MyRecipe.java</code></a>:</p>
-<pre><code class="language-java">// ...
-		@Override
-		public MyRecipe read(Identifier id, JsonObject json) {
-			// Gets the object specified by the &quot;input&quot; key
-			var inputObject = json.getAsJsonObject(&quot;input&quot;);
-			// Helper method to read Ingredient from JsonElement
-			var input = Ingredient.fromJson(inputObject);
-			// Gets the string in the &quot;output&quot; key
-			var outputIdentifier = json.get(&quot;output&quot;).getAsString();
-			// Gets the integer in the &quot;count&quot; key, fallbacking to 1 if it does not exist
-			var count = JsonHelper.getInt(json, &quot;count&quot;, 1);
-			// Attempts to get the item in &quot;output&quot; with the registry and creates a stack with it
-			var output = new ItemStack(Registry.ITEM.getOrEmpty(new Identifier(outputIdentifier))
-					.orElseThrow(() -&gt; new IllegalStateException(&quot;Item &quot; + outputIdentifier + &quot; does not exist&quot;)), count);
-
-			return new MyRecipe(id, input, output);
-		}
-
-		@Override
-		public JsonObject toJson(MyRecipe recipe) {
-			var obj = new JsonObject();
-			// Puts the serialized ingredient json element into the &quot;input&quot; key
-			obj.add(&quot;input&quot;, recipe.input.toJson());
-			// Checks if the output count is higher than the default, and if it is, adds into the &quot;count&quot; key
-			if (recipe.output.getCount() &gt; 1) {
-				obj.addProperty(&quot;count&quot;, recipe.output.getCount());
-			}
-			// Gets the output identifier from the registry and adds it into the &quot;output&quot; key
-			obj.addProperty(&quot;output&quot;, Registry.ITEM.getId(recipe.output.getItem()).toString());
-
-			return obj;
-		}
-// ...
-</code></pre>
-<h4><a href="#packet" id="packet">Packet</a></h4>
-<p>You must create and read recipe packets, so the server is able to send the recipes to the clients, and be converted correctly, failing to implement the packet reading and writing might result in desyncs.</p>
-<p>It is imperative that you read values in the same order that you wrote them.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java" target="_blank"><code>MyRecipe.java</code></a>:</p>
-<pre><code class="language-java">// ...
-		@Override
-		public MyRecipe read(Identifier id, PacketByteBuf buf) {
-			var input = Ingredient.fromPacket(buf);
-			var output = buf.readItemStack();
-
-			return new MyRecipe(id, input, output);
-		}
-
-		@Override
-		public void write(PacketByteBuf buf, MyRecipe recipe) {
-			recipe.input.write(buf);
-			buf.writeItemStack(recipe.output);
-		}
-// ...
-</code></pre>
-<h3><a href="#recipe-type" id="recipe-type">Recipe Type</a></h3>
-<p>Creating a recipe type is as simple as instantiating <code>RecipeType</code>, unfortunately it is an interface, so you must subclass it. From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
-<pre><code class="language-java">// ...
-	public static final RecipeType&lt;MyRecipe&gt; MY_RECIPE = new RecipeType&lt;&gt;() {}; // Subclasses it anonymously
-// ...
-</code></pre>
-<h3><a href="#registration" id="registration">Registration</a></h3>
-<p>You must register your serializer and your type, so Minecraft knows about them. From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
-<pre><code class="language-java">// ...
-		Registry.register(Registry.RECIPE_TYPE, new Identifier(&quot;example&quot;, &quot;my_recipe&quot;), MY_RECIPE);
-		Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(&quot;example&quot;, &quot;my_recipe&quot;), MY_RECIPE_SERIALIZER);
-// ...
-</code></pre>
-<p>Additionally, you also have to specify them in your recipe class. From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java" target="_blank"><code>MyRecipe.java</code></a>:</p>
-<pre><code class="language-java">// ...
-	@Override
-	public RecipeSerializer&lt;?&gt; getSerializer() {
-		return Recipes.MY_RECIPE_SERIALIZER;
-	}
-
-	@Override
-	public RecipeType&lt;?&gt; getType() {
-		return Recipes.MY_RECIPE;
-	}
-// ...
-</code></pre>
-<h3><a href="#using-your-recipe" id="using-your-recipe">Using your recipe</a></h3>
-<h4><a href="#creating-recipe-json-files" id="creating-recipe-json-files">Creating recipe JSON files</a></h4>
-<p>Now that you have created and registered your recipe, it's time to make a few recipes.</p>
-<p>Recipes should be located inside <code>resources/data/[namespace]/recipes</code>; its id will be composed of the namespace to which it was added, and the file path with its file name.</p>
-<p>All recipes have different structures, the only common denominator between all of them is the field <code>&quot;type&quot;</code>, which specifies the identifier of the recipe type - so in our case, <code>&quot;example:my_recipe&quot;</code>; The remaining values are dependent on the serializer.</p>
-<p>For instance, a recipe of ours that inputs an iron ingot and outputs two apples would be: From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/resources/data/recipes/recipes/fun.json" target="_blank"><code>fun.json</code></a>:</p>
-<pre><code class="language-json">{
-  &quot;type&quot;: &quot;example:my_recipe&quot;,
-  &quot;input&quot;: {
-    &quot;item&quot;: &quot;minecraft:iron_ingot&quot;
-  },
-  &quot;output&quot;: &quot;minecraft:apple&quot;,
-  &quot;count&quot;: 2
-}
-</code></pre>
-<h4><a href="#retrieving-your-recipes" id="retrieving-your-recipes">Retrieving your recipes</a></h4>
-<p>Recipes must be retrieved from the <code>RecipeManager</code>, which can be fetched from either a <code>World</code> or the <code>MinecraftServer</code>. The recipe manager has a few methods for recipe retrieving, such as:</p>
+<h2><a href="#see-also" id="see-also">See Also</a></h2>
 <ul>
-    <li><code>getFirstMatch</code> - Gets the first recipe of a type that returned <code>true</code> for <code>matches</code>.</li>
-    <li><code>listAllOfType</code> - Gets all recipes from a type.</li>
-    <li><code>getAllMatches</code> - Gets all recipes of a type that returned <code>true</code> for <code>matches</code>.</li>
+    <li><strong><a href="https://minecraft.fandom.com/wiki/Recipe" target="_blank">Minecraft's Wiki Recipe Page</a></strong></li>
+    <li><strong><a href="https://misode.github.io/recipe" target="_blank">Recipe Generator</a></strong> - A web page that can generate recipe files, of vanilla types, with ease.</li>
 </ul>
-<p>The methods that get matching recipes require you to pass an inventory that matches the specified in the recipe generic.</p>
     </div>
 </div>
 	    </main>
