@@ -99,32 +99,3 @@ other than Quiltflower) Gradle task.
 
 In case your sources weren't attached, attach them manually, the file is located in
 `./.gradle/quilt-loom-cache/[Minecraft Version]/[Mappings Folder]`, the sources jar being the one ending with `-sources`.
-
-### Other Mappings
-
-Mappings are a part of toolchain that gives Minecraft code human-readable names and documentation, mappings choice is
-purely personal and depends on your own priorities.
-
-The template mod provides [Quilt Mappings](https://github.com/quiltMC/quilt-mappings) by default, but you might also want
-to use other mapping sets, like:
-- **Mojang's Official Mappings**: Also known as "Mojmap", does not provide documentation nor parameter names - Can be used with the `loom.officialMojangMappings()` method.
-- [**Parchment**](https://parchmentmc.org/about.html): Expands upon the Mojang's Official Mappings, providing documentation and parameter names.
-- [**Yarn**](https://github.com/FabricMC/Yarn): FabricMC mappings.
-
-Just replace the `mappings` dependency declaration in your buildscript, with the respective mapping.
-
-#### Migrating to Another Mapping Set
-
-While you could rewrite the names manually when switching to other mappings, that becomes unpractical once you have a
-large codebase.
-
-The `migrateMappings` task allows for remapping of your whole project; bear in mind that it is not a perfect tool and
-some inconsistencies might occur, and you may have to fix them manually.
-
-Before switching mappings in your buildscript, run the task with a `mappings` argument specifying the groupId, module name,
-and version in a dependency notation way.
-
-- Unix-like and Windows Powershell: `./gradlew migrateMappings --mappings=com.somedom:some-mappings:1.0.1`
-- Windows Command Prompt: `gradlew migrateMappings --mappings=com.somedom:some-mappings:1.0.1`
-
-The remapped source should be in a folder called `remappedSrc` inside your project.
