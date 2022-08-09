@@ -18,7 +18,7 @@ More information can be found at the [quilt.mod.json specification RFC](https://
 - The structure contains many differences.
     - Most of the fields have been reorganized into objects, such as `quilt_loader` and `minecraft`.
     - Information that is meant to be read and shown to humans is now contained under a `metadata` block.
-- Custom values are not defined in a `custom` object, instead they are declared into the top-level object.
+- Custom values are not defined in a `custom` object, instead they are declared in the top-level object.
 - The dependency notation now is able to be represented as an object.
     - This allows for extended behavior which was not possible before, check the [dependency object section in the RFC](https://github.com/QuiltMC/rfcs/blob/main/specification/0002-quilt.mod.json.md#dependency-objects).
 
@@ -35,14 +35,14 @@ More information can be found at the [quilt.mod.json specification RFC](https://
 
 ### Base API
 
-While not all of Fabric API has been matched by Quilt Standard Libraries, the parts that have been were improved, besides
+While not all of Fabric API has been matched by Quilt Standard Libraries, the parts that have been improved, besides
 all the new APIs that were added.
 
 A comparison chart that shows features that are present or absent, between QSL and Fabric API is available at the [Quilt
 Standard Libraries README](https://github.com/QuiltMC/quilt-standard-libraries/blob/1.19/README.md#features).
 
-In case there is the need of usage of an API which is present of Fabric API, but not in QSL, it is possible to pull and
+In case there is the need of usage of an API which is present in Fabric API, but not in QSL, it is possible to pull and
 use [Quilted Fabric API](https://github.com/QuiltMC/quilted-fabric-api), which is acts as a bridge between both.
 
-In case there is something that is deprecated in Quilted Fabric API which is not in Fabric API, it is very likely that
+In case something is deprecated in Quilted Fabric API while not in Fabric API, it is very likely that
 an alternative in Quilt Standard Libraries exists and should be used instead.
