@@ -35,7 +35,7 @@ More information can be found at the [quilt.mod.json specification RFC](https://
 
 ### Base API
 
-While not all of Fabric API has been matched by Quilt Standard Libraries, the parts that have been improved, besides
+While not all of Fabric API has been matched by Quilt Standard Libraries, the parts that have been, were improved, besides
 all the new APIs that were added.
 
 A comparison chart that shows features that are present or absent, between QSL and Fabric API is available at the [Quilt
