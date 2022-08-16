@@ -8,7 +8,7 @@ Minecraft.
 Every access widener must have a header which specifies the version of the format, and the target namespace.
 
 ```
-accessWidener v1 named
+accessWidener v2 named
 ```
 
 ## Access
