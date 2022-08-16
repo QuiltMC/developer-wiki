@@ -42,7 +42,7 @@ A comparison chart that shows features that are present or absent, between QSL a
 Standard Libraries README](https://github.com/QuiltMC/quilt-standard-libraries/blob/1.19/README.md#features).
 
 In case there is the need of usage of an API which is present in Fabric API, but not in QSL, it is possible to pull and
-use [Quilted Fabric API](https://github.com/QuiltMC/quilted-fabric-api), which is acts as a bridge between both.
+use [Quilted Fabric API](https://github.com/QuiltMC/quilted-fabric-api), which acts as a bridge between both.
 
 In case something is deprecated in Quilted Fabric API while not in Fabric API, it is very likely that
 an alternative in Quilt Standard Libraries exists and should be used instead.

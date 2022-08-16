@@ -28,10 +28,10 @@ Open the project, and run the `eclipse` Gradle task.
 #### [Visual Studio Code](https://code.visualstudio.com)
 
 Visual Studio Code does not support Java by default, you must install an extension to be able to code in Java inside
-VSCode.
+it.
 
-- [Language Support for Java(TM) by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java)
-- [Debugger for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug)
+- [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack): A package of Java-related
+extensions for VSCode.
 
 Then open the folder as a project and run the `vscode` Gradle task.
 
