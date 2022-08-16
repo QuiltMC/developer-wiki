@@ -75,7 +75,7 @@ which license to choose, Modrinth has a very straightforward [blog post](https:/
     The Quilt mod metadata file.
     Contains a variety of information relating to your mod.
 
-    The complete specification of all the fields and format can be accessed in [the RFC](https://github.com/QuiltMC/rfcs/blob/main/specification/0002-quilt.mod.json.md),
+    The complete specification of all the fields and format can be accessed in [the RFC](https://github.com/QuiltMC/rfcs/blob/main/specification/0002-quilt.mod.json.md)
 and in [the official JSON Schema.](https://raw.githubusercontent.com/QuiltMC/quilt-json-schemas/main/quilt.mod.json/schemas/main.json).
 
 - `File Structure`
