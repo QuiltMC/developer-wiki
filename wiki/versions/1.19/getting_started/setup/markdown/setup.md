@@ -23,7 +23,10 @@ Importing the mod with IntelliJ IDEA is as simple as selecting the folder/`build
 
 #### [Eclipse](https://www.eclipse.org)
 
-Open the project, and run the `eclipse` Gradle task.
+Open the project as a Gradle Project, then run the `eclipse` Gradle task, which should be available under the Gradle Tasks
+view tab, alternatively, it's also possible to use the command-line to run Gradle tasks with the Wrapper script (`gradlew`):
+- Unix-like and Windows Powershell: `./gradlew eclipse`
+- Windows Command Prompt: `gradlew eclipse`
 
 #### [Visual Studio Code](https://code.visualstudio.com)
 
@@ -33,7 +36,11 @@ it.
 - [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack): A package of Java-related
 extensions for VSCode.
 
-Then open the folder as a project and run the `vscode` Gradle task.
+After that, open the folder as a project, then run the `vscode` Gradle task: Do note that without the [Gradle for Java extension](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle),
+which might have some flaws and bugs, it is not possible to run tasks within VSCode as an integrated convenience. If that is the case
+you must use the command-line (<code>Ctrl + \`</code> by default) with the Gradle wrapper script (`gradlew`):
+- Unix-like and Windows Powershell: `./gradlew vscode`
+- Windows Command Prompt: `gradlew vscode`
 
 ### Customizing your Project
 
