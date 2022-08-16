@@ -12,7 +12,8 @@ Although many things are very similar, there are a few remarkable divergences be
 ### Mod Metadata
 
 Quilt utilizes a `quilt.mod.json` which is largely different from the `fabric.mod.json`.
-More information can be found at the [quilt.mod.json specification RFC](https://github.com/QuiltMC/rfcs/blob/main/specification/0002-quilt.mod.json.md).
+More information can be found at the [quilt.mod.json specification RFC](https://github.com/QuiltMC/rfcs/blob/main/specification/0002-quilt.mod.json.md);
+Furthermore, a [JSON schema for it is also available.](https://raw.githubusercontent.com/QuiltMC/quilt-json-schemas/main/quilt.mod.json/schemas/main.json)
 
 - The naming convention that official fields naming use is `snake_case`, instead of `camelCase`.
 - The structure contains many differences.

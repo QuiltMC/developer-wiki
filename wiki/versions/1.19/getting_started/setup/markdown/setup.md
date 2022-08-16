@@ -6,7 +6,7 @@ It is recommended that you have knowledge of Java, because it is the language wh
 
 ## Setting Up your Workspace
 
-While you could create your own template, cloning the [official template mod](https://github.com/QuiltMC/quilt-template-mod)
+While you could create your own template, using the [official template mod](https://github.com/QuiltMC/quilt-template-mod)
 might be a bit simpler.
 
 You can either clone the template with the [git command `clone`](https://git-scm.com/docs/git-clone), or download the
@@ -47,7 +47,7 @@ You should replace them to match the details of your mod.
 - `gradle.properties`
 
     Properties that can be used in the buildscript.
-    The default values included in it, that you should modify first are: `version`, the current version of the mod;
+    The default values included in the template file, that perhaps should be modified are: `version`, the current version of the mod;
 `maven_group`, the group ID for your mod, preferable it should follow Java's package convention, that is, the reverse
 of a domain you own (e.g. `mydomain.com` -> `com.mydomain`), alphanumeric lowercase with underscores replacing dashes;
 `archives_base_name`, the name of the built JAR file.
@@ -65,7 +65,8 @@ configuration befit for them.
 - `LICENSE`
 
     A default `LICENSE` file is not included by itself in the template mod, only a template, choose a license that matches
-your own priorities and thoughts, and then create a file that has the legal text for it.
+your own priorities and thoughts, and then create a file that has the legal text for it. In the event that you are unsure
+which license to choose, Modrinth has a very straightforward [blog post](https://blog.modrinth.com/licensing-guide) on the subject which may help.
 
     You also should set the `license` field in the `quilt.mod.json` to the [SPDX Identifier](https://spdx.org/licenses) of the chosen license.
 
@@ -74,7 +75,8 @@ your own priorities and thoughts, and then create a file that has the legal text
     The Quilt mod metadata file.
     Contains a variety of information relating to your mod.
 
-    A complete specification of all the fields and format can be accessed in [the RFC](https://github.com/QuiltMC/rfcs/blob/main/specification/0002-quilt.mod.json.md).
+    The complete specification of all the fields and format can be accessed in [the RFC](https://github.com/QuiltMC/rfcs/blob/main/specification/0002-quilt.mod.json.md),
+and in [the official JSON Schema.](https://raw.githubusercontent.com/QuiltMC/quilt-json-schemas/main/quilt.mod.json/schemas/main.json).
 
 - `File Structure`
 
