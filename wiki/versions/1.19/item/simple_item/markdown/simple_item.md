@@ -25,7 +25,7 @@ Now that we've declared the item, we need to tell the game registry to put it in
 
 Having done all of this, if we run the game we can see that our item appears in the Miscellaneous tab! But it doesn't have a texture, and its name isn't translated properly. How do we fix this?
 
-## Assets
+## Textures
 First we need to declare the model for the item. This tells the game how to render the item.
 
 ```file:src/main/resources/assets/tutorial/models/item/example_item.json
@@ -34,6 +34,8 @@ First we need to declare the model for the item. This tells the game how to rend
 For most items, all you need to do here is replace `tutorial` with your mod ID and `example_item` with the item name you set earlier. This file should go to your assets folder under `/models/item`.
 
 The texture file, as shown in the model, should match the identifier path, so in our case `textures/item/example_item.png`
+
+# Language Translation
 
 Finally, we need to add a translation. Put this in `lang/en_us.json` in your assets folder, replacing the same values as before:
 
