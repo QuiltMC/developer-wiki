@@ -10,14 +10,14 @@ import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 
 public class SimpleItemExample implements ModInitializer {
 
-	//@start Declaration
+	// @start Declaration
 	public static final Item EXAMPLE_ITEM = new Item(new QuiltItemSettings().group(ItemGroup.MISC));
-	//@end Declaration
+	// @end Declaration
 
 	@Override
 	public void onInitialize(ModContainer mod) {
-		//@start Registration
+		// @start Registration
 		Registry.register(Registry.ITEM, new Identifier("tutorial", "example_item"), EXAMPLE_ITEM);
-		//@end Registration
+		// @end Registration
 	}
 }
