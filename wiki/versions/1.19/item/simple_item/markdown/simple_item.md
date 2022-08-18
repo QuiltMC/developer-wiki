@@ -42,5 +42,8 @@ Finally, we need to add a translation. Put this in `lang/en_us.json` in your ass
 
 And that's it! Your item should be working fully.
 
+
 ## What's next?
 This tutorial only covers the most basic of items. Check the other item tutorials for more advanced items.
+
+If you want your item to have a recipe, generate one from [this website](https://crafting.thedestruc7i0n.ca/) (you may want to use a placeholder for the `output` item and then replace it with e.g. `tutorial:example_item`) and then put it in a JSON file under `src/main/resources/data/tutorial/recipes/` (replacing `tutorial` with your mod ID). Further details on item recipes can be found <abbr title="This documentation is not done yet, but it will be soon!">here</abbr>.
