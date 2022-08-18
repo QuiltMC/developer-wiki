@@ -31,7 +31,7 @@ First we need to declare the model for the item. This tells the game how to rend
 ```file:src/main/resources/assets/tutorial/models/item/example_item.json
 ```
 
-For most items, all you need to do here is replace `tutorial` with your mod ID and `example_item` with the item name you said earlier. This file should go to your assets folder under `/models/item`.
+For most items, all you need to do here is replace `tutorial` with your mod ID and `example_item` with the item name you set earlier. This file should go to your assets folder under `/models/item`.
 
 The texture file, as shown in the model, should match the identifier path, so in our case `textures/item/example_item.png`
 
