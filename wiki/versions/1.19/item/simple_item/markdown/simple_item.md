@@ -20,7 +20,7 @@ Now that we've declared the item, we need to tell the game registry to put it in
 
 `Registry.register()` takes three parameters:
 - The `Registry` we want to add to. For items this is always `Registry.ITEM`.
-- The `Identifier` used for the item. This must be unique. The first part is the namespace (which should be the mod ID, but here it is `tutorial`) and the item name itself. Only lowercase letters, numbers and underscores should be used. 
+- The `Identifier` used for the item. This must be unique. The first part is the namespace (which should be the mod id, but here it is `tutorial`) and the item name itself. Only lowercase letters, numbers, underscores, dashes, periods, and slashes are allowed.
 - The `Item` to register. Here, we pass in the item we declared earlier.
 
 Having done all of this, if we run the game we can see that our item appears in the Miscellaneous tab! But it doesn't have a texture, and its name isn't translated properly. How do we fix this?
