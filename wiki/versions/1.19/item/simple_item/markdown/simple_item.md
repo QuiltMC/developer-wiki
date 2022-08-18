@@ -33,7 +33,7 @@ First we need to declare the model for the item. This tells the game how to rend
 
 For most items, all you need to do here is replace `tutorial` with your mod ID and `example_item` with the item name you said earlier. This file should go to your assets folder under `/models/item`.
 
-The texture file, as shown in the model, should be at `textures/item/example_item.png`.
+The texture file, as shown in the model, should match the identifier path, so in our case `textures/item/example_item.png`
 
 Finally, we need to add a translation. Put this in `lang/en_us.json` in your assets folder, replacing the same values as before:
 
