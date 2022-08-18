@@ -35,7 +35,7 @@ For most items, all you need to do here is replace `simple_item` with your mod I
 
 The texture file, as shown in the model, should match the identifier path, so in our case `textures/item/example_item.png`
 
-# Language Translation
+## Language Translation
 
 Finally, we need to add a translation. Put this in `lang/en_us.json` in your assets folder, replacing the same values as before:
 
