@@ -17,7 +17,7 @@ public class SimpleItemExample implements ModInitializer {
 	@Override
 	public void onInitialize(ModContainer mod) {
 		// @start Registration
-		Registry.register(Registry.ITEM, new Identifier("tutorial", "example_item"), EXAMPLE_ITEM);
+		Registry.register(Registry.ITEM, new Identifier("simple_item", "example_item"), EXAMPLE_ITEM);
 		// @end Registration
 	}
 }

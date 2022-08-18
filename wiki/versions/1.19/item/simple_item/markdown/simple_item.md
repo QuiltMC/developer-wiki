@@ -6,7 +6,7 @@ The first thing we need to do is register the item so that the game knows to add
 
 In theory, we could do this directly in the registration line but having a separate variable allows us to reference it elsewhere for other purposes.
 
-```file:src/main/java/org/quiltmc/wiki/tutorial/SimpleItemExample.java@Declaration
+```file:src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Declaration
 ```
 
 Here, the `public static final` ensures that we can access the item elsewhere but not change it, making sure that we don't accidentally alter it somewhere else. 
@@ -15,12 +15,12 @@ Our new instance of `Item` takes in an instance of `QuiltItemSettings` as an arg
 
 Now that we've declared the item, we need to tell the game registry to put it into the game. We do so by putting this into the mod's `onInitialize` method:
 
-```file:src/main/java/org/quiltmc/wiki/tutorial/SimpleItemExample.java@Registration
+```file:src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Registration
 ```
 
 `Registry.register()` takes three parameters:
 - The `Registry` we want to add to. For items this is always `Registry.ITEM`.
-- The `Identifier` used for the item. This must be unique. The first part is the namespace (which should be the mod id, but here it is `tutorial`) and the item name itself. Only lowercase letters, numbers, underscores, dashes, periods, and slashes are allowed.
+- The `Identifier` used for the item. This must be unique. The first part is the namespace (which should be the mod id, but here it is `simple_item`) and the item name itself. Only lowercase letters, numbers, underscores, dashes, periods, and slashes are allowed.
 - The `Item` to register. Here, we pass in the item we declared earlier.
 
 Having done all of this, if we run the game we can see that our item appears in the Miscellaneous tab! But it doesn't have a texture, and its name isn't translated properly. How do we fix this?
@@ -28,10 +28,10 @@ Having done all of this, if we run the game we can see that our item appears in 
 ## Textures
 First we need to declare the model for the item. This tells the game how to render the item.
 
-```file:src/main/resources/assets/tutorial/models/item/example_item.json
+```file:src/main/resources/assets/simple_item/models/item/example_item.json
 ```
 
-For most items, all you need to do here is replace `tutorial` with your mod ID and `example_item` with the item name you set earlier. This file should go to your assets folder under `/models/item`.
+For most items, all you need to do here is replace `simple_item` with your mod ID and `example_item` with the item name you set earlier. This file should go to your assets folder under `/models/item`.
 
 The texture file, as shown in the model, should match the identifier path, so in our case `textures/item/example_item.png`
 
@@ -39,7 +39,7 @@ The texture file, as shown in the model, should match the identifier path, so in
 
 Finally, we need to add a translation. Put this in `lang/en_us.json` in your assets folder, replacing the same values as before:
 
-```file:src/main/resources/assets/tutorial/lang/en_us.json
+```file:src/main/resources/assets/simple_item/lang/en_us.json
 ```
 
 And that's it! Your item should be working fully.
@@ -48,4 +48,4 @@ And that's it! Your item should be working fully.
 ## What's next?
 This tutorial only covers the most basic of items. Check the other item tutorials for more advanced items.
 
-If you want your item to have a recipe, generate one from [this website](https://crafting.thedestruc7i0n.ca/) (you may want to use a placeholder for the `output` item and then replace it with e.g. `tutorial:example_item`) and then put it in a JSON file under `src/main/resources/data/tutorial/recipes/` (replacing `tutorial` with your mod ID). Further details on item recipes can be found <abbr title="This documentation is not done yet, but it will be soon!">here</abbr>.
+If you want your item to have a recipe, generate one from [this website](https://crafting.thedestruc7i0n.ca/) (you may want to use a placeholder for the `output` item and then replace it with e.g. `simple_item:example_item`) and then put it in a JSON file under `src/main/resources/data/simple_item/recipes/` (replacing `simple_item` with your mod ID). Further details on item recipes can be found <abbr title="This documentation is not done yet, but it will be soon!">here</abbr>.

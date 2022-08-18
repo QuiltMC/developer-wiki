@@ -2,7 +2,7 @@
 	"schema_version": 1,
 	"quilt_loader": {
 		"group": "org.quiltmc.wiki",
-		"id": "tutorial",
+		"id": "simple_item",
 		"version": "${version}",
 		"metadata": {
 			"name": "Simple Item Example",
