@@ -22,7 +22,9 @@ should be the path to the Tiny file.
 ```json
 {
   //...
-  "loom:provided_javadoc": "my_javadoc.tiny"
+  "quilt_loom": {
+    "provided_javadoc_path": "my_javadoc.tiny"
+  }
 }
 ```
 
