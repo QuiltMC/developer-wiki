@@ -7,7 +7,7 @@ This can be particularly useful for libraries.
 
 ## Format
 
-The format used is Tiny Mappings v2 (`.tiny`), whose complete, but subject to change, spec can be found in https://github.com/FabricMC/tiny-remapper/issues/9.
+The format used is Tiny Mappings v2 (`.tiny`), whose complete, but subject to change spec can be found in https://github.com/FabricMC/tiny-remapper/issues/9.
 
 The complete format is not necessary, only the `intermediary` namespace, as it is not meant to remap, only add comments.
 
@@ -16,8 +16,8 @@ The complete format is not necessary, only the `intermediary` namespace, as it i
 
 ## Setup
 
-Create a key-value field in the top-level object of the `quilt.mod.json`, named `loom:provided_javadoc`. The value
-should be the path and name to the Tiny file.
+Create a key-value field in the `quilt_loom` object of the `quilt.mod.json`, named `provided_javadoc_path`. The value
+should be the path to the Tiny file.
 
 ```json
 {

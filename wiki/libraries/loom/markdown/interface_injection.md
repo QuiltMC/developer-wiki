@@ -14,17 +14,19 @@ A reminder that the interface must be implemented at runtime, for example with a
 
 ## Setting Up
 
-Create an object in the top-level object of the `quilt.mod.json`, named `loom:injected_interfaces`. This
-object must contain a key-array, the key being the injected class, and the array of all the interfaces to inject.
+Create an object inside the `quilt_loom` object of the `quilt.mod.json`, named`injected_interfaces`, this object
+must contain key-array values, the key being the injected class, and the array all the interfaces to inject.
 
 ```json
 {
   //...
-  "loom:injected_interfaces": {
-    "some/minecraft/Class": [
-      "my/interface/ToInject",
-      "my/interface/ToInject2"
-    ]
+  "quilt_loom": {
+    "injected_interfaces": {
+      "some/minecraft/Class": [
+        "my/interface/ToInject",
+        "my/interface/ToInject2"
+      ]
+    }
   }
 }
 ```
