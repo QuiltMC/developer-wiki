@@ -48,4 +48,4 @@ And that's it! Your item should be working fully.
 ## What's next?
 This tutorial only covers the most basic of items. Check the other item tutorials for more advanced items.
 
-If you want your item to have a recipe, generate one from [this website](https://crafting.thedestruc7i0n.ca/) (you may want to use a placeholder for the `output` item and then replace it with e.g. `simple_item:example_item`) and then put it in a JSON file under `src/main/resources/data/simple_item/recipes/` (replacing `simple_item` with your mod ID). Further details on item recipes can be found <abbr title="This documentation is not done yet, but it will be soon!">here</abbr>.
+If you want your item to have a recipe, generate one from [destruc7i0n's crafting recipe generator](https://crafting.thedestruc7i0n.ca/) (you may want to use a placeholder for the `output` item and then replace it with e.g. `simple_item:example_item`) and then put it in a JSON file under `src/main/resources/data/simple_item/recipes/` (replacing `simple_item` with your mod ID). Further details on item recipes can be found <abbr title="This documentation is not done yet, but it will be soon!">here</abbr>.
