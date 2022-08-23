@@ -9,7 +9,7 @@ In theory, we could do this directly in the registration line but having a separ
 ```file:src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Declaration
 ```
 
-Here, the `public static final` ensures that we can access the item elsewhere but not change it, making sure that we don't accidentally alter it somewhere else. 
+Here, the `public static final` ensures that we can access the item elsewhere but not change the contents of the variable itself, making sure that we don't accidentally alter it somewhere else. 
 
 Our new instance of `Item` takes in an instance of `QuiltItemSettings` as an argument. This is where we declare all of the settings for our item. There are a variety of these, but for now we only need `.group()`, which sets which creative tab the item will be found in. You can create your own, but here we use the Miscellaneous tab.
 
@@ -33,7 +33,7 @@ First we need to declare the model for the item. This tells the game how to rend
 
 For most items, all you need to do here is replace `simple_item` with your mod ID and `example_item` with the item name you set earlier. This file should go to your assets folder under `/models/item`.
 
-The texture file, as shown in the model, should match the identifier path, so in our case `textures/item/example_item.png`
+The texture file, as shown in the model, should match the path specified in the `Identifier`, so in our case `textures/item/example_item.png`
 
 ## Language Translation
 
@@ -42,7 +42,7 @@ Finally, we need to add a translation. Put this in `lang/en_us.json` in your ass
 ```file:src/main/resources/assets/simple_item/lang/en_us.json
 ```
 
-And that's it! Your item should be working fully.
+And that's it! Your item should be fully working.
 
 
 ## What's next?
