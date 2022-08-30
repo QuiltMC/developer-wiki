@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Recipe API</title>
+    <title>Items</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
     <link rel="stylesheet" href="https://quiltmc.org/assets/css/style.css">
@@ -16,19 +16,19 @@
     <link rel="icon" type="image/png" sizes="32x32" href="https://quiltmc.org/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://quiltmc.org/favicon/favicon-16x16.png">
     <link rel="shortcut icon" href="https://quiltmc.org/favicon/favicon.ico">
-    <link rel="canonical" href="https://modder.wiki.quiltmc.org/versions/1.19/data/recipes/recipe_api"/>
+    <link rel="canonical" href="https://modder.wiki.quiltmc.org/versions/1.19/item"/>
 
-    <meta property="og:title" content="Recipe API"/>
+    <meta property="og:title" content="Items"/>
     <meta name="author" content="QuiltMC"/>
     <meta property="og:locale" content="en_US"/>
-    <meta name="description" content="A Quilt Standard Libraries module that aims to help to manipulate recipes."/>
-    <meta property="og:description" content="A Quilt Standard Libraries module that aims to help to manipulate recipes."/>
-    <meta property="og:url" content="https://modder.wiki.quiltmc.org/versions/1.19/data/recipes/recipe_api"/>
-    <meta property="og:site_name" content="Recipe API"/>
+    <meta name="description" content="The Quilt Developer Wiki"/>
+    <meta property="og:description" content="The Quilt Developer Wiki"/>
+    <meta property="og:url" content="https://modder.wiki.quiltmc.org/versions/1.19/item"/>
+    <meta property="og:site_name" content="Items"/>
     <meta property="og:image" content="https://quiltmc.org/assets/img/logo-square.png"/>
     <meta name="twitter:card" content="summary"/>
     <meta property="twitter:image" content="https://quiltmc.org/assets/img/logo-square.png"/>
-    <meta property="twitter:title" content="Recipe API"/>
+    <meta property="twitter:title" content="Items"/>
     <meta name="twitter:site" content="@quilt_mc"/>
     <meta name="twitter:creator" content="@QuiltMC"/>
 
@@ -185,71 +185,7 @@
     </div>
 
     <div class="content column">
-        <h1><a href="#recipe-api" id="recipe-api">Recipe API</a></h1>
-<p>A Quilt Standard Libraries module that aims to help to manipulate recipes.</p>
-<p>It has three parts, <code>QuiltRecipeSerializer</code> (Which was briefly covered in the <a href="./recipe_type">Recipe Type Tutorial</a>), recipe manager manipulation, and utilities.</p>
-<h2><a href="#quiltrecipeserializer" id="quiltrecipeserializer">QuiltRecipeSerializer</a></h2>
-<p>An interface that extends <code>RecipeSerializer</code> to add to-JSON serialization.</p>
-<p>Its primary use is the recipe dump, which allows for dumping of JSON representations of recipes as files into the game directory (<code>./debug/quilt/recipe/...</code>) - It supports any recipes whose serializer implements <code>QuiltRecipeSerializer</code>, vanilla recipes are supported by default.</p>
-<p>Dumping can be enabled with the <code>quilt.recipe.dump</code> system property.</p>
-<h2><a href="#manipulation" id="manipulation">Manipulation</a></h2>
-<p>The recipe manager manipulation is a grouping of systems that can alter the state of the recipe manager and its recipes, they can be accessed using the <code>RecipeManagerHelper</code> class.</p>
-<p>The events contained in this system have a set order, which is addition, modification, and removal respectively.</p>
-<h3><a href="#static-recipes" id="static-recipes">Static Recipes</a></h3>
-<p>Static recipes are a kind of recipe that is always kept present during the whole game lifecycle. They're only applied after data pack reloads, that is, when starting a world/server or after using the <code>/reload</code> command.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
-<pre><code class="language-java">// ...
-		RecipeManagerHelper.registerStaticRecipe(
-				VanillaRecipeBuilders.shapedRecipe(&quot;IAI&quot;) // Shaped recipe with the IAI pattern
-						.output(new ItemStack(Items.CHAINMAIL_CHESTPLATE)) // That outputs a chestplate
-						.ingredient('I', Items.IRON_INGOT) // 'I' being an ingot
-						.ingredient('A', Items.APPLE) // and 'A' an apple
-						.build(new Identifier(&quot;example&quot;, &quot;apple_iron_ingot_fun&quot;), &quot;&quot;)
-		);
-// ...
-</code></pre>
-<h3><a href="#addition" id="addition">Addition</a></h3>
-<p>Mods might want to add recipes that have runtime components - Something that cannot be known at build time - for example, recipes that depend on other mods. Dynamic recipe providers allow for that.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
-<pre><code class="language-java">// ...
-		RecipeManagerHelper.addRecipes(handler -&gt; handler.register(new Identifier(&quot;example&quot;, &quot;random&quot;), id -&gt;
-				VanillaRecipeBuilders.shapelessRecipe(new ItemStack(
-						// We can't know which item it's going to output in advance, therefore
-						// it's impossible to create a JSON for this recipe.
-						Registry.ITEM.getRandom(RandomGenerator.createLegacy()).orElseThrow().value()))
-					.ingredient(Items.ACACIA_BUTTON)
-					.build(id, &quot;&quot;)));
-// ...
-</code></pre>
-<h3><a href="#modification" id="modification">Modification</a></h3>
-<p>Mods might want to modify values or replace recipes entirely while they're being built, this event allows for that.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
-<pre><code class="language-java">// ...
-		RecipeManagerHelper.modifyRecipes(handler -&gt; {
-			// Modifies the name of the output of the stone smelting recipe
-			handler.getRecipe(new Identifier(&quot;minecraft&quot;, &quot;stone&quot;), RecipeType.SMELTING)
-					.getOutput().setCustomName(Text.literal(&quot;Modified!&quot;).formatted(Formatting.RED));
-			// Replaces the enchanting table recipe with different ingredients
-			handler.replace(VanillaRecipeBuilders.shapedRecipe(&quot; B &quot;, &quot;D#D&quot;, &quot;###&quot;)
-					.ingredient('B', Items.WRITABLE_BOOK)
-					.ingredient('D', Items.GOLD_INGOT)
-					.ingredient('#', Items.POLISHED_BASALT)
-					.output(new ItemStack(Items.ENCHANTING_TABLE))
-					.build(new Identifier(&quot;minecraft&quot;, &quot;enchanting_table&quot;), &quot;&quot;)
-			);
-		});
-// ...
-</code></pre>
-<h3><a href="#removal" id="removal">Removal</a></h3>
-<p>Mods might want to remove a recipe completely from the game, this event allows for that. Be aware that removing recipes might not be entirely compatible with what other mods expect.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
-<pre><code class="language-java">// ...
-		RecipeManagerHelper.removeRecipes(handler -&gt; {
-			handler.remove(new Identifier(&quot;minecraft&quot;, &quot;acacia_door&quot;));
-			handler.removeIf(RecipeType.BLASTING, rec -&gt; rec.getOutput().isOf(Items.GOLD_INGOT));
-		});
-// ...
-</code></pre>
+        <h1><a href="#items" id="items">Items</a></h1>
     </div>
 </div>
 	    </main>
