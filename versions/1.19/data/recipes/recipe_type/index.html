@@ -210,6 +210,7 @@
 		return this.id;
 	}
 // ...
+
 </code></pre>
 <h3><a href="#matching" id="matching">Matching</a></h3>
 <p>The method <code>matches</code> returns whether this current recipe should be matched when retrieved via the <code>RecipeManager</code> - Match the inventory contents against the inputs here.</p>
@@ -220,6 +221,7 @@
 		return this.input.test(inventory.getStack(0));
 	}
 // ...
+
 </code></pre>
 <h3><a href="#outputs" id="outputs">Outputs</a></h3>
 <p>Outputting has two parts, <code>getOutput</code> and <code>craft</code>, the first being a view of the output and the latter being a copy of the output that may be modified.</p>
@@ -235,6 +237,7 @@
 		return this.output.copy();
 	}
 // ...
+
 </code></pre>
 <h3><a href="#serializer" id="serializer">Serializer</a></h3>
 <p>The serializer of a recipe type specifies the serialization and deserialization of recipes of that type into JSON and packet representation.</p>
@@ -276,6 +279,7 @@
 			return obj;
 		}
 // ...
+
 </code></pre>
 <h4><a href="#packet" id="packet">Packet</a></h4>
 <p>You must create and read recipe packets, so the server is able to send the recipes to the clients, and be converted correctly, failing to implement the packet reading and writing might result in desynchronizations.</p>
@@ -296,6 +300,7 @@
 			buf.writeItemStack(recipe.output);
 		}
 // ...
+
 </code></pre>
 <h3><a href="#recipe-type" id="recipe-type">Recipe Type</a></h3>
 <p>Creating the recipe type is as simple as instantiating <code>RecipeType</code>, unfortunately it is an interface, so you have to subclass it.</p>
@@ -303,6 +308,7 @@
 <pre><code class="language-java">// ...
 	public static final RecipeType&lt;MyRecipe&gt; MY_RECIPE = new RecipeType&lt;&gt;() {}; // Subclasses it anonymously
 // ...
+
 </code></pre>
 <h3><a href="#registration" id="registration">Registration</a></h3>
 <p>You must register your serializer and your type, so Minecraft knows about them.</p>
@@ -311,6 +317,7 @@
 		Registry.register(Registry.RECIPE_TYPE, new Identifier(&quot;example&quot;, &quot;my_recipe&quot;), MY_RECIPE);
 		Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(&quot;example&quot;, &quot;my_recipe&quot;), MY_RECIPE_SERIALIZER);
 // ...
+
 </code></pre>
 <p>Additionally, you also have to specify them in your recipe class.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java" target="_blank"><code>MyRecipe.java</code></a>:</p>
@@ -325,6 +332,7 @@
 		return Recipes.MY_RECIPE;
 	}
 // ...
+
 </code></pre>
 <h3><a href="#using-your-recipe" id="using-your-recipe">Using your recipe</a></h3>
 <h4><a href="#creating-recipe-json-files" id="creating-recipe-json-files">Creating recipe JSON files</a></h4>
@@ -341,6 +349,7 @@
   &quot;output&quot;: &quot;minecraft:apple&quot;,
   &quot;count&quot;: 2
 }
+
 </code></pre>
 <h4><a href="#retrieving-your-recipes-in-code" id="retrieving-your-recipes-in-code">Retrieving your recipes in code</a></h4>
 <p>Recipes must be retrieved from the <code>RecipeManager</code>, which can be fetched from either a <code>World</code> or the <code>MinecraftServer</code>. The recipe manager has a few methods for recipe retrieving, such as:</p>

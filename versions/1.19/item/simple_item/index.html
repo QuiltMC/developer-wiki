@@ -194,6 +194,7 @@
 <pre><code class="language-java">// ...
 	public static final Item EXAMPLE_ITEM = new Item(new QuiltItemSettings().group(ItemGroup.MISC));
 // ...
+
 </code></pre>
 <p>Here, the <code>public static final</code> ensures that we can access the item elsewhere but not change the contents of the variable itself, making sure that we don't accidentally alter it somewhere else.</p>
 <p>Our new instance of <code>Item</code> takes in an instance of <code>QuiltItemSettings</code> as an argument. This is where we declare all of the settings for our item. There are a variety of these, but for now we only need <code>.group()</code>, which sets which creative tab the item will be found in. You can create your own, but here we use the Miscellaneous tab.</p>
@@ -202,6 +203,7 @@
 <pre><code class="language-java">// ...
 		Registry.register(Registry.ITEM, new Identifier(&quot;simple_item&quot;, &quot;example_item&quot;), EXAMPLE_ITEM);
 // ...
+
 </code></pre>
 <p><code>Registry.register()</code> takes three parameters: - The <code>Registry</code> we want to add to. For items this is always <code>Registry.ITEM</code>. - The <code>Identifier</code> used for the item. This must be unique. The first part is the namespace (which should be the mod id, but here it is <code>simple_item</code>) and the item name itself. Only lowercase letters, numbers, underscores, dashes, periods, and slashes are allowed. - The <code>Item</code> to register. Here, we pass in the item we declared earlier.</p>
 <p>Having done all of this, if we run the game we can see that our item appears in the Miscellaneous tab! But it doesn't have a texture, and its name isn't translated properly. How do we fix this?</p>
@@ -213,21 +215,17 @@
     &quot;textures&quot;: {
       &quot;layer0&quot;: &quot;simple_item:item/example_item&quot;
     }
-}```
-
-For most items, all you need to do here is replace `simple_item` with your mod ID and `example_item` with the item name you set earlier. This file should go to your assets folder under `/models/item`.
-
-The texture file, as shown in the model, should match the path specified in the `Identifier`, so in our case `textures/item/example_item.png`
-
-## Language Translation
-
-Finally, we need to add a translation. Put this in `lang/en_us.json` in your assets folder, replacing the same values as before:
-
-From [`en_us.json`](https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/src/main/resources/assets/simple_item/lang/en_us.json):
-```json
-{
+}
+</code></pre>
+<p>For most items, all you need to do here is replace <code>simple_item</code> with your mod ID and <code>example_item</code> with the item name you set earlier. This file should go to your assets folder under <code>/models/item</code>.</p>
+<p>The texture file, as shown in the model, should match the path specified in the <code>Identifier</code>, so in our case <code>textures/item/example_item.png</code></p>
+<h2><a href="#language-translation" id="language-translation">Language Translation</a></h2>
+<p>Finally, we need to add a translation. Put this in <code>lang/en_us.json</code> in your assets folder, replacing the same values as before:</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/src/main/resources/assets/simple_item/lang/en_us.json" target="_blank"><code>en_us.json</code></a>:</p>
+<pre><code class="language-json">{
   &quot;item.simple_item.example_item&quot;: &quot;Example Item&quot;
 }
+
 </code></pre>
 <p>And that's it! Your item should be fully working.</p>
 <h2><a href="#whats-next" id="whats-next">What's next?</a></h2>

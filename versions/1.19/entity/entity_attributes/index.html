@@ -201,6 +201,7 @@
 <pre><code class="language-java">// ...
 	public static final EntityAttribute GENERIC_JUMP_BOOST = new ClampedEntityAttribute(&quot;attribute.name.generic_jump_boost&quot;, 1.0, 0.0, 2.0).setTracked(true);
 // ...
+
 </code></pre>
 <p>The <code>generic</code> preceding the attribute name is a convention meaning 'applying to multiple living entities (and players).' Specific attributes get their own prefixes, such as <code>horse</code> in <code>horse_jump_strength</code>.</p>
 <p>You might notice the <code>setTracked</code> call; this ensures that the value of this attribute will be synchronized between the server and client. Since we're dealing with player movement, it's important to have this set to <code>true</code>, which is what you'll want in most cases regardless.</p>
@@ -214,6 +215,7 @@
 <pre><code class="language-java">// ...
 		Registry.register(Registry.ATTRIBUTE, new Identifier(&quot;example&quot;, &quot;generic.jump_boost&quot;), GENERIC_JUMP_BOOST);
 // ...
+
 </code></pre>
 <p>This identifier doesn't follow normal conventions, but it's what the vanilla attributes use.</p>
 <h2><a href="#registering-attributes-on-entities" id="registering-attributes-on-entities">Registering Attributes on Entities</a></h2>
@@ -256,6 +258,7 @@
 		cir.getReturnValue().add(AttributesExample.GENERIC_JUMP_BOOST);
 	}
 // ...
+
 </code></pre>
 <h2><a href="#using-attributes" id="using-attributes">Using Attributes</a></h2>
 <p>We've registered our attribute and let all living entities know that they have it. The next step is to actually use it somewhere: in our case, to modify jump height.</p>
@@ -271,6 +274,7 @@
 		cir.setReturnValue(cir.getReturnValue() * (float) instance.getValue());
 	}
 // ...
+
 </code></pre>
 <h2><a href="#attribute-modifiers" id="attribute-modifiers">Attribute Modifiers</a></h2>
 <p>Now that we've given our attribute functionality, it's time to modify its value in some way. The next section will discuss three methods you might use to do so, but they all have one thing in common: <code>EntityAttributeModifier</code>.</p>
@@ -295,6 +299,7 @@
 			EntityAttributeModifier.Operation.ADDITION
 	);
 // ...
+
 </code></pre>
 <p>It's important to note that all attribute modifiers are calculated in order based on type, with the order being <code>ADDITION</code>, <code>MULTIPLY_BASE</code>, then <code>MULTIPLY_TOTAL</code>. You can see the exact behavior in <code>EntityAttributeInstance#computeValue</code>.</p>
 <h2><a href="#applying-modifiers" id="applying-modifiers">Applying Modifiers</a></h2>
@@ -306,12 +311,14 @@
 		EntityAttributeInstance instance = player.getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST);
 		instance.addTemporaryModifier(AttributesExample.SOME_MODIFIER);
 // ...
+
 </code></pre>
 <p>This is also the most appropriate case where you would remove the modifier at some other point in time. You can either use the UUID associated with the modifier or the modifier itself.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
 <pre><code class="language-java">// ...
 		instance.removeModifier(AttributesExample.SOME_MODIFIER_ID);
 // ...
+
 </code></pre>
 <h3><a href="#via-items" id="via-items">Via Items</a></h3>
 <p>Upon equipping an item, the game checks if it has any attribute modifiers marked in the slot it was equipped in. If so, it applies those modifiers to the entity. There are two ways items can achieve this: through <code>ItemStack</code> NBT or custom <code>Item</code> instance behavior.</p>
@@ -326,6 +333,7 @@
 				EquipmentSlot.MAINHAND
 		);
 // ...
+
 </code></pre>
 <h4><a href="#hard-coded" id="hard-coded">Hard-coded</a></h4>
 <p>The <code>Item</code> class contains a <code>getAttributeModifiers</code> method which returns a multimap of modifiers to apply when the item is equipped in the specified slot. We can override this in our own item class.</p>
@@ -356,6 +364,7 @@ public class JumpStick extends Item {
 		return super.getAttributeModifiers(slot);
 	}
 }
+
 </code></pre>
 <h4><a href="#conflicts" id="conflicts">Conflicts</a></h4>
 <p>By default, NBT and hard-coded modifiers don't mix. If you've ever applied a modifier via NBT on a sword, for example, you might have noticed that your modifier <em>does</em> get applied, but the item suddenly doesn't have any attack damage or attack speed. You can see why in <code>ItemStack#getAttributeModifiers</code>: it completely ignores any hard-coded ones like in the previous example if the stack has any modifiers in its NBT.</p>

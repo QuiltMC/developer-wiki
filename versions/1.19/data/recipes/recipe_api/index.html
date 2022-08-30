@@ -207,6 +207,7 @@
 						.build(new Identifier(&quot;example&quot;, &quot;apple_iron_ingot_fun&quot;), &quot;&quot;)
 		);
 // ...
+
 </code></pre>
 <h3><a href="#addition" id="addition">Addition</a></h3>
 <p>Mods might want to add recipes that have runtime components - Something that cannot be known at build time - for example, recipes that depend on other mods. Dynamic recipe providers allow for that.</p>
@@ -220,6 +221,7 @@
 					.ingredient(Items.ACACIA_BUTTON)
 					.build(id, &quot;&quot;)));
 // ...
+
 </code></pre>
 <h3><a href="#modification" id="modification">Modification</a></h3>
 <p>Mods might want to modify values or replace recipes entirely while they're being built, this event allows for that.</p>
@@ -239,6 +241,7 @@
 			);
 		});
 // ...
+
 </code></pre>
 <h3><a href="#removal" id="removal">Removal</a></h3>
 <p>Mods might want to remove a recipe completely from the game, this event allows for that. Be aware that removing recipes might not be entirely compatible with what other mods expect.</p>
@@ -249,6 +252,7 @@
 			handler.removeIf(RecipeType.BLASTING, rec -&gt; rec.getOutput().isOf(Items.GOLD_INGOT));
 		});
 // ...
+
 </code></pre>
     </div>
 </div>
