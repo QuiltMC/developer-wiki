@@ -1,1 +1,7 @@
 @import "dracula-dark.css" (prefers-color-scheme: dark);
+
+@media(prefers-color-scheme: dark) {
+    .hljs-punctuation {
+        color: white;
+    }
+}
