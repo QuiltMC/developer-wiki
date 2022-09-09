@@ -10,7 +10,7 @@
     <title>Quilt Developer Wiki</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-    <link rel="stylesheet" href="https://quiltmc.org/assets/css/style.css">
+    <link rel="stylesheet" href="/styles/style.min.css">
     <link rel="stylesheet" href="https://modder.wiki.quiltmc.org/dracula.css">
 
     <link rel="icon" type="image/png" sizes="32x32" href="https://quiltmc.org/favicon/favicon-32x32.png">
@@ -79,6 +79,10 @@
             <img src="https://quiltmc.org/assets/img/logo.svg" alt="Quilt Logo">
 
             <span class="ml-2">DevWiki</span>
+        </a>
+
+        <a class="navbar-item px-2 has-tooltip-arrow has-tooltip-bottom" style="display: none" id="language-switcher" data-tooltip="Switch Language">
+            <i class="fak fa-language fa-2xl"></i>
         </a>
 
         <a class="navbar-item px-2 has-tooltip-arrow has-tooltip-bottom" id="theme-switcher" data-tooltip="Toggle Low Contrast">
@@ -263,7 +267,24 @@
     </div>
 </footer>
 
-<script src="https://quiltmc.org/assets/js/bundle.js"></script>
+<div class="modal" id="language-modal">
+	<div class="modal-background" id="language-modal-background" data-action="click->languages#hide"></div>
+
+	<div class="modal-content">
+		<section class="box">
+			We're not quite ready for this to be used just yet, but stay tuned!
+		</section>
+
+		<div class="is-flex is-flex-direction-row mt-3">
+			<a class="button is-primary" id="language-modal-close-button" aria-label="close" data-action="click->languages#hide">
+				<span class="icon"><i class="fas fa-x"></i></span>
+				<span>Close</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<script src="/bundle.js"></script>
 
 </body>
 </html>
