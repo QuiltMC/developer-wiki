@@ -5,11 +5,14 @@ plugins {
 
 repositories {
     mavenCentral()
+	gradlePluginPortal()
 }
 
 dependencies {
     implementation("com.vladsch.flexmark:flexmark-all:0.62.2")
     implementation("io.pebbletemplates:pebble:3.1.5")
+
+	implementation("com.github.node-gradle:gradle-node-plugin:3.4.0")
 }
 
 gradlePlugin {

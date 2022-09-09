@@ -1,0 +1,8 @@
+{
+  "name": "developer-wiki",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "quilt-bulma": "^0.0.4"
+  }
+}

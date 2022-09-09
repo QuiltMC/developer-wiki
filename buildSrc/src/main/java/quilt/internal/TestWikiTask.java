@@ -36,6 +36,10 @@ public class TestWikiTask extends DefaultTask {
 				sendWebpageFile(exchange, url.substring(1), "text/css;charset=utf-8");
 			} else if (url.endsWith(".ico")) {
 				sendWebpageFile(exchange, url.substring(1), "image/png");
+			} else if (url.endsWith(".js")) {
+				sendWebpageFile(exchange, url.substring(1), "application/javascript");
+			} else {
+				sendWebpageFile(exchange, url.substring(1), "text/plain");
 			}
 
 			System.out.println("Served");
