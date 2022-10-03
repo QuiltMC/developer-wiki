@@ -1,0 +1,31 @@
+{
+	"schema_version": 1,
+	"quilt_loader": {
+		"group": "org.quiltmc.wiki",
+		"id": "entity_attributes",
+		"version": "${version}",
+		"metadata": {
+			"name": "Surface Rule Injection Example",
+			"description": "Creation and injection of surface rules",
+			"contributors": {
+			},
+			"contact": {
+			},
+			"icon": "assets/surface_rule/icon.png"
+		},
+		"intermediate_mappings": "net.fabricmc:intermediary",
+		"entrypoints": {
+			"init": "org.quiltmc.wiki.surface_rules.QuiltSurfaceRuleExample"
+		},
+		"depends": [
+			{
+				"id": "quilt_loader",
+				"versions": ">=0.16.0-"
+			},
+			{
+				"id": "minecraft",
+				"versions": ">=1.19"
+			}
+		]
+	}
+}
