@@ -19,6 +19,7 @@ Now that we've declared the item, we need to tell the game registry to put it in
 ```
 
 `Registry.register()` takes three parameters:
+
 - The `Registry` we want to add to. For items this is always `Registry.ITEM`.
 - The `Identifier` used for the item. This must be unique. The first part is the namespace (which should be the mod id, but here it is `simple_item`) and the item name itself. Only lowercase letters, numbers, underscores, dashes, periods, and slashes are allowed.
 - The `Item` to register. Here, we pass in the item we declared earlier.
