@@ -166,8 +166,8 @@
         <ul>
             <li><a href="https://modder.wiki.quiltmc.org/versions/1.19/data/recipes/">Recipes</a>
                 <ul>
-                    <li><a href="https://modder.wiki.quiltmc.org/versions/1.19/data/recipes/recipe_api/">Recipe API</a></li>
                     <li><a href="https://modder.wiki.quiltmc.org/versions/1.19/data/recipes/recipe_type/">Recipe Type</a></li>
+                    <li><a href="https://modder.wiki.quiltmc.org/versions/1.19/data/recipes/recipe_api/">Recipe API</a></li>
                 </ul>
             </li>
         </ul>
@@ -218,7 +218,12 @@
 // ...
 
 </code></pre>
-<p><code>Registry.register()</code> takes three parameters: - The <code>Registry</code> we want to add to. For items this is always <code>Registry.ITEM</code>. - The <code>Identifier</code> used for the item. This must be unique. The first part is the namespace (which should be the mod id, but here it is <code>simple_item</code>) and the item name itself. Only lowercase letters, numbers, underscores, dashes, periods, and slashes are allowed. - The <code>Item</code> to register. Here, we pass in the item we declared earlier.</p>
+<p><code>Registry.register()</code> takes three parameters:</p>
+<ul>
+    <li>The <code>Registry</code> we want to add to. For items this is always <code>Registry.ITEM</code>.</li>
+    <li>The <code>Identifier</code> used for the item. This must be unique. The first part is the namespace (which should be the mod id, but here it is <code>simple_item</code>) and the item name itself. Only lowercase letters, numbers, underscores, dashes, periods, and slashes are allowed.</li>
+    <li>The <code>Item</code> to register. Here, we pass in the item we declared earlier.</li>
+</ul>
 <p>Having done all of this, if we run the game we can see that our item appears in the Miscellaneous tab! But it doesn't have a texture, and its name isn't translated properly. How do we fix this?</p>
 <h2><a href="#textures" id="textures">Textures</a></h2>
 <p>First we need to declare the model for the item. This tells the game how to render the item.</p>
