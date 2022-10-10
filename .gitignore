@@ -28,3 +28,6 @@ bin/
 
 # Wiki Output
 docs/
+
+# Wiki web deps
+node_modules/

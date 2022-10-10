@@ -107,7 +107,8 @@ public class GenerateContentTask extends DefaultTask {
 				"):\n```" +
 				fileType +
 				"\n" +
-				fileText;
+				fileText +
+				"\n";
 	}
 
 	public Map<GenerateWikiFileTreeTask.FileEntry, String> getGenerated() {

@@ -1,0 +1,32 @@
+{
+	"schema_version": 1,
+	"quilt_loader": {
+		"group": "org.quiltmc.wiki",
+		"id": "simple_item",
+		"version": "${version}",
+		"metadata": {
+			"name": "Simple Item Example",
+			"description": "Creation and registration of a simple item.",
+			"contributors": {
+				"bs3k": "Owner"
+			},
+			"contact": {
+			},
+			"icon": "assets/tutorial/icon.png"
+		},
+		"intermediate_mappings": "net.fabricmc:intermediary",
+		"entrypoints": {
+			"init": "org.quiltmc.wiki.tutorial.SimpleItemExample"
+		},
+		"depends": [
+			{
+				"id": "quilt_loader",
+				"versions": ">=0.16.0-"
+			},
+			{
+				"id": "minecraft",
+				"versions": ">=1.19"
+			}
+		]
+	}
+}

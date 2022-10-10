@@ -115,6 +115,20 @@ public class GenerateWikiTask extends DefaultTask {
 				return super.visitFile(file, attrs);
 			}
 		});
+
+		Path npmStyles = this.getProject().getRootDir().toPath().resolve("node_modules/quilt-bulma/dist");
+
+		output.resolve("styles").toFile().mkdir();
+
+		Files.walkFileTree(npmStyles, new SimpleFileVisitor<>() {
+			@Override
+			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+				Path outputPath = output.resolve("styles").resolve(npmStyles.relativize(file));
+				Files.copy(file, outputPath);
+
+				return super.visitFile(file, attrs);
+			}
+		});
 	}
 
 	private void generateStaticPage(

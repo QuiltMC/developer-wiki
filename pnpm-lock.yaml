@@ -1,0 +1,13 @@
+lockfileVersion: 5.4
+
+specifiers:
+  quilt-bulma: ^0.0.4
+
+dependencies:
+  quilt-bulma: 0.0.4
+
+packages:
+
+  /quilt-bulma/0.0.4:
+    resolution: {integrity: sha512-AltxA0vFe+AF2VRUvHaPw9sJv2p5CNtjtG7bPI+pBrb2NHYu8bDCM1pv3+LNNcMPyqQFbwNOoseiKGysShRU2g==}
+    dev: false
