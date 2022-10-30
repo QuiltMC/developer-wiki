@@ -76,11 +76,15 @@ public class GenerateContentTask extends DefaultTask {
 		String[] full = matchResult.group(0).split("\\s+");
 		StringBuilder tabs = new StringBuilder();
 		StringBuilder sections = new StringBuilder();
+		StringBuilder langClasses = new StringBuilder();
 		boolean isFirst = true;
 		for (String tab : full) {
 			Matcher matcher = Pattern.compile("([a-z]+):(.+?)(?:@(.+?))?").matcher(tab);
 			if (matcher.matches()) {
 				String language = matcher.group(1);
+				if (!isFirst)
+					langClasses.append(' ');
+				langClasses.append("has-lang-"+language);
 				tabs.append("<li class=\"tab"+(isFirst ? " is-active" : "")+"\" onclick=\"switchTab(event,'" + language + "')\"><a>"+capitalize(language)+"</a></li>\n");
 				String codeChunk = replaceMatch(matcher.group(2), matcher.group(3), entry);
 				sections.append("<section class=\"tab-contents lang-selected-" + language + "\""+(!isFirst ? " style=\"display:none\"" : "")+">\n\n" + codeChunk + "```\n\n</section>\n");
@@ -89,11 +93,11 @@ public class GenerateContentTask extends DefaultTask {
 		}
 		return "<div class=\"tab-holder\">\n" +
 				"<div class=\"tabs is-boxed\">\n" +
-				"<ul>\n" +
+				"<ul class=\""+langClasses+"\">\n" +
 				tabs +
 				"</ul>\n" +
 				"</div>\n" +
-				"<div class=\"selected-lang-contents\">\n" +
+				"<div class=\""+langClasses+"\">\n" +
 				sections +
 				"</div>\n" +
 				"</div>\n<p>\n";
@@ -152,7 +156,8 @@ public class GenerateContentTask extends DefaultTask {
 
 	private static final Map<String, String> CAPITALIZATION_LOOKUP = Map.of(
 			"java", "Java",
-			"kotlin", "Kotlin"
+			"kotlin", "Kotlin",
+			"json", "JSON"
 	);
 
 	private String capitalize(String string) {
