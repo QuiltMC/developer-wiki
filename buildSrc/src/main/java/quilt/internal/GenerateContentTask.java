@@ -12,6 +12,7 @@ import java.util.*;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class GenerateContentTask extends DefaultTask {
 	@Internal
@@ -47,7 +48,7 @@ public class GenerateContentTask extends DefaultTask {
 			String input = Files.readString(entry.path()).replace("\r", "");
 
 			// Parse the path includes
-			Matcher matcher = Pattern.compile("```file:(.+?)(?:@(.+?))?\\n").matcher(input);
+			Matcher matcher = Pattern.compile("```([a-z]+):(.+?)(?:@(.+?))?\\n").matcher(input);
 
 			input = matcher.replaceAll(matchResult -> replaceSimpleMatch(matchResult, entry));
 
@@ -86,7 +87,7 @@ public class GenerateContentTask extends DefaultTask {
 					langClasses.append(' ');
 				langClasses.append("has-lang-"+language);
 				tabs.append("<li class=\"tab"+(isFirst ? " is-active" : "")+"\" onclick=\"switchTab(event,'" + language + "')\"><a>"+capitalize(language)+"</a></li>\n");
-				String codeChunk = replaceMatch(matcher.group(2), matcher.group(3), entry);
+				String codeChunk = replaceMatch(matcher.group(2), matcher.group(3), language, entry);
 				sections.append("<section class=\"tab-contents lang-selected-" + language + "\""+(!isFirst ? " style=\"display:none\"" : "")+">\n\n" + codeChunk + "```\n\n</section>\n");
 				isFirst = false;
 			}
@@ -104,13 +105,15 @@ public class GenerateContentTask extends DefaultTask {
 	}
 
 	private String replaceSimpleMatch(MatchResult matchResult, GenerateWikiFileTreeTask.FileEntry entry) {
-		String requestedFile = matchResult.group(1);
-		String region = matchResult.group(2);
+		String requestedFile = matchResult.group(2);
+		String region = matchResult.group(3);
+		String fileType = matchResult.group(1).equals("file") ?
+				requestedFile.substring(requestedFile.lastIndexOf(".") + 1) : matchResult.group(1);
 
-		return replaceMatch(requestedFile, region, entry);
+		return replaceMatch(requestedFile, region, fileType, entry);
 	}
 
-	private String replaceMatch(String requestedFile, String region, GenerateWikiFileTreeTask.FileEntry entry) {
+	private String replaceMatch(String requestedFile, String region, String fileType, GenerateWikiFileTreeTask.FileEntry entry) {
 		Path file = entry.project().file(requestedFile).toPath();
 
 		// TODO: Strip extra region comments
@@ -131,11 +134,22 @@ public class GenerateContentTask extends DefaultTask {
 			int endRegion = fileText.indexOf("// @end " + region);
 
 			fileText = fileText.substring(startRegion + 10 + region.length(), endRegion).stripTrailing() + "\n";
-			fileText = "// ..." + fileText + "// ...\n";
+			int maxLeading = fileText.lines().filter(line->!line.isBlank()).mapToInt(line->{
+				Matcher matcher = Pattern.compile("^(\\s*).*").matcher(line);
+				if(!matcher.matches())
+					return 0;
+				return matcher.group(1).length();
+			}).min().orElse(0);
+			fileText = fileText.lines().map(line -> {
+				if(line.isBlank())
+					return line;
+				return line.substring(maxLeading);
+			}).collect(Collectors.joining("\n"))+"\n";
+
+			fileText = "// ..." + fileText + "// ...";
 		}
 
 		String filePath = getProject().file(".").toPath().relativize(file).toString().replace("\\", "/");
-		String fileType = requestedFile.substring(requestedFile.lastIndexOf(".") + 1);
 
 		return "From [`" +
 				requestedFile.substring(requestedFile.lastIndexOf("/") + 1) +
