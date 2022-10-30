@@ -1,3 +1,7 @@
+plugins {
+	id "org.jetbrains.kotlin.jvm" version "1.7.20"
+}
+
 apply plugin: "org.quiltmc.loom"
 
 archivesBaseName = project.archives_base_name
@@ -5,6 +9,13 @@ version = project.version
 group = project.maven_group
 
 repositories {
+}
+
+sourceSets {
+	kotlin {
+		compileClasspath += sourceSets.main.compileClasspath
+		runtimeClasspath += sourceSets.main.runtimeClasspath
+	}
 }
 
 // All dependency versions are declared in the gradle.properties file
@@ -17,6 +28,9 @@ dependencies {
 
 	// QSL is not yet a complete API. When released for this version, it's highly recommended to use Quilted Fabric API instead.
 	modImplementation "org.quiltmc:qsl:${qsl_version}+${minecraft_version}"
+
+	// Quilt Kotlin Libraries are still a bit unstable
+	modImplementation "org.quiltmc.quilt-kotlin-libraries:quilt-kotlin-libraries:${project.qkl_version}"
 }
 
 processResources {
