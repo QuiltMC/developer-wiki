@@ -6,9 +6,7 @@ The first thing we need to do is register the item so that the game knows to add
 
 In theory, we could do this directly in the registration line but having a separate variable allows us to reference it elsewhere for other purposes.
 
-```tabbed-files
-java:src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Declaration
-kotlin:src/kotlin/kotlin/org/quiltmc/wiki/simple_item/SimpleItemExample.kt@Declaration
+```file:src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Declaration
 ```
 
 Here, the `public static final` ensures that we can access the item elsewhere but not change the contents of the variable itself, making sure that we don't accidentally alter it somewhere else.
