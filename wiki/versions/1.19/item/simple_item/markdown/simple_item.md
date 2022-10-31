@@ -9,7 +9,7 @@ In theory, we could do this directly in the registration line but having a separ
 ```file:src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Declaration
 ```
 
-Here, the `public static final` ensures that we can access the item elsewhere but not change the contents of the variable itself, making sure that we don't accidentally alter it somewhere else.
+Here, the `public static final` ensures that we can access the item elsewhere but not change the contents of the variable itself, making sure that we don't accidentally alter it somewhere else. 
 
 Our new instance of `Item` takes in an instance of `QuiltItemSettings` as an argument. This is where we declare all of the settings for our item. There are a variety of these, but for now we only need `.group()`, which sets which creative tab the item will be found in. You can create your own, but here we use the Miscellaneous tab.
 
