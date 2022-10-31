@@ -31,7 +31,7 @@ abstract class LivingEntityMixin {
     @Inject(method = 'getJumpVelocity', at = @At(value = 'RETURN'), cancellable = true)
     private void applyJumpBoost(CallbackInfoReturnable<Float> cir) {
         EntityAttributeInstance instance = getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST)
-        cir.returnValue *= instance.value as float
+        cir.returnValue = (cir.returnValue * instance.value).toFloat()
     }
     // @end Use-Attribute
 }
