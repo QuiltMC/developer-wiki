@@ -36,12 +36,25 @@
     * `library`: A directory containing directories for different tutorials for the library. This directory *does* have
       a gradle project and can contain template or very basic code. The markdown file for this library should include
       some basic information about the library, who made it, and what minecraft versions use each library
-* `tutorial` (All instances above): A function gradle project that is well documented, both through its markdown file(s)
-  and code.
 
-Each directory with a gradle project should have a `markdown` directory, where markdown files are placed. Any images are
-in `images`. Markdown files with different names than the tutorial are made into sub tutorials of the main tutorial for
-the project.
+#### Tutorial Layout
+
+`tutorial`s contain functional gradle projects that are well documented, both through its markdown file(s) and code. Each functional gradle project for a given tutorial is stored in a subdirectory via an identifier. The identifier denotes a specific attribute about the tutorial and its variation from other subprojects (e.g. written in a specific programming language, using a specific library, etc.).
+
+For example, if a given tutorial had a gradle project for each of the most common JVM programming languages, its structure would look something similar to this:
+
+```
+/tutorial
+    /java
+    /kotlin
+    /scala
+    /groovy
+    /clojure
+```
+
+#### Additional Directories
+
+Each directory with a gradle project, except subprojects within `tutorial`s, should have a `markdown` directory, where markdown files are placed. Any images are in `images`. Markdown files with different names than the `tutorial` are made into sub tutorials of the main tutorial for the project.
 
 ### Markdown
 
