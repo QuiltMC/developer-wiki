@@ -49,7 +49,7 @@ object MyRecipe {
             val count = JsonHelper.getInt(json, "count", 1)
             // Attempts to get the item in "output" with the registry and creates a stack with it
             val output = ItemStack(Registry.ITEM.getOrEmpty(Identifier(outputIdentifier))
-                    .orElseThrow(() => IllegalStateException("Item " + outputIdentifier + " does not exist")), count)
+                    .orElseThrow(() => IllegalStateException(s"Item $outputIdentifier does not exist")), count)
 
             MyRecipe(id, input, output)
         }
