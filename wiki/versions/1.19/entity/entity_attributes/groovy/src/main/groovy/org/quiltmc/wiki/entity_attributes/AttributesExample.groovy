@@ -17,7 +17,7 @@ import org.quiltmc.qsl.item.setting.api.QuiltItemSettings
 class AttributesExample implements ModInitializer {
 
     // @start Attribute-Instance
-    static final EntityAttribute GENERIC_JUMP_BOOST = new ClampedEntityAttribute('attribute.name.generic_jump_boost', 1.0 as double, 0.0 as double, 2.0 as double).setTracked(true)
+    static final EntityAttribute GENERIC_JUMP_BOOST = new ClampedEntityAttribute('attribute.name.generic_jump_boost', 1.0d, 0.0d, 2.0d).setTracked(true)
     // @end Attribute-Instance
 
     // @start Modifier-Instance
@@ -26,7 +26,7 @@ class AttributesExample implements ModInitializer {
     static final EntityAttributeModifier SOME_MODIFIER = new EntityAttributeModifier(
             SOME_MODIFIER_ID,
             'Jump stick modifier',
-            0.5 as double,
+            0.5d,
             EntityAttributeModifier.Operation.ADDITION
     )
     // @end Modifier-Instance
@@ -41,7 +41,7 @@ class AttributesExample implements ModInitializer {
         Registry.ATTRIBUTE[new Identifier(modId, 'generic.jump_boost')] = GENERIC_JUMP_BOOST
         // @end Register-Attribute
         Registry.ITEM[new Identifier(modId, 'jump_stick')] = JUMP_STICK
-        CommandRegistrationCallback.EVENT.add({ CommandDispatcher dispatcher, buildContext, environment ->
+        CommandRegistrationCallback.EVENT << ({ CommandDispatcher dispatcher, buildContext, environment ->
             JumpBoostCommand.register(dispatcher)
         } as CommandRegistrationCallback)
     }
