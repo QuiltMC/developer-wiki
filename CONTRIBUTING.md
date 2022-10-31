@@ -63,6 +63,27 @@ A code block with the following syntax will target a region:
 ```file:path/to/file.ext@Region
 ```
 ~~~
+The wiki will use the extension of the file for its language. If the language the file should be rendered with is different
+than the extension of the file, it should be specified as follows:
+~~~markdown
+```language:path/to/file.ext@Region
+```
+~~~
+Additionally, it is possible to take two samples of code for the same purpose, written in different languages, and display them
+side by side:
+~~~markdown
+```tabbed-files
+java:path/to/java/file.java
+kotlin:path/to/kotlin/file.kt
+```
+~~~
+Regions can be specified with this method as well:
+~~~markdown
+```tabbed-files
+java:path/to/java/file.java@Region
+kotlin:path/to/kotlin/file.kt@Region
+```
+~~~
 
 ## Guide: New Tutorials
 
