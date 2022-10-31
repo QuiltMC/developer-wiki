@@ -15,7 +15,11 @@ The conventional way of specifying inputs and output, is to utilize `Ingredient`
 
 You should also store the recipe identifier for identification and value filling.
 
-```file:src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Starting
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Starting
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/MyRecipe.kt@Starting
+scala:scala/src/main/scala/org/quiltmc/wiki/recipes/MyRecipe.scala@Starting
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/MyRecipe.groovy@Starting
 ```
 
 ### Matching
@@ -23,7 +27,11 @@ You should also store the recipe identifier for identification and value filling
 The method `matches` returns whether this current recipe should be matched when retrieved via the `RecipeManager` -
 Match the inventory contents against the inputs here.
 
-```file:src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Match
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Match
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/MyRecipe.kt@Match
+scala:scala/src/main/scala/org/quiltmc/wiki/recipes/MyRecipe.scala@Match
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/MyRecipe.groovy@Match
 ```
 
 ### Outputs
@@ -31,7 +39,11 @@ Match the inventory contents against the inputs here.
 Outputting has two parts, `getOutput` and `craft`, the first being a view of the output and the latter being a copy of
 the output that may be modified.
 
-```file:src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Output
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Output
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/MyRecipe.kt@Output
+scala:scala/src/main/scala/org/quiltmc/wiki/recipes/MyRecipe.scala@Output
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/MyRecipe.groovy@Output
 ```
 
 ### Serializer
@@ -50,7 +62,11 @@ In `toJson` you must convert the recipe object into a valid equivalent JSON obje
 serialized correctly via dumping the recipes with the `quilt.recipe.dump` property (`-Dquilt.recipe.dump=true` in the VM options)
 and checking the outputted recipes.
 
-```file:src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer-JSON
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer-JSON
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/MyRecipe.kt@Serializer-JSON
+scala:scala/src/main/scala/org/quiltmc/wiki/recipes/MyRecipe.scala@Serializer-JSON
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/MyRecipe.groovy@Serializer-JSON
 ```
 
 #### Packet
@@ -60,26 +76,42 @@ failing to implement the packet reading and writing might result in desynchroniz
 
 It is imperative that you read values in the same order that you wrote them.
 
-```file:src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer-Packet
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer-Packet
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/MyRecipe.kt@Serializer-Packet
+scala:scala/src/main/scala/org/quiltmc/wiki/recipes/MyRecipe.scala@Serializer-Packet
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/MyRecipe.groovy@Serializer-Packet
 ```
 
 ### Recipe Type
 
 Creating the recipe type is as simple as instantiating `RecipeType`, unfortunately it is an interface, so you have to subclass it.
 
-```file:src/main/java/org/quiltmc/wiki/recipes/Recipes.java@RecipeType-Instance
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@RecipeType-Instance
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt@RecipeType-Instance
+scala:scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala@RecipeType-Instance
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@RecipeType-Instance
 ```
 
 ### Registration
 
 You must register your serializer and your type, so Minecraft knows about them.
 
-```file:src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Registration
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Registration
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt@Registration
+scala:scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala@Registration
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@Registration
 ```
 
 Additionally, you also have to specify them in your recipe class.
 
-```file:src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer/Type
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer/Type
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/MyRecipe.kt@Serializer/Type
+scala:scala/src/main/scala/org/quiltmc/wiki/recipes/MyRecipe.scala@Serializer/Type
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/MyRecipe.groovy@Serializer/Type
 ```
 
 ### Using your recipe
@@ -97,7 +129,7 @@ are dependent on the serializer.
 
 For instance, a recipe of ours that inputs an iron ingot and outputs two apples would be:
 
-```file:src/main/resources/data/recipes/recipes/fun.json
+```json:java/src/main/resources/data/recipes/recipes/fun.json
 ```
 
 #### Retrieving your recipes in code

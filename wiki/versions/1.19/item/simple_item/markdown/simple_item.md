@@ -6,16 +6,24 @@ The first thing we need to do is register the item so that the game knows to add
 
 In theory, we could do this directly in the registration line but having a separate variable allows us to reference it elsewhere for other purposes.
 
-```file:src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Declaration
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Declaration
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/simple_item/SimpleItemExample.kt@Declaration
+scala:scala/src/main/scala/org/quiltmc/wiki/simple_item/SimpleItemExample.scala@Declaration
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/simple_item/SimpleItemExample.groovy@Declaration
 ```
 
-Here, the `public static final` ensures that we can access the item elsewhere but not change the contents of the variable itself, making sure that we don't accidentally alter it somewhere else. 
+Here, the `public static final` ensures that we can access the item elsewhere but not change the contents of the variable itself, making sure that we don't accidentally alter it somewhere else.
 
 Our new instance of `Item` takes in an instance of `QuiltItemSettings` as an argument. This is where we declare all of the settings for our item. There are a variety of these, but for now we only need `.group()`, which sets which creative tab the item will be found in. You can create your own, but here we use the Miscellaneous tab.
 
 Now that we've declared the item, we need to tell the game registry to put it into the game. We do so by putting this into the mod's `onInitialize` method:
 
-```file:src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Registration
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Registration
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/simple_item/SimpleItemExample.kt@Registration
+scala:scala/src/main/scala/org/quiltmc/wiki/simple_item/SimpleItemExample.scala@Registration
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/simple_item/SimpleItemExample.groovy@Registration
 ```
 
 `Registry.register()` takes three parameters:
@@ -29,7 +37,7 @@ Having done all of this, if we run the game we can see that our item appears in 
 ## Textures
 First we need to declare the model for the item. This tells the game how to render the item.
 
-```file:src/main/resources/assets/simple_item/models/item/example_item.json
+```json:java/src/main/resources/assets/simple_item/models/item/example_item.json
 ```
 
 For most items, all you need to do here is replace `simple_item` with your mod ID and `example_item` with the item name you set earlier. This file should go to your assets folder under `/models/item`.
@@ -40,7 +48,7 @@ The texture file, as shown in the model, should match the path specified in the 
 
 Finally, we need to add a translation. Put this in `lang/en_us.json` in your assets folder, replacing the same values as before:
 
-```file:src/main/resources/assets/simple_item/lang/en_us.json
+```json:java/src/main/resources/assets/simple_item/lang/en_us.json
 ```
 
 And that's it! Your item should be fully working.
