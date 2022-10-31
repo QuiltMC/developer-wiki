@@ -2,6 +2,7 @@ package org.quiltmc.wiki.recipes
 
 import com.google.gson.JsonObject
 import groovy.transform.CompileStatic
+import groovy.transform.TupleConstructor
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
@@ -15,22 +16,13 @@ import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import org.quiltmc.qsl.recipe.api.serializer.QuiltRecipeSerializer
 
+@CompileStatic
+@TupleConstructor
 class MyRecipe implements Recipe<Inventory> {
     // @start Starting
-    private final Identifier id
-    private final Ingredient input
-    private final ItemStack output
-
-    MyRecipe(id, input, output) {
-        this.id = id
-        this.input = input
-        this.output = output
-    }
-
-    @Override
-    Identifier getId() {
-        this.id
-    }
+    final Identifier id
+    final Ingredient input
+    final ItemStack output
     // @end Starting
 
     // @start Match
@@ -41,11 +33,6 @@ class MyRecipe implements Recipe<Inventory> {
     // @end Match
 
     // @start Output
-    @Override
-    ItemStack getOutput() {
-        this.output
-    }
-
     @Override
     ItemStack craft(Inventory inventory) {
         this.output.copy()
@@ -79,7 +66,7 @@ class MyRecipe implements Recipe<Inventory> {
             // Helper method to read Ingredient from JsonElement
             def input = Ingredient.fromJson(inputObject)
             // Gets the string in the "output" key
-            def outputIdentifier = json.get('output').getAsString()
+            def outputIdentifier = json.get('output').asString
             // Gets the integer in the "count" key, fallbacking to 1 if it does not exist
             def count = JsonHelper.getInt(json, 'count', 1)
             // Attempts to get the item in "output" with the registry and creates a stack with it
@@ -97,11 +84,11 @@ class MyRecipe implements Recipe<Inventory> {
             // Puts the serialized ingredient json element into the "input" key
             obj.add('input', recipe.input.toJson())
             // Checks if the output count is higher than the default, and if it is, adds into the "count" key
-            if (recipe.output.getCount() > 1) {
-                obj.addProperty('count', recipe.output.getCount())
+            if (recipe.output.count > 1) {
+                obj.addProperty('count', recipe.output.count)
             }
             // Gets the output identifier from the registry and adds it into the "output" key
-            obj.addProperty('output', Registry.ITEM.getId(recipe.output.getItem()).toString())
+            obj.addProperty('output', Registry.ITEM.getId(recipe.output.item).toString())
 
             obj
         }

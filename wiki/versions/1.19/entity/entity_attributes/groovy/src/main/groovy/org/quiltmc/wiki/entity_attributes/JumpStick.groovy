@@ -2,11 +2,13 @@ package org.quiltmc.wiki.entity_attributes
 
 import com.google.common.collect.ImmutableMultimap
 import com.google.common.collect.Multimap
+import groovy.transform.CompileStatic
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.item.Item
 
+@CompileStatic
 class JumpStick extends Item {
 
     JumpStick(Settings settings) {

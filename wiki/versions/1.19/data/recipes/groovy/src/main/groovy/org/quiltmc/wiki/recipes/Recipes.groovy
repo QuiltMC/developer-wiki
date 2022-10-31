@@ -1,5 +1,6 @@
 package org.quiltmc.wiki.recipes
 
+import groovy.transform.CompileStatic
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.recipe.RecipeSerializer
@@ -14,6 +15,7 @@ import org.quiltmc.qsl.base.api.entrypoint.ModInitializer
 import org.quiltmc.qsl.recipe.api.RecipeManagerHelper
 import org.quiltmc.qsl.recipe.api.builder.VanillaRecipeBuilders
 
+@CompileStatic
 class Recipes implements ModInitializer {
     // @start RecipeType-Instance
     static final RecipeType MY_RECIPE = new RecipeType() {} // Subclasses it anonymously
@@ -58,7 +60,7 @@ class Recipes implements ModInitializer {
         RecipeManagerHelper.modifyRecipes {
             // Modifies the name of the output of the stone smelting recipe
             it.getRecipe(new Identifier('minecraft', 'stone'), RecipeType.SMELTING)
-            .getOutput().setCustomName(Text.literal('Modified!') << Formatting.RED)
+            .output.setCustomName(Text.literal('Modified!') << Formatting.RED)
             // Replaces the enchanting table recipe with different ingredients
             it.replace(VanillaRecipeBuilders.shapedRecipe(' B ', 'D#D', '###')
             .ingredient('B' as char, Items.WRITABLE_BOOK)
@@ -73,7 +75,7 @@ class Recipes implements ModInitializer {
         RecipeManagerHelper.removeRecipes {
             it.remove(new Identifier('minecraft', 'acacia_door'))
             it.removeIf(RecipeType.BLASTING) { rec ->
-                rec.getOutput().isOf(Items.GOLD_INGOT)
+                rec.output.isOf(Items.GOLD_INGOT)
             }
         }
         // @end Removal

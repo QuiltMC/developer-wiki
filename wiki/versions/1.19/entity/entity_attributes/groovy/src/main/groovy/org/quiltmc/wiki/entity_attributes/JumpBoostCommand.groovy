@@ -2,15 +2,17 @@ package org.quiltmc.wiki.entity_attributes
 
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.context.CommandContext
+import groovy.transform.CompileStatic
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 
+@CompileStatic
 class JumpBoostCommand {
 
     static int add(CommandContext context) {
         // @start Apply-Direct
-        context.getPlayer().getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST)
+        context.player.getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST)
         .addTemporaryModifier(AttributesExample.SOME_MODIFIER)
         // @end Apply-Direct
         1
@@ -18,7 +20,7 @@ class JumpBoostCommand {
 
     static int remove(CommandContext context) {
         // @start Remove-Direct
-        context.getPlayer().getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST)
+        context.player.getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST)
                 .removeModifier(AttributesExample.SOME_MODIFIER_ID)
         // @end Remove-Direct
         1
@@ -33,23 +35,23 @@ class JumpBoostCommand {
                 EquipmentSlot.MAINHAND
         )
         // @end Apply-NBT
-        context.getPlayer().giveItemStack(stack)
+        context.player.giveItemStack(stack)
         1
     }
 
     static void register(CommandDispatcher dispatcher) {
-        dispatcher.register("jump_boost") {
-            then("add") {
+        dispatcher.register('jump_boost') {
+            then('add') {
                 executes {
                     add(it)
                 }
             }
-            then("remove") {
+            then('remove') {
                 executes {
                     remove(it)
                 }
             }
-            then("stick") {
+            then('stick') {
                 executes {
                     stick(it)
                 }
