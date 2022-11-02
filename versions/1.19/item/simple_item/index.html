@@ -69,6 +69,27 @@
             }
         }
     </style>
+    <script>
+        function switchTab(evt, tabName) {
+          let contents = document.getElementsByClassName("tab-contents");
+          for (let i = 0; i < contents.length; i++) {
+            if (contents[i].parentElement.classList.contains("has-lang-"+tabName)) {
+              contents[i].style.display = "none";
+            }
+          }
+          let tabs = document.getElementsByClassName("tab");
+          for (let i = 0; i < tabs.length; i++) {
+            if (tabs[i].parentElement.classList.contains("has-lang-"+tabName)) {
+              tabs[i].className = tabs[i].className.replace(" is-active", "");
+            }
+          }
+          let bodies = document.getElementsByClassName("lang-selected-"+tabName);
+          for (let i = 0; i < bodies.length; i++) {
+            bodies[i].style.display = "block";
+          }
+          evt.currentTarget.className += " is-active";
+        }
+    </script>
 </head>
 
 <body>
@@ -205,18 +226,16 @@
 <p>In theory, we could do this directly in the registration line but having a separate variable allows us to reference it elsewhere for other purposes.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java" target="_blank"><code>SimpleItemExample.java</code></a>:</p>
 <pre><code class="language-java">// ...
-	public static final Item EXAMPLE_ITEM = new Item(new QuiltItemSettings().group(ItemGroup.MISC));
+public static final Item EXAMPLE_ITEM = new Item(new QuiltItemSettings().group(ItemGroup.MISC));
 // ...
-
 </code></pre>
 <p>Here, the <code>public static final</code> ensures that we can access the item elsewhere but not change the contents of the variable itself, making sure that we don't accidentally alter it somewhere else.</p>
 <p>Our new instance of <code>Item</code> takes in an instance of <code>QuiltItemSettings</code> as an argument. This is where we declare all of the settings for our item. There are a variety of these, but for now we only need <code>.group()</code>, which sets which creative tab the item will be found in. You can create your own, but here we use the Miscellaneous tab.</p>
 <p>Now that we've declared the item, we need to tell the game registry to put it into the game. We do so by putting this into the mod's <code>onInitialize</code> method:</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java" target="_blank"><code>SimpleItemExample.java</code></a>:</p>
 <pre><code class="language-java">// ...
-		Registry.register(Registry.ITEM, new Identifier(&quot;simple_item&quot;, &quot;example_item&quot;), EXAMPLE_ITEM);
+Registry.register(Registry.ITEM, new Identifier(&quot;simple_item&quot;, &quot;example_item&quot;), EXAMPLE_ITEM);
 // ...
-
 </code></pre>
 <p><code>Registry.register()</code> takes three parameters:</p>
 <ul>

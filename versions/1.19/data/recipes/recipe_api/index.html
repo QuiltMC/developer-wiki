@@ -69,6 +69,27 @@
             }
         }
     </style>
+    <script>
+        function switchTab(evt, tabName) {
+          let contents = document.getElementsByClassName("tab-contents");
+          for (let i = 0; i < contents.length; i++) {
+            if (contents[i].parentElement.classList.contains("has-lang-"+tabName)) {
+              contents[i].style.display = "none";
+            }
+          }
+          let tabs = document.getElementsByClassName("tab");
+          for (let i = 0; i < tabs.length; i++) {
+            if (tabs[i].parentElement.classList.contains("has-lang-"+tabName)) {
+              tabs[i].className = tabs[i].className.replace(" is-active", "");
+            }
+          }
+          let bodies = document.getElementsByClassName("lang-selected-"+tabName);
+          for (let i = 0; i < bodies.length; i++) {
+            bodies[i].style.display = "block";
+          }
+          evt.currentTarget.className += " is-active";
+        }
+    </script>
 </head>
 
 <body>
@@ -212,60 +233,56 @@
 <p>Static recipes are a kind of recipe that is always kept present during the whole game lifecycle. They're only applied after data pack reloads, that is, when starting a world/server or after using the <code>/reload</code> command.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
 <pre><code class="language-java">// ...
-		RecipeManagerHelper.registerStaticRecipe(
-				VanillaRecipeBuilders.shapedRecipe(&quot;IAI&quot;) // Shaped recipe with the IAI pattern
-						.output(new ItemStack(Items.CHAINMAIL_CHESTPLATE)) // That outputs a chestplate
-						.ingredient('I', Items.IRON_INGOT) // 'I' being an ingot
-						.ingredient('A', Items.APPLE) // and 'A' an apple
-						.build(new Identifier(&quot;example&quot;, &quot;apple_iron_ingot_fun&quot;), &quot;&quot;)
-		);
+RecipeManagerHelper.registerStaticRecipe(
+		VanillaRecipeBuilders.shapedRecipe(&quot;IAI&quot;) // Shaped recipe with the IAI pattern
+				.output(new ItemStack(Items.CHAINMAIL_CHESTPLATE)) // That outputs a chestplate
+				.ingredient('I', Items.IRON_INGOT) // 'I' being an ingot
+				.ingredient('A', Items.APPLE) // and 'A' an apple
+				.build(new Identifier(&quot;example&quot;, &quot;apple_iron_ingot_fun&quot;), &quot;&quot;)
+);
 // ...
-
 </code></pre>
 <h3><a href="#addition" id="addition">Addition</a></h3>
 <p>Mods might want to add recipes that have runtime components - Something that cannot be known at build time - for example, recipes that depend on other mods. Dynamic recipe providers allow for that.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
 <pre><code class="language-java">// ...
-		RecipeManagerHelper.addRecipes(handler -&gt; handler.register(new Identifier(&quot;example&quot;, &quot;random&quot;), id -&gt;
-				VanillaRecipeBuilders.shapelessRecipe(new ItemStack(
-						// We can't know which item it's going to output in advance, therefore
-						// it's impossible to create a JSON for this recipe.
-						Registry.ITEM.getRandom(RandomGenerator.createLegacy()).orElseThrow().value()))
-					.ingredient(Items.ACACIA_BUTTON)
-					.build(id, &quot;&quot;)));
+RecipeManagerHelper.addRecipes(handler -&gt; handler.register(new Identifier(&quot;example&quot;, &quot;random&quot;), id -&gt;
+		VanillaRecipeBuilders.shapelessRecipe(new ItemStack(
+				// We can't know which item it's going to output in advance, therefore
+				// it's impossible to create a JSON for this recipe.
+				Registry.ITEM.getRandom(RandomGenerator.createLegacy()).orElseThrow().value()))
+			.ingredient(Items.ACACIA_BUTTON)
+			.build(id, &quot;&quot;)));
 // ...
-
 </code></pre>
 <h3><a href="#modification" id="modification">Modification</a></h3>
 <p>Mods might want to modify values or replace recipes entirely while they're being built, this event allows for that.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
 <pre><code class="language-java">// ...
-		RecipeManagerHelper.modifyRecipes(handler -&gt; {
-			// Modifies the name of the output of the stone smelting recipe
-			handler.getRecipe(new Identifier(&quot;minecraft&quot;, &quot;stone&quot;), RecipeType.SMELTING)
-					.getOutput().setCustomName(Text.literal(&quot;Modified!&quot;).formatted(Formatting.RED));
-			// Replaces the enchanting table recipe with different ingredients
-			handler.replace(VanillaRecipeBuilders.shapedRecipe(&quot; B &quot;, &quot;D#D&quot;, &quot;###&quot;)
-					.ingredient('B', Items.WRITABLE_BOOK)
-					.ingredient('D', Items.GOLD_INGOT)
-					.ingredient('#', Items.POLISHED_BASALT)
-					.output(new ItemStack(Items.ENCHANTING_TABLE))
-					.build(new Identifier(&quot;minecraft&quot;, &quot;enchanting_table&quot;), &quot;&quot;)
-			);
-		});
+RecipeManagerHelper.modifyRecipes(handler -&gt; {
+	// Modifies the name of the output of the stone smelting recipe
+	handler.getRecipe(new Identifier(&quot;minecraft&quot;, &quot;stone&quot;), RecipeType.SMELTING)
+			.getOutput().setCustomName(Text.literal(&quot;Modified!&quot;).formatted(Formatting.RED));
+	// Replaces the enchanting table recipe with different ingredients
+	handler.replace(VanillaRecipeBuilders.shapedRecipe(&quot; B &quot;, &quot;D#D&quot;, &quot;###&quot;)
+			.ingredient('B', Items.WRITABLE_BOOK)
+			.ingredient('D', Items.GOLD_INGOT)
+			.ingredient('#', Items.POLISHED_BASALT)
+			.output(new ItemStack(Items.ENCHANTING_TABLE))
+			.build(new Identifier(&quot;minecraft&quot;, &quot;enchanting_table&quot;), &quot;&quot;)
+	);
+});
 // ...
-
 </code></pre>
 <h3><a href="#removal" id="removal">Removal</a></h3>
 <p>Mods might want to remove a recipe completely from the game, this event allows for that. Be aware that removing recipes might not be entirely compatible with what other mods expect.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
 <pre><code class="language-java">// ...
-		RecipeManagerHelper.removeRecipes(handler -&gt; {
-			handler.remove(new Identifier(&quot;minecraft&quot;, &quot;acacia_door&quot;));
-			handler.removeIf(RecipeType.BLASTING, rec -&gt; rec.getOutput().isOf(Items.GOLD_INGOT));
-		});
+RecipeManagerHelper.removeRecipes(handler -&gt; {
+	handler.remove(new Identifier(&quot;minecraft&quot;, &quot;acacia_door&quot;));
+	handler.removeIf(RecipeType.BLASTING, rec -&gt; rec.getOutput().isOf(Items.GOLD_INGOT));
+});
 // ...
-
 </code></pre>
     </div>
 </div>

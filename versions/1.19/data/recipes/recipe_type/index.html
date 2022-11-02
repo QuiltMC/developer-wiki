@@ -69,6 +69,27 @@
             }
         }
     </style>
+    <script>
+        function switchTab(evt, tabName) {
+          let contents = document.getElementsByClassName("tab-contents");
+          for (let i = 0; i < contents.length; i++) {
+            if (contents[i].parentElement.classList.contains("has-lang-"+tabName)) {
+              contents[i].style.display = "none";
+            }
+          }
+          let tabs = document.getElementsByClassName("tab");
+          for (let i = 0; i < tabs.length; i++) {
+            if (tabs[i].parentElement.classList.contains("has-lang-"+tabName)) {
+              tabs[i].className = tabs[i].className.replace(" is-active", "");
+            }
+          }
+          let bodies = document.getElementsByClassName("lang-selected-"+tabName);
+          for (let i = 0; i < bodies.length; i++) {
+            bodies[i].style.display = "block";
+          }
+          evt.currentTarget.className += " is-active";
+        }
+    </script>
 </head>
 
 <body>
@@ -208,49 +229,46 @@
 <p>You should also store the recipe identifier for identification and value filling.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java" target="_blank"><code>MyRecipe.java</code></a>:</p>
 <pre><code class="language-java">// ...
-	private final Identifier id;
-	private final Ingredient input;
-	private final ItemStack output;
+private final Identifier id;
+private final Ingredient input;
+private final ItemStack output;
 
-	public MyRecipe(Identifier id, Ingredient input, ItemStack output) {
-		this.id = id;
-		this.input = input;
-		this.output = output;
-	}
+public MyRecipe(Identifier id, Ingredient input, ItemStack output) {
+	this.id = id;
+	this.input = input;
+	this.output = output;
+}
 
-	@Override
-	public Identifier getId() {
-		return this.id;
-	}
+@Override
+public Identifier getId() {
+	return this.id;
+}
 // ...
-
 </code></pre>
 <h3><a href="#matching" id="matching">Matching</a></h3>
 <p>The method <code>matches</code> returns whether this current recipe should be matched when retrieved via the <code>RecipeManager</code> - Match the inventory contents against the inputs here.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java" target="_blank"><code>MyRecipe.java</code></a>:</p>
 <pre><code class="language-java">// ...
-	@Override
-	public boolean matches(Inventory inventory, World world) {
-		return this.input.test(inventory.getStack(0));
-	}
+@Override
+public boolean matches(Inventory inventory, World world) {
+	return this.input.test(inventory.getStack(0));
+}
 // ...
-
 </code></pre>
 <h3><a href="#outputs" id="outputs">Outputs</a></h3>
 <p>Outputting has two parts, <code>getOutput</code> and <code>craft</code>, the first being a view of the output and the latter being a copy of the output that may be modified.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java" target="_blank"><code>MyRecipe.java</code></a>:</p>
 <pre><code class="language-java">// ...
-	@Override
-	public ItemStack getOutput() {
-		return this.output;
-	}
+@Override
+public ItemStack getOutput() {
+	return this.output;
+}
 
-	@Override
-	public ItemStack craft(Inventory inventory) {
-		return this.output.copy();
-	}
+@Override
+public ItemStack craft(Inventory inventory) {
+	return this.output.copy();
+}
 // ...
-
 </code></pre>
 <h3><a href="#serializer" id="serializer">Serializer</a></h3>
 <p>The serializer of a recipe type specifies the serialization and deserialization of recipes of that type into JSON and packet representation.</p>
@@ -260,92 +278,87 @@
 <p>In <code>toJson</code> you must convert the recipe object into a valid equivalent JSON object - You can check if it's being serialized correctly via dumping the recipes with the <code>quilt.recipe.dump</code> property (<code>-Dquilt.recipe.dump=true</code> in the VM options) and checking the outputted recipes.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java" target="_blank"><code>MyRecipe.java</code></a>:</p>
 <pre><code class="language-java">// ...
-		@Override
-		public MyRecipe read(Identifier id, JsonObject json) {
-			// Gets the object specified by the &quot;input&quot; key
-			var inputObject = json.getAsJsonObject(&quot;input&quot;);
-			// Helper method to read Ingredient from JsonElement
-			var input = Ingredient.fromJson(inputObject);
-			// Gets the string in the &quot;output&quot; key
-			var outputIdentifier = json.get(&quot;output&quot;).getAsString();
-			// Gets the integer in the &quot;count&quot; key, fallbacking to 1 if it does not exist
-			var count = JsonHelper.getInt(json, &quot;count&quot;, 1);
-			// Attempts to get the item in &quot;output&quot; with the registry and creates a stack with it
-			var output = new ItemStack(Registry.ITEM.getOrEmpty(new Identifier(outputIdentifier))
-					.orElseThrow(() -&gt; new IllegalStateException(&quot;Item &quot; + outputIdentifier + &quot; does not exist&quot;)), count);
+@Override
+public MyRecipe read(Identifier id, JsonObject json) {
+	// Gets the object specified by the &quot;input&quot; key
+	var inputObject = json.getAsJsonObject(&quot;input&quot;);
+	// Helper method to read Ingredient from JsonElement
+	var input = Ingredient.fromJson(inputObject);
+	// Gets the string in the &quot;output&quot; key
+	var outputIdentifier = json.get(&quot;output&quot;).getAsString();
+	// Gets the integer in the &quot;count&quot; key, fallbacking to 1 if it does not exist
+	var count = JsonHelper.getInt(json, &quot;count&quot;, 1);
+	// Attempts to get the item in &quot;output&quot; with the registry and creates a stack with it
+	var output = new ItemStack(Registry.ITEM.getOrEmpty(new Identifier(outputIdentifier))
+			.orElseThrow(() -&gt; new IllegalStateException(&quot;Item &quot; + outputIdentifier + &quot; does not exist&quot;)), count);
 
-			return new MyRecipe(id, input, output);
-		}
+	return new MyRecipe(id, input, output);
+}
 
-		@Override
-		public JsonObject toJson(MyRecipe recipe) {
-			var obj = new JsonObject();
-			// Puts the serialized ingredient json element into the &quot;input&quot; key
-			obj.add(&quot;input&quot;, recipe.input.toJson());
-			// Checks if the output count is higher than the default, and if it is, adds into the &quot;count&quot; key
-			if (recipe.output.getCount() &gt; 1) {
-				obj.addProperty(&quot;count&quot;, recipe.output.getCount());
-			}
-			// Gets the output identifier from the registry and adds it into the &quot;output&quot; key
-			obj.addProperty(&quot;output&quot;, Registry.ITEM.getId(recipe.output.getItem()).toString());
+@Override
+public JsonObject toJson(MyRecipe recipe) {
+	var obj = new JsonObject();
+	// Puts the serialized ingredient json element into the &quot;input&quot; key
+	obj.add(&quot;input&quot;, recipe.input.toJson());
+	// Checks if the output count is higher than the default, and if it is, adds into the &quot;count&quot; key
+	if (recipe.output.getCount() &gt; 1) {
+		obj.addProperty(&quot;count&quot;, recipe.output.getCount());
+	}
+	// Gets the output identifier from the registry and adds it into the &quot;output&quot; key
+	obj.addProperty(&quot;output&quot;, Registry.ITEM.getId(recipe.output.getItem()).toString());
 
-			return obj;
-		}
+	return obj;
+}
 // ...
-
 </code></pre>
 <h4><a href="#packet" id="packet">Packet</a></h4>
 <p>You must create and read recipe packets, so the server is able to send the recipes to the clients, and be converted correctly, failing to implement the packet reading and writing might result in desynchronizations.</p>
 <p>It is imperative that you read values in the same order that you wrote them.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java" target="_blank"><code>MyRecipe.java</code></a>:</p>
 <pre><code class="language-java">// ...
-		@Override
-		public MyRecipe read(Identifier id, PacketByteBuf buf) {
-			var input = Ingredient.fromPacket(buf);
-			var output = buf.readItemStack();
+@Override
+public MyRecipe read(Identifier id, PacketByteBuf buf) {
+	var input = Ingredient.fromPacket(buf);
+	var output = buf.readItemStack();
 
-			return new MyRecipe(id, input, output);
-		}
+	return new MyRecipe(id, input, output);
+}
 
-		@Override
-		public void write(PacketByteBuf buf, MyRecipe recipe) {
-			recipe.input.write(buf);
-			buf.writeItemStack(recipe.output);
-		}
+@Override
+public void write(PacketByteBuf buf, MyRecipe recipe) {
+	recipe.input.write(buf);
+	buf.writeItemStack(recipe.output);
+}
 // ...
-
 </code></pre>
 <h3><a href="#recipe-type" id="recipe-type">Recipe Type</a></h3>
 <p>Creating the recipe type is as simple as instantiating <code>RecipeType</code>, unfortunately it is an interface, so you have to subclass it.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
 <pre><code class="language-java">// ...
-	public static final RecipeType&lt;MyRecipe&gt; MY_RECIPE = new RecipeType&lt;&gt;() {}; // Subclasses it anonymously
+public static final RecipeType&lt;MyRecipe&gt; MY_RECIPE = new RecipeType&lt;&gt;() {}; // Subclasses it anonymously
 // ...
-
 </code></pre>
 <h3><a href="#registration" id="registration">Registration</a></h3>
 <p>You must register your serializer and your type, so Minecraft knows about them.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
 <pre><code class="language-java">// ...
-		Registry.register(Registry.RECIPE_TYPE, new Identifier(&quot;example&quot;, &quot;my_recipe&quot;), MY_RECIPE);
-		Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(&quot;example&quot;, &quot;my_recipe&quot;), MY_RECIPE_SERIALIZER);
+Registry.register(Registry.RECIPE_TYPE, new Identifier(&quot;example&quot;, &quot;my_recipe&quot;), MY_RECIPE);
+Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(&quot;example&quot;, &quot;my_recipe&quot;), MY_RECIPE_SERIALIZER);
 // ...
-
 </code></pre>
 <p>Additionally, you also have to specify them in your recipe class.</p>
 <p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java" target="_blank"><code>MyRecipe.java</code></a>:</p>
 <pre><code class="language-java">// ...
-	@Override
-	public RecipeSerializer&lt;?&gt; getSerializer() {
-		return Recipes.MY_RECIPE_SERIALIZER;
-	}
+@Override
+public RecipeSerializer&lt;?&gt; getSerializer() {
+	return Recipes.MY_RECIPE_SERIALIZER;
+}
 
-	@Override
-	public RecipeType&lt;?&gt; getType() {
-		return Recipes.MY_RECIPE;
-	}
+@Override
+public RecipeType&lt;?&gt; getType() {
+	return Recipes.MY_RECIPE;
+}
 // ...
-
 </code></pre>
 <h3><a href="#using-your-recipe" id="using-your-recipe">Using your recipe</a></h3>
 <h4><a href="#creating-recipe-json-files" id="creating-recipe-json-files">Creating recipe JSON files</a></h4>

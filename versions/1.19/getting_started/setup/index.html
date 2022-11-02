@@ -69,6 +69,27 @@
             }
         }
     </style>
+    <script>
+        function switchTab(evt, tabName) {
+          let contents = document.getElementsByClassName("tab-contents");
+          for (let i = 0; i < contents.length; i++) {
+            if (contents[i].parentElement.classList.contains("has-lang-"+tabName)) {
+              contents[i].style.display = "none";
+            }
+          }
+          let tabs = document.getElementsByClassName("tab");
+          for (let i = 0; i < tabs.length; i++) {
+            if (tabs[i].parentElement.classList.contains("has-lang-"+tabName)) {
+              tabs[i].className = tabs[i].className.replace(" is-active", "");
+            }
+          }
+          let bodies = document.getElementsByClassName("lang-selected-"+tabName);
+          for (let i = 0; i < bodies.length; i++) {
+            bodies[i].style.display = "block";
+          }
+          evt.currentTarget.className += " is-active";
+        }
+    </script>
 </head>
 
 <body>
