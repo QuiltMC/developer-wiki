@@ -133,7 +133,7 @@ It's as simple as getting the attribute instance and calling `addTemporaryModifi
 
 ```tabbed-files
 java:java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java@Apply-Direct
-kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.kt@Apply-Direct
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt@Apply-Direct
 scala:scala/src/main/scala/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.scala@Apply-Direct
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.groovy@Apply-Direct
 ```
@@ -142,7 +142,7 @@ This is also the most appropriate case where you would remove the modifier at so
 
 ```tabbed-files
 java:java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java@Remove-Direct
-kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.kt@Remove-Direct
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt@Remove-Direct
 scala:scala/src/main/scala/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.scala@Remove-Direct
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.groovy@Remove-Direct
 ```
@@ -157,7 +157,7 @@ You can use the `ItemStack#addAttributeModifier` method to apply a modifier via 
 
 ```tabbed-files
 java:java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java@Apply-NBT
-kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.kt@Apply-NBT
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt@Apply-NBT
 scala:scala/src/main/scala/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.scala@Apply-NBT
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.groovy@Apply-NBT
 ```

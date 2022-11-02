@@ -17,9 +17,10 @@ import net.minecraft.world.level.Level
 import org.quiltmc.qsl.recipe.api.serializer.QuiltRecipeSerializer
 
 @CompileStatic
+// @start Starting
 @TupleConstructor
 class MyRecipe implements Recipe<Container> {
-    // @start Starting
+
     final ResourceLocation id
     final Ingredient input
     final ItemStack output
