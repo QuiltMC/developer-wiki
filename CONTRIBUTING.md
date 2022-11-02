@@ -69,11 +69,33 @@ We have a custom feature that can directly place the contents of files into wiki
 ```file:path/to/file.ext
 ```
 ~~~
-The wiki will automatically place the file contents into the code block. However, files are often too large, and so the wiki also supports adding regions from the code.
-Regions are started with `//@start Region` and close with `//@end Region`, replacing `//` with the one line comment for the language file. Any code inside that is the placed into the code block. Overlapping regions strip the region comments.
-A code block with the following syntax will target a region:
+The path specified should be relative to the project the markdown file is contained in. The wiki will automatically place the file contents into the code 
+block. However, files are often too large, and so the wiki also supports adding regions from the code. Regions are started with `//@start Region` and close 
+with `//@end Region`, replacing `//` with the one line comment for the language file. Any code inside that is the placed into the code block. Overlapping 
+regions strip the region comments. A code block with the following syntax will target a region:
 ~~~markdown
 ```file:path/to/file.ext@Region
+```
+~~~
+The wiki will use the extension of the file for its language. If the language the file should be rendered with is different
+than the extension of the file, it should be specified as follows:
+~~~markdown
+```language:path/to/file.ext@Region
+```
+~~~
+Additionally, it is possible to take two samples of code for the same purpose, written in different languages, and display them
+side by side:
+~~~markdown
+```tabbed-files
+java:path/to/java/file.java
+kotlin:path/to/kotlin/file.kt
+```
+~~~
+Regions can be specified with this method as well:
+~~~markdown
+```tabbed-files
+java:path/to/java/file.java@Region
+kotlin:path/to/kotlin/file.kt@Region
 ```
 ~~~
 
