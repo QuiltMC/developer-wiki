@@ -171,7 +171,8 @@ public class GenerateContentTask extends DefaultTask {
 	private static final Map<String, String> CAPITALIZATION_LOOKUP = Map.of(
 			"java", "Java",
 			"kotlin", "Kotlin",
-			"json", "JSON"
+			"json", "JSON",
+			"groovy", "Groovy (Mojmaps)"
 	);
 
 	private String capitalize(String string) {
