@@ -1,15 +1,15 @@
 package org.quiltmc.wiki.recipes
 
 import groovy.transform.CompileStatic
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
-import net.minecraft.recipe.RecipeSerializer
-import net.minecraft.recipe.RecipeType
-import net.minecraft.text.Text
-import net.minecraft.util.Formatting
-import net.minecraft.util.Identifier
-import net.minecraft.util.random.RandomGenerator
-import net.minecraft.util.registry.Registry
+import net.minecraft.ChatFormatting
+import net.minecraft.core.Registry
+import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.RandomSource
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.crafting.RecipeSerializer
+import net.minecraft.world.item.crafting.RecipeType
 import org.quiltmc.loader.api.ModContainer
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer
 import org.quiltmc.qsl.recipe.api.RecipeManagerHelper
@@ -29,8 +29,8 @@ class Recipes implements ModInitializer {
         def modId = mod.metadata().id()
 
         // @start Registration
-        Registry.RECIPE_TYPE[new Identifier(modId, 'my_recipe')] = MY_RECIPE
-        Registry.RECIPE_SERIALIZER[new Identifier(modId, 'my_recipe')] = MY_RECIPE_SERIALIZER
+        Registry.RECIPE_TYPE[new ResourceLocation(modId, 'my_recipe')] = MY_RECIPE
+        Registry.RECIPE_SERIALIZER[new ResourceLocation(modId, 'my_recipe')] = MY_RECIPE_SERIALIZER
         // @end Registration
 
         // @start Static-Recipe
@@ -39,17 +39,17 @@ class Recipes implements ModInitializer {
                 .output(new ItemStack(Items.CHAINMAIL_CHESTPLATE)) // That outputs a chestplate
                 .ingredient('I' as char, Items.IRON_INGOT) // 'I' being an ingot
                 .ingredient('A' as char, Items.APPLE) // and 'A' an apple
-                .build(new Identifier(modId, 'apple_iron_ingot_fun'), '')
+                .build(new ResourceLocation(modId, 'apple_iron_ingot_fun'), '')
         )
         // @end Static-Recipe
 
         // @start Adding
         RecipeManagerHelper.addRecipes {
-            it.register(new Identifier(modId, 'random')) {id ->
+            it.register(new ResourceLocation(modId, 'random')) {id ->
                 VanillaRecipeBuilders.shapelessRecipe(new ItemStack(
                         // We can't know which item it's going to output in advance, therefore
                         // it's impossible to create a JSON for this recipe.
-                        Registry.ITEM.getRandom(RandomGenerator.createLegacy()).orElseThrow().value()
+                        Registry.ITEM.getRandom(RandomSource.create()).orElseThrow().value()
                 )).ingredient(Items.ACACIA_BUTTON)
                 .build(id, '')
             }
@@ -59,23 +59,23 @@ class Recipes implements ModInitializer {
         // @start Modification
         RecipeManagerHelper.modifyRecipes {
             // Modifies the name of the output of the stone smelting recipe
-            it.getRecipe(new Identifier('minecraft', 'stone'), RecipeType.SMELTING)
-            .output.setCustomName(Text.literal('Modified!') << Formatting.RED)
+            it.getRecipe(new ResourceLocation('minecraft', 'stone'), RecipeType.SMELTING)
+            .resultItem.setHoverName(Component.literal('Modified!') << ChatFormatting.RED)
             // Replaces the enchanting table recipe with different ingredients
             it.replace(VanillaRecipeBuilders.shapedRecipe(' B ', 'D#D', '###')
             .ingredient('B' as char, Items.WRITABLE_BOOK)
             .ingredient('D' as char, Items.GOLD_INGOT)
             .ingredient('#' as char, Items.POLISHED_BASALT)
             .output(new ItemStack(Items.ENCHANTING_TABLE))
-            .build(new Identifier('minecraft', 'enchanting_table'), ''))
+            .build(new ResourceLocation('minecraft', 'enchanting_table'), ''))
         }
         // @end Modification
 
         // @start Removal
         RecipeManagerHelper.removeRecipes {
-            it.remove(new Identifier('minecraft', 'acacia_door'))
+            it.remove(new ResourceLocation('minecraft', 'acacia_door'))
             it.removeIf(RecipeType.BLASTING) { rec ->
-                rec.output.isOf(Items.GOLD_INGOT)
+                rec.resultItem.is(Items.GOLD_INGOT)
             }
         }
         // @end Removal

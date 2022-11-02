@@ -3,24 +3,24 @@ package org.quiltmc.wiki.entity_attributes
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.context.CommandContext
 import groovy.transform.CompileStatic
-import net.minecraft.entity.EquipmentSlot
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
+import net.minecraft.world.entity.EquipmentSlot
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 
 @CompileStatic
 class JumpBoostCommand {
 
     static int add(CommandContext context) {
         // @start Apply-Direct
-        context.player.getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST)
-        .addTemporaryModifier(AttributesExample.SOME_MODIFIER)
+        context.player.getAttribute(AttributesExample.GENERIC_JUMP_BOOST)
+        .addTransientModifier(AttributesExample.SOME_MODIFIER)
         // @end Apply-Direct
         1
     }
 
     static int remove(CommandContext context) {
         // @start Remove-Direct
-        context.player.getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST)
+        context.player.getAttribute(AttributesExample.GENERIC_JUMP_BOOST)
                 .removeModifier(AttributesExample.SOME_MODIFIER_ID)
         // @end Remove-Direct
         1
@@ -35,7 +35,7 @@ class JumpBoostCommand {
                 EquipmentSlot.MAINHAND
         )
         // @end Apply-NBT
-        context.player.giveItemStack(stack)
+        context.player.addItem(stack)
         1
     }
 
