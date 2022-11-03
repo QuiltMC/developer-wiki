@@ -1,7 +1,6 @@
 plugins {
 	id("java")
 	id("wiki-build-logic")
-	id("org.quiltmc.loom") version "0.12.+" apply false
 
 	id("com.github.node-gradle.node")
 }

@@ -12,6 +12,7 @@ import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import net.fabricmc.loom.task.MigrateMappingsTask;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.jetbrains.annotations.NotNull;
@@ -39,6 +40,15 @@ public class WikiBuildPlugin implements Plugin<Project> {
 		target.getTasks().register("generateWikiTree", GenerateWikiTreeTask.class);
 		target.getTasks().register("generateWiki", GenerateWikiTask.class);
 		target.getTasks().register("testWiki", TestWikiTask.class);
+		target.allprojects(project -> {
+			if (project.hasProperty("minecraft_version")) {
+				String minecraftVersion = project.findProperty("minecraft_version").toString();
+				project.getTasks().register("translateToMojmaps", MigrateMappingsTask.class).configure(task -> {
+					task.setMappings("net.minecraft:mappings:"+minecraftVersion);
+					task.setOutputDir("src_mojmaps");
+				});
+			}
+		});
 	}
 
 	private static class MdLinkParserExtension implements HtmlRenderer.HtmlRendererExtension {

@@ -6,6 +6,14 @@ plugins {
 repositories {
     mavenCentral()
 	gradlePluginPortal()
+	maven {
+		name = "Quilt"
+		url = uri("https://maven.quiltmc.org/repository/release")
+	}
+	maven {
+		name = "Fabric"
+		url = uri("https://maven.fabricmc.net/")
+	}
 }
 
 dependencies {
@@ -13,6 +21,8 @@ dependencies {
     implementation("io.pebbletemplates:pebble:3.1.5")
 
 	implementation("com.github.node-gradle:gradle-node-plugin:3.4.0")
+
+	implementation("org.quiltmc:loom:0.12.+")
 }
 
 gradlePlugin {
