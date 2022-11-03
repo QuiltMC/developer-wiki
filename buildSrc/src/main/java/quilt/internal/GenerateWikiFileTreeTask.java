@@ -35,6 +35,13 @@ public class GenerateWikiFileTreeTask extends DefaultTask {
 		List<Project> directSubprojects = getDirectSubprojects(root);
 
 		for (Project subproject : directSubprojects) {
+			// If the project is actually a tutorial (which is true when there is a 'src' folder)
+			// Skip looking for markdown in the source folder
+			Path srcDir = subproject.file("src").toPath();
+			if (Files.exists(srcDir) && Files.isDirectory(srcDir)) {
+				continue;
+			}
+
 			// List of entries for the current entry being built
 			List<FileEntry> subEntries = new ArrayList<>();
 
