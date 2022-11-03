@@ -112,7 +112,7 @@ public class GenerateContentTask extends DefaultTask {
 		}
 		String prefixedOuterClasses = outerClasses.isEmpty()?"":" "+outerClasses;
 		return "<div class=\"lang-tab-holder\">\n" +
-				"<div class=\"tabs is-boxed\">\n" +
+				"<div class=\"tabs lang-tab-wrapper is-boxed\">\n" +
 				"<ul class=\"lang-tab-list"+ prefixedOuterClasses +"\">\n" +
 				tabs +
 				"</ul>\n" +

@@ -102,6 +102,13 @@
           } else {
             document.getElementById("mappings-switcher").innerHTML = "Switch to Quilt Mappings";
           }
+          // hide all tab wrappers
+          let tabWrappers = document.getElementsByClassName("lang-tab-wrapper");
+          for (let i = 0; i < tabWrappers.length; i++) {
+            tabWrappers[i].style.display = "none";
+          }
+
+          // hide tab contents as needed
           let tabLists = document.getElementsByClassName("lang-tab-list");
           for (let i = 0; i < tabLists.length; i++) {
             let tabList = tabLists[i];
@@ -194,6 +201,20 @@
                   isFirst = false;
                 }
               }
+            }
+          }
+
+          // Unhide wrappers with more than one tab
+          for (let i = 0; i < tabWrappers.length; i++) {
+            tabCount = 0;
+            let children = tabWrappers[i].querySelectorAll(".tab");
+            for (let j = 0; j < children.length; j++) {
+              if (children[j].style.display == "block") {
+                tabCount += 1;
+              }
+            }
+            if (tabCount > 1) {
+              tabWrappers[i].style.display = "block";
             }
           }
         }
