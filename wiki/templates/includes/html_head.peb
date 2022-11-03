@@ -107,10 +107,21 @@
             let tabList = tabLists[i];
             if (tabList.classList.contains("has-mappings-"+mappings)) {
               let tabs = tabList.children;
-              let isFirst = true;
+              let isNotFirst = {};
+              let isFirst = true
               for (let j = 0; j < tabs.length; j++) {
                 let tab = tabs[j];
-                if (tab.classList.contains("is-mappings-"+mappings)) {
+                let lang = tab.dataset.tablang;
+                let noneFound = true;
+                for (let k = 0; k < tabs.length; k++) {
+                  let checkTab = tabs[k];
+                  if (checkTab.classList.contains("is-mappings-"+mappings) && checkTab.dataset.tablang == lang) {
+                    noneFound = false;
+                  }
+                }
+                tabList.querySelector(".is-mappings-"+mappings) == null;
+                if (tab.classList.contains("is-mappings-"+mappings) || (noneFound && isNotFirst[lang] != true)) {
+                  isNotFirst[lang] = true;
                   tab.style.display = "block";
                   tab.className = tab.className.replaceAll(" is-active", "");
                   if (isFirst) {
@@ -118,6 +129,9 @@
                     isFirst = false;
                   }
                   tab.children[0].querySelector(".mappings-optional-selector").style.display = "none";
+                  if (noneFound) {
+                    tab.children[0].querySelector(".mappings-optional-selector").style.display = "block";
+                  }
                 } else {
                   tab.style.display = "none";
                   tab.className = tab.className.replaceAll(" is-active", "");
@@ -126,13 +140,18 @@
             } else if (tabList.classList.contains("has-mappable")) {
               let tabs = tabList.children;
               let isFirst = true;
+              let isNotFirst = {};
               for (let j = 0; j < tabs.length; j++) {
                 let tab = tabs[j];
-                if (isFirst) {
+                let lang = tab.dataset.tablang;
+                if (isNotFirst[lang] != true) {
                   tab.style.display = "block";
                   tab.className = tab.className.replaceAll(" is-active", "");
-                  tab.className += " is-active";
+                  if (isFirst) {
+                    tab.className += " is-active";
+                  }
                   isFirst = false;
+                  isNotFirst[lang] = true;
                   tab.children[0].querySelector(".mappings-optional-selector").style.display = "block";
                 } else {
                   tab.style.display = "none";
@@ -151,7 +170,15 @@
               for (let j = 0; j < tabs.length; j++) {
                 let tab = tabs[j];
                 tab.style.display = "none";
-                if (tab.classList.contains("is-mappings-"+mappings) && isFirst) {
+                let lang = tab.dataset.tablang;
+                let noneFound = true;
+                for (let k = 0; k < tabs.length; k++) {
+                  let checkTab = tabs[k];
+                  if (checkTab.classList.contains("is-mappings-"+mappings) && checkTab.dataset.tablang == lang) {
+                    noneFound = false;
+                  }
+                }
+                if ((tab.classList.contains("is-mappings-"+mappings) || noneFound) && isFirst) {
                   tab.style.display = "block";
                   isFirst = false;
                 }

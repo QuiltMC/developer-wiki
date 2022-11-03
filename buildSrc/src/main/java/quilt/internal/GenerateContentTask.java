@@ -80,17 +80,15 @@ public class GenerateContentTask extends DefaultTask {
 		StringBuilder outerClasses = new StringBuilder();
 		boolean isFirst = true;
 		List<Matcher> matchers = Arrays.stream(full).map(tab -> Pattern.compile("([a-z]+)(?:@([a-z]+?))?:(.+?)(?:@(.+?))?").matcher(tab)).toList();
-		boolean isAnyMapped = matchers.stream().anyMatch(it -> it.matches() && (it.group(2)!=null || MAPPING_DEFAULT_FOR_LANG.get(it.group(1).toLowerCase(Locale.ROOT))!=null));
+		boolean isAnyMapped = matchers.stream().anyMatch(it -> it.matches() && it.group(2)!=null);
 		if (isAnyMapped)
 			outerClasses.append("has-mappable ");
 		for (Matcher matcher : matchers) {
 			if (matcher.matches()) {
 				String language = matcher.group(1);
 				String mappings = matcher.group(2);
-				if (mappings == null)
-					mappings = MAPPING_DEFAULT_FOR_LANG.get(language.toLowerCase(Locale.ROOT));
 				if (mappings == null && isAnyMapped)
-					mappings = "qm";
+					mappings = MAPPING_DEFAULT_FOR_LANG.getOrDefault(language.toLowerCase(Locale.ROOT), "qm");
 				String name = capitalizeLanguage(language);
 				String tag = language+(mappings == null ? "" : ("-"+mappings));
 				if (!isFirst)
@@ -103,11 +101,12 @@ public class GenerateContentTask extends DefaultTask {
 				tabs.append("<li class=\"tab"+
 						(mappings!=null?" is-mappings-"+mappings:"")
 						+(isFirst ? " is-active" : "")
-						+"\" onclick=\"switchTab(event,'" + tag + "')\"><a>"+name+"</a></li>\n");
+						+"\" onclick=\"switchTab(event,'" + tag + "')\" data-tablang=\""+language+"\"><a>"+name+"</a></li>\n");
 				String codeChunk = replaceMatch(matcher.group(3), matcher.group(4), language, entry);
 				sections.append("<section class=\"tab-contents"+
 						(mappings!=null?" is-mappings-"+mappings:"")
-						+" lang-selected-" + tag + "\""+(!isFirst ? " style=\"display:none\"" : "")+">\n\n" + codeChunk + "```\n\n</section>\n");
+						+" lang-selected-" + tag + "\" data-tablang=\""+language+"\""
+						+(!isFirst ? " style=\"display:none\"" : "")+">\n\n" + codeChunk + "```\n\n</section>\n");
 				isFirst = false;
 			}
 		}
