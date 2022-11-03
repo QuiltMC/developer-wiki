@@ -81,7 +81,7 @@
           let tabs = document.getElementsByClassName("tab");
           for (let i = 0; i < tabs.length; i++) {
             if (tabs[i].parentElement.classList.contains("has-lang-"+tabName)) {
-              tabs[i].className = tabs[i].className.replace(" is-active", "");
+              tabs[i].className = tabs[i].className.replaceAll(" is-active", "");
             }
           }
           let bodies = document.getElementsByClassName("lang-selected-"+tabName);
@@ -89,6 +89,96 @@
             bodies[i].style.display = "block";
           }
           evt.currentTarget.className += " is-active";
+        }
+
+        var mappings = sessionStorage.getItem("mappings_name");
+        if (mappings == null) {
+          mappings = "qm"
+        }
+
+        function setMappings() {
+          if (mappings == "qm") {
+            document.getElementById("mappings-switcher").innerHTML = "Switch to Mojang Mappings";
+          } else {
+            document.getElementById("mappings-switcher").innerHTML = "Switch to Quilt Mappings";
+          }
+          let tabLists = document.getElementsByClassName("lang-tab-list");
+          for (let i = 0; i < tabLists.length; i++) {
+            let tabList = tabLists[i];
+            if (tabList.classList.contains("has-mappings-"+mappings)) {
+              let tabs = tabList.children;
+              let isFirst = true;
+              for (let j = 0; j < tabs.length; j++) {
+                let tab = tabs[j];
+                if (tab.classList.contains("is-mappings-"+mappings)) {
+                  tab.style.display = "block";
+                  tab.className = tab.className.replaceAll(" is-active", "");
+                  if (isFirst) {
+                    tab.className += " is-active";
+                    isFirst = false;
+                  }
+                  tab.children[0].querySelector(".mappings-optional-selector").style.display = "none";
+                } else {
+                  tab.style.display = "none";
+                  tab.className = tab.className.replaceAll(" is-active", "");
+                }
+              }
+            } else if (tabList.classList.contains("has-mappable")) {
+              let tabs = tabList.children;
+              let isFirst = true;
+              for (let j = 0; j < tabs.length; j++) {
+                let tab = tabs[j];
+                if (isFirst) {
+                  tab.style.display = "block";
+                  tab.className = tab.className.replaceAll(" is-active", "");
+                  tab.className += " is-active";
+                  isFirst = false;
+                  tab.children[0].querySelector(".mappings-optional-selector").style.display = "block";
+                } else {
+                  tab.style.display = "none";
+                  tab.className = tab.className.replaceAll(" is-active", "");
+                }
+              }
+            }
+          }
+          // Now, update tab content things...
+          let tabContentLists = document.getElementsByClassName("lang-tab-contents");
+          for (let i = 0; i < tabContentLists.length; i++) {
+            let tabContentList = tabContentLists[i];
+            if (tabContentList.classList.contains("has-mappings-"+mappings)) {
+              let tabs = tabContentList.children;
+              let isFirst = true;
+              for (let j = 0; j < tabs.length; j++) {
+                let tab = tabs[j];
+                tab.style.display = "none";
+                if (tab.classList.contains("is-mappings-"+mappings) && isFirst) {
+                  tab.style.display = "block";
+                  isFirst = false;
+                }
+              }
+            } else if (tabContentList.classList.contains("has-mappable")) {
+              let tabs = tabContentList.children;
+              let isFirst = true;
+              for (let j = 0; j < tabs.length; j++) {
+                let tab = tabs[j];
+                tab.style.display = "none";
+                if (isFirst) {
+                  tab.style.display = "block";
+                  isFirst = false;
+                }
+              }
+            }
+          }
+        }
+
+        function switchMappings() {
+          if (mappings == "qm") {
+            mappings = "mojmaps"
+          } else {
+            mappings = "qm"
+          }
+          sessionStorage.setItem("mappings_name",mappings)
+          setMappings();
         }
     </script>
 </head>

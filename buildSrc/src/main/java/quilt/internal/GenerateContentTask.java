@@ -53,7 +53,7 @@ public class GenerateContentTask extends DefaultTask {
 			input = matcher.replaceAll(matchResult -> replaceSimpleMatch(matchResult, entry));
 
 			// Parse tabbed path includes
-			matcher = Pattern.compile("```tabbed-files\\s*(([a-z]+):(.+?)(?:@(.+?))?\\s+)+```").matcher(input);
+			matcher = Pattern.compile("```tabbed-files\\s*(([a-z]+)(?:@([a-z]+?))?:(.+?)(?:@(.+?))?\\s+)+```").matcher(input);
 
 			input = matcher.replaceAll(matchResult -> replaceTabbedMatch(matchResult, entry));
 
@@ -77,28 +77,48 @@ public class GenerateContentTask extends DefaultTask {
 		String[] full = matchResult.group(0).split("\\s+");
 		StringBuilder tabs = new StringBuilder();
 		StringBuilder sections = new StringBuilder();
-		StringBuilder langClasses = new StringBuilder();
+		StringBuilder outerClasses = new StringBuilder();
 		boolean isFirst = true;
-		for (String tab : full) {
-			Matcher matcher = Pattern.compile("([a-z]+):(.+?)(?:@(.+?))?").matcher(tab);
+		List<Matcher> matchers = Arrays.stream(full).map(tab -> Pattern.compile("([a-z]+)(?:@([a-z]+?))?:(.+?)(?:@(.+?))?").matcher(tab)).toList();
+		boolean isAnyMapped = matchers.stream().anyMatch(it -> it.matches() && (it.group(2)!=null || MAPPING_DEFAULT_FOR_LANG.get(it.group(1).toLowerCase(Locale.ROOT))!=null));
+		if (isAnyMapped)
+			outerClasses.append("has-mappable ");
+		for (Matcher matcher : matchers) {
 			if (matcher.matches()) {
 				String language = matcher.group(1);
+				String mappings = matcher.group(2);
+				if (mappings == null)
+					mappings = MAPPING_DEFAULT_FOR_LANG.get(language.toLowerCase(Locale.ROOT));
+				if (mappings == null && isAnyMapped)
+					mappings = "qm";
+				String name = capitalizeLanguage(language);
+				String tag = language+(mappings == null ? "" : ("-"+mappings));
 				if (!isFirst)
-					langClasses.append(' ');
-				langClasses.append("has-lang-"+language);
-				tabs.append("<li class=\"tab"+(isFirst ? " is-active" : "")+"\" onclick=\"switchTab(event,'" + language + "')\"><a>"+capitalize(language)+"</a></li>\n");
-				String codeChunk = replaceMatch(matcher.group(2), matcher.group(3), language, entry);
-				sections.append("<section class=\"tab-contents lang-selected-" + language + "\""+(!isFirst ? " style=\"display:none\"" : "")+">\n\n" + codeChunk + "```\n\n</section>\n");
+					outerClasses.append(' ');
+				outerClasses.append("has-lang-"+tag);
+				if (mappings != null) {
+					outerClasses.append(" has-mappings-" + mappings);
+					name += "<span class=\"mappings-optional-selector\" style=\"display:none\">&nbsp("+capitalizeMapping(mappings)+")</span>";
+				}
+				tabs.append("<li class=\"tab"+
+						(mappings!=null?" is-mappings-"+mappings:"")
+						+(isFirst ? " is-active" : "")
+						+"\" onclick=\"switchTab(event,'" + tag + "')\"><a>"+name+"</a></li>\n");
+				String codeChunk = replaceMatch(matcher.group(3), matcher.group(4), language, entry);
+				sections.append("<section class=\"tab-contents"+
+						(mappings!=null?" is-mappings-"+mappings:"")
+						+" lang-selected-" + tag + "\""+(!isFirst ? " style=\"display:none\"" : "")+">\n\n" + codeChunk + "```\n\n</section>\n");
 				isFirst = false;
 			}
 		}
-		return "<div class=\"tab-holder\">\n" +
+		String prefixedOuterClasses = outerClasses.isEmpty()?"":" "+outerClasses;
+		return "<div class=\"lang-tab-holder\">\n" +
 				"<div class=\"tabs is-boxed\">\n" +
-				"<ul class=\""+langClasses+"\">\n" +
+				"<ul class=\"lang-tab-list"+ prefixedOuterClasses +"\">\n" +
 				tabs +
 				"</ul>\n" +
 				"</div>\n" +
-				"<div class=\""+langClasses+"\">\n" +
+				"<div class=\"lang-tab-contents"+ prefixedOuterClasses +"\">\n" +
 				sections +
 				"</div>\n" +
 				"</div>\n<p>\n";
@@ -116,7 +136,6 @@ public class GenerateContentTask extends DefaultTask {
 	private String replaceMatch(String requestedFile, String region, String fileType, GenerateWikiFileTreeTask.FileEntry entry) {
 		Path file = entry.project().file(requestedFile).toPath();
 
-		// TODO: Strip extra region comments
 		// TODO: have different file type be able to set the single line comment character(s)
 
 		// Read the path
@@ -149,6 +168,12 @@ public class GenerateContentTask extends DefaultTask {
 			fileText = "// ..." + fileText + "// ...";
 		}
 
+		fileText = fileText.lines().filter(line ->
+				!Pattern.compile("// @start .*")
+						.matcher(line.trim()).matches() ||
+				!Pattern.compile("// @end .*")
+						.matcher(line.trim()).matches()).collect(Collectors.joining("\n"));
+
 		String filePath = getProject().file(".").toPath().relativize(file).toString().replace("\\", "/");
 
 		return "From [`" +
@@ -174,9 +199,27 @@ public class GenerateContentTask extends DefaultTask {
 			"json", "JSON"
 	);
 
-	private String capitalize(String string) {
+	private static final Map<String, String> MAPPING_LOOKUP = Map.of(
+			"qm", "Quilt Mappings",
+			"mojmaps", "Mojang Mappings",
+			"yarn", "Yarn"
+	);
+
+	private static final Map<String, String> MAPPING_DEFAULT_FOR_LANG = Map.of(
+			"groovy", "mojmaps"
+	);
+
+	private String capitalizeLanguage(String string) {
 		string = string.toLowerCase(Locale.ROOT);
 		String lookup = CAPITALIZATION_LOOKUP.get(string);
+		if (lookup != null)
+			return lookup;
+		return string.substring(0,1).toUpperCase(Locale.ROOT)+string.substring(1);
+	}
+
+	private String capitalizeMapping(String string) {
+		string = string.toLowerCase(Locale.ROOT);
+		String lookup = MAPPING_LOOKUP.get(string);
 		if (lookup != null)
 			return lookup;
 		return string.substring(0,1).toUpperCase(Locale.ROOT)+string.substring(1);
