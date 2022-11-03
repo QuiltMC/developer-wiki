@@ -35,6 +35,9 @@
     <script src="https://kit.fontawesome.com/b1b70f724e.js" crossorigin="anonymous"></script>
     <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/groovy.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gradle.min.js"></script>
 
     <script>hljs.highlightAll();</script>
 
@@ -231,11 +234,47 @@
     <li>A 'fallback' value: the base value before any external attribute modifiers are applied</li>
     <li>A min and max value, clamping the <strong>end result</strong> of the modifier calculations (after all modifiers are applied)</li>
 </ul>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/java/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
 <pre><code class="language-java">// ...
 public static final EntityAttribute GENERIC_JUMP_BOOST = new ClampedEntityAttribute(&quot;attribute.name.generic_jump_boost&quot;, 1.0, 0.0, 2.0).setTracked(true);
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt" target="_blank"><code>AttributesExample.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+val GENERIC_JUMP_BOOST: EntityAttribute = ClampedEntityAttribute(&quot;attribute.name.generic_jump_boost&quot;, 1.0, 0.0, 2.0).setTracked(true)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/scala/src/main/scala/org/quiltmc/wiki/entity_attributes/AttributesExample.scala" target="_blank"><code>AttributesExample.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+final val GENERIC_JUMP_BOOST: EntityAttribute = ClampedEntityAttribute(&quot;attribute.name.generic_jump_boost&quot;, 1.0, 0.0, 2.0).setTracked(true)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/AttributesExample.groovy" target="_blank"><code>AttributesExample.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+static final Attribute GENERIC_JUMP_BOOST = new RangedAttribute('attribute.name.generic_jump_boost', 1.0d, 0.0d, 2.0d).setSyncable(true)
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <p>The <code>generic</code> preceding the attribute name is a convention meaning 'applying to multiple living entities (and players).' Specific attributes get their own prefixes, such as <code>horse</code> in <code>horse_jump_strength</code>.</p>
 <p>You might notice the <code>setTracked</code> call; this ensures that the value of this attribute will be synchronized between the server and client. Since we're dealing with player movement, it's important to have this set to <code>true</code>, which is what you'll want in most cases regardless.</p>
 <p>At this point, we might want to add a language entry:</p>
@@ -244,11 +283,47 @@ public static final EntityAttribute GENERIC_JUMP_BOOST = new ClampedEntityAttrib
 }
 </code></pre>
 <p>With our <code>EntityAttribute</code> instance created, we can go ahead and register it.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/java/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
 <pre><code class="language-java">// ...
-Registry.register(Registry.ATTRIBUTE, new Identifier(&quot;example&quot;, &quot;generic.jump_boost&quot;), GENERIC_JUMP_BOOST);
+Registry.register(Registry.ATTRIBUTE, new Identifier(modId, &quot;generic.jump_boost&quot;), GENERIC_JUMP_BOOST);
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt" target="_blank"><code>AttributesExample.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+GENERIC_JUMP_BOOST withPath &quot;generic.jump_boost&quot; toRegistry Registry.ATTRIBUTE
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/scala/src/main/scala/org/quiltmc/wiki/entity_attributes/AttributesExample.scala" target="_blank"><code>AttributesExample.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+Registry.register(Registry.ATTRIBUTE, Identifier(modId, &quot;generic.jump_boost&quot;), AttributesExample.GENERIC_JUMP_BOOST)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/AttributesExample.groovy" target="_blank"><code>AttributesExample.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+Registry.ATTRIBUTE[new ResourceLocation(modId, 'generic.jump_boost')] = GENERIC_JUMP_BOOST
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <p>This identifier doesn't follow normal conventions, but it's what the vanilla attributes use.</p>
 <h2><a href="#registering-attributes-on-entities" id="registering-attributes-on-entities">Registering Attributes on Entities</a></h2>
 <p>The next step is letting certain entities know that they accept our new attribute. Let's walk through how entities do this in the first place.</p>
@@ -283,7 +358,18 @@ Registry.register(Registry.ATTRIBUTE, new Identifier(&quot;example&quot;, &quot;
 <h3><a href="#mixing-into-attribute-creation" id="mixing-into-attribute-creation">Mixing Into Attribute Creation</a></h3>
 <p>Each entity that does something different with attributes has their own attribute creation method, which you can find in <code>DefaultAttributeRegistry</code>. Since we want our attribute on all entities, we'll mix into the <code>LivingEntity.createLivingAttributes</code> method shown in the previous section.</p>
 <p>Remember, at this point, the builder is still mutable - and a reference - so our mixin is very straightforward.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java" target="_blank"><code>LivingEntityMixin.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/java/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java" target="_blank"><code>LivingEntityMixin.java</code></a>:</p>
 <pre><code class="language-java">// ...
 @Inject(method = &quot;createLivingAttributes&quot;, at = @At(value = &quot;RETURN&quot;))
 private static void addCustomAttribute(CallbackInfoReturnable&lt;DefaultAttributeContainer.Builder&gt; cir) {
@@ -291,11 +377,55 @@ private static void addCustomAttribute(CallbackInfoReturnable&lt;DefaultAttribut
 }
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.kt" target="_blank"><code>LivingEntityMixin.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+@Inject(method = [&quot;createLivingAttributes&quot;], at = [At(value = &quot;RETURN&quot;)])
+private fun addCustomAttribute(cir: CallbackInfoReturnable&lt;DefaultAttributeContainer.Builder&gt;) =
+    cir.returnValue.add(GENERIC_JUMP_BOOST)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/scala/src/main/scala/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.scala" target="_blank"><code>LivingEntityMixin.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+@static
+@Inject(method = Array(&quot;createLivingAttributes&quot;), at = Array(At(value = &quot;RETURN&quot;)))
+private def addCustomAttribute(cir: CallbackInfoReturnable[DefaultAttributeContainer.Builder]): Unit =
+    cir.getReturnValue.add(AttributesExample.GENERIC_JUMP_BOOST)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.groovy" target="_blank"><code>LivingEntityMixin.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+@Inject(method = 'createLivingAttributes', at = @At(value = 'RETURN'))
+private static void addCustomAttribute(CallbackInfoReturnable&lt;AttributeSupplier.Builder&gt; cir) {
+    cir.returnValue.add(AttributesExample.GENERIC_JUMP_BOOST)
+}
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <h2><a href="#using-attributes" id="using-attributes">Using Attributes</a></h2>
 <p>We've registered our attribute and let all living entities know that they have it. The next step is to actually use it somewhere: in our case, to modify jump height.</p>
 <p><code>LivingEntity#getAttributes</code> gets the <em>possible</em> attributes that the entity knows it has, but not the actual values. Instead, each attribute has its own 'instance' on an entity known as an <code>EntityAttributeInstance</code>, which has all the logic for controlling attribute values. You can use the <code>LivingEntity#getAttributeInstance</code> method for getting one of these instances.</p>
 <p>We'll need another mixin into <code>LivingEntity</code>, this time for the <code>getJumpVelocity</code> method. Since our initial fallback value is <code>1.0</code>, we can feel free to just multiply the end result by the attribute value.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java" target="_blank"><code>LivingEntityMixin.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/java/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java" target="_blank"><code>LivingEntityMixin.java</code></a>:</p>
 <pre><code class="language-java">// ...
 @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(EntityAttribute attribute);
 
@@ -306,6 +436,53 @@ private void applyJumpBoost(CallbackInfoReturnable&lt;Float&gt; cir) {
 }
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.kt" target="_blank"><code>LivingEntityMixin.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+@Shadow
+abstract fun getAttributeInstance(attribute: EntityAttribute): EntityAttributeInstance?
+
+@Inject(method = [&quot;getJumpVelocity&quot;], at = [At(value = &quot;RETURN&quot;)], cancellable = true)
+private fun applyJumpBoost(cir: CallbackInfoReturnable&lt;Float&gt;) {
+    getAttributeInstance(GENERIC_JUMP_BOOST)?.run {
+        cir.returnValue *= this.value.toFloat()
+    }
+}
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/scala/src/main/scala/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.scala" target="_blank"><code>LivingEntityMixin.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+@Shadow
+def getAttributeInstance(attribute: EntityAttribute): EntityAttributeInstance
+
+@Inject(method = Array(&quot;getJumpVelocity&quot;), at = Array(At(value = &quot;RETURN&quot;)), cancellable = true)
+private def applyJumpBoost(cir: CallbackInfoReturnable[Float]): Unit = Option(
+    getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST)
+).foreach { instance =&gt;
+    cir.setReturnValue(cir.getReturnValue * instance.getValue.toFloat)
+}
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.groovy" target="_blank"><code>LivingEntityMixin.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+@Shadow abstract AttributeInstance getAttribute(Attribute attribute)
+
+@Inject(method = 'getJumpPower', at = @At(value = 'RETURN'), cancellable = true)
+private void applyJumpBoost(CallbackInfoReturnable&lt;Float&gt; cir) {
+    AttributeInstance instance = getAttribute(AttributesExample.GENERIC_JUMP_BOOST)
+    cir.returnValue = (cir.returnValue * instance.value).toFloat()
+}
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <h2><a href="#attribute-modifiers" id="attribute-modifiers">Attribute Modifiers</a></h2>
 <p>Now that we've given our attribute functionality, it's time to modify its value in some way. The next section will discuss three methods you might use to do so, but they all have one thing in common: <code>EntityAttributeModifier</code>.</p>
 <p>Attribute modifiers are completely disconnected from any particular attribute and are only concerned with numbers, operations, and identities. The constructor takes:</p>
@@ -318,7 +495,18 @@ private void applyJumpBoost(CallbackInfoReturnable&lt;Float&gt; cir) {
     <li>A string representing the modifier's 'name' - only used for NBT and when <code>StatusEffect</code>s link to attributes, notably showing up in potion tooltips</li>
     <li>A double value and an <code>EntityAttributeModifier.Operation</code> that specifies how the modifier should be applied and by what magnitude</li>
 </ul>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/java/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java" target="_blank"><code>AttributesExample.java</code></a>:</p>
 <pre><code class="language-java">// ...
 public static final UUID SOME_MODIFIER_ID = UUID.fromString(&quot;de17612a-adec-11ec-b909-0242ac120002&quot;);
 
@@ -330,28 +518,166 @@ public static final EntityAttributeModifier SOME_MODIFIER = new EntityAttributeM
 );
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt" target="_blank"><code>AttributesExample.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+val SOME_MODIFIER_ID: UUID = UUID.fromString(&quot;de17612a-adec-11ec-b909-0242ac120002&quot;)
+
+val SOME_MODIFIER: EntityAttributeModifier = EntityAttributeModifier(
+    SOME_MODIFIER_ID,
+    &quot;Jump stick modifier&quot;,
+    0.5,
+    EntityAttributeModifier.Operation.ADDITION
+)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/scala/src/main/scala/org/quiltmc/wiki/entity_attributes/AttributesExample.scala" target="_blank"><code>AttributesExample.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+final val SOME_MODIFIER_ID: UUID = UUID.fromString(&quot;de17612a-adec-11ec-b909-0242ac120002&quot;)
+
+final val SOME_MODIFIER: EntityAttributeModifier = EntityAttributeModifier(
+    SOME_MODIFIER_ID,
+    &quot;Jump stick modifier&quot;,
+    0.5,
+    EntityAttributeModifier.Operation.ADDITION
+)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/AttributesExample.groovy" target="_blank"><code>AttributesExample.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+static final UUID SOME_MODIFIER_ID = UUID.fromString('de17612a-adec-11ec-b909-0242ac120002')
+
+static final AttributeModifier SOME_MODIFIER = new AttributeModifier(
+        SOME_MODIFIER_ID,
+        'Jump stick modifier',
+        0.5d,
+        AttributeModifier.Operation.ADDITION
+)
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <p>It's important to note that all attribute modifiers are calculated in order based on type, with the order being <code>ADDITION</code>, <code>MULTIPLY_BASE</code>, then <code>MULTIPLY_TOTAL</code>. You can see the exact behavior in <code>EntityAttributeInstance#computeValue</code>.</p>
 <h2><a href="#applying-modifiers" id="applying-modifiers">Applying Modifiers</a></h2>
 <p>The final step is to apply this modifier. These examples use the <code>SOME_MODIFIER</code> field created in the previous section.</p>
 <h3><a href="#via-code" id="via-code">Via Code</a></h3>
 <p>It's as simple as getting the attribute instance and calling <code>addTemporaryModifier</code> (or <code>addPersistentModifier</code> if you want it to be serialized in the instance's NBT).</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
 <pre><code class="language-java">// ...
 EntityAttributeInstance instance = player.getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST);
 instance.addTemporaryModifier(AttributesExample.SOME_MODIFIER);
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt" target="_blank"><code>AttributesExample.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+this.source.player.getAttributeInstance(GENERIC_JUMP_BOOST)
+    ?.addTemporaryModifier(SOME_MODIFIER)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/scala/src/main/scala/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.scala" target="_blank"><code>JumpBoostCommand.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+def add(context: CommandContext[ServerCommandSource]): Int = Option(
+    context.getSource.getPlayer.getAttributeInstance(AttributesExample.GENERIC_JUMP_BOOST)
+).map { instance =&gt;
+    instance.addTemporaryModifier(AttributesExample.SOME_MODIFIER)
+    1
+}.getOrElse(0)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.groovy" target="_blank"><code>JumpBoostCommand.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+context.player.getAttribute(AttributesExample.GENERIC_JUMP_BOOST)
+.addTransientModifier(AttributesExample.SOME_MODIFIER)
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <p>This is also the most appropriate case where you would remove the modifier at some other point in time. You can either use the UUID associated with the modifier or the modifier itself.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
 <pre><code class="language-java">// ...
 instance.removeModifier(AttributesExample.SOME_MODIFIER_ID);
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt" target="_blank"><code>AttributesExample.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+this.source.player.getAttributeInstance(GENERIC_JUMP_BOOST)
+    ?.removeModifier(SOME_MODIFIER_ID)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/scala/src/main/scala/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.scala" target="_blank"><code>JumpBoostCommand.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+instance.removeModifier(AttributesExample.SOME_MODIFIER)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.groovy" target="_blank"><code>JumpBoostCommand.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+context.player.getAttribute(AttributesExample.GENERIC_JUMP_BOOST)
+        .removeModifier(AttributesExample.SOME_MODIFIER_ID)
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <h3><a href="#via-items" id="via-items">Via Items</a></h3>
 <p>Upon equipping an item, the game checks if it has any attribute modifiers marked in the slot it was equipped in. If so, it applies those modifiers to the entity. There are two ways items can achieve this: through <code>ItemStack</code> NBT or custom <code>Item</code> instance behavior.</p>
 <h4><a href="#nbt" id="nbt">NBT</a></h4>
 <p>You can use the <code>ItemStack#addAttributeModifier</code> method to apply a modifier via NBT.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java" target="_blank"><code>JumpBoostCommand.java</code></a>:</p>
 <pre><code class="language-java">// ...
 ItemStack stack = new ItemStack(Items.STICK);
 stack.addAttributeModifier(
@@ -361,9 +687,57 @@ stack.addAttributeModifier(
 );
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt" target="_blank"><code>AttributesExample.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+this.source.player.giveItemStack(ItemStack(Items.STICK).apply {
+    this.addAttributeModifier(GENERIC_JUMP_BOOST, SOME_MODIFIER, EquipmentSlot.MAINHAND)
+})
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/scala/src/main/scala/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.scala" target="_blank"><code>JumpBoostCommand.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+val stack = ItemStack(Items.STICK)
+stack.addAttributeModifier(
+    AttributesExample.GENERIC_JUMP_BOOST,
+    AttributesExample.SOME_MODIFIER,
+    EquipmentSlot.MAINHAND
+)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.groovy" target="_blank"><code>JumpBoostCommand.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+ItemStack stack = new ItemStack(Items.STICK)
+stack.addAttributeModifier(
+        AttributesExample.GENERIC_JUMP_BOOST,
+        AttributesExample.SOME_MODIFIER,
+        EquipmentSlot.MAINHAND
+)
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <h4><a href="#hard-coded" id="hard-coded">Hard-coded</a></h4>
 <p>The <code>Item</code> class contains a <code>getAttributeModifiers</code> method which returns a multimap of modifiers to apply when the item is equipped in the specified slot. We can override this in our own item class.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/src/main/java/org/quiltmc/wiki/entity_attributes/JumpStick.java" target="_blank"><code>JumpStick.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpStick.java" target="_blank"><code>JumpStick.java</code></a>:</p>
 <pre><code class="language-java">package org.quiltmc.wiki.entity_attributes;
 
 import com.google.common.collect.ImmutableMultimap;
@@ -392,6 +766,81 @@ public class JumpStick extends Item {
 }
 
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/JumpStick.kt" target="_blank"><code>JumpStick.kt</code></a>:</p>
+<pre><code class="language-kotlin">package org.quiltmc.wiki.entity_attributes
+
+import com.google.common.collect.ImmutableMultimap
+import com.google.common.collect.Multimap
+import net.minecraft.entity.EquipmentSlot
+import net.minecraft.entity.attribute.EntityAttribute
+import net.minecraft.entity.attribute.EntityAttributeModifier
+import net.minecraft.item.Item
+
+class JumpStick(settings: Settings): Item(settings) {
+
+    override fun getAttributeModifiers(slot: EquipmentSlot): Multimap&lt;EntityAttribute, EntityAttributeModifier&gt; {
+        // If held in main hand, return our modifier, otherwise nothing
+        return if (slot == EquipmentSlot.MAINHAND) ImmutableMultimap.of(GENERIC_JUMP_BOOST, SOME_MODIFIER)
+        else super.getAttributeModifiers(slot)
+    }
+}
+
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/scala/src/main/scala/org/quiltmc/wiki/entity_attributes/JumpStick.scala" target="_blank"><code>JumpStick.scala</code></a>:</p>
+<pre><code class="language-scala">package org.quiltmc.wiki.entity_attributes
+
+import com.google.common.collect.{ImmutableMultimap, Multimap}
+import net.minecraft.entity.EquipmentSlot
+import net.minecraft.entity.attribute.{EntityAttribute, EntityAttributeModifier}
+import net.minecraft.item.Item
+import net.minecraft.item.Item.Settings
+
+class JumpStick(settings: Settings) extends Item(settings) {
+
+    override def getAttributeModifiers(slot: EquipmentSlot): Multimap[EntityAttribute, EntityAttributeModifier] =
+        // If held in main hand, return our modifier, otherwise nothing
+        if (slot == EquipmentSlot.MAINHAND) ImmutableMultimap.of(AttributesExample.GENERIC_JUMP_BOOST, AttributesExample.SOME_MODIFIER)
+        else super.getAttributeModifiers(slot)
+}
+
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/entity/entity_attributes/groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/JumpStick.groovy" target="_blank"><code>JumpStick.groovy</code></a>:</p>
+<pre><code class="language-groovy">package org.quiltmc.wiki.entity_attributes
+
+import com.google.common.collect.ImmutableMultimap
+import com.google.common.collect.Multimap
+import groovy.transform.CompileStatic
+import net.minecraft.world.entity.EquipmentSlot
+import net.minecraft.world.entity.ai.attributes.Attribute
+import net.minecraft.world.entity.ai.attributes.AttributeModifier
+import net.minecraft.world.item.Item
+
+@CompileStatic
+class JumpStick extends Item {
+
+    JumpStick(Properties properties) {
+        super(properties)
+    }
+
+    @Override
+    Multimap&lt;Attribute, AttributeModifier&gt; getDefaultAttributeModifiers(EquipmentSlot slot) {
+        // If held in main hand, return our modifier, otherwise nothing
+        (slot == EquipmentSlot.MAINHAND) ? ImmutableMultimap.of(AttributesExample.GENERIC_JUMP_BOOST, AttributesExample.SOME_MODIFIER)
+                : super.getDefaultAttributeModifiers(slot)
+    }
+}
+
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <h4><a href="#conflicts" id="conflicts">Conflicts</a></h4>
 <p>By default, NBT and hard-coded modifiers don't mix. If you've ever applied a modifier via NBT on a sword, for example, you might have noticed that your modifier <em>does</em> get applied, but the item suddenly doesn't have any attack damage or attack speed. You can see why in <code>ItemStack#getAttributeModifiers</code>: it completely ignores any hard-coded ones like in the previous example if the stack has any modifiers in its NBT.</p>
 <p><a href="https://modrinth.com/mod/cmods" target="_blank">Here's a mod that fixes this</a>. It's basically a one-line mixin, but, hey, someone had to do it.</p>

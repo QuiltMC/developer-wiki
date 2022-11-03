@@ -2,6 +2,10 @@
 @import url("https://fonts.bunny.net/css?family=IBM+Plex+Mono:400&display=swap");
 @import url("https://fonts.bunny.net/css?family=Poppins:500,700&display=swap");
 @import url("https://fonts.bunny.net/css?family=IBM+Plex+Mono:400&display=swap");
+.content .tabs ul {
+  margin-left: 0;
+}
+
 .timeline {
   display: flex;
   flex-direction: column;
@@ -8598,7 +8602,7 @@ label.panel-block:hover {
   border-bottom-color: hsl(0deg, 0%, 86%);
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  color: hsl(0deg, 0%, 29%);
+  color: #8200f5;
   display: flex;
   justify-content: center;
   margin-bottom: -1px;
@@ -8607,14 +8611,14 @@ label.panel-block:hover {
 }
 .tabs a:hover {
   border-bottom-color: hsl(0deg, 0%, 21%);
-  color: hsl(0deg, 0%, 21%);
+  color: #8200f5;
 }
 .tabs li {
   display: block;
 }
 .tabs li.is-active a {
   border-bottom-color: #2291e6;
-  color: #2291e6;
+  color: #8200f5;
 }
 .tabs ul {
   align-items: center;
@@ -13250,6 +13254,10 @@ a.has-text-pink-dark:hover, a.has-text-pink-dark:focus {
   padding: 3rem 1.5rem 6rem;
 }
 
+.content .tabs ul {
+  margin-left: 0;
+}
+
 .button-grid {
   display: flex;
   flex-direction: row;
@@ -13374,10 +13382,6 @@ h6 {
     background-image: url("/assets/img/hero-bg.svg");
   }
 }
-.hero .navbar {
-  backdrop-filter: blur(2px);
-}
-
 .blog-post > .title:first-child,
 .blog-post > .subtitle:first-child,
 .blog-post > h1:first-child {
@@ -13488,6 +13492,11 @@ img.is-pixelated,
   color: #1571b7;
 }
 
+* {
+  scroll-behavior: smooth;
+  transition-duration: 0.1s;
+}
+
 .columns {
   margin-left: 0;
   margin-right: 0;
@@ -13522,6 +13531,23 @@ h6:hover a.is-anchor,
 h6:focus a.is-anchor,
 h6:active a.is-anchor {
   display: inline;
+}
+
+kbd {
+  color: #8200f5;
+  background-color: #f9f3ff;
+  padding: 2px 4px;
+  border: 2px solid black;
+  border-radius: 3px;
+  box-shadow: 2px 2px black;
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+kbd:hover {
+  transform: translate(2px, 2px);
+  box-shadow: none;
 }
 
 article.blog-post:not(:last-child) {
@@ -13607,8 +13633,7 @@ body > * {
   transition: all 1s ease;
 }
 
-#theme-normal-contrast,
-#theme-low-contrast {
+label[for=low-contrast] {
   display: none;
 }
 
@@ -13665,6 +13690,26 @@ body {
 
 .is-rtl {
   display: none !important;
+}
+
+.tag {
+  all: unset !important;
+}
+
+:root {
+  --tab-stop: 4;
+}
+
+* {
+  tab-size: var(--tab-stop);
+}
+
+.has-text-starchild {
+  color: #de1f26;
+}
+
+.has-background-starchild {
+  background-color: #de1f26;
 }
 
 .card.admin,
@@ -13906,6 +13951,34 @@ body {
   border: 2px solid hsl(0deg, 0%, 29%);
 }
 
+#language-switcher:checked ~ #language-modal {
+  display: flex;
+}
+
+#low-contrast:not(:checked) ~ section #theme-low-contrast {
+  display: none;
+}
+#low-contrast:checked ~ * {
+  filter: brightness(70%) contrast(90%) saturate(90%);
+}
+#low-contrast:checked ~ section #theme-low-contrast {
+  display: block;
+}
+#low-contrast:checked ~ section #theme-normal-contrast {
+  display: none;
+}
+
+#toggle-navbar:checked ~ section .navbar-menu {
+  display: block;
+}
+#toggle-navbar:checked ~ nav .navbar-menu {
+  display: block;
+}
+
+#toggle-sidebar:checked ~ div .sidebar {
+  display: block !important;
+}
+
 .button.is-discord {
   background-color: #5865f2;
   border-color: #5865f2;
@@ -13980,8 +14053,20 @@ span.inline-divider {
   border-color: hsl(0deg, 0%, 86%);
 }
 
+.modal-close::before, .modal-close::after {
+  background-color: black;
+}
+
 #theme-switcher {
   display: none;
+}
+
+.has-text-starchild-themed {
+  color: #f2a4a7;
+}
+
+.has-background-starchild-themed {
+  background-color: #f2a4a7;
 }
 
 .highlight .hll {

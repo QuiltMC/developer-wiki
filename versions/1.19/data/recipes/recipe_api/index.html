@@ -35,6 +35,9 @@
     <script src="https://kit.fontawesome.com/b1b70f724e.js" crossorigin="anonymous"></script>
     <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/groovy.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gradle.min.js"></script>
 
     <script>hljs.highlightAll();</script>
 
@@ -231,22 +234,88 @@
 <p>The events contained in this system have a set order, which is addition, modification, and removal respectively.</p>
 <h3><a href="#static-recipes" id="static-recipes">Static Recipes</a></h3>
 <p>Static recipes are a kind of recipe that is always kept present during the whole game lifecycle. They're only applied after data pack reloads, that is, when starting a world/server or after using the <code>/reload</code> command.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
 <pre><code class="language-java">// ...
 RecipeManagerHelper.registerStaticRecipe(
 		VanillaRecipeBuilders.shapedRecipe(&quot;IAI&quot;) // Shaped recipe with the IAI pattern
 				.output(new ItemStack(Items.CHAINMAIL_CHESTPLATE)) // That outputs a chestplate
 				.ingredient('I', Items.IRON_INGOT) // 'I' being an ingot
 				.ingredient('A', Items.APPLE) // and 'A' an apple
-				.build(new Identifier(&quot;example&quot;, &quot;apple_iron_ingot_fun&quot;), &quot;&quot;)
+				.build(new Identifier(modId, &quot;apple_iron_ingot_fun&quot;), &quot;&quot;)
 );
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt" target="_blank"><code>Recipes.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+registerStaticRecipe(shapedRecipe(
+    Identifier(modId, &quot;apple_iron_ingot_fun&quot;),
+    &quot;&quot;,
+    &quot;IAI&quot;, // Shaped recipe with the IAI pattern
+    ItemStack(Items.CHAINMAIL_CHESTPLATE), // That outputs a chestplate
+    'I' to Items.IRON_INGOT, // 'I' being an ingot
+    'A' to Items.APPLE // and 'A' an apple
+))
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala" target="_blank"><code>Recipes.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+RecipeManagerHelper.registerStaticRecipe(
+    VanillaRecipeBuilders.shapedRecipe(&quot;IAI&quot;)  // Shaped recipe with the IAI pattern
+            .output(ItemStack(Items.CHAINMAIL_CHESTPLATE)) // That outputs a chestplate
+            .ingredient('I', Items.IRON_INGOT) // 'I' being an ingot
+            .ingredient('A', Items.APPLE) // and 'A' an apple
+            .build(Identifier(modId, &quot;apple_iron_ingot_fun&quot;), &quot;&quot;)
+)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy" target="_blank"><code>Recipes.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+RecipeManagerHelper.registerStaticRecipe(
+        VanillaRecipeBuilders.shapedRecipe('IAI') // Shaped recipe with the IAI pattern
+        .output(new ItemStack(Items.CHAINMAIL_CHESTPLATE)) // That outputs a chestplate
+        .ingredient('I' as char, Items.IRON_INGOT) // 'I' being an ingot
+        .ingredient('A' as char, Items.APPLE) // and 'A' an apple
+        .build(new ResourceLocation(modId, 'apple_iron_ingot_fun'), '')
+)
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <h3><a href="#addition" id="addition">Addition</a></h3>
 <p>Mods might want to add recipes that have runtime components - Something that cannot be known at build time - for example, recipes that depend on other mods. Dynamic recipe providers allow for that.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
 <pre><code class="language-java">// ...
-RecipeManagerHelper.addRecipes(handler -&gt; handler.register(new Identifier(&quot;example&quot;, &quot;random&quot;), id -&gt;
+RecipeManagerHelper.addRecipes(handler -&gt; handler.register(new Identifier(modId, &quot;random&quot;), id -&gt;
 		VanillaRecipeBuilders.shapelessRecipe(new ItemStack(
 				// We can't know which item it's going to output in advance, therefore
 				// it's impossible to create a JSON for this recipe.
@@ -255,9 +324,73 @@ RecipeManagerHelper.addRecipes(handler -&gt; handler.register(new Identifier(&qu
 			.build(id, &quot;&quot;)));
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt" target="_blank"><code>Recipes.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+onAddRecipes {
+    it.register(Identifier(modId, &quot;random&quot;)) { id -&gt;
+        shapelessRecipe(
+            id,
+            &quot;&quot;,
+            // We can't know which item it's going to output in advance, therefore
+            // it's impossible to create a JSON for this recipe.
+            ItemStack(Registry.ITEM.getRandom(RandomGenerator.createLegacy()).orElseThrow().value()),
+            Items.ACACIA_BUTTON
+        )
+    }
+}
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala" target="_blank"><code>Recipes.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+RecipeManagerHelper.addRecipes { handler =&gt; handler.register(Identifier(modId, &quot;random&quot;), id =&gt;
+        VanillaRecipeBuilders.shapelessRecipe(ItemStack(
+            // We can't know which item it's going to output in advance, therefore
+            // it's impossible to create a JSON for this recipe.
+            Registry.ITEM.getRandom(RandomGenerator.createLegacy).orElseThrow.value
+        ))
+                .ingredient(Items.ACACIA_BUTTON)
+                .build(id, &quot;&quot;)
+)}
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy" target="_blank"><code>Recipes.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+RecipeManagerHelper.addRecipes {
+    it.register(new ResourceLocation(modId, 'random')) {id -&gt;
+        VanillaRecipeBuilders.shapelessRecipe(new ItemStack(
+                // We can't know which item it's going to output in advance, therefore
+                // it's impossible to create a JSON for this recipe.
+                Registry.ITEM.getRandom(RandomSource.create()).orElseThrow().value()
+        )).ingredient(Items.ACACIA_BUTTON)
+        .build(id, '')
+    }
+}
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <h3><a href="#modification" id="modification">Modification</a></h3>
 <p>Mods might want to modify values or replace recipes entirely while they're being built, this event allows for that.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
 <pre><code class="language-java">// ...
 RecipeManagerHelper.modifyRecipes(handler -&gt; {
 	// Modifies the name of the output of the stone smelting recipe
@@ -274,9 +407,90 @@ RecipeManagerHelper.modifyRecipes(handler -&gt; {
 });
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt" target="_blank"><code>Recipes.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+onModifyRecipes {
+    // Modifies the name of the output of the stone smelting recipe
+    it.getRecipe(Identifier(&quot;minecraft&quot;, &quot;stone&quot;), RecipeType.SMELTING)!!
+        .output.setCustomName(buildText {
+            styled(Style.EMPTY.withFormatting(Formatting.RED)) {
+                literal(&quot;Modified!&quot;)
+            }
+        })
+    // Replaces the enchanting table recipe with different ingredients
+    it.replace(shapedRecipe(
+        Identifier(&quot;minecraft&quot;, &quot;enchanting_table&quot;),
+        &quot;&quot;,
+        &quot;&quot;&quot;
+        | B
+        |D#D
+        |###
+        &quot;&quot;&quot;.trimMargin(),
+        ItemStack(Items.ENCHANTING_TABLE),
+        'B' to Items.WRITABLE_BOOK,
+        'D' to Items.GOLD_INGOT,
+        '#' to Items.POLISHED_BASALT
+    ))
+}
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala" target="_blank"><code>Recipes.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+RecipeManagerHelper.modifyRecipes { handler =&gt;
+    // Modifies the name of the output of the stone smelting recipe
+    handler.getRecipe(Identifier(&quot;minecraft&quot;, &quot;stone&quot;), RecipeType.SMELTING)
+            .getOutput.setCustomName(Text.literal(&quot;Modified!&quot;).formatted(Formatting.RED))
+    // Replaces the enchanting table recipe with different ingredients
+    handler.replace(VanillaRecipeBuilders.shapedRecipe(&quot; B &quot;, &quot;D#D&quot;, &quot;###&quot;)
+            .ingredient('B', Items.WRITABLE_BOOK)
+            .ingredient('D', Items.GOLD_INGOT)
+            .ingredient('#', Items.POLISHED_BASALT)
+            .output(ItemStack(Items.ENCHANTING_TABLE))
+            .build(Identifier(&quot;minecraft&quot;, &quot;enchanting_table&quot;), &quot;&quot;)
+    )
+}
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy" target="_blank"><code>Recipes.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+RecipeManagerHelper.modifyRecipes {
+    // Modifies the name of the output of the stone smelting recipe
+    it.getRecipe(new ResourceLocation('minecraft', 'stone'), RecipeType.SMELTING)
+    .resultItem.setHoverName(Component.literal('Modified!') &lt;&lt; ChatFormatting.RED)
+    // Replaces the enchanting table recipe with different ingredients
+    it.replace(VanillaRecipeBuilders.shapedRecipe(' B ', 'D#D', '###')
+    .ingredient('B' as char, Items.WRITABLE_BOOK)
+    .ingredient('D' as char, Items.GOLD_INGOT)
+    .ingredient('#' as char, Items.POLISHED_BASALT)
+    .output(new ItemStack(Items.ENCHANTING_TABLE))
+    .build(new ResourceLocation('minecraft', 'enchanting_table'), ''))
+}
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <h3><a href="#removal" id="removal">Removal</a></h3>
 <p>Mods might want to remove a recipe completely from the game, this event allows for that. Be aware that removing recipes might not be entirely compatible with what other mods expect.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java" target="_blank"><code>Recipes.java</code></a>:</p>
 <pre><code class="language-java">// ...
 RecipeManagerHelper.removeRecipes(handler -&gt; {
 	handler.remove(new Identifier(&quot;minecraft&quot;, &quot;acacia_door&quot;));
@@ -284,6 +498,44 @@ RecipeManagerHelper.removeRecipes(handler -&gt; {
 });
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt" target="_blank"><code>Recipes.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+onRemoveRecipes {
+    it.remove(Identifier(&quot;minecraft&quot;, &quot;acacia_door&quot;))
+    it.removeIf(RecipeType.BLASTING) { rec -&gt;
+        rec.output.isOf(Items.GOLD_INGOT)
+    }
+}
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala" target="_blank"><code>Recipes.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+RecipeManagerHelper.removeRecipes { handler =&gt;
+    handler.remove(Identifier(&quot;minecraft&quot;, &quot;acacia_door&quot;))
+    handler.removeIf(RecipeType.BLASTING, rec =&gt; rec.getOutput.isOf(Items.GOLD_INGOT))
+}
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/data/recipes/groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy" target="_blank"><code>Recipes.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+RecipeManagerHelper.removeRecipes {
+    it.remove(new ResourceLocation('minecraft', 'acacia_door'))
+    it.removeIf(RecipeType.BLASTING) { rec -&gt;
+        rec.resultItem.is(Items.GOLD_INGOT)
+    }
+}
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
     </div>
 </div>
 	    </main>

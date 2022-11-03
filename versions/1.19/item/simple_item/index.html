@@ -35,6 +35,9 @@
     <script src="https://kit.fontawesome.com/b1b70f724e.js" crossorigin="anonymous"></script>
     <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/groovy.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gradle.min.js"></script>
 
     <script>hljs.highlightAll();</script>
 
@@ -224,19 +227,94 @@
 <h2><a href="#registering-the-item" id="registering-the-item">Registering the Item</a></h2>
 <p>The first thing we need to do is register the item so that the game knows to add it in. First, we need to declare an instance of <code>net.minecraft.item.Item</code> with the parameters for our item.</p>
 <p>In theory, we could do this directly in the registration line but having a separate variable allows us to reference it elsewhere for other purposes.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java" target="_blank"><code>SimpleItemExample.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/java/src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java" target="_blank"><code>SimpleItemExample.java</code></a>:</p>
 <pre><code class="language-java">// ...
 public static final Item EXAMPLE_ITEM = new Item(new QuiltItemSettings().group(ItemGroup.MISC));
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/kotlin/src/main/kotlin/org/quiltmc/wiki/simple_item/SimpleItemExample.kt" target="_blank"><code>SimpleItemExample.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+val EXAMPLE_ITEM: Item = Item(itemSettingsOf(group = ItemGroup.MISC))
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/scala/src/main/scala/org/quiltmc/wiki/simple_item/SimpleItemExample.scala" target="_blank"><code>SimpleItemExample.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+final val EXAMPLE_ITEM: Item = Item(QuiltItemSettings().group(ItemGroup.MISC))
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/groovy/src/main/groovy/org/quiltmc/wiki/simple_item/SimpleItemExample.groovy" target="_blank"><code>SimpleItemExample.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+final Item EXAMPLE_ITEM = new Item(new QuiltItemSettings().group(CreativeModeTab.TAB_MISC))
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <p>Here, the <code>public static final</code> ensures that we can access the item elsewhere but not change the contents of the variable itself, making sure that we don't accidentally alter it somewhere else.</p>
 <p>Our new instance of <code>Item</code> takes in an instance of <code>QuiltItemSettings</code> as an argument. This is where we declare all of the settings for our item. There are a variety of these, but for now we only need <code>.group()</code>, which sets which creative tab the item will be found in. You can create your own, but here we use the Miscellaneous tab.</p>
 <p>Now that we've declared the item, we need to tell the game registry to put it into the game. We do so by putting this into the mod's <code>onInitialize</code> method:</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java" target="_blank"><code>SimpleItemExample.java</code></a>:</p>
+<div class="tab-holder">
+<div class="tabs is-boxed">
+<ul class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<li class="tab is-active" onclick="switchTab(event,'java')"><a>Java</a></li>
+<li class="tab" onclick="switchTab(event,'kotlin')"><a>Kotlin</a></li>
+<li class="tab" onclick="switchTab(event,'scala')"><a>Scala</a></li>
+<li class="tab" onclick="switchTab(event,'groovy')"><a>Groovy (Mojmaps)</a></li>
+</ul>
+</div>
+<div class="has-lang-java has-lang-kotlin has-lang-scala has-lang-groovy">
+<section class="tab-contents lang-selected-java">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/java/src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java" target="_blank"><code>SimpleItemExample.java</code></a>:</p>
 <pre><code class="language-java">// ...
-Registry.register(Registry.ITEM, new Identifier(&quot;simple_item&quot;, &quot;example_item&quot;), EXAMPLE_ITEM);
+Registry.register(Registry.ITEM, new Identifier(mod.metadata().id(), &quot;example_item&quot;), EXAMPLE_ITEM);
 // ...
 </code></pre>
+</section>
+<section class="tab-contents lang-selected-kotlin" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/kotlin/src/main/kotlin/org/quiltmc/wiki/simple_item/SimpleItemExample.kt" target="_blank"><code>SimpleItemExample.kt</code></a>:</p>
+<pre><code class="language-kotlin">// ...
+registryScope(mod.metadata().id()) {
+    EXAMPLE_ITEM withPath &quot;example_item&quot; toRegistry Registry.ITEM
+}
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-scala" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/scala/src/main/scala/org/quiltmc/wiki/simple_item/SimpleItemExample.scala" target="_blank"><code>SimpleItemExample.scala</code></a>:</p>
+<pre><code class="language-scala">// ...
+Registry.register(Registry.ITEM, Identifier(mod.metadata.id, &quot;example_item&quot;), SimpleItemExample.EXAMPLE_ITEM)
+// ...
+</code></pre>
+</section>
+<section class="tab-contents lang-selected-groovy" style="display:none">
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/groovy/src/main/groovy/org/quiltmc/wiki/simple_item/SimpleItemExample.groovy" target="_blank"><code>SimpleItemExample.groovy</code></a>:</p>
+<pre><code class="language-groovy">// ...
+// arg0 is the ModContainer
+Registry.ITEM[new ResourceLocation(arg0.metadata().id(), 'example_item')] = EXAMPLE_ITEM
+// ...
+</code></pre>
+</section>
+</div>
+</div>
+<p>
 <p><code>Registry.register()</code> takes three parameters:</p>
 <ul>
     <li>The <code>Registry</code> we want to add to. For items this is always <code>Registry.ITEM</code>.</li>
@@ -246,7 +324,7 @@ Registry.register(Registry.ITEM, new Identifier(&quot;simple_item&quot;, &quot;e
 <p>Having done all of this, if we run the game we can see that our item appears in the Miscellaneous tab! But it doesn't have a texture, and its name isn't translated properly. How do we fix this?</p>
 <h2><a href="#textures" id="textures">Textures</a></h2>
 <p>First we need to declare the model for the item. This tells the game how to render the item.</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/src/main/resources/assets/simple_item/models/item/example_item.json" target="_blank"><code>example_item.json</code></a>:</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/java/src/main/resources/assets/simple_item/models/item/example_item.json" target="_blank"><code>example_item.json</code></a>:</p>
 <pre><code class="language-json">{
     &quot;parent&quot;: &quot;item/generated&quot;,
     &quot;textures&quot;: {
@@ -258,7 +336,7 @@ Registry.register(Registry.ITEM, new Identifier(&quot;simple_item&quot;, &quot;e
 <p>The texture file, as shown in the model, should match the path specified in the <code>Identifier</code>, so in our case <code>textures/item/example_item.png</code></p>
 <h2><a href="#language-translation" id="language-translation">Language Translation</a></h2>
 <p>Finally, we need to add a translation. Put this in <code>lang/en_us.json</code> in your assets folder, replacing the same values as before:</p>
-<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/src/main/resources/assets/simple_item/lang/en_us.json" target="_blank"><code>en_us.json</code></a>:</p>
+<p>From <a href="https://github.com/QuiltMC/developer-wiki/tree/main/wiki/versions/1.19/item/simple_item/java/src/main/resources/assets/simple_item/lang/en_us.json" target="_blank"><code>en_us.json</code></a>:</p>
 <pre><code class="language-json">{
   &quot;item.simple_item.example_item&quot;: &quot;Example Item&quot;
 }
