@@ -56,9 +56,9 @@ We have a custom feature that can directly place the contents of files into wiki
 ```file:path/to/file.ext
 ```
 ~~~
-The path specified should be relative to the project the markdown file is contained in. The wiki will automatically place the file contents into the code 
-block. However, files are often too large, and so the wiki also supports adding regions from the code. Regions are started with `//@start Region` and close 
-with `//@end Region`, replacing `//` with the one line comment for the language file. Any code inside that is the placed into the code block. Overlapping 
+The path specified should be relative to the project the markdown file is contained in. The wiki will automatically place the file contents into the code
+block. However, files are often too large, and so the wiki also supports adding regions from the code. Regions are started with `//@start Region` and close
+with `//@end Region`, replacing `//` with the one line comment for the language file. Any code inside that is the placed into the code block. Overlapping
 regions strip the region comments. A code block with the following syntax will target a region:
 ~~~markdown
 ```file:path/to/file.ext@Region
@@ -85,6 +85,17 @@ java:path/to/java/file.java@Region
 kotlin:path/to/kotlin/file.kt@Region
 ```
 ~~~
+If you write java code, the wiki has a tool to generate translations from quilt mappings to mojmaps; simply run the
+`translateToMojmaps` task to generate translated code of any code in `src/main/java` of every project. To include these
+translations in the displayed code on a page, use the following syntax:
+~~~markdown
+```tabbed-files
+java:src/main/java/package/File.java@Region
+java@mojmaps:src_mojmaps/package/File.java@Region
+```
+~~~
+Note that this can be used for code chunks that are available only in one language - if only a single tab would be displayed,
+all tabs are hidden from a given code block.
 
 ## Guide: New Tutorials
 
