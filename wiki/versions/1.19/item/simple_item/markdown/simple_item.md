@@ -7,7 +7,8 @@ The first thing we need to do is register the item so that the game knows to add
 In theory, we could do this directly in the registration line but having a separate variable allows us to reference it elsewhere for other purposes.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Declaration
+java@qm:java/src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Declaration
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Declaration
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/simple_item/SimpleItemExample.kt@Declaration
 scala:scala/src/main/scala/org/quiltmc/wiki/simple_item/SimpleItemExample.scala@Declaration
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/simple_item/SimpleItemExample.groovy@Declaration
@@ -20,7 +21,8 @@ Our new instance of `Item` takes in an instance of `QuiltItemSettings` as an arg
 Now that we've declared the item, we need to tell the game registry to put it into the game. We do so by putting this into the mod's `onInitialize` method:
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Registration
+java@qm:java/src/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Registration
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/simple_item/SimpleItemExample.java@Registration
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/simple_item/SimpleItemExample.kt@Registration
 scala:scala/src/main/scala/org/quiltmc/wiki/simple_item/SimpleItemExample.scala@Registration
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/simple_item/SimpleItemExample.groovy@Registration

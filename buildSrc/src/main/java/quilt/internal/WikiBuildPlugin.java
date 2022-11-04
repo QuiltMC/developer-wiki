@@ -41,12 +41,20 @@ public class WikiBuildPlugin implements Plugin<Project> {
 		target.getTasks().register("generateWiki", GenerateWikiTask.class);
 		target.getTasks().register("testWiki", TestWikiTask.class);
 		target.allprojects(project -> {
+			project.getExtensions().create("wikiBuild", WikiBuildExtension.class);
 			if (project.hasProperty("minecraft_version")) {
 				String minecraftVersion = project.findProperty("minecraft_version").toString();
-				project.getTasks().register("translateToMojmaps", MigrateMappingsTask.class).configure(task -> {
-					task.setMappings("net.minecraft:mappings:"+minecraftVersion);
-					task.setOutputDir("src_mojmaps");
-				});
+				if (project.file("src/main/java").exists()) {
+					project.getTasks().register("translateToMojmaps", MigrateMappingsTask.class).configure(task -> {
+						task.setMappings("net.minecraft:mappings:" + minecraftVersion);
+						task.setOutputDir("src_mojmaps/main/java");
+					});
+					project.afterEvaluate(p -> {
+						p.getTasks().getByName("translateToMojmaps", task -> {
+							task.setEnabled(p.getExtensions().getByType(WikiBuildExtension.class).getMojmapTranslatable().get());
+						});
+					});
+				}
 			}
 		});
 	}

@@ -16,7 +16,8 @@ The conventional way of specifying inputs and output, is to utilize `Ingredient`
 You should also store the recipe identifier for identification and value filling.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Starting
+java@qm:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Starting
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Starting
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/MyRecipe.kt@Starting
 scala:scala/src/main/scala/org/quiltmc/wiki/recipes/MyRecipe.scala@Starting
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/MyRecipe.groovy@Starting
@@ -28,7 +29,8 @@ The method `matches` returns whether this current recipe should be matched when 
 Match the inventory contents against the inputs here.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Match
+java@qm:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Match
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Match
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/MyRecipe.kt@Match
 scala:scala/src/main/scala/org/quiltmc/wiki/recipes/MyRecipe.scala@Match
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/MyRecipe.groovy@Match
@@ -40,7 +42,8 @@ Outputting has two parts, `getOutput` and `craft`, the first being a view of the
 the output that may be modified.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Output
+java@qm:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Output
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Output
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/MyRecipe.kt@Output
 scala:scala/src/main/scala/org/quiltmc/wiki/recipes/MyRecipe.scala@Output
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/MyRecipe.groovy@Output
@@ -63,7 +66,8 @@ serialized correctly via dumping the recipes with the `quilt.recipe.dump` proper
 and checking the outputted recipes.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer-JSON
+java@qm:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer-JSON
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer-JSON
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/MyRecipe.kt@Serializer-JSON
 scala:scala/src/main/scala/org/quiltmc/wiki/recipes/MyRecipe.scala@Serializer-JSON
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/MyRecipe.groovy@Serializer-JSON
@@ -77,7 +81,8 @@ failing to implement the packet reading and writing might result in desynchroniz
 It is imperative that you read values in the same order that you wrote them.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer-Packet
+java@qm:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer-Packet
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer-Packet
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/MyRecipe.kt@Serializer-Packet
 scala:scala/src/main/scala/org/quiltmc/wiki/recipes/MyRecipe.scala@Serializer-Packet
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/MyRecipe.groovy@Serializer-Packet
@@ -88,7 +93,8 @@ groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/MyRecipe.groovy@Serialize
 Creating the recipe type is as simple as instantiating `RecipeType`, unfortunately it is an interface, so you have to subclass it.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@RecipeType-Instance
+java@qm:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@RecipeType-Instance
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/recipes/Recipes.java@RecipeType-Instance
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt@RecipeType-Instance
 scala:scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala@RecipeType-Instance
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@RecipeType-Instance
@@ -99,7 +105,8 @@ groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@RecipeType
 You must register your serializer and your type, so Minecraft knows about them.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Registration
+java@qm:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Registration
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/recipes/Recipes.java@Registration
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt@Registration
 scala:scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala@Registration
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@Registration
@@ -108,7 +115,8 @@ groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@Registrati
 Additionally, you also have to specify them in your recipe class.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer/Type
+java@qm:java/src/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer/Type
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/recipes/MyRecipe.java@Serializer/Type
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/MyRecipe.kt@Serializer/Type
 scala:scala/src/main/scala/org/quiltmc/wiki/recipes/MyRecipe.scala@Serializer/Type
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/MyRecipe.groovy@Serializer/Type

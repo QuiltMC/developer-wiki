@@ -17,7 +17,8 @@ The constructor takes:
 - A min and max value, clamping the **end result** of the modifier calculations (after all modifiers are applied)
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java@Attribute-Instance
+java@qm:java/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java@Attribute-Instance
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java@Attribute-Instance
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt@Attribute-Instance
 scala:scala/src/main/scala/org/quiltmc/wiki/entity_attributes/AttributesExample.scala@Attribute-Instance
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/AttributesExample.groovy@Attribute-Instance
@@ -38,7 +39,8 @@ At this point, we might want to add a language entry:
 With our `EntityAttribute` instance created, we can go ahead and register it.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java@Register-Attribute
+java@qm:java/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java@Register-Attribute
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java@Register-Attribute
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt@Register-Attribute
 scala:scala/src/main/scala/org/quiltmc/wiki/entity_attributes/AttributesExample.scala@Register-Attribute
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/AttributesExample.groovy@Register-Attribute
@@ -82,7 +84,8 @@ Each entity that does something different with attributes has their own attribut
 Remember, at this point, the builder is still mutable - and a reference - so our mixin is very straightforward.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java@Add-Attribute-Mixin
+java@qm:java/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java@Add-Attribute-Mixin
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java@Add-Attribute-Mixin
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.kt@Add-Attribute-Mixin
 scala:scala/src/main/scala/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.scala@Add-Attribute-Mixin
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.groovy@Add-Attribute-Mixin
@@ -97,7 +100,8 @@ We've registered our attribute and let all living entities know that they have i
 We'll need another mixin into `LivingEntity`, this time for the `getJumpVelocity` method. Since our initial fallback value is `1.0`, we can feel free to just multiply the end result by the attribute value.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java@Use-Attribute
+java@qm:java/src/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java@Use-Attribute
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.java@Use-Attribute
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.kt@Use-Attribute
 scala:scala/src/main/scala/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.scala@Use-Attribute
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/mixin/LivingEntityMixin.groovy@Use-Attribute
@@ -115,7 +119,8 @@ Attribute modifiers are completely disconnected from any particular attribute an
 - A double value and an `EntityAttributeModifier.Operation` that specifies how the modifier should be applied and by what magnitude
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java@Modifier-Instance
+java@qm:java/src/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java@Modifier-Instance
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/entity_attributes/AttributesExample.java@Modifier-Instance
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt@Modifier-Instance
 scala:scala/src/main/scala/org/quiltmc/wiki/entity_attributes/AttributesExample.scala@Modifier-Instance
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/AttributesExample.groovy@Modifier-Instance
@@ -132,7 +137,8 @@ The final step is to apply this modifier. These examples use the `SOME_MODIFIER`
 It's as simple as getting the attribute instance and calling `addTemporaryModifier` (or `addPersistentModifier` if you want it to be serialized in the instance's NBT).
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java@Apply-Direct
+java@qm:java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java@Apply-Direct
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java@Apply-Direct
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt@Apply-Direct
 scala:scala/src/main/scala/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.scala@Apply-Direct
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.groovy@Apply-Direct
@@ -141,7 +147,8 @@ groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/JumpBoostComman
 This is also the most appropriate case where you would remove the modifier at some other point in time. You can either use the UUID associated with the modifier or the modifier itself.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java@Remove-Direct
+java@qm:java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java@Remove-Direct
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java@Remove-Direct
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt@Remove-Direct
 scala:scala/src/main/scala/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.scala@Remove-Direct
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.groovy@Remove-Direct
@@ -156,7 +163,8 @@ Upon equipping an item, the game checks if it has any attribute modifiers marked
 You can use the `ItemStack#addAttributeModifier` method to apply a modifier via NBT.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java@Apply-NBT
+java@qm:java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java@Apply-NBT
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.java@Apply-NBT
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/AttributesExample.kt@Apply-NBT
 scala:scala/src/main/scala/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.scala@Apply-NBT
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/JumpBoostCommand.groovy@Apply-NBT
@@ -167,7 +175,8 @@ groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/JumpBoostComman
 The `Item` class contains a `getAttributeModifiers` method which returns a multimap of modifiers to apply when the item is equipped in the specified slot. We can override this in our own item class.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpStick.java
+java@qm:java/src/main/java/org/quiltmc/wiki/entity_attributes/JumpStick.java
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/entity_attributes/JumpStick.java
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/entity_attributes/JumpStick.kt
 scala:scala/src/main/scala/org/quiltmc/wiki/entity_attributes/JumpStick.scala
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/entity_attributes/JumpStick.groovy

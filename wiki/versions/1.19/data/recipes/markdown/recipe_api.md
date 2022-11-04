@@ -28,7 +28,8 @@ Static recipes are a kind of recipe that is always kept present during the whole
 They're only applied after data pack reloads, that is, when starting a world/server or after using the `/reload` command.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Static-Recipe
+java@qm:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Static-Recipe
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/recipes/Recipes.java@Static-Recipe
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt@Static-Recipe
 scala:scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala@Static-Recipe
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@Static-Recipe
@@ -40,7 +41,8 @@ Mods might want to add recipes that have runtime components - Something that can
 recipes that depend on other mods. Dynamic recipe providers allow for that.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Adding
+java@qm:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Adding
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/recipes/Recipes.java@Adding
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt@Adding
 scala:scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala@Adding
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@Adding
@@ -51,7 +53,8 @@ groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@Adding
 Mods might want to modify values or replace recipes entirely while they're being built, this event allows for that.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Modification
+java@qm:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Modification
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/recipes/Recipes.java@Modification
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt@Modification
 scala:scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala@Modification
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@Modification
@@ -63,7 +66,8 @@ Mods might want to remove a recipe completely from the game, this event allows f
 might not be entirely compatible with what other mods expect.
 
 ```tabbed-files
-java:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Removal
+java@qm:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Removal
+java@mojmaps:java/src_mojmaps/main/java/org/quiltmc/wiki/recipes/Recipes.java@Removal
 kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt@Removal
 scala:scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala@Removal
 groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@Removal

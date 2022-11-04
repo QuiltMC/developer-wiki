@@ -85,13 +85,15 @@
           for (let i = 0; i < tabs.length; i++) {
             if (tabs[i].parentElement.classList.contains("has-lang-"+tabName)) {
               tabs[i].className = tabs[i].className.replaceAll(" is-active", "");
+              if (tabs[i].classList.contains("tab-lang-selected-"+tabName)) {
+                tabs[i].className += " is-active";
+              }
             }
           }
           let bodies = document.getElementsByClassName("lang-selected-"+tabName);
           for (let i = 0; i < bodies.length; i++) {
             bodies[i].style.display = "block";
           }
-          evt.currentTarget.className += " is-active";
         }
 
         var mappings = sessionStorage.getItem("mappings_name");

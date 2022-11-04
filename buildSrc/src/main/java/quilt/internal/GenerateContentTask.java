@@ -43,18 +43,25 @@ public class GenerateContentTask extends DefaultTask {
 		});
 	}
 
+	private static final Pattern SIMPLE_PATTERN = Pattern.compile("```([a-z]+):(.+?)(?:@(.+?))?\\n");
+	private static final Pattern TABBED_FILES_FULL_PATTERN = Pattern.compile("```tabbed-files\\s*(([a-z]+)(?:@([a-z]+?))?:(.+?)(?:@(.+?))?\\s+)+```");
+	private static final Pattern TABBED_FILES_LINE_PATTERN = Pattern.compile("([a-z]+)(?:@([a-z]+?))?:(.+?)(?:@(.+?))?");
+	private static final Pattern INDENT_PATTERN = Pattern.compile("^(\\s*).*");
+	private static final Pattern REGION_START_PATTERN = Pattern.compile("// @start .*");
+	private static final Pattern REGION_END_PATTERN = Pattern.compile("// @end .*");
+
 	private void generateContent(GenerateWikiFileTreeTask.FileEntry entry) throws IOException {
 		if (Files.exists(entry.path())) {
 			// Read the path
 			String input = Files.readString(entry.path()).replace("\r", "");
 
 			// Parse the path includes
-			Matcher matcher = Pattern.compile("```([a-z]+):(.+?)(?:@(.+?))?\\n").matcher(input);
+			Matcher matcher = SIMPLE_PATTERN.matcher(input);
 
 			input = matcher.replaceAll(matchResult -> replaceSimpleMatch(matchResult, entry));
 
 			// Parse tabbed path includes
-			matcher = Pattern.compile("```tabbed-files\\s*(([a-z]+)(?:@([a-z]+?))?:(.+?)(?:@(.+?))?\\s+)+```").matcher(input);
+			matcher = TABBED_FILES_FULL_PATTERN.matcher(input);
 
 			input = matcher.replaceAll(matchResult -> replaceTabbedMatch(matchResult, entry));
 
@@ -80,7 +87,7 @@ public class GenerateContentTask extends DefaultTask {
 		StringBuilder sections = new StringBuilder();
 		StringBuilder outerClasses = new StringBuilder();
 		boolean isFirst = true;
-		List<Matcher> matchers = Arrays.stream(full).map(tab -> Pattern.compile("([a-z]+)(?:@([a-z]+?))?:(.+?)(?:@(.+?))?").matcher(tab)).toList();
+		List<Matcher> matchers = Arrays.stream(full).map(tab -> TABBED_FILES_LINE_PATTERN.matcher(tab)).toList();
 		boolean isAnyMapped = matchers.stream().anyMatch(it -> it.matches() && it.group(2)!=null);
 		if (isAnyMapped)
 			outerClasses.append("has-mappable ");
@@ -101,6 +108,7 @@ public class GenerateContentTask extends DefaultTask {
 				}
 				tabs.append("<li class=\"tab"+
 						(mappings!=null?" is-mappings-"+mappings:"")
+						+" tab-lang-selected-" + tag
 						+(isFirst ? " is-active" : "")
 						+"\" onclick=\"switchTab(event,'" + tag + "')\" data-tablang=\""+language+"\"><a>"+name+"</a></li>\n");
 				String codeChunk = replaceMatch(matcher.group(3), matcher.group(4), language, entry);
@@ -154,7 +162,7 @@ public class GenerateContentTask extends DefaultTask {
 
 			fileText = fileText.substring(startRegion + 10 + region.length(), endRegion).stripTrailing() + "\n";
 			int maxLeading = fileText.lines().filter(line->!line.isBlank()).mapToInt(line->{
-				Matcher matcher = Pattern.compile("^(\\s*).*").matcher(line);
+				Matcher matcher = INDENT_PATTERN.matcher(line);
 				if(!matcher.matches())
 					return 0;
 				return matcher.group(1).length();
@@ -169,10 +177,8 @@ public class GenerateContentTask extends DefaultTask {
 		}
 
 		fileText = fileText.lines().filter(line ->
-				!Pattern.compile("// @start .*")
-						.matcher(line.trim()).matches() ||
-				!Pattern.compile("// @end .*")
-						.matcher(line.trim()).matches()).collect(Collectors.joining("\n"));
+				!REGION_START_PATTERN.matcher(line.trim()).matches() ||
+				!REGION_END_PATTERN.matcher(line.trim()).matches()).collect(Collectors.joining("\n"));
 
 		String filePath = getProject().file(".").toPath().relativize(file).toString().replace("\\", "/");
 
@@ -196,8 +202,7 @@ public class GenerateContentTask extends DefaultTask {
 	private static final Map<String, String> CAPITALIZATION_LOOKUP = Map.of(
 			"java", "Java",
 			"kotlin", "Kotlin",
-			"json", "JSON",
-			"groovy", "Groovy (Mojmaps)"
+			"json", "JSON"
 	);
 
 	private static final Map<String, String> MAPPING_LOOKUP = Map.of(
