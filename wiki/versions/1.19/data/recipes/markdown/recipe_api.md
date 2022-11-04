@@ -27,7 +27,11 @@ The events contained in this system have a set order, which is addition, modific
 Static recipes are a kind of recipe that is always kept present during the whole game lifecycle.
 They're only applied after data pack reloads, that is, when starting a world/server or after using the `/reload` command.
 
-```file:src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Static-Recipe
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Static-Recipe
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt@Static-Recipe
+scala:scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala@Static-Recipe
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@Static-Recipe
 ```
 
 ### Addition
@@ -35,14 +39,22 @@ They're only applied after data pack reloads, that is, when starting a world/ser
 Mods might want to add recipes that have runtime components - Something that cannot be known at build time - for example,
 recipes that depend on other mods. Dynamic recipe providers allow for that.
 
-```file:src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Adding
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Adding
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt@Adding
+scala:scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala@Adding
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@Adding
 ```
 
 ### Modification
 
 Mods might want to modify values or replace recipes entirely while they're being built, this event allows for that.
 
-```file:src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Modification
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Modification
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt@Modification
+scala:scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala@Modification
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@Modification
 ```
 
 ### Removal
@@ -50,5 +62,9 @@ Mods might want to modify values or replace recipes entirely while they're being
 Mods might want to remove a recipe completely from the game, this event allows for that. Be aware that removing recipes
 might not be entirely compatible with what other mods expect.
 
-```file:src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Removal
+```tabbed-files
+java:java/src/main/java/org/quiltmc/wiki/recipes/Recipes.java@Removal
+kotlin:kotlin/src/main/kotlin/org/quiltmc/wiki/recipes/Recipes.kt@Removal
+scala:scala/src/main/scala/org/quiltmc/wiki/recipes/Recipes.scala@Removal
+groovy:groovy/src/main/groovy/org/quiltmc/wiki/recipes/Recipes.groovy@Removal
 ```

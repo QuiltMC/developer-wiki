@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
-    "quilt-bulma": "^0.0.4"
+    "quilt-bulma": "^0.0.12"
   }
 }

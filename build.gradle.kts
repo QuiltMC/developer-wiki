@@ -1,5 +1,6 @@
 plugins {
 	id("java")
+    id("idea") // Needed for scala support in Intellij strangely
 	id("wiki-build-logic")
 
 	id("com.github.node-gradle.node")

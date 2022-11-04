@@ -1,6 +1,7 @@
 package quilt.internal;
 
 import com.vladsch.flexmark.util.ast.Node;
+import groovy.json.StringEscapeUtils;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
@@ -141,7 +142,7 @@ public class GenerateContentTask extends DefaultTask {
 		String fileText;
 
 		try {
-			fileText = Files.readString(file);
+			fileText = Matcher.quoteReplacement(Files.readString(file));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -195,7 +196,8 @@ public class GenerateContentTask extends DefaultTask {
 	private static final Map<String, String> CAPITALIZATION_LOOKUP = Map.of(
 			"java", "Java",
 			"kotlin", "Kotlin",
-			"json", "JSON"
+			"json", "JSON",
+			"groovy", "Groovy (Mojmaps)"
 	);
 
 	private static final Map<String, String> MAPPING_LOOKUP = Map.of(
