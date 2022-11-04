@@ -46,6 +46,9 @@ public class WikiBuildPlugin implements Plugin<Project> {
 				String minecraftVersion = project.findProperty("minecraft_version").toString();
 				if (project.file("src/main/java").exists()) {
 					project.getTasks().register("translateToMojmaps", MigrateMappingsTask.class).configure(task -> {
+						task.doFirst(t -> {
+							project.file("src_mojmaps/main/java").delete();
+						});
 						task.setMappings("net.minecraft:mappings:" + minecraftVersion);
 						task.setOutputDir("src_mojmaps/main/java");
 					});
