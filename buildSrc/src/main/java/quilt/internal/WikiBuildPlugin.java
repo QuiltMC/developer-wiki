@@ -41,7 +41,7 @@ public class WikiBuildPlugin implements Plugin<Project> {
 		target.getTasks().register("generateWiki", GenerateWikiTask.class);
 		target.getTasks().register("testWiki", TestWikiTask.class);
 		target.allprojects(project -> {
-			var extension = project.getExtensions().create("wikiBuild", MappingTranslationExtension.class);
+			var extension = project.getExtensions().create("wikiMappings", MappingTranslationExtension.class);
 			if (project.hasProperty("minecraft_version")) {
 				String minecraftVersion = project.findProperty("minecraft_version").toString();
 				extension.getMinecraftVersion().set(project.findProperty("minecraft_version").toString());
