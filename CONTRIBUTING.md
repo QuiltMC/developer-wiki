@@ -104,7 +104,7 @@ translations in the displayed code on a page, use the following syntax:
 ~~~markdown
 ```tabbed-files
 java:src/main/java/package/File.java@Region
-java@mojmaps:src_mojmaps/package/File.java@Region
+java@mojmaps:src_mojmaps/main/java/package/File.java@Region
 ```
 ~~~
 Note that this can be used for code chunks that are available only in one language - if only a single tab would be displayed,
