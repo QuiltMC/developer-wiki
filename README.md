@@ -9,10 +9,10 @@ pnpm install
 Run dev server with:
 
 ```bash
-pnpm run dev
+pnpm dev
 
 # or start the server and open the app in a new browser tab
-pnpm run dev -- --open
+pnpm dev -- --open
 ```
 
 ## Building
@@ -20,7 +20,7 @@ pnpm run dev -- --open
 To create a production version of your app:
 
 ```bash
-pnpm run build
+pnpm build
 ```
 
-You can preview the production build with `pnpm run preview`.
+You can preview the production build with `pnpm preview`.
