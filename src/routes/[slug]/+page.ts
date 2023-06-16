@@ -1,5 +1,6 @@
+import fs from "fs/promises";
+
 import type { PageLoadEvent } from "./$types";
-import fs from "fs";
 
 export async function load({ params }: PageLoadEvent){
 	const post = await import(`../${params.slug}.md`);
@@ -10,6 +11,6 @@ export async function load({ params }: PageLoadEvent){
 }
 
 export async function entries(){
-	const articles = fs.readdirSync("src/routes").filter(path => path.endsWith(".md") && !path.startsWith("+page"));
+	const articles = await fs.readdir("src/routes").then(files => files.filter(path => path.endsWith(".md") && !path.startsWith("+")));
 	return articles.map(path => { return { slug: path.slice(0, -3) }});
 }

@@ -1,6 +1,6 @@
 # Quilt Developer Wiki
 
-Installed dependencies:
+Installe dependencies:
 
 ```bash
 pnpm install

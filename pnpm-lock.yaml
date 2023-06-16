@@ -13,6 +13,12 @@ devDependencies:
   mdsvex:
     specifier: ^0.10.6
     version: 0.10.6(svelte@3.59.1)
+  prismjs:
+    specifier: ^1.29.0
+    version: 1.29.0
+  quilt-bulma:
+    specifier: ^0.0.23
+    version: 0.0.23
   svelte:
     specifier: ^3.54.0
     version: 3.59.1
@@ -750,6 +756,10 @@ packages:
 
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
+    dev: true
+
+  /quilt-bulma@0.0.23:
+    resolution: {integrity: sha512-79pxK+JfOk5ZWH9Qz67nKPkaRpNgqs1Eky0wsqgTviaRtg9xx1+IFi8F4UkFfITqv3JoNjCF+qK3mIEJhyz1IA==}
     dev: true
 
   /readdirp@3.6.0:

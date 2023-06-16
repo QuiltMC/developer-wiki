@@ -1,1 +1,0 @@
-# Quilt Developer Wiki :P
