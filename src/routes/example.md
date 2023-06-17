@@ -1,12 +1,13 @@
 ---
 title: Example page
 categories:
-  - example
+  - Example category
 ---
 
 *example*
 
 
+`example.java`
 ```java
 // Here's some code!
 

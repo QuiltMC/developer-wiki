@@ -70,11 +70,17 @@
                     </p>
 
                     <p>
-                        Made with <i class="fak fa-2xl fa-pumpkin"></i>, <a href="https://bulma.io">Bulma</a> and
-                        <a href="https://github.com/CreativeBulma">the CreativeBulma extensions</a>.
+                        Made with <img src="https://quiltmc.org/assets/img/pineapple.png" alt=":pineapple:" title="Pineapple" width="24" height="24" class="pineapple">,
+                        <a href="https://bulma.io">Bulma</a> and <a href="https://github.com/CreativeBulma">the CreativeBulma extensions</a>.
                     </p>
                 </div>
             </div>
         </div>
     </div>
 </footer>
+
+<style>
+    .pineapple {
+        margin-bottom: -5px;
+    }
+</style>

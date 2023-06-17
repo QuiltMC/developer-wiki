@@ -4,7 +4,7 @@
     import Footer from "$lib/Footer.svelte";
 </script>
 
-<HtmlHead/>
+<HtmlHead />
 
 <Header />
 <slot />
