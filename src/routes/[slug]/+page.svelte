@@ -1,8 +1,7 @@
-<script>
-	import Sidebar from '$lib/Sidebar.svelte';
+<script lang="ts">
+	import Sidebar from "$lib/Sidebar.svelte";
 
 	export let data;
-	console.log(data);
 </script>
 
 <svelte:head>
@@ -16,7 +15,7 @@
 
 			<div class="content column">
 				<h1>{data.title}</h1>
-				<h3>Categories: {data.categories.map(cat => cat.name)}</h3>
+				<h3>Categories: {data.categories.map((cat) => cat.name)}</h3>
 
 				<svelte:component this={data.content} />
 			</div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Category } from './types';
+	import type { Category } from "./types";
 
 	export let categories: Category[] = [];
 	export let slug: string | undefined = undefined;

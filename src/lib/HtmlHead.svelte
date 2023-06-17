@@ -1,9 +1,8 @@
-<script>
-	import styles_dark from 'quilt-bulma/dist/style-dark.min.css?url';
-	import styles_light from 'quilt-bulma/dist/style-light.min.css?url';
-
-	import prism_dark from 'prismjs/themes/prism-tomorrow.min.css?url';
-	import prism_light from 'prismjs/themes/prism.min.css?url';
+<script lang="ts">
+	import prism_dark from "prismjs/themes/prism-tomorrow.min.css?url";
+	import prism_light from "prismjs/themes/prism.min.css?url";
+	import styles_dark from "quilt-bulma/dist/style-dark.min.css?url";
+	import styles_light from "quilt-bulma/dist/style-light.min.css?url";
 </script>
 
 <svelte:head>
