@@ -4,10 +4,10 @@ categories:
   - Example category
 ---
 
-*example*
-
+_example_
 
 `example.java`
+
 ```java
 // Here's some code!
 
