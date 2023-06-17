@@ -1,6 +1,8 @@
-<script>
-	export let categories;
-	export let slug;
+<script lang="ts">
+	import type { Category } from './types';
+
+	export let categories: Category[] = [];
+	export let slug: string | undefined = undefined;
 </script>
 
 <div class="column is-narrow" data-controller="sidebar">
@@ -22,11 +24,9 @@
 						{category.name}
 						{#each category.pages as page}
 							<ul>
-								{#if slug === page.slug}
-									<li><a href="/{page.slug}" class="is-active">{page.title}</a></li>
-								{:else}
-									<li><a href="/{page.slug}">{page.title}</a></li>
-								{/if}
+								<li>
+									<a href="/{page.slug}" class:is-active={slug === page.slug}>{page.title}</a>
+								</li>
 							</ul>
 						{/each}
 					</li>

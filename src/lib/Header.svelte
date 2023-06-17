@@ -1,4 +1,4 @@
-<nav class="navbar is-dark" role="navigation" aria-label="main navigation" data-controller="navbar">
+<nav class="navbar is-dark" aria-label="main navigation" data-controller="navbar">
 	<div class="navbar-brand">
 		<a class="navbar-item pr-6" href="/">
 			<img src="https://quiltmc.org/assets/img/logo.svg" alt="Quilt Logo" />
@@ -37,8 +37,7 @@
 			<span><i class="fas fa-home fa-lg" /></span>
 		</a>
 
-		<a
-			role="button"
+		<button
 			data-navbar-target="menu"
 			data-action="click->navbar#toggle"
 			class="navbar-burger"
@@ -48,7 +47,7 @@
 			<span aria-hidden="true" />
 			<span aria-hidden="true" />
 			<span aria-hidden="true" />
-		</a>
+		</button>
 	</div>
 
 	<div class="navbar-menu" data-navbar-target="menu">

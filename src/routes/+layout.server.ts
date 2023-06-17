@@ -1,14 +1,5 @@
+import type { Category } from "$lib/types";
 import fs from "fs/promises";
-
-interface Page {
-  slug: string;
-  title: string;
-}
-
-interface Category {
-  name: string;
-  pages: Page[];
-}
 
 export async function load() {
   const files = await fs.readdir("src/routes");
@@ -22,10 +13,10 @@ export async function load() {
     const post = await import(`../routes/${article}.md` /* @vite-ignore */); // Don't ask, it works
 
     for (const category of post.metadata.categories) {
-      const idx = categories.findIndex((cat) => cat.name === category);
+			const cat = categories.find((cat) => cat.name === category);
 
-      if (idx != -1) {
-        categories[idx].pages.push(post.metadata);
+      if (cat) {
+        cat.pages.push(post.metadata);
       } else {
         categories.push({
           name: category,
@@ -35,5 +26,5 @@ export async function load() {
     }
   }
 
-  return { menu: categories };
+  return { categories };
 }

@@ -1,71 +1,26 @@
+<script>
+	import Button from "./Button.svelte";
+
+	// prettier-ignore
+	const buttons = [
+		{ title: "Discord", style: "is-discord", href: "https://discord.quiltmc.org", icon: "fab fa-discord" },
+		{ title: "Forum", style: "is-gradle", href: "https://forum.quiltmc.org", icon: "fab fa-discourse" },
+		{ title: "GitHub", style: "is-github", href: "https://github.com/QuiltMC", icon: "fab fa-github" },
+		{ title: "Twitter", style: "is-twitter", href: "https://twitter.com/quilt_mc", icon: "fab fa-twitter" },
+		{ title: "Mastodon", style: "is-mastodon", href: "https://tech.lgbt/@quiltmc", icon: "fab fa-mastodon" },
+		{ title: "Twitch", style: "is-primary", href: "https://twitch.tv/quiltmc", icon: "fab fa-twitch" },
+		{ title: "RSS", style: "is-rss", href: "https://quiltmc.org/feed.xml", icon: "fa-solid fa-rss" },
+	];
+</script>
+
 <footer class="footer">
 	<div class="content">
 		<div class="columns">
 			<div class="column is-half is-offset-one-quarter">
 				<div class="button-grid">
-					<a
-						title="Discord"
-						class="button is-discord is-rounded"
-						target="_blank"
-						href="https://discord.quiltmc.org"
-					>
-						<span class="icon"><i class="fab fa-discord" /></span>
-					</a>
-
-					<a
-						title="Forum"
-						class="button is-gradle is-rounded"
-						target="_blank"
-						href="https://forum.quiltmc.org"
-					>
-						<span class="icon"><i class="fab fa-discourse" /></span>
-					</a>
-
-					<a
-						title="GitHub"
-						class="button is-github is-rounded"
-						target="_blank"
-						href="https://github.com/QuiltMC"
-					>
-						<span class="icon"><i class="fab fa-github" /></span>
-					</a>
-
-					<a
-						title="Twitter"
-						class="button is-twitter is-rounded"
-						target="_blank"
-						href="https://twitter.com/quilt_mc"
-					>
-						<span class="icon"><i class="fab fa-twitter" /></span>
-					</a>
-
-					<a
-						title="Mastodon"
-						class="button is-mastodon is-rounded"
-						target="_blank"
-						rel="me"
-						href="https://tech.lgbt/@quiltmc"
-					>
-						<span class="icon"><i class="fab fa-mastodon" /></span>
-					</a>
-
-					<a
-						title="Twitch"
-						class="button is-primary is-rounded"
-						target="_blank"
-						href="https://twitch.tv/quiltmc"
-					>
-						<span class="icon"><i class="fab fa-twitch" /></span>
-					</a>
-
-					<a
-						title="RSS"
-						class="button is-rss is-rounded"
-						target="_blank"
-						href="https://quiltmc.org/feed.xml"
-					>
-						<span class="icon"><i class="fa-solid fa-rss" /></span>
-					</a>
+					{#each buttons as button}
+						<Button {...button} />
+					{/each}
 				</div>
 
 				<br />

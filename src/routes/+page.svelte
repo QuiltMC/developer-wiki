@@ -1,5 +1,5 @@
-<script>
-	import Sidebar from '$lib/Sidebar.svelte';
+<script lang="ts">
+	import Sidebar from "$lib/Sidebar.svelte";
 
 	export let data;
 </script>
@@ -11,7 +11,7 @@
 <section class="section">
 	<main class="container">
 		<div class="columns">
-			<Sidebar categories={data.menu} />
+			<Sidebar categories={data.categories} />
 
 			<div class="content column">
 				<h1>Quilt Developer Wiki :P</h1>
