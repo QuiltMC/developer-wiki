@@ -1,24 +1,25 @@
-import type { Category, Post } from "$lib/types";
+import type { Category, GlobImport } from "$lib/types";
 
 export async function load() {
-	const articles = import.meta.glob(["$wiki/*.md", "!$wiki/+*.md"]);
+	const articles: GlobImport = import.meta.glob(["$wiki/*.md", "!$wiki/+*.md"]);
 
 	const categories: Category[] = [];
 
-	for (const article in articles) {
-		const post: Post = await articles[article]();
+	for (const [path, resolver] of Object.entries(articles)) {
+		const post = await resolver();
+
+		if (post instanceof Function) continue; // The resolver can return itself, we need to filter that out
 
 		for (const category of post.metadata.categories) {
 			const cat = categories.find((cat) => cat.name === category);
+			const slug = path.slice(path.lastIndexOf("/") + 1, -3);
 
 			if (cat) {
-				cat.pages.push(post.metadata);
+				cat.pages.push({ slug, ...post.metadata });
 			} else {
 				categories.push({
 					name: category,
-					pages: [
-						{ slug: article.slice(article.lastIndexOf("/") + 1, -3), title: post.metadata.title }
-					]
+					pages: [{ slug, ...post.metadata }]
 				});
 			}
 		}
