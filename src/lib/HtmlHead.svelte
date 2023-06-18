@@ -11,6 +11,8 @@
 
 	<link rel="preconnect" href="https://quiltmc.org" />
 	<link rel="preconnect" href="https://fonts.bunny.net" />
+	<link rel="preconnect" href="https://kit.fontawesome.com" />
+	<link rel="preconnect" href="https://ka-p.fontawesome.com" />
 
 	<link
 		rel="icon"

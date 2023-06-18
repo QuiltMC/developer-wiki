@@ -1,6 +1,7 @@
 import type { Category, GlobImport } from "$lib/types";
+import type { LayoutServerLoadEvent } from "./$types";
 
-export async function load() {
+export async function load({ params }: LayoutServerLoadEvent) {
 	const articles: GlobImport = import.meta.glob(["$wiki/*.md", "!$wiki/+*.md"]);
 
 	const categories: Category[] = [];
@@ -25,5 +26,5 @@ export async function load() {
 		}
 	}
 
-	return { categories };
+	return { slug: params.slug, categories };
 }

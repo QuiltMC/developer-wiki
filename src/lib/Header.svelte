@@ -1,23 +1,22 @@
 <nav class="navbar is-dark" aria-label="main navigation" data-controller="navbar">
-	<div class="navbar-brand">
-		<a class="navbar-item pr-6" href="/">
-			<img src="https://quiltmc.org/assets/img/logo.svg" alt="Quilt Logo" />
+	<div class="navbar-brand no-style">
+		<a class="navbar-item navbar-logo" href="/">
+			<img src="https://quiltmc.org/assets/img/logo.svg" alt="Quilt Logo" height="28" width="28" />
 
 			<span class="ml-2">DevWiki</span>
 		</a>
 
-		<a
-			class="navbar-item px-2 has-tooltip-arrow has-tooltip-bottom"
-			style="display: none"
-			id="language-switcher"
+		<label
+			class="navbar-item px-2 has-tooltip-arrow has-tooltip-bottom is-hidden"
+			for="language-switcher"
 			data-tooltip="Switch Language"
 		>
 			<i class="fas fa-language fa-2xl" />
-		</a>
+		</label>
 
-		<a
+		<label
 			class="navbar-item px-2 has-tooltip-arrow has-tooltip-bottom"
-			id="theme-switcher"
+			for="low-contrast"
 			data-tooltip="Toggle Low Contrast"
 		>
 			<span id="theme-normal-contrast">
@@ -27,27 +26,21 @@
 			<span id="theme-low-contrast">
 				<i class="fal fa-circle-half-stroke fa-xl" />
 			</span>
-		</a>
+		</label>
 
 		<a
 			class="navbar-item px-2 has-tooltip-arrow has-tooltip-bottom"
 			href="https://quiltmc.org/"
 			data-tooltip="Website Home"
 		>
-			<span><i class="fas fa-home fa-lg" /></span>
+			<i class="fas fa-home fa-lg" />
 		</a>
 
-		<button
-			data-navbar-target="menu"
-			data-action="click->navbar#toggle"
-			class="navbar-burger"
-			aria-label="menu"
-			aria-expanded="false"
-		>
+		<label class="navbar-burger" for="toggle-navbar" aria-label="menu">
 			<span aria-hidden="true" />
 			<span aria-hidden="true" />
 			<span aria-hidden="true" />
-		</button>
+		</label>
 	</div>
 
 	<div class="navbar-menu" data-navbar-target="menu">

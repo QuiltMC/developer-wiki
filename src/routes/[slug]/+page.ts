@@ -1,9 +1,9 @@
 import type { PageLoadEvent } from "./$types";
 
 export async function load({ params }: PageLoadEvent) {
-	const post = await import(`../../../wiki/${params.slug}.md` /* @vite-ignore */);
+	const post = await import(`../../../wiki/${params.slug}.md`);
 
-	return { content: post.default, title: post.metadata.title, slug: params.slug };
+	return { content: post.default, title: post.metadata.title };
 }
 
 export async function entries() {

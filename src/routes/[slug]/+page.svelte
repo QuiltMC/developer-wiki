@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Sidebar from "$lib/Sidebar.svelte";
-
 	export let data;
 </script>
 
@@ -8,17 +6,9 @@
 	<title>{data.title}</title>
 </svelte:head>
 
-<section class="section">
-	<main class="container">
-		<div class="columns">
-			<Sidebar categories={data.categories} slug={data.slug} />
+<main class="content column">
+	<h1>{data.title}</h1>
+	<h3>Categories: {data.categories.map((cat) => cat.name)}</h3>
 
-			<div class="content column">
-				<h1>{data.title}</h1>
-				<h3>Categories: {data.categories.map((cat) => cat.name)}</h3>
-
-				<svelte:component this={data.content} />
-			</div>
-		</div>
-	</main>
-</section>
+	<svelte:component this={data.content} />
+</main>

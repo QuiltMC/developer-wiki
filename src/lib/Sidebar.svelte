@@ -5,19 +5,20 @@
 	export let slug: string | undefined = undefined;
 </script>
 
-<div class="column is-narrow" data-controller="sidebar">
+<div class="column is-narrow">
 	<div class="is-hidden-tablet">
-		<button data-action="click->sidebar#toggle" class="button is-primary">
+		<label class="button is-primary" for="toggle-sidebar">
 			<span class="icon"><i class="fas fa-ellipsis-h" /></span>
 			<span>Menu</span>
-		</button>
+		</label>
 
 		<br />
 		<br />
 	</div>
 
-	<div class="box is-hidden-mobile is-sticky" data-sidebar-target="sidebar">
-		<div class="menu">
+	<div class="box is-hidden-mobile is-sticky sidebar">
+		<aside class="menu">
+			<p class="menu-label">Articles</p>
 			<ul class="menu-list">
 				{#each categories as category}
 					<li>
@@ -32,6 +33,6 @@
 					</li>
 				{/each}
 			</ul>
-		</div>
+		</aside>
 	</div>
 </div>

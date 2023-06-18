@@ -34,7 +34,7 @@
 						Quilt is not an official Minecraft product, and is not approved by or associated with
 						Mojang Studios. "Minecraft" is a trademark of Mojang AB and any usage of the Minecraft
 						brand on this site is used in accordance with Mojang Studios'
-						<a href="https://account.mojang.com/terms?ref=ft#brand" target="_blank"
+						<a href="https://www.minecraft.net/en-us/terms#terms-brand_guidelines" target="_blank"
 							>Brand and Asset Guidelines</a
 						>.
 					</p>
@@ -67,6 +67,7 @@
 </footer>
 
 <style>
+	.footer,
 	.pineapple {
 		margin-bottom: -5px;
 	}
