@@ -1,9 +1,10 @@
-import fs from "fs/promises";
-
+import type { Post } from "$lib/types";
 import type { PageLoadEvent } from "./$types";
 
 export async function load({ params }: PageLoadEvent) {
-	const post = await import(`../${params.slug}.md` /* @vite-ignore */);
+	const articles = await import.meta.glob(`$wiki/*.md`);
+	const path = Object.keys(articles).find((article) => article.endsWith(params.slug + ".md")) || "";
+	const post: Post = await articles[path]();
 	const { title } = post.metadata;
 	const content = post.default;
 
@@ -11,9 +12,9 @@ export async function load({ params }: PageLoadEvent) {
 }
 
 export async function entries() {
-	const files = await fs.readdir("src/routes");
-	const articles = files.filter((path) => path.endsWith(".md") && !path.startsWith("+"));
+	const articles = Object.keys(import.meta.glob(["$wiki/*.md", "!$wiki/+*.md"]));
+
 	return articles.map((path) => {
-		return { slug: path.slice(0, -3) };
+		return { slug: path.slice(path.lastIndexOf("/") + 1, -3) };
 	});
 }

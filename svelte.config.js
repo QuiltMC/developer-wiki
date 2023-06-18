@@ -4,13 +4,18 @@ import { mdsvex } from "mdsvex";
 
 export default {
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+
+		alias: {
+			$wiki: "wiki"
+		}
 	},
 
 	extensions: [".svelte", ".md"],
 
 	preprocess: [
 		vitePreprocess(),
+
 		mdsvex({
 			extensions: [".md"]
 		})

@@ -1,17 +1,12 @@
-import fs from "fs/promises";
-
-import type { Category } from "$lib/types";
+import type { Category, Post } from "$lib/types";
 
 export async function load() {
-	const files = await fs.readdir("src/routes");
-	const articles = files
-		.filter((path) => path.endsWith(".md") && !path.startsWith("+"))
-		.map((path) => path.slice(0, -3));
+	const articles = import.meta.glob(["$wiki/*.md", "!$wiki/+*.md"]);
 
 	const categories: Category[] = [];
 
-	for (const article of articles) {
-		const post = await import(`../routes/${article}.md` /* @vite-ignore */); // Don't ask, it works
+	for (const article in articles) {
+		const post: Post = await articles[article]();
 
 		for (const category of post.metadata.categories) {
 			const cat = categories.find((cat) => cat.name === category);
@@ -21,7 +16,9 @@ export async function load() {
 			} else {
 				categories.push({
 					name: category,
-					pages: [{ slug: article, title: post.metadata.title }]
+					pages: [
+						{ slug: article.slice(article.lastIndexOf("/") + 1, -3), title: post.metadata.title }
+					]
 				});
 			}
 		}
