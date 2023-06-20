@@ -33,7 +33,7 @@
 <div class="section">
 	<main class="container">
 		<div class="columns">
-			<Sidebar categories={data.categories} slug={data.slug} />
+			<Sidebar categories={data.categories} slug={data.slug} category={data.category} />
 
 			<slot />
 		</div>

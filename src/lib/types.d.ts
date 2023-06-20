@@ -7,13 +7,14 @@ export interface Page {
 
 export interface Category {
 	name: string;
+	slug: string;
 	pages: Page[];
 }
 
 export interface Post {
 	metadata: {
 		title: string;
-		categories: string[];
+		category: string;
 	};
 	default: Promise<SvelteComponentTyped>;
 }

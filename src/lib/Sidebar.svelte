@@ -2,7 +2,8 @@
 	import type { Category } from "./types";
 
 	export let categories: Category[] = [];
-	export let slug: string | undefined = undefined;
+	export let slug: string;
+	export let category: string;
 </script>
 
 <div class="column is-narrow">
@@ -20,13 +21,16 @@
 		<aside class="menu">
 			<p class="menu-label">Articles</p>
 			<ul class="menu-list">
-				{#each categories as category}
+				{#each categories as cat}
 					<li>
-						{category.name}
-						{#each category.pages as page}
+						{cat.name}
+						{#each cat.pages as page}
 							<ul>
 								<li>
-									<a href="/{page.slug}" class:is-active={slug === page.slug}>{page.title}</a>
+									<a
+										href="/{cat.slug}/{page.slug}"
+										class:is-active={category === cat.slug && slug === page.slug}>{page.title}</a
+									>
 								</li>
 							</ul>
 						{/each}
