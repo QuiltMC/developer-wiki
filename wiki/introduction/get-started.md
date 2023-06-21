@@ -1,6 +1,5 @@
 ---
 title: Getting started with Quilt
-category: Introduction
 ---
 
 # Getting started with Quilt

@@ -1,6 +1,5 @@
 ---
 title: Setting up a development environment
-category: Introduction
 ---
 
 # Setting up a development environment
@@ -12,7 +11,7 @@ You'll need a couple things before you can get started.
   You can download them here: <https://adoptium.net/releases.html>
 - Any Java IDE, like [IntelliJ Idea](https://www.jetbrains.com/idea/) or [Eclipse](https://www.eclipse.org/ide/).
   [Visual Studio Code](https://www.eclipse.org/ide/) can work, but it takes extra work to get set up.
-    - We recommend using IntelliJ Idea as it has the most integrations and is the easiest to use.
+  - We recommend using IntelliJ Idea as it has the most integrations and is the easiest to use.
 
 ## Template mod download (Java)
 
@@ -44,7 +43,7 @@ that is highly recommended to have. You can get it here:
 
 ## Making the mod yours
 
-First, update `gradle.properties` to use your Maven group and mod ID. 
+First, update `gradle.properties` to use your Maven group and mod ID.
 If you don't know which Maven group to use, and you are planning to host the mod's
 source code on GitHub, use `io.github.<Your_Username_Here>`. Set `archives_base_name`
 to your mod's ID.
@@ -60,14 +59,14 @@ You'll need to update a few things under `"quilt_loader"`:
 2. `"id"` should be set to your mod's ID. This should be your mod's name in all lowercase
    with underscores instead of spaces.
 3. `"metadata"`:
-    1. `"name"` should be your mod's name. This does not require any special formatting,
-       unlike your mod's ID.
-    2. `"description"` should be a short description of your mod.
-    3. `"contributors"` can contain entries for anything. Use your name as the key
-       and `"Developer"` as the value if you don't know what to put here.
-    4. `"contact"` can contain entries for anything similar to `""contributors"`,
-       but typically people put a `"homepage"` and a `"sources"` entry with a valid URL here.
-    5. Replace `example_mod` with your mod's ID in `"icon"`.
+   1. `"name"` should be your mod's name. This does not require any special formatting,
+      unlike your mod's ID.
+   2. `"description"` should be a short description of your mod.
+   3. `"contributors"` can contain entries for anything. Use your name as the key
+      and `"Developer"` as the value if you don't know what to put here.
+   4. `"contact"` can contain entries for anything similar to `""contributors"`,
+      but typically people put a `"homepage"` and a `"sources"` entry with a valid URL here.
+   5. Replace `example_mod` with your mod's ID in `"icon"`.
 4. In `"entrypoints"`, replace `com.example.example_mod` with your Maven group and mod ID,
    and the `ExampleMod` at the end should be the Java class name for your mod.
    For example, `io.github.bingus.bingus_mod.BingusMod`.

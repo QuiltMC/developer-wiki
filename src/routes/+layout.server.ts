@@ -1,6 +1,9 @@
+import YAML from "yaml";
+
+import fs from "fs";
+
 import type { Category, GlobImport } from "$lib/types";
 import type { LayoutServerLoadEvent } from "./$types";
-
 
 export async function load({ params }: LayoutServerLoadEvent) {
 	const articles: GlobImport = import.meta.glob("$wiki/**/*.md");
@@ -13,17 +16,22 @@ export async function load({ params }: LayoutServerLoadEvent) {
 		if (post instanceof Function) continue; // The resolver can return itself, we need to filter that out
 
 		const [, , category, slug] = path.split("/");
-		const cat = categories.find((cat) => cat.name === category);
+		const cat = categories.find((cat) => cat.slug === category);
 		const page = {
 			slug: slug.slice(0, -3),
 			title: post.metadata.title,
 			category: post.metadata.category
 		};
 
+		const metadata = YAML.parse(
+			fs.readFileSync(`${process.cwd()}/wiki/${category}/+category.yml`, "utf-8")
+		);
+		const name = metadata.name;
+
 		if (cat) {
 			cat.pages.push(page);
 		} else {
-			categories.push({ name: page.category, slug: category, pages: [page] });
+			categories.push({ name, slug: category, pages: [page] });
 		}
 	}
 

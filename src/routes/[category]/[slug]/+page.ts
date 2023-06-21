@@ -10,6 +10,7 @@ export async function entries() {
 	const articles = Object.keys(import.meta.glob("$wiki/**/*.md"));
 
 	return articles.map((path) => {
-		return { category: path.slice(path.indexOf("/", 1) + 1, path.lastIndexOf("/")), slug: path.slice(path.lastIndexOf("/") + 1, -3) };
+		const [, category, slug] = path.split("/");
+		return { category, slug };
 	});
 }

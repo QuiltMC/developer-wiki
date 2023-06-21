@@ -2,8 +2,7 @@
 	import type { Category } from "./types";
 
 	export let categories: Category[] = [];
-	export let slug: string;
-	export let category: string;
+	export let url: string;
 </script>
 
 <div class="column is-narrow">
@@ -21,19 +20,19 @@
 		<aside class="menu">
 			<p class="menu-label">Articles</p>
 			<ul class="menu-list">
-				{#each categories as cat}
+				{#each categories as category}
 					<li>
-						{cat.name}
-						{#each cat.pages as page}
-							<ul>
+						{category.name}
+						<ul>
+							{#each category.pages as page}
 								<li>
 									<a
-										href="/{cat.slug}/{page.slug}"
-										class:is-active={category === cat.slug && slug === page.slug}>{page.title}</a
+										href={`/${category.slug}/${page.slug}`}
+										class:is-active={url === `${category.slug}/${page.slug}`}>{page.title}</a
 									>
 								</li>
-							</ul>
-						{/each}
+							{/each}
+						</ul>
 					</li>
 				{/each}
 			</ul>
