@@ -22,7 +22,8 @@ straight away.
 To download the ZIP file for the template mod, open the [GitHub repository](https://github.com/QuiltMC/quilt-template-mod),
 then go to the `< >` button and press `Download ZIP`, or refer to the following images:
 
-TODO: INSERT IMAGE 1 & 2 HERE
+![Arrow pointing to the <> button](/introduction/setting-up-1.png)
+![Arrow pointing to the Download ZIP button](/introduction/setting-up-2.png)
 
 Extract the ZIP file's contents into a folder of your choosing. Alternatively, if you
 created a repository through GitHub, clone that repository using Git.
@@ -33,7 +34,7 @@ If you downloaded the template mod and extracted it into a folder,
 import the project by pressing the `Open` button in the project listing.
 If you made a GitHub repository with the template, use the `Get from VCS` button.
 
-TODO: INSERT IMAGE 3 HERE
+![IntelliJ Idea projects window](/introduction/setting-up-3.png)
 
 If you get a window asking if you trust the folder, press `Trust Project`.
 
@@ -48,7 +49,7 @@ If you don't know which Maven group to use, and you are planning to host the mod
 source code on GitHub, use `io.github.<Your_Username_Here>`. Set `archives_base_name`
 to your mod's ID.
 
-TODO: INSERT IMAGE 4 HERE
+![gradle.properties](/introduction/setting-up-4.png)
 
 ---
 
@@ -74,7 +75,7 @@ You'll need to update a few things under `"quilt_loader"`:
 
 Your `quilt.mod.json` should not have any traces of "example" in them anymore.
 
-TODO: INSERT IMAGE 5 HERE
+![quilt.mod.json](/introduction/setting-up-5.png)
 
 ---
 
@@ -93,7 +94,7 @@ For example, if your Maven group is `io.github.bingus` and your mod's ID is `bin
 you should have four directories in total. IntelliJ Idea should make this step easier for
 you when you rename the directories; just change the whole line to match your group and ID.
 
-TODO: INSERT IMAGE 6 HERE
+![IntelliJ Idea rename packages dialog](/introduction/setting-up-6.png)
 
 Delete the `com.example` directories.
 
@@ -105,7 +106,7 @@ In the `resources` folder, change `example_mod.mixins.json` to the file name you
 
 Your directories and file names should not have any traces of "example" in them anymore.
 
-TODO: INSERT IMAGE 7 HERE
+![Directory structure](/introduction/setting-up-7.png)
 
 ---
 
@@ -119,10 +120,10 @@ This is so you can view Minecraft's code with the power of Quilt's decompiler.
 In the Gradle menu, go to the `fabric` category and run the `genSourcesWithQuiltflower`
 task.
 
-TODO: INSERT IMAGE 8 HERE
+![Gradle window with genSourcesWithQuiltflower highlighted](/introduction/setting-up-8.png)
 
 Finally, reload the Gradle project by pressing this button in the Gradle menu:
 
-TODO: INSERT IMAGE 9 HERE
+![Gradle window with the reload project button highlighted](/introduction/setting-up-9.png)
 
 Once you're done with all of these steps, your mod is ready to be worked on!
