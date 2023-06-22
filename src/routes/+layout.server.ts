@@ -20,18 +20,17 @@ export async function load({ params }: LayoutServerLoadEvent) {
 		const page = {
 			slug: slug.slice(0, -3),
 			title: post.metadata.title,
-			category: post.metadata.category
 		};
 
 		const metadata = YAML.parse(
 			fs.readFileSync(`${process.cwd()}/wiki/${category}/+category.yml`, "utf-8")
 		);
-		const name = metadata.name;
+		const categoryName = metadata.name;
 
 		if (cat) {
 			cat.pages.push(page);
 		} else {
-			categories.push({ name, slug: category, pages: [page] });
+			categories.push({ name: categoryName, slug: category, pages: [page] });
 		}
 	}
 

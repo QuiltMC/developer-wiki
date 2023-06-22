@@ -30,11 +30,11 @@
 <input id="toggle-sidebar" type="checkbox" class="is-hidden" />
 
 <Header />
-<main class="section">
+<div class="section">
 	<div class="columns">
 		<Sidebar categories={data.categories} url={data.category + "/" + data.slug} />
 
 		<slot />
 	</div>
-</main>
+</div>
 <Footer />
