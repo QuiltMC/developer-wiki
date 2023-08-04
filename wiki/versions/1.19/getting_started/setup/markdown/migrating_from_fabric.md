@@ -3,7 +3,7 @@
 While Quilt supports loading Fabric mods, you might want to experience some additional features that Quilt might
 provide.
 
-To set up a Quilt mod workspace, check the [`Setup` guide](./setup).
+To set up a Quilt mod workspace, check the [`Setup` guide](./setup.md).
 
 ## Notable Differences
 
