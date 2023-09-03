@@ -1,5 +1,6 @@
 ---
 title: Getting started with Quilt
+index: 1
 ---
 
 # Getting started with Quilt

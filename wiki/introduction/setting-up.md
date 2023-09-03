@@ -1,5 +1,6 @@
 ---
 title: Setting up a development environment
+index: 2
 ---
 
 # Setting up a development environment
@@ -127,3 +128,4 @@ Finally, reload the Gradle project by pressing this button in the Gradle menu:
 ![Gradle window with the reload project button highlighted](/introduction/setting-up-9.png)
 
 Once you're done with all of these steps, your mod is ready to be worked on!
+You can start for example by [Adding your first item](../items/01-first-item)

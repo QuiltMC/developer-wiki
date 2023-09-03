@@ -1,5 +1,6 @@
 ---
 title: Creating your first Item
+index: 1
 ---
 
 # Creating your first item
@@ -8,7 +9,7 @@ title: Creating your first Item
 Items are crucial to Minecraft, and almost any mod will make use of them. This tutorial will go through the basic steps for creating an item.
 
 ## Registering the Item
-The first thing we need to do is register the item so that the game knows to add it in. [Registries](TODO) are an integral part to Minecraft (and modding it). Blocks, Entities, Items, Sounds, Particles,... all those different aspects are using a registry. First, we need to declare an instance of `net.minecraft.item.Item` with the parameters for our item.
+The first thing we need to do is register the item so that the game knows to add it in. [Registries](../concepts/registries) are an integral part to Minecraft (and modding it). Blocks, Entities, Items, Sounds, Particles,... all those different aspects are using a registry. First, we need to declare an instance of `net.minecraft.item.Item` with the parameters for our item.
 
 In theory, we could do this directly in the registration line but having a separate variable allows us to reference it elsewhere for other purposes.
 
@@ -44,7 +45,7 @@ ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
 });
 ```
 
-Here we are using the `ItemGroupEvents` API. We get the [Event](TODO) for modifying the `INGREDIENTS` item group and register a new listener. [Events](TODO) have two main use cases. On the one side you can use them to do things when something happens, for example when block gets broken or even simply at each tick. On the other side they can be used for modifying things like item groups, where ordering is important. However in this case we are doing nothing complicated and simply adding the item to the end of the Ingredients item group. This will also add them to search.
+Here we are using the `ItemGroupEvents` API. We get the [Event](../concepts/events) for modifying the `INGREDIENTS` item group and register a new listener. [Events](../concepts/events) have two main use cases. On the one side you can use them to do things when something happens, for example when block gets broken or even simply at each tick. On the other side they can be used for modifying things like item groups, where ordering is important. However in this case we are doing nothing complicated and simply adding the item to the end of the Ingredients item group. This will also add them to search.
 
 ## Textures
 First we need to declare the model for the item. This tells the game how to render the item.
@@ -77,6 +78,6 @@ And that's it! Your item should be fully working.
 
 
 ## What's next?
-This tutorial only covers the most basic of items. Check the other item tutorials for more advanced items or [add a simple block](TODO)
+This tutorial only covers the most basic of items. Check the other item tutorials for more advanced items or [add a simple block](../blocks/first-block)
 
-If you want your item to have a recipe, generate one from [destruc7i0n's crafting recipe generator](https://crafting.thedestruc7i0n.ca/) (you may want to use a placeholder for the `output` item and then replace it with e.g. `simple_item:example_item`) and then put it in a JSON file under `src/main/resources/data/simple_item/recipes/` (replacing `simple_item` with your mod ID). Further details on item recipes can be found <abbr title="This documentation is not done yet, but it will be soon!">here</abbr>.
+If you want your item to have a recipe, generate one from [destruc7i0n's crafting recipe generator](https://crafting.thedestruc7i0n.ca/) (you may want to use a placeholder for the `output` item and then replace it with e.g. `simple_item:example_item`) and then put it in a JSON file under `src/main/resources/data/simple_item/recipes/` (replacing `simple_item` with your mod ID). [Further details on item recipes can be found here.](../data/adding-recipes)
