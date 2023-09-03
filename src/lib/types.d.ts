@@ -2,6 +2,7 @@ import type { SvelteComponentTyped } from "svelte";
 
 export interface Page {
 	slug: string;
+	index: number;
 	title: string;
 }
 
@@ -14,7 +15,7 @@ export interface Category {
 export interface Post {
 	metadata: {
 		title: string;
-		category: string;
+		index: number?;
 	};
 	default: Promise<SvelteComponentTyped>;
 }

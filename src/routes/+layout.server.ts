@@ -17,8 +17,10 @@ export async function load({ params }: LayoutServerLoadEvent) {
 
 		const [, , category, slug] = path.split("/");
 		const cat = categories.find((cat) => cat.slug === category);
+		if (!post.metadata.index) post.metadata.index = 0;
 		const page = {
 			slug: slug.slice(0, -3),
+			index: post.metadata.index,
 			title: post.metadata.title,
 		};
 
@@ -32,6 +34,10 @@ export async function load({ params }: LayoutServerLoadEvent) {
 		} else {
 			categories.push({ name: categoryName, slug: category, pages: [page] });
 		}
+	}
+
+	for (let category of categories) {
+		category.pages.sort((a, b) => a.index - b.index);
 	}
 
 	return { category: params.category, slug: params.slug, categories };
