@@ -36,6 +36,18 @@
 		<link href="https://quiltmc.org/assets/fontawesome/css/all.min.css" rel="stylesheet" />
 	</noscript>
 
+	<style global>
+		.token.number {
+			background-color: initial;
+			border-radius: initial;
+			display: initial;
+			font-size: 1em;
+			margin-right: initial;
+			padding: initial;
+			text-align: left;
+			vertical-align: initial;
+		}
+	</style>
 	<link rel="stylesheet" href={prism_dark} media="(prefers-color-scheme:dark)" />
 	<link rel="stylesheet" href={prism_light} media="(prefers-color-scheme:light)" />
 </svelte:head>
