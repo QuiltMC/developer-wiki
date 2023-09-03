@@ -30,7 +30,7 @@ ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries 
 });
 ```
 
-For more information on what this does, see the [Creating your first Item](../items/first-item) Article.
+For more information on what this does, see the [Creating your first Item](../items/first-item#registering-the-item) Article.
 
 ## Adding a Model for the Block
 
