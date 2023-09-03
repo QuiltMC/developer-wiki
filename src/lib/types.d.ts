@@ -9,6 +9,7 @@ export interface Page {
 export interface Category {
 	name: string;
 	slug: string;
+	index: number;
 	pages: Page[];
 }
 
