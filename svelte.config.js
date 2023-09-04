@@ -5,7 +5,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import toc from '@jsdevtools/rehype-toc';
 import sectionize from '@hbsnow/rehype-sectionize';
-import { children } from "svelte/internal";
+import rehypeRewrite from 'rehype-rewrite';
 
 export default {
 	kit: {
@@ -38,16 +38,11 @@ export default {
 						}]
 					}
 				}],
-				[sectionize, {properties: {className: "column content"}}],
+				[sectionize, {properties: {className: ""}}],
 				[toc, {
 					nav: false,
 					customizeTOC: (toc) =>{
 						toc.properties.className = "menu-list";
-						function change_tagname(node) {
-							if (node.tagName == "ol") node.tagName = "ul";
-							if (node.children) node.children.forEach(change_tagname);
-						}
-						change_tagname(toc);
 						return {
 							type: 'element',
 							tagName: 'div',
@@ -70,6 +65,16 @@ export default {
 								]}]
 							}]
 						};
+					}
+				}],
+				[rehypeRewrite, {
+					rewrite: (node, index, parent) => {
+						if(node.type == 'element' && node.tagName == 'ol') {
+							node.tagName = 'ul'
+						}
+						if (node.type === 'element' && node.tagName === 'section' && node.properties && node.properties.dataHeadingRank && node.properties.dataHeadingRank === 1) {
+							node.properties.className = "column content container";
+						}
 					}
 				}]
 			]

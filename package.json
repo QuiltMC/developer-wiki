@@ -31,6 +31,7 @@
 		"rehype-slug": "^6.0.0",
 		"@hbsnow/rehype-sectionize": "^1.0.7",
 		"@jsdevtools/rehype-toc": "^3.0.2",
+		"rehype-rewrite": "^3.0.6",
 		"svelte": "^3.59.2",
 		"svelte-check": "^3.4.4",
 		"tslib": "^2.5.3",
