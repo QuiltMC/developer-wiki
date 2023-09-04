@@ -59,7 +59,7 @@ Here we are using the `ItemGroupEvents` API. We get the [Event](../concepts/even
 
 First we need to declare the model for the item. This tells the game how to render the item.
 
-`example_item.json`:
+`assets/simple_item_mod/models/item/example_item.json`:
 
 ```json
 {
@@ -70,7 +70,8 @@ First we need to declare the model for the item. This tells the game how to rend
 }
 ```
 
-This goes in `assets/simple_item_mod/models/item`. 
+Replace the mod id and item name as before.
+
 For most items, all you need to do here is replace `simple_item_mod` with your mod ID and `example_item` with the item name you set earlier. Be sure to replace them in both the file/folder names and the JSON file.
 The texture file, as shown in the model, should match the path specified in the `Identifier`, so in our case `assets/simple_item_mod/textures/item/example_item.png`
 
@@ -88,6 +89,6 @@ And that's it! Your item should be fully working.
 
 ## What's next?
 
-This tutorial only covers the most basic of items. Check the other item tutorials for more advanced items or [add a simple block](../blocks/first-block)
+This tutorial only covers the most basic of items. Check the other item tutorials for more advanced items or try [Adding a simple block](../blocks/first-block).
 
-If you want your item to have a recipe, generate one from [destruc7i0n's crafting recipe generator](https://crafting.thedestruc7i0n.ca/) (you may want to use a placeholder for the `output` item and then replace it with e.g. `simple_item_mod:example_item`) and then put it in a JSON file under `resources/data/simple_item_mod/recipes/` (replacing `simple_item_mod` with your mod id). Further details on item recipes can be found on [the dedicated recipe page](.../data/adding-recipes).
+If you want your item to have a recipe, generate one from [destruc7i0n's crafting recipe generator](https://crafting.thedestruc7i0n.ca/) (you can add your mod's items using the "Add Item" button above the ingredient list) and then put it in a JSON file under `resources/data/simple_item_mod/recipes/` (replacing `simple_item_mod` with your mod id). Further details on item recipes can be found on [the dedicated recipe page](.../data/adding-recipes).
