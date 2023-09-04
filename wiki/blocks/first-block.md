@@ -26,7 +26,7 @@ Having done that, we can place the block using the `setblock` command, but there
 Registry.register(Registries.ITEM, new Identifier(mod.metadata().id(), "example_block"), new BlockItem(EXAMPLE_BLOCK, new QuiltItemSettings()))
 
 ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
-	entries.addStack(EXAMPLE_BLOCK.asItem().getDefaultStack());
+	entries.addItem(EXAMPLE_BLOCK.asItem());
 });
 ```
 
@@ -35,7 +35,9 @@ For more information on what this does, see the [Creating your first Item](../it
 ## Adding a Model for the Block
 
 First, we need to create the BlockStates file for your Block. This tells the game which BlockStates use which models. For an example on using a more complicated BlockState setup, see [Adding redstone functionality to your Block](TODO). In this case, we only have one BlockState and can use this simple json:
+
 `assets/simple_block_mod/blockstates/example_block.json`:
+```json
 {
     "variants": {
         "": {
@@ -72,6 +74,7 @@ Replace `simple_block_mod` and `example_block` as before.
 ## Adding a translation for the Block
 
 Last but not least we need to add a translation for the block. This will automatically apply to the BlockItem, too.
+
 `assets/simple_block_mod/lang/en_us.json`:
 ```json
 {

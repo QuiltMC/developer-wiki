@@ -42,7 +42,7 @@ Because of a change in 1.19.3, you can't add items to item groups using only QSL
 
 ```java
 ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
-	entries.addStack(EXAMPLE_ITEM.getDefaultStack());
+	entries.addItem(EXAMPLE_ITEM);
 });
 ```
 
