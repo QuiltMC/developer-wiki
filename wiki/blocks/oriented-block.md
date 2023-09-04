@@ -1,4 +1,4 @@
 ---
-title: Adding a oriented Block
+title: Adding an oriented Block
 index: 2
 ---
