@@ -25,7 +25,19 @@ export default {
 			extensions: [".md"],
 			rehypePlugins: [
 				rehypeSlug,
-				rehypeAutolinkHeadings,
+				[rehypeAutolinkHeadings, {
+					behavior: "append",
+					content: {
+						type: 'element',
+						tagName: 'span',
+						properties: {className: 'icon header-anchor-container pl-3'},
+						children: [{
+							type: 'element',
+							tagName: 'i',
+							properties: {className: 'header-anchor fas fa-lg fa-link has-text-link is-size-5'}
+						}]
+					}
+				}],
 				[sectionize, {properties: {className: "column content"}}],
 				[toc, {
 					nav: false,
