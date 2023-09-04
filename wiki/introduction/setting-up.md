@@ -5,7 +5,7 @@ index: 2
 
 # Setting up a development environment
 
-You'll need a couple things before you can get started.
+You'll need a couple of things before you can get started.
 
 - A Java Development Kit (JDK) for Java 17 (recommended) or newer.
   Temurin Adoptium JDKs are easily available and recommended.
@@ -29,7 +29,7 @@ then go to the `< >` button and press `Download ZIP`, or refer to the following 
 Extract the ZIP file's contents into a folder of your choosing. Alternatively, if you
 created a repository through GitHub, clone that repository using Git.
 
-## Setting up with IntelliJ Idea
+## Setting up with IntelliJ IDEA
 
 If you downloaded the template mod and extracted it into a folder,
 import the project by pressing the `Open` button in the project listing.
@@ -40,7 +40,7 @@ If you made a GitHub repository with the template, use the `Get from VCS` button
 If you get a window asking if you trust the folder, press `Trust Project`.
 
 There is a plugin that adds additional support for Minecraft modding projects
-that is highly recommended to have. You can get it here:
+that is highly recommended. You can get it here:
 <https://plugins.jetbrains.com/plugin/8327-minecraft-development>
 
 ## Making the mod yours
@@ -92,10 +92,10 @@ the template, not your mod.
 
 Change the name of the directories in the `src/main/java` folder to reflect your mod.
 For example, if your Maven group is `io.github.bingus` and your mod's ID is `bingus_mod`,
-you should have four directories in total. IntelliJ Idea should make this step easier for
+you should have four directories in total. IntelliJ IDEA should make this step easier for
 you when you rename the directories; just change the whole line to match your group and ID.
 
-![IntelliJ Idea rename packages dialog](/introduction/setting-up-6.png)
+![IntelliJ IDEA rename packages dialog](/introduction/setting-up-6.png)
 
 Delete the `com.example` directories.
 
@@ -125,7 +125,7 @@ task.
 
 Finally, reload the Gradle project by pressing this button in the Gradle menu:
 
-![Gradle window with the reload project button highlighted](/introduction/setting-up-9.png)
+![Gradle window with the 'reload project' button highlighted](/introduction/setting-up-9.png)
 
 Once you're done with all of these steps, your mod is ready to be worked on!
 You can start by [Adding your first item](../items/first-item)
