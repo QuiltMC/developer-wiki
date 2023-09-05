@@ -4,7 +4,7 @@ index: 1
 ---
 # Adding a Simple Block
 
-Creating a block is quite similar to [creating an item](../items/first-item), but now leveraging both the block *and* item registries, as well a more in-depth process for creating a model.
+Creating a block is quite similar to [creating an item](../items/first-item), but now leveraging both the block *and* item registries, as well as a more in-depth process for creating a model.
 
 ## Creating and Registering the Block
 
