@@ -1,3 +1,3 @@
 ---
-title: NBT and data in Minecaft
+title: NBT and Data in Minecaft
 ---

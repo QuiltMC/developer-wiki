@@ -1,10 +1,10 @@
 ---
-title: Adding food
+title: Adding Food
 index: 2
 ---
 # Adding food
 
-This tutorial will assume that you already understand [Creating your first item](first-item)
+This tutorial will assume that you already understand [Creating your First Item](first-item)
 
 Adding a `FoodComponent` to an item's settings makes that item food. A `FoodComponent` can be created using a `FoodComponent.Bulder`. Try reading the inline documentation (Javadocs) of the builder to understand what's going on here, or continue reading for an explanation:
 

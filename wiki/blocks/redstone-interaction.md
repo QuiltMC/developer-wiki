@@ -1,4 +1,4 @@
 ---
-title: Adding redstone functionality to your Block
+title: Adding Redstone Functionality to your Block
 index: 3
 ---

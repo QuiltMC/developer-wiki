@@ -1,3 +1,3 @@
 ---
-title: Using Registry Entry Attchments (REA)
+title: Using Registry Entry Attachments (REA)
 ---

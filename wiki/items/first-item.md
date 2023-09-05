@@ -1,16 +1,16 @@
 ---
-title: Creating your first Item
+title: Creating your First Item
 index: 1
 ---
 
-# Creating your first item
+# Creating your First Item
 
 <!-- This is migrated from the old wiki and modified to match 1.20, with some additions -->
 Items are crucial to Minecraft, and almost any mod will make use of them. This tutorial will go through the basic steps for creating an item.
 
 ## Registering the Item
 
-The first thing we need to do is register the item so that the game knows to add it in. [Registries](../concepts/registries) are an integral part to Minecraft (and modding it). Blocks, Entities, Items, Sounds, Particles... all those different aspects are using a registry.
+The first thing we need to do is register the item so that the game knows to add it in. [Registries](../concepts/registries) are an integral part to Minecraft (and modding it). Blocks, entities, items, sounds, particles... all those different aspects are using a registry.
 
 ---
 
@@ -37,12 +37,12 @@ Registry.register(Registries.ITEM, new Identifier(mod.metadata().id(), "example_
 `Registry.register()` takes three parameters:
 
 - The `Registry` we want to add to. For items this is always `Registries.ITEM`.
-- The `Identifier` used for the item. This must be unique. The first part is the namespace (which should be the mod id) and the item name itself. Only lowercase letters, numbers, underscores, dashes, periods, and slashes are allowed.
+- The `Identifier` used for the item. This must be unique. The first part is the namespace (which should be the mod id) and the item name itself. Only lowercase letters, numbers, underscores, dashes, periods, and slashes are allowed. To convert the item's name into this format, write everything in lowercase and separate words using underscores.
 - The `Item` to register. Here, we pass in the item we declared earlier.
 
 Having done all of this, if we run the game we can see that we can give the item using the give command: `/give @s simple_item_mod:example_item`! But it doesn't appear in the creative menu, nor does it have a texture, and its name isn't translated properly. How do we fix this?
 
-## Adding the Item to a group
+## Adding the Item to a Group
 
 `ItemGroup`s represent the tabs in the creative menu.
 Because of a change in 1.19.3, you can't add items to item groups using only [Quilt Standard Libraries](../concepts/qsl-qfapi) (From now on QSL). However, [Fabric API]((../concepts/qsl-qfapi)) has an API for it. Thanks to [Quilted Fabric API](../concepts/qsl-qfapi), which the template mod includes and users download with QSL, we can use it on Quilt, too:
@@ -53,7 +53,7 @@ ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
 });
 ```
 
-Here we are using the `ItemGroupEvents` API. We get the [Event](../concepts/events) for modifying the `INGREDIENTS` item group and register a new listener. [Events](../concepts/events) have two main use cases. On the one side you can use them to do things when something happens, for example when block gets broken or even simply at each tick. On the other side they can be used for modifying things like item groups, where ordering is important. In this case, however, we are doing nothing complicated and simply adding the item to the end of the Ingredients item group. This will also add them to the creative menu search.
+Here we are using the `ItemGroupEvents` API. We get the [event](../concepts/events) for modifying the `INGREDIENTS` item group and register a new listener. [Events](../concepts/events) have two main use cases. On the one side you can use them to do things when something happens, for example when block gets broken or even simply at each tick. On the other side they can be used for modifying things like item groups, where ordering is important. In this case, however, we are doing nothing complicated and simply adding the item to the end of the ingredients item group. This will also add them to the creative menu search.
 
 ## Textures
 
@@ -70,8 +70,6 @@ First we need to declare the model for the item. This tells the game how to rend
 }
 ```
 
-Replace the mod id and item name as before.
-
 For most items, all you need to do here is replace `simple_item_mod` with your mod ID and `example_item` with the item name you set earlier. Be sure to replace them in both the file/folder names and the JSON file.
 The texture file, as shown in the model, should match the path specified in the `Identifier`, so in our case `assets/simple_item_mod/textures/item/example_item.png`
 
@@ -84,6 +82,8 @@ Finally, we need to add a translation. Put this in `assets/simple_item_mod/lang/
 	"item.simple_item_mod.example_item": "Example Item"
 }
 ```
+
+Replace the mod id and item name as before.
 
 And that's it! Your item should be fully working.
 

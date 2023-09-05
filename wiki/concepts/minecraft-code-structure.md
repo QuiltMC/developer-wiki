@@ -1,3 +1,3 @@
 ---
-title: Minecraft’s code structure and where to find things
+title: Minecraft’s Code Structure and Where to Find Things
 ---

@@ -1,4 +1,4 @@
 ---
-title: Adding custom Tools
+title: Adding Custom Tools
 index: 4
 ---
