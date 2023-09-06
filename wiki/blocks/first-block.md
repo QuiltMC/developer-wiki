@@ -11,7 +11,7 @@ Creating a block is quite similar to [creating an item](../items/first-item), bu
 First we create the block and store it in a field:
 
 ```java
-public final Block EXAMPLE_BLOCK = new Block(new QuiltBlockSettings())
+public static final Block EXAMPLE_BLOCK = new Block(new QuiltBlockSettings());
 ```
 
 Then we register it in the `onInitialize()` function:
