@@ -6,9 +6,11 @@ title: Mod integration
 
 One of the main advantages of creating mods with Quilt is the ability to provide unique functionality depending on if another mod is installed.
 
-Some mods explicitly provide an API (Application Programming Interface) which can be included in your own project within the `build.gradle` file. This acts like a bridge between 2 mods that allows you to utalize features of that mod in your own project, without including the entire mods codebase which is likely to constantly be changing.
+Some mods explicitly provide an API (Application Programming Interface) which can be included in your own project as a dependency. This acts like a bridge between 2 mods that allows you to utalize features of that mod in your own project, without including the entire mods codebase, which is likely to constantly be changing.
 
-A mod does not have to include an API for you to interact with it however. Blocks, Items, Entities etc... are all registered in the same place and so should be accesible from any mod. Resources can share commmon id's allowing duplicates and common functionality. Mixins can also be used to directly modify the behaviour of other mods. Although doing so should be exercised with caution.
+A mod does not have to include an API for you to interact with it however. You can choose to execute sections of code depending on if a mod is loaded and if the mod is declared as a dependency you can use content from it.
+  
+Other ways of achieving mod integration can include loading objects from a common registry such as a specific Item, Block or Entity; Creating common tags for resources to prevent duplicates / allow shared behaviour and using Mixins to modify the behaviour of another mod.
 
 ## Licensing restrictions
 
@@ -17,6 +19,51 @@ Before deciding to add any kind of integration with other mods please check the 
 Most Minecraft mods are now open source and free to modify without permission but this is not always the case. Depending on the license some may request attribution is given or there code is not modified in a certain way. Some mods may also have an `All rights reserved` license meaning no kind of modification is allowed without asking the developers for explicit permission first.
 
 It is of course ok to check if a mod is installed and adjust your own mod accordingly.
+
+## Including other mods & libraries
+
+Other mods can be included within the `dependencies` section of the `build.gradle` file. The `.jar` file for mod dependencies will be located within a specific `repository` which also must be included. 
+
+If you are confused about the `libs.example.mod` notation you may want to read through [LINK]() first.
+
+```gradle
+repositories {
+	// Import the maven repository that stores the files we need
+	maven {
+		name = 'Example Mod API'
+		url = 'https://maven.examplemod.org/releases'
+	}
+}
+
+dependencies {
+	// Remap from the maven repository and apply different types of dependency configurations
+	modImplementation libs.example.mod.implemented
+	modImplementation (include (libs.example.mod.included))
+	modCompileOnly libs.example.mod.compiled
+}
+
+```
+As we can see there are various different ways mods can be included in our `build.gradle` file. These can achieve different purposes depending on what you need.
+
+### Gradle dependency configurations
+
+A table is included below showing a couple different mod dependency configurations. This is not a full list but should get you started.
+
+| Configuration | Explanation | Example Usage |
+| --- | --- | --- |
+| modCompileOnly | Included at compile time within the development environment only. There is no guarentee this mod will be included at runtime within an instance of Modded Minecraft | An optional dependency which is not required for a mod to run but can provide additional functionality |
+| modImplementation | Included as a dependency. Must be included both at `compile` time and `runtime` within your development environment and in a Modded Minecraft instance | Relying on another library. This library must be manually included by a player in the `mods` folder| 
+| include | `Shades` a dependency. This means the `.jar` file is included in the final build without another user having to include it themselves | If you want to bundle one mod alongside another `*` |
+
+`*` <small> Be careful with this configuration as within a modpack multiple versions of the same mod can be included causing conflicts. It can also make it difficult for players to debug a mod if they see another mod included that they don't recognise. </small>
+
+### Using a library / API
+
+Normally developers who want you to implement certain functionality from there mod will include information on how to do so. This will include lines to add to the `build.gradle` file, excluding the exact version which you must fill in. 
+  
+Most developers also include a wiki describing how to use the mod but this is not always the case. If you are having difficulties it can be helpful to see if other mods have used a specific library / API and learn by example or ask the mod developer(s) on what to do next. You can of course experiment if all else fails.
+
+If a mod is hosted using the `git` version control system you can also import the mod using [Jitpack](https://jitpack.io).
 
 ## Conditional execution
 
@@ -96,10 +143,6 @@ Better compatibility can also be established by checking a mods version and whet
 ## Mod Containers
 
 A Mod Container holds a mods associated metadata alongside other important information such as the type of mod (Quilt, Fabric, Built-in etc...), the location of it's root directory and sub-directories.
-
-## Mixin Injection
-
-Lucky Ducks will again be used to demonstrate some example code and as the victim for a Mixin injection. Applying a Mixin to another mod can be considered invasive depending on what is being done. If a mod is hosted using git it is generally a better idea to post a pull request with the functionality you need to the mod developer. Nevertheless inter-mod Mixins can be an options for a quick and(or) temporary fix.
 
 ## Example Files
 
