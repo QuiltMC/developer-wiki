@@ -46,24 +46,19 @@ export default {
 						return {
 							type: 'element',
 							tagName: 'div',
-							properties: {className: "column is-narrow"},
+							properties: {className: "box is-hidden-mobile is-sticky sidebar"},
 							children: [{
 								type: 'element',
-								tagName: 'div',
-								properties: {className: "box is-hidden-mobile is-sticky sidebar"},
+								tagName: 'aside',
+								properties: {className: "menu"},
 								children: [{
 									type: 'element',
-									tagName: 'aside',
-									properties: {className: "menu"},
-									children: [{
-										type: 'element',
-										tagName: 'p',
-										properties: {className: 'menu-label'},
-										children: [{type: 'text', value: 'Contents'}]
-									},
-									toc
-								]}]
-							}]
+									tagName: 'p',
+									properties: {className: 'menu-label'},
+									children: [{type: 'text', value: 'Contents'}]
+								},
+								toc
+							]}]
 						};
 					}
 				}],
@@ -73,7 +68,7 @@ export default {
 							node.tagName = 'ul'
 						}
 						if (node.type === 'element' && node.tagName === 'section' && node.properties && node.properties.dataHeadingRank && node.properties.dataHeadingRank === 1) {
-							node.properties.className = "column content container";
+							node.properties.className = "content container";
 						}
 					}
 				}]
