@@ -47,6 +47,12 @@
 			text-align: left;
 			vertical-align: initial;
 		}
+		@media screen and (min-width: 1260px) {
+			.table-of-contents {
+				float: right;
+				width: 340px;
+			}
+		}
 	</style>
 	<link rel="stylesheet" href={prism_dark} media="(prefers-color-scheme:dark)" />
 	<link rel="stylesheet" href={prism_light} media="(prefers-color-scheme:light)" />

@@ -46,7 +46,7 @@ export default {
 						return {
 							type: 'element',
 							tagName: 'div',
-							properties: {className: "box is-hidden-mobile is-sticky sidebar"},
+							properties: {className: "box is-hidden-mobile is-sticky sidebar table-of-contents"},
 							children: [{
 								type: 'element',
 								tagName: 'aside',
@@ -68,7 +68,7 @@ export default {
 							node.tagName = 'ul'
 						}
 						if (node.type === 'element' && node.tagName === 'section' && node.properties && node.properties.dataHeadingRank && node.properties.dataHeadingRank === 1) {
-							node.properties.className = "content container";
+							node.properties.className = "content";
 						}
 					}
 				}]
