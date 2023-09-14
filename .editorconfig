@@ -5,3 +5,7 @@ insert_final_newline = true
 [*.{js,ts,svelte,json,html}]
 indent_style = tab
 indent_size = 2
+
+[*.md]
+indent_style = tab
+indent_size = 4
