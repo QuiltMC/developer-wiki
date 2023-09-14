@@ -73,7 +73,7 @@ configuration befit for them.
 
     A default `LICENSE` file is not included by itself in the template mod, only a template, choose a license that matches
 your own priorities and thoughts, and then create a file that has the legal text for it. In the event that you are unsure
-which license to choose, Modrinth has a very straightforward [blog post](https://blog.modrinth.com/licensing-guide) on the subject which may help.
+which license to choose, Modrinth has a very straightforward [blog post](https://blog.modrinth.com/p/licensing-guide) on the subject which may help.
 
     You also should set the `license` field in the `quilt.mod.json` to the [SPDX Identifier](https://spdx.org/licenses) of the chosen license.
 
