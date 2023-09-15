@@ -198,3 +198,9 @@ A list of `String` paths to nested `.jar` files to load relative to the root dir
 	// ...
 }
 ```
+
+#### `language_adapters`
+| Type   | Required |
+|--------|----------|
+| Object | False    |
+An `Object` in which each key is the namespace of the language adapter and each value is a reference in [JVM Entrypoint Notation](#jvm-entrypoint-notation) of an implementation of `LanguageAdapter`.
