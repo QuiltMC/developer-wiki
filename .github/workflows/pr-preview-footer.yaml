@@ -15,5 +15,5 @@ jobs:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         body-template: |
           ---
-          See preview on Cloudflare Pages: https://preview-${{ github.event.number }}.developer-wiki-test.pages.dev
+          See preview on Cloudflare Pages: https://preview-${{ github.event.number }}.developer-wiki.pages.dev
         body-update-action: 'suffix'
