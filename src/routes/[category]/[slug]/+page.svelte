@@ -6,6 +6,6 @@
 	<title>{data.title}</title>
 </svelte:head>
 
-<main class="content column">
+<main class="column container">
 	<svelte:component this={data.content} />
 </main>
