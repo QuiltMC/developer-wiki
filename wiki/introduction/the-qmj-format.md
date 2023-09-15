@@ -191,7 +191,7 @@ A list of `String` paths to nested `.jar` files to load relative to the root dir
 	"quilt_loader": {
 		// ...
 		"jars": [
-			"/resources/gross_hack.jar"
+			"/resources/example.jar"
 		],
 		// ...
 	},
