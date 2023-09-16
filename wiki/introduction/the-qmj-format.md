@@ -11,32 +11,6 @@ TODO
 
 ## Fields
 
-* [schema_version](#schemaversion)
-* [quilt_loader](#quiltloader) — Information related to loading the mod
-  * [group](#group) — The Maven group ID
-  * [id](#id) — The mod ID
-  * [version](#version) — The mod version
-  * [entrypoints](#entrypoints) — Collection of entrypoints
-  * [plugins](#plugins) — Collection of plugins
-  * [jars](#jars) — Array of nested JARs to be loaded
-  * [language_adapters](#languageadapters) — Array of language adapters
-  * [depends](#depends) — Collection of mod dependencies
-  * [breaks](#breaks) — Collection of mods that this mod is incompatible with
-  * [load_type](#load-type) — How eagerly to load this mod
-  * [repositories](#repositories) — Array of maven repositories
-  * [intermediate_mappings](#intermediatemappings) — The intermediate mappings used
-  * [metadata](#metadata) — Extra information about the mod
-    * [name](#name) — Human-readable mod name
-    * [description](#description) — Human-readable mod description
-    * [contributors](#contributors) — A list of contributors to this mod
-    * [contact](#contact) — List of contact information
-    * [license](#license) — One or more licenses this project is under
-    * [icon](#icon) — The mod icon
-* [mixin](#mixin) — Path(s) to the mixin file(s)
-* [access_widener](#accesswidener) — Path(s) to the access widener file(s)
-* [minecraft](#minecraft) — Minecraft-related options
-  * [environment](#environment) — What game environment this mod will run in
-
 ### `schema_version`
 | Type   | Required |
 |--------|----------|
