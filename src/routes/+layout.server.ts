@@ -17,8 +17,10 @@ export async function load({ params }: LayoutServerLoadEvent) {
 
 		const [, , category, slug] = path.split("/");
 		const cat = categories.find((cat) => cat.slug === category);
+		if (!post.metadata.index) post.metadata.index = 0;
 		const page = {
 			slug: slug.slice(0, -3),
+			index: post.metadata.index,
 			title: post.metadata.title,
 		};
 
@@ -26,12 +28,18 @@ export async function load({ params }: LayoutServerLoadEvent) {
 			fs.readFileSync(`${process.cwd()}/wiki/${category}/+category.yml`, "utf-8")
 		);
 		const categoryName = metadata.name;
+		if (!metadata.index || typeof metadata.index !== "number") metadata.index = 100; // Unspecified categories go last
 
 		if (cat) {
 			cat.pages.push(page);
 		} else {
-			categories.push({ name: categoryName, slug: category, pages: [page] });
+			categories.push({ name: categoryName, index: metadata.index, slug: category, pages: [page] });
 		}
+	}
+
+	categories.sort((a, b) => a.index - b.index);
+	for (let category of categories) {
+		category.pages.sort((a, b) => a.index - b.index);
 	}
 
 	return { category: params.category, slug: params.slug, categories };

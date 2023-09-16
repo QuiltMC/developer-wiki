@@ -1,19 +1,20 @@
 ---
-title: Setting up a development environment
+title: Setting Up a Development Environment
+index: 2
 ---
 
-# Setting up a development environment
+# Setting up a Development Environment
 
-You'll need a couple things before you can get started.
+You'll need a couple of things before you can get started.
 
 - A Java Development Kit (JDK) for Java 17 (recommended) or newer.
   Temurin Adoptium JDKs are easily available and recommended.
   You can download them here: <https://adoptium.net/releases.html>
 - Any Java IDE, like [IntelliJ Idea](https://www.jetbrains.com/idea/) or [Eclipse](https://www.eclipse.org/ide/).
   [Visual Studio Code](https://www.eclipse.org/ide/) can work, but it takes extra work to get set up.
-  - We recommend using IntelliJ Idea as it has the most integrations and is the easiest to use.
+  - We recommend using IntelliJ IDEA as it has the most integrations and is the easiest to use.
 
-## Template mod download (Java)
+## Template Mod Download (Java)
 
 You can download the template mod from the [quilt-template-mod](https://github.com/QuiltMC/quilt-template-mod)
 repository or use GitHub's template feature to generate a mod that you can use
@@ -28,21 +29,21 @@ then go to the `< >` button and press `Download ZIP`, or refer to the following 
 Extract the ZIP file's contents into a folder of your choosing. Alternatively, if you
 created a repository through GitHub, clone that repository using Git.
 
-## Setting up with IntelliJ Idea
+## Setting up with IntelliJ IDEA
 
 If you downloaded the template mod and extracted it into a folder,
 import the project by pressing the `Open` button in the project listing.
 If you made a GitHub repository with the template, use the `Get from VCS` button.
 
-![IntelliJ Idea projects window](/introduction/setting-up-3.png)
+![IntelliJ IDEA projects window](/introduction/setting-up-3.png)
 
 If you get a window asking if you trust the folder, press `Trust Project`.
 
 There is a plugin that adds additional support for Minecraft modding projects
-that is highly recommended to have. You can get it here:
+that is highly recommended. You can get it here:
 <https://plugins.jetbrains.com/plugin/8327-minecraft-development>
 
-## Making the mod yours
+## Making the Mod Yours
 
 First, update `gradle.properties` to use your Maven group and mod ID.
 If you don't know which Maven group to use, and you are planning to host the mod's
@@ -91,10 +92,10 @@ the template, not your mod.
 
 Change the name of the directories in the `src/main/java` folder to reflect your mod.
 For example, if your Maven group is `io.github.bingus` and your mod's ID is `bingus_mod`,
-you should have four directories in total. IntelliJ Idea should make this step easier for
+you should have four directories in total. IntelliJ IDEA should make this step easier for
 you when you rename the directories; just change the whole line to match your group and ID.
 
-![IntelliJ Idea rename packages dialog](/introduction/setting-up-6.png)
+![IntelliJ IDEA rename packages dialog](/introduction/setting-up-6.png)
 
 Delete the `com.example` directories.
 
@@ -124,6 +125,7 @@ task.
 
 Finally, reload the Gradle project by pressing this button in the Gradle menu:
 
-![Gradle window with the reload project button highlighted](/introduction/setting-up-9.png)
+![Gradle window with the 'reload project' button highlighted](/introduction/setting-up-9.png)
 
 Once you're done with all of these steps, your mod is ready to be worked on!
+You can start by [Creating your First Item](../items/first-item)

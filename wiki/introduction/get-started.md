@@ -1,14 +1,15 @@
 ---
-title: Getting started with Quilt
+title: Getting Started with Quilt
+index: 1
 ---
 
-# Getting started with Quilt
+# Getting Started with Quilt
 
-## Basic requirements
+## Basic Requirements
 
-In order to start modding Minecraft, you'll need to know a couple things.
+In order to start modding Minecraft, you'll need to know a couple of things.
 
-- Basic Java knowledge. This includes understanding its syntax, object oriented
+- Basic Java knowledge. This includes understanding its syntax, object-oriented
   programming, and some essential design patterns.
 - Basic [Git](https://git-scm.com/) knowledge. While technically not necessary, it'll
   make your life a lot easier. This includes understanding how to clone repositories
@@ -16,7 +17,7 @@ In order to start modding Minecraft, you'll need to know a couple things.
 
 TODO: Is there anything more to be described here?
 
-## How to use this wiki
+## How to Use this Wiki
 
 TODO: Create example code repository and put it here
 
@@ -27,7 +28,7 @@ contain code snippets, with full examples provided in
 
 TODO: Give an outline of all of the wiki articles once they're ready
 
-## How to learn modding, for beginners
+## How to Learn Modding, for Beginners
 
 Minecraft modding can get complicated. We aim to provide a resource to help you learn
 fundamental modding concepts. However, there are some things that we can't do and
