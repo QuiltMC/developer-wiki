@@ -1,5 +1,6 @@
 ---
 title: The quilt.mod.json Format
+index: 3
 ---
 
 # The `quilt.mod.json` Format
