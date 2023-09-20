@@ -45,7 +45,7 @@ Having done all of this, if we run the game we can see that we can give the item
 ## Adding the Item to a Group
 
 `ItemGroup`s represent the tabs in the creative menu.
-Because of a change in 1.19.3, you can't add items to item groups using only [Quilt Standard Libraries](../concepts/qsl-qfapi) (From now on QSL). However, [Fabric API]((../concepts/qsl-qfapi)) has an API for it. Thanks to [Quilted Fabric API](../concepts/qsl-qfapi), which the template mod includes and users download with QSL, we can use it on Quilt, too:
+Because of a change in 1.19.3, you can't add items to item groups using only [Quilt Standard Libraries](../concepts/qsl-qfapi) (From now on QSL). However, [Fabric API](../concepts/qsl-qfapi) has an API for it. Thanks to [Quilted Fabric API](../concepts/qsl-qfapi), which the template mod includes and users download with QSL, we can use it on Quilt, too:
 
 ```java
 ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
@@ -91,4 +91,4 @@ And that's it! Your item should be fully working.
 
 This tutorial only covers the most basic of items. Check the other item tutorials for more advanced items or try [Adding a simple block](../blocks/first-block).
 
-If you want your item to have a recipe, generate one from [destruc7i0n's crafting recipe generator](https://crafting.thedestruc7i0n.ca/) (you can add your mod's items using the "Add Item" button above the ingredient list) and then put it in a JSON file under `resources/data/simple_item_mod/recipes/` (replacing `simple_item_mod` with your mod id). Further details on item recipes can be found on [the dedicated recipe page](.../data/adding-recipes).
+If you want your item to have a recipe, generate one from [destruc7i0n's crafting recipe generator](https://crafting.thedestruc7i0n.ca/) (you can add your mod's items using the "Add Item" button above the ingredient list) and then put it in a JSON file under `resources/data/simple_item_mod/recipes/` (replacing `simple_item_mod` with your mod id). Further details on item recipes can be found on [the dedicated recipe page](../data/adding-recipes).

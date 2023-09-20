@@ -1,0 +1,22 @@
+name: Wiki Request
+description: Suggesting a new wiki to add
+labels: ["enhancement"]
+body:
+  - type: textarea
+    attributes:
+      label: What would you like the wiki to cover?
+      description: A short description of the feature you wish the wiki would cover
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Why should this be added to the wiki?
+      description: A brief summary of why you believe this topic belongs on the wiki
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Where in the wiki should this go?
+      description: Suggest a current section or wiki to integrate this into, or a new section.
+    validations:
+      required: true
