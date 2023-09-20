@@ -3,12 +3,10 @@ import type { PageLoadEvent } from "./$types";
 export async function load({ params }: PageLoadEvent) {
 	const post = await import(`../../../../wiki/${params.category}/${params.slug}.md`);
 
-	if (post.metadata.draft) {
-		const draft = await import(`../../../../draft.md`);
-		return { content: draft.default, title: post.metadata.title };
-	}
+	if (!post.metadata.draft) post.metadata.draft = false
 
-	return { content: post.default, title: post.metadata.title };
+	const draft = await import(`../../../../draft.md`);
+	return { content: post.default, title: post.metadata.title, draft: draft.default, isDraft: post.metadata.draft };
 }
 
 export async function entries() {
