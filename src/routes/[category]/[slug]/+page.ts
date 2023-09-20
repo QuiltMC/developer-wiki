@@ -5,8 +5,7 @@ export async function load({ params }: PageLoadEvent) {
 
 	if (!post.metadata.draft) post.metadata.draft = false
 
-	const draft = await import(`../../../../draft.md`);
-	return { content: post.default, title: post.metadata.title, draft: draft.default, isDraft: post.metadata.draft };
+	return { content: post.default, title: post.metadata.title, isDraft: post.metadata.draft };
 }
 
 export async function entries() {
