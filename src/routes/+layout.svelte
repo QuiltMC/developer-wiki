@@ -30,7 +30,15 @@
 <input id="toggle-sidebar" type="checkbox" class="is-hidden" />
 
 <Header />
-<div class="section">
+<div class="section" style="padding: 0.5rem;">
+	<article class="message is-danger mx-3 mt-3 mb-3">
+		<div class="message-body has-text-centered">
+			<h1>
+				Notice: This website is still under development. Please report any issues at
+				<a href="https://github.com/QuiltMC/developer-wiki">https://github.com/QuiltMC/developer-wiki</a>
+			</h1>
+		</div>
+	</article>
 	<div class="columns">
 		<Sidebar categories={data.categories} url={data.category + "/" + data.slug} />
 

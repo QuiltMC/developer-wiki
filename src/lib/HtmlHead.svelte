@@ -51,6 +51,7 @@
 			.table-of-contents {
 				float: right;
 				width: 340px;
+				margin-left: 0.9rem;
 			}
 		}
 	</style>
