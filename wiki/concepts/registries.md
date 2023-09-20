@@ -1,3 +1,4 @@
 ---
 title: Registries
+draft: true
 ---
