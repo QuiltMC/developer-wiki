@@ -130,3 +130,27 @@ ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
 	entries.addAfter(Items.NETHERITE_BOOTS, EXAMPLE_HELMET, EXAMPLE_CHESTPLATE, EXAMPLE_LEGGINGS, EXAMPLE_BOOTS);
 });
 ```
+
+## Adding textures for the armor
+
+Now that we have the armor registered, the only things missing are the textures and translations.
+For armors, you have to provide two textures. One for the items themselves, and one for the armor that is rendered on the player model.
+
+### Adding the texture to the Item
+
+Adding the texture to the item is the same as any normal item: You need to add a model and a texture. For example, here is the model file for an example helmet:
+
+```json
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "example_mod:item/example_item_helmet"
+	}
+}
+```
+
+Repeat this for all your armor's items, replacing mod id and item name, and add the corresponding textures.
+
+### Adding the texture for the player model
+
+Now the armor should look right in the inventory, but when you put it on, it will still show the missing texture
