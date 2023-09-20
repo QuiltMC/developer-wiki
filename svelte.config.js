@@ -67,8 +67,15 @@ export default {
 						if(node.type == 'element' && node.tagName == 'ol') {
 							node.tagName = 'ul'
 						}
-						if (node.type === 'element' && node.tagName === 'section' && node.properties && node.properties.dataHeadingRank && node.properties.dataHeadingRank === 1) {
-							node.properties.className = "content";
+						if (node.type === 'element' && node.tagName === 'section') {
+							if (node.properties && node.properties.dataHeadingRank && node.properties.dataHeadingRank === 1) {
+								node.properties.className = "content";
+							} else {
+								parent.children.push(...node.children); // TODO: quick fix for heading padding bug, moves all child elements of the section in to the main section, and then ereases all section data (replacing them with divs), in order to try and keep the tree clean
+								node.children = [];
+								node.properties = {};
+								node.tagName = "div";
+							}
 						}
 					}
 				}]
