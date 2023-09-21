@@ -3,7 +3,9 @@ import type { PageLoadEvent } from "./$types";
 export async function load({ params }: PageLoadEvent) {
 	const post = await import(`../../../../wiki/${params.category}/${params.slug}.md`);
 
-	return { content: post.default, title: post.metadata.title };
+	if (!post.metadata.draft) post.metadata.draft = false
+
+	return { content: post.default, title: post.metadata.title, isDraft: post.metadata.draft };
 }
 
 export async function entries() {

@@ -18,6 +18,9 @@ export async function load({ params }: LayoutServerLoadEvent) {
 		const [, , category, slug] = path.split("/");
 		const cat = categories.find((cat) => cat.slug === category);
 		if (!post.metadata.index) post.metadata.index = 0;
+
+		if (post.metadata.draft) continue;
+		
 		const page = {
 			slug: slug.slice(0, -3),
 			index: post.metadata.index,

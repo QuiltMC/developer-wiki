@@ -17,6 +17,7 @@ export interface Post {
 	metadata: {
 		title: string;
 		index: number?;
+		draft: boolean?;
 	};
 	default: Promise<SvelteComponentTyped>;
 }

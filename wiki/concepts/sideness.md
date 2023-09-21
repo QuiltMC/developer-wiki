@@ -1,5 +1,6 @@
 ---
 title: Server-Side and Client-Side
+draft: true
 --- 
 # Server-Side and Client-Side
 
