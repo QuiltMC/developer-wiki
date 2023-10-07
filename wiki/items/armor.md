@@ -11,7 +11,7 @@ This tutorial will assume that you already understand [Creating your First Item]
 To add an armor set, you start by creating an armor material. It defines the basic properties of your armor, such as the durability, the armor value, or the toughness.
 For this you create a new armor material class:
 
-`src/main/com/example/example_mod/ExampleArmorMaterial`
+`src/main/com/example/example_mod/ExampleArmorMaterial`:
 
 ```java
 public class ExampleArmorMaterial implements ArmorMaterial {
@@ -43,7 +43,7 @@ The protection corresponds to the Armor's armor value.
 
 ---
 
-Next we'll define the enchantability. This defines how good the enchantments in an enchantment table will get. For example netherite armor and gold armor have a high enchantability
+Next we'll define the enchantability. This defines how good the enchantments in an enchantment table will get. For example netherite armor and gold armor have a high enchantability.
 
 ```java
 @Override
@@ -77,7 +77,7 @@ public Ingredient getRepairIngredient() {
 ---
 
 Finally, we need to specify the armor material's name, its toughness and its knockback resistance.
-The material's name should usually be the name of the main item you armor is made of. Toughness helps to reduce especially high damage and knockback resistance works only on netherite armor in vanilla, but is patched to work for other armors by QSL.
+The material's name should usually be the name of the main item you armor is made of. Toughness helps to reduce especially high damage and knockback resistance works only on netherite armor in vanilla, but is patched to work for other armors by [QSL](../concepts/qsl-qfapi.md).
 
 ```java
 @Override
@@ -153,4 +153,20 @@ Repeat this for all your armor's items, replacing mod id and item name, and add 
 
 ### Adding the texture for the player model
 
-Now the armor should look right in the inventory, but when you put it on, it will still show the missing texture
+Now the armor should look right in the inventory, but when you put it on, it will still show the missing texture. For that one to work we also need to add the armor model. The armor model basically consists of two textures that are organized like a player skin. However, different armor parts only draw different parts of that texture.
+Shoes, Helmet, and Chestplate use the `layer_1` texture (and have a lot more distance from the player skin itself) and Leggings use the `layer_2` texture.
+If you want, you can use this example texture as a template. The different armor parts use different tones to try help differentiating them.
+
+`assets/minecraft/models/armor/example_item_layer_1.png`:  
+![An example armor layer 1 texture](example_item_layer_1.png)<br><a href="example_item_layer_1.png" target="_blank">example_item_layer_1.png</a>
+
+`assets/minecraft/models/armor/example_item_layer_2.png`:  
+![An example armor layer 2 texture](example_item_layer_2.png)<br><a href="example_item_layer_2.png" target="_blank">example_item_layer_2.png</a>
+
+Replace use your armor material's name for instead of `example_item` in the path.
+
+Now that you have added these, and reloaded your game, you should be able to view your fancy armor!
+
+## Finishing it up
+
+The final step is to [add translation keys](../items/first-item#language-translation) for your armor's items. Once you've done that, you might also want to [add recipes for your armor](../data/adding-recipes)
