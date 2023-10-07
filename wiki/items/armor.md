@@ -77,7 +77,7 @@ public Ingredient getRepairIngredient() {
 ---
 
 Finally, we need to specify the armor material's name, its toughness and its knockback resistance.
-The material's name should usually be the name of the main item you armor is made of. Toughness helps to reduce especially high damage and knockback resistance works only on netherite armor in vanilla, but is patched to work for other armors by [QSL](../concepts/qsl-qfapi.md).
+The material's name should usually be the name of the main item you armor is made of. Toughness helps to reduce especially high damage and knockback resistance works only on netherite armor in vanilla, but is patched to work for other armors by [QSL](../concepts/qsl-qfapi).
 
 ```java
 @Override
