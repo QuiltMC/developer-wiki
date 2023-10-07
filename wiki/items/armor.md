@@ -173,6 +173,6 @@ Replace use your armor material's name for instead of `example_item` in the path
 
 Now that you have added these, and reloaded your game, you should be able to view your fancy armor!
 
-## Finishing It Up
+## Final Steps
 
-The final step is to [add translation keys](../items/first-item#language-translation) for your armor's items. Once you've done that, you might also want to [add recipes for your armor](../data/adding-recipes).
+The last thing to do is [adding translation keys](../items/first-item#language-translation) for your armor's items. Once you've done that, you might also want to [add recipes for your armor](../data/adding-recipes).
