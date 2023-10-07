@@ -136,7 +136,10 @@ ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
 Now that we have the armor registered, the only things missing are the textures and translations.
 For armors, you have to provide two textures. One for the items themselves, and one for the armor that is rendered on the player model.
 
-### Adding the texture to the Item
+<!-- TODO: the desectionization fails if nested like this. See svelte.config.json -->
+<!-- ### Adding the texture to the Item-->
+
+---
 
 Adding the texture to the item is the same as any normal item: You need to add a model and a texture. For example, here is the model file for an example helmet:
 
@@ -151,7 +154,10 @@ Adding the texture to the item is the same as any normal item: You need to add a
 
 Repeat this for all your armor's items, replacing mod id and item name, and add the corresponding textures.
 
-### Adding the texture for the player model
+<!-- TODO: the desectionization fails if nested like this. See svelte.config.json -->
+<!-- ### Adding the texture for the player model -->
+
+---
 
 Now the armor should look right in the inventory, but when you put it on, it will still show the missing texture. For that one to work we also need to add the armor model. The armor model basically consists of two textures that are organized like a player skin. However, different armor parts only draw different parts of that texture.
 Shoes, Helmet, and Chestplate use the `layer_1` texture (and have a lot more distance from the player skin itself) and Leggings use the `layer_2` texture.
