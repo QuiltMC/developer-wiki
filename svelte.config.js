@@ -64,7 +64,7 @@ export default {
 				}],
 				[rehypeRewrite, {
 					rewrite: (node, index, parent) => {
-						if(node.type == 'element' && node.tagName == 'ol') {
+						if(node.type == 'element' && node.tagName == 'ol' && (node.properties.className == 'menu-list' || node.properties.className && node.properties.className.includes("toc-level"))) {
 							node.tagName = 'ul'
 						}
 						if (node.type === 'element' && node.tagName === 'section') {
