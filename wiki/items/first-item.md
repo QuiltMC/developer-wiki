@@ -45,7 +45,7 @@ Having done all of this, if we run the game we can see that we can give the item
 ## Adding the Item to a Group
 
 `ItemGroup`s represent the tabs in the creative menu.
-Because of a change in 1.19.3, you can't add items to item groups using only [Quilt Standard Libraries](../concepts/qsl-qfapi) (From now on QSL). However, [Fabric API](../concepts/qsl-qfapi) has an API for it. Thanks to [Quilted Fabric API](../concepts/qsl-qfapi), which the template mod includes and users download with QSL, we can use it on Quilt, too:
+Because of a change in 1.19.3, you can't add items to item groups using only [Quilt Standard Libraries](../concepts/qsl-qfapi#quilt-standard-libraries) (From now on QSL). However, [Fabric API](../concepts/qsl-qfapi#fabric-api) has an API for it. Thanks to [Quilted Fabric API](../concepts/qsl-qfapi#quilted-fabric-api), which the template mod includes and users download with QSL, we can use it on Quilt, too:
 
 ```java
 ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
