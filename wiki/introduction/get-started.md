@@ -21,10 +21,9 @@ TODO: Is there anything more to be described here?
 
 TODO: Create example code repository and put it here
 
-This wiki contains pages that are best read in order. Certain articles in the
-examples category have associated sub-pages, which are supplementary. Most pages will
-contain code snippets, with full examples provided in
-[the example code repository](https://example.com).
+This wiki contains pages that are best read in order. Many of the articles, especially at the beginning, suggest other articles sensible to continue with. Most pages will contain code snippets, with full examples planned to be provided in example mods. (This is not done yet)
+
+Additionally, you might account lines prefixed with `TODO: `. Those are notes for people working on the wiki what still needs to be done. For now, you can ignore them. Just know that there is more content to be inserted there.
 
 TODO: Give an outline of all of the wiki articles once they're ready
 
@@ -32,10 +31,10 @@ TODO: Give an outline of all of the wiki articles once they're ready
 
 Minecraft modding can get complicated. We aim to provide a resource to help you learn
 fundamental modding concepts. However, there are some things that we can't do and
-expect you to do on your own to learn.
+expect you to learn on your own.
 
-Asking questions properly, whether it be on our forum or on Discord, is an essential
-skill to have. Never be afraid to ask questions, we're always willing to help and we
+Asking questions properly, whether it is on our forum or on Discord, is an essential
+skill to have. Never be afraid to ask questions, we're always willing to help, and we
 don't judge.
 
 TODO: Methodology for asking questions here
