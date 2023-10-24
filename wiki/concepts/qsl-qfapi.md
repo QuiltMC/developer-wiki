@@ -16,11 +16,11 @@ It is important to note that an API only defines the *means* to interact with a 
 
 ## Fabric API
 
-Fabric API (short FAPI) is fabric's API and provides some useful APIs that QSL does not provide. For Quilt, [Quilted Fabric API](#quilted-fabric-api) is an alternate implementation, that uses QSL where possible.
+Fabric API (FAPI for short) is Fabric's API and provides some useful APIs that QSL does not provide. For Quilt, [Quilted Fabric API](#quilted-fabric-api) is an alternate implementation, that uses QSL where possible.
 
 ## Quilt Standard Libraries
 
-Quilt Standard Libraries (short QSL) provide lots of core functionality for mods, as well as many useful APIs, such as [REA](../data/rea).
+The Quilt Standard Libraries (QSL for short) provide lots of core functionality for mods, as well as many useful APIs, such as [REA](../data/rea).
 
 The [main entrypoints](sideness#on-mod-initializers) are provided by QSL, and QSL loads the `assets` directory of your mod. This means that unless you use [mixin](mixins), basically nothing will work without QSL.
 
@@ -28,13 +28,13 @@ However, QSL's API is not complete enough to provide all functionality that woul
 
 ## Quilted Fabric API
 
-Quilted Fabric API (short QFAPI) provides Fabric API, but implements the API using QSL where possible. APIs from FAPI with a proper QSL alternative are deprecated in QFAPI, so consider using QSL APIs when some Fabric API methods are deprecated.
+Quilted Fabric API (QFAPI for short) provides Fabric API, but implements the API using QSL where possible. APIs from FAPI with a proper QSL alternative are deprecated in QFAPI, so consider using QSL APIs when some Fabric API methods are deprecated.
 
 Quilted Fabric API has two main use cases:
 
 - It provides a compatibility layer so that Fabric mods can be loaded on Quilt.
-- And it allows using fabric's APIs when QSL does not yet provide relevant APIs. This is for example the case for [item groups](../items/first-item#adding-the-item-to-a-group).
+- And it allows using Fabric's APIs when QSL does not yet provide relevant APIs. This is for example the case for [item groups](../items/first-item#adding-the-item-to-a-group).
 
-Because QFAPI depends on QSL and needs to know fabric's implementation, it will always update after Fabric API and QSL released.
+Because QFAPI depends on QSL and needs to know Fabric's implementation, it will always update after Fabric API and QSL released.
 
 QFAPI also includes QSL, meaning that you'll usually want to only use QFAPI. The downloads on [Modrinth](https://modrinth.com/mod/qsl) and [Curseforge](https://www.curseforge.com/minecraft/mc-mods/qsl) also are QFAPI and QSL packaged together.
