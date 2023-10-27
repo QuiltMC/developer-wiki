@@ -25,7 +25,7 @@ The Quilt Standard Libraries (QSL for short) provide lots of core functionality 
 Some features QSL provides are:
 
 - The [main entrypoints](sideness#on-mod-initializers) for mods.
-- Loading the `assets` and `data` directory of your mod through the [resource loader](resource_loader).
+- Loading the `assets` and `data` directory of your mod through the [resource loader](../data/resource-loader).
 - Many [events](events) such as world tick events.
 - Extension classes and interfaces for many blocks, items, entities, and more.
 
