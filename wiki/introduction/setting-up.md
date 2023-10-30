@@ -14,25 +14,30 @@ You'll need a couple of things before you can get started.
   [Visual Studio Code](https://www.eclipse.org/ide/) can work, but it takes extra work to get set up.
   - We recommend using IntelliJ IDEA as it has the most integrations and is the easiest to use.
 
-## Template Mod Download (Java)
+Next, you need to decide on whether you want to [download the template mod zip](#template-mod-download-zip-file) or [use the GitHub template](#template-mod-download-github-template). If you don't know how to use git, use the first method. However, it is recommended for you to have at least a GitHub account to get started and familiarize yourself with git quickly.
+
+## Template Mod Download (ZIP file)
 
 You can download the template mod from the [quilt-template-mod](https://github.com/QuiltMC/quilt-template-mod)
-repository or use GitHub's template feature to generate a mod that you can use
-straight away.
+repository.
 
 To download the ZIP file for the template mod, open the [GitHub repository](https://github.com/QuiltMC/quilt-template-mod),
-then go to the `< >` button and press `Download ZIP`, or refer to the following image:
+then go to the `< > Code` button and press `Download ZIP` as shown in the following image:
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="/introduction/setting-up-1-dark.png">
   <img alt="The GitHub repository with an arrow pointing to the code button, and another to the Download ZIP button inside the opened popup" src="/introduction/setting-up-1-light.png">
 </picture>
 
-Extract the ZIP file's contents into a folder of your choosing. Alternatively, if you
-created a repository through GitHub, clone that repository using Git.
+Extract the ZIP file's contents into a folder of your choosing.
+
+## Template Mod Download (GitHub Template)
+
+To use the [GitHub template](https://github.com/QuiltMC/quilt-template-mod), visit the [GitHub repository](https://github.com/QuiltMC/quilt-template-mod) and click the `Use this template` button. Follow through the dialog and clone that repository using git. Then you can continue.
 
 ## Setting up with IntelliJ IDEA
 
+Now you need to set up your development environment. Open IntelliJ IDEA and follow through the initial setup dialog. Then, you need to open the project:
 If you downloaded the template mod and extracted it into a folder,
 import the project by pressing the `Open` button in the project listing.
 If you made a GitHub repository with the template, use the `Get from VCS` button.
@@ -48,12 +53,33 @@ There is a plugin that adds additional support for Minecraft modding projects
 that is highly recommended. You can get it here:
 <https://plugins.jetbrains.com/plugin/8327-minecraft-development>
 
+## An Overview Over IDEA
+
+After you opened the project, you should see a window looking roughly like this:
+
+TODO: Embed screenshot
+
+On the right and left side there are sidebars with icons to toggle different "Tool Windows". There are a few that you should know about: First, the folder icon in the top left toggles your `Project` tool window. With it, you can select the different files in your project. In the bottom left, there are the buttons for the `Terminal` and `Version Control System`. Additionally, after you tested your mod, there should also be a `Run` and a `Build` button. To the right are the `Notifications` and `Gradle` tool windows.
+
+When you open a file, it should open a new tab in the editor in the middle. ^
+Additionally, there are some things you might find not straight away: If you want to rename something, be it a file or a name of a variable or function, you can do so in the context menu under `Refactor > Rename`
+
 ## Making the Mod Yours
 
-First, update `gradle.properties` to use your Maven group and mod ID.
-If you don't know which Maven group to use, and you are planning to host the mod's
-source code on GitHub, use `io.github.<Your_Username_Here>`. Set `archives_base_name`
-to your mod's ID.
+First you'll need to make up a name for your mod. For this tutorial, we will use the mod name `Bingus Mod`.
+
+Based on the name, you also need a mod id. It should be composed of lowercase characters from the alphabet and underlines. Usually, you mod id should be your mod name, but with underscores instead of spaces, hyphens or other special characters. Additionally, there shouldn't be a mod already using that id. For a mod named `Bingus Mod`, it would be `bingus_mod`.
+
+Lastly you need to decide on a maven group. It is used to identify the developer of the mod in a machine-readable scheme and is designed to be unique. It should be a domain you own in reversed. So if you own `bingus.example.com`, your maven group would be `com.example.bingus`. If you don't have a domain (or don't know what it is), but have a GitHub account, you can use `io.github.your_github_username`, replace all special characters with underscores again.
+
+---
+
+Now that you have decided on these things, you can update your mod's metadata:
+
+First, update the `gradle.properties` file directly in your project folder to use your Maven group and mod ID.
+
+Change the line beginning with `maven_group =` to use your mod maven group instead of `com.example`
+Set `archives_base_name` to your mod's ID similarly and ignore all other properties for now. Here is an example how the result might look:
 
 ```gradle
 # Gradle Properties
@@ -68,8 +94,9 @@ archives_base_name = bingus-mod
 
 ---
 
-Next, update the `quilt.mod.json` file in the `src/main/resources` folder.
-You'll need to update a few things under `"quilt_loader"`:
+Next, update the `quilt.mod.json` file in the `src/main/resources` folder. The `quilt.mod.json` defines your mod's metadata, like mod name, author, description, website, but also more development focused metadata such as dependencies, version, mod ID and [mod initializers](../concepts/sideness#on-mod-initializers).
+
+You'll need to update a few things under `"quilt_loader"`, see below for a finalized example:
 
 1. `"group"` should be set to the Maven group you specified in your `gradle.properties`.
 2. `"id"` should be set to your mod's ID. This should be your mod's name in all lowercase
@@ -81,10 +108,10 @@ You'll need to update a few things under `"quilt_loader"`:
    3. `"contributors"` can contain entries for anything. Use your name as the key
       and `"Developer"` as the value if you don't know what to put here.
    4. `"contact"` can contain entries for anything similar to `""contributors"`,
-      but typically people put a `"homepage"` and a `"sources"` entry with a valid URL here.
+      but typically people put a `"homepage"`, a `"sources"`, and a `"issues"` entry with a valid URL here.
    5. Replace `example_mod` with your mod's ID in `"icon"`.
 4. In `"entrypoints"`, replace `com.example.example_mod` with your Maven group and mod ID,
-   and the `ExampleMod` at the end should be the Java class name for your mod.
+   and the `ExampleMod` at the end should be the Java class name for your mod. The Java class name usually is your mod's name, written in `UpperCamelCase` (So new words simply start by using a uppercase letter and the initial latter is also upper case)
    For example, `io.github.bingus.bingus_mod.BingusMod`.
 5. In `"mixin"`, replace `example_mod` in the file name to your mod's ID.
 
@@ -144,7 +171,7 @@ you when you rename the directories; just change the whole line to match your gr
 
 Delete the `com.example` directories.
 
-Rename `ExampleMod` to your mod's name using Java class naming conventions. Make sure the
+Rename `ExampleMod` to your mod's name using Java class naming conventions. Check that the
 `package` declaration at the top is correct!
 
 In the `resources` folder, change `example_mod.mixins.json` to the file name you set in
