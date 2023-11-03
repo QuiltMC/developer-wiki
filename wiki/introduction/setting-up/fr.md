@@ -113,7 +113,7 @@ archives_base_name = bingus-mod
 ---
 
 Ensuite, mettez à jour le fichier `quilt.mod.json` dans le dossier `src/main/resources`.
-Ce fichier définie les métadonnées de votre mod, comme son nom, saon auteur.ice, sa description, son site web,
+Ce fichier définie les métadonnées de votre mod, comme son nom, saon auteurice, sa description, son site web,
 mais aussi des métadonnées qui concernent plus directement le développement du mod
 tel que les dépendances, la version, l'ID du mod et les '[mod initializers](../concepts/sideness#les-mod-initializers)'.
 
