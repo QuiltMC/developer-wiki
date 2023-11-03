@@ -7,7 +7,7 @@
 	import Header from "$lib/Header.svelte";
 	import HtmlHead from "$lib/HtmlHead.svelte";
 	import Sidebar from "$lib/Sidebar.svelte";
-	import { t } from "$lib/translations/index.js";
+	import { t, locale } from "$lib/translations/index.js";
 
 	onMount(() => {
 		const lowContrast = document.getElementById("low-contrast") as HTMLInputElement;
@@ -45,6 +45,15 @@
 			</h1>
 		</div>
 	</article>
+	{#if $locale !== "en"}
+		<article class="message is-danger mx-3 mt-3 mb-3">
+			<div class="message-body has-text-centered">
+				<h1>
+					{$t("application.translation-notice")}
+				</h1>
+			</div>
+		</article>
+	{/if}
 	<div class="columns">
 		<Sidebar categories={data.categories} url={data.category + "/" + data.slug} />
 
