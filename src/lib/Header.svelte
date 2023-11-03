@@ -1,3 +1,7 @@
+<script>
+	import NavbarLangDropdown from "./NavbarLangDropdown.svelte";
+</script>
+
 <nav class="navbar is-dark" aria-label="main navigation" data-controller="navbar">
 	<div class="navbar-brand no-style">
 		<a class="navbar-item navbar-logo" href="/">
@@ -44,6 +48,10 @@
 	</div>
 
 	<div class="navbar-menu" data-navbar-target="menu">
+		<div class="navbar-start">
+			<NavbarLangDropdown />
+		</div>
+
 		<div class="navbar-end">
 			<a
 				href="https://github.com/QuiltMC/developer-wiki"

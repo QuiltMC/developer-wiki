@@ -2,48 +2,61 @@ import YAML from "yaml";
 
 import fs from "fs";
 
-import type { Category, GlobImport } from "$lib/types";
+import type { Category, Page } from "$lib/types";
 import type { LayoutServerLoadEvent } from "./$types";
 
 export async function load({ params }: LayoutServerLoadEvent) {
-	const articles: GlobImport = import.meta.glob("$wiki/**/*.md");
+	const wiki_path = `${process.cwd()}/wiki/`;
 
-	const categories: Category[] = [];
+	const categories: Category[] = fs
+		// get the name of each file in the wiki folder
+		.readdirSync(wiki_path)
+		// remove files with extensions (not directories)
+		.filter((file_name) => !file_name.match(/.+\..+/))
+		.map((category_slug) => {
+			const pages: Page[] = fs
+				// get the name if each file in this category's folder
+				.readdirSync(`${wiki_path}${category_slug}/`)
+				// remove files with extensions (not directories)
+				.filter((file_name) => !file_name.match(/.+\..+/))
+				.map((page_slug) => {
+					// get the metadata of each file from their yaml file
+					const page_metadata = YAML.parse(
+						fs.readFileSync(`${wiki_path}${category_slug}/${page_slug}/+page.yml`, "utf-8")
+					);
 
-	for (const [path, resolver] of Object.entries(articles)) {
-		const post = await resolver();
+					return {
+						slug: page_slug,
+						index:
+							page_metadata.index && typeof page_metadata.index === "number"
+								? page_metadata.index
+								: Number.MAX_SAFE_INTEGER, // Put the pages with no index last
+						title: page_metadata.title,
+						draft: page_metadata.draft || false
+					};
+				})
+				// exlude draft pages
+				.filter((page) => !page.draft)
+				.toSorted((a, b) => a.index - b.index);
 
-		if (post instanceof Function) continue; // The resolver can return itself, we need to filter that out
+			// get the metadata of each category from their yaml file
+			const category_metadata = YAML.parse(
+				fs.readFileSync(`${wiki_path}${category_slug}/+category.yml`, "utf-8")
+			);
 
-		const [, , category, slug] = path.split("/");
-		const cat = categories.find((cat) => cat.slug === category);
-		if (!post.metadata.index) post.metadata.index = 0;
-
-		if (post.metadata.draft) continue;
-		
-		const page = {
-			slug: slug.slice(0, -3),
-			index: post.metadata.index,
-			title: post.metadata.title,
-		};
-
-		const metadata = YAML.parse(
-			fs.readFileSync(`${process.cwd()}/wiki/${category}/+category.yml`, "utf-8")
-		);
-		const categoryName = metadata.name;
-		if (!metadata.index || typeof metadata.index !== "number") metadata.index = 100; // Unspecified categories go last
-
-		if (cat) {
-			cat.pages.push(page);
-		} else {
-			categories.push({ name: categoryName, index: metadata.index, slug: category, pages: [page] });
-		}
-	}
-
-	categories.sort((a, b) => a.index - b.index);
-	for (let category of categories) {
-		category.pages.sort((a, b) => a.index - b.index);
-	}
+			return {
+				slug: category_slug,
+				index:
+					category_metadata.index && typeof category_metadata.index === "number"
+						? category_metadata.index
+						: Number.MAX_SAFE_INTEGER, // Put the categories with no index last
+				name: category_metadata.name,
+				pages: pages
+			};
+		})
+		// exckude categories with no pages
+		.filter((category) => category.pages.length)
+		.toSorted((a, b) => a.index - b.index);
 
 	return { category: params.category, slug: params.slug, categories };
 }

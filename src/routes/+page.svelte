@@ -1,7 +1,9 @@
+<script>
+	import { t } from "$lib/translations";
+</script>
+
 <svelte:head>
-	<title>Quilt Developer Wiki</title>
+	<title>{$t("application.title")}</title>
 </svelte:head>
 
-<main class="content column">
-	<h1>Quilt Developer Wiki :P</h1>
-</main>
+<h1 class="title">{$t("application.title")}</h1>

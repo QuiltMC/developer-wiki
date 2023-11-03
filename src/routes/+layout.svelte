@@ -1,10 +1,13 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 
+	import SvelteMarkdown from "svelte-markdown";
+
 	import Footer from "$lib/Footer.svelte";
 	import Header from "$lib/Header.svelte";
 	import HtmlHead from "$lib/HtmlHead.svelte";
 	import Sidebar from "$lib/Sidebar.svelte";
+	import { t } from "$lib/translations/index.js";
 
 	onMount(() => {
 		const lowContrast = document.getElementById("low-contrast") as HTMLInputElement;
@@ -34,15 +37,20 @@
 	<article class="message is-danger mx-3 mt-3 mb-3">
 		<div class="message-body has-text-centered">
 			<h1>
-				Notice: This website is still under development. Please report any issues at
-				<a href="https://github.com/QuiltMC/developer-wiki">https://github.com/QuiltMC/developer-wiki</a>
+				<SvelteMarkdown
+					source={$t("application.dev-notice", {
+						placeholder: "https://github.com/QuiltMC/developer-wiki"
+					})}
+				/>
 			</h1>
 		</div>
 	</article>
 	<div class="columns">
 		<Sidebar categories={data.categories} url={data.category + "/" + data.slug} />
 
-		<slot />
+		<main class="column container">
+			<slot />
+		</main>
 	</div>
 </div>
 <Footer />

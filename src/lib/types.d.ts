@@ -4,21 +4,17 @@ export interface Page {
 	slug: string;
 	index: number;
 	title: string;
+	draft: boolean;
 }
 
 export interface Category {
-	name: string;
 	slug: string;
 	index: number;
+	name: string;
 	pages: Page[];
 }
 
 export interface Post {
-	metadata: {
-		title: string;
-		index: number?;
-		draft: boolean?;
-	};
 	default: Promise<SvelteComponentTyped>;
 }
 
