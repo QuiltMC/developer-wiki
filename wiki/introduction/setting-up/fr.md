@@ -1,59 +1,60 @@
-# Setting up a Development Environment
+# Mettre en place un Environement de Développement
 
-You'll need a couple of things before you can get started.
+Vous aurez besoin de deux choses avant de commencer.
 
-- A Java Development Kit (JDK) for Java 17 (recommended) or newer.
-  Temurin Adoptium JDKs are easily available and recommended.
-  You can download them here: <https://adoptium.net/releases.html>
-- Any Java IDE, like [IntelliJ Idea](https://www.jetbrains.com/idea/) or [Eclipse](https://www.eclipse.org/ide/).
-  [Visual Studio Code](https://www.eclipse.org/ide/) can work, but it takes extra work to get set up.
-  - We recommend using IntelliJ IDEA as it has the most integrations and is the easiest to use.
+- Un Kit de Développement Java (JDK) pour Java 17 (recommandé) ou suppérieur.
+  Les Kits de Développement Temurin Adoptium sont facilement disponibles et recommandés.
+  Vous pouvez les télécharger ici : <https://adoptium.net/releases.html>
+- Une IDE pour Java, comme [IntelliJ Idea](https://www.jetbrains.com/idea/) ou [Eclipse](https://www.eclipse.org/ide/).
+  - Nous recommendons d'utiliser IntelliJ IDEA car il a le plus d'intégrations et est plus facile à utiliser.
 
-Next, you need to decide on whether you want to [download the template mod zip](#template-mod-download-zip-file) or [use the GitHub template](#template-mod-download-github-template). If you don't know how to use git, use the first method. However, it is recommended for you to have at least a GitHub account to get started and familiarize yourself with git quickly.
+Ensuite, vous devez décider si vous voulez [télécharger le zip du mod patron](#télécharger-le-mod-patron-fichier-zip) ou
+[utiliser le patron Github](#télécharger-le-mod-patron-github-template). Si vous ne savez pas utiliser git, utiliser la première méthode.
+Cependant, il est recommandé d'au moins avoir un compte Github pour débuter et vous familiariser rapidement avec git.
 
-## Template Mod Download (ZIP file)
+## Télécharger le Mod Patron (Fichier ZIP)
 
-You can download the template mod from the [quilt-template-mod](https://github.com/QuiltMC/quilt-template-mod)
-repository.
+Vous pouvez télécharger le mod patron depuis le dépôt [quilt-template-mod](https://github.com/QuiltMC/quilt-template-mod).
 
-To download the ZIP file for the template mod, open the [GitHub repository](https://github.com/QuiltMC/quilt-template-mod),
-then go to the `< > Code` button and press `Download ZIP` as shown in the following image:
+Pour télécharger le fichier ZIP du mod patron, ouvrez le [dépôt Github](https://github.com/QuiltMC/quilt-template-mod),
+puis cliquer sur le boutton `< > Code` puis `Download ZIP` comme montré dans l'image ci-dessous:
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="/introduction/setting-up-1-dark.png">
-  <img alt="The GitHub repository with an arrow pointing to the code button, and another to the Download ZIP button inside the opened popup" src="/introduction/setting-up-1-light.png">
+  <img alt="Le dépôt Github avec un flèche qui pointe vers le boutton 'Code' et une autre qui pointe vers le bouton 'Download ZIP' dans la popup ouverte" src="/introduction/setting-up-1-light.png">
 </picture>
 
-Extract the ZIP file's contents into a folder of your choosing.
+Extrayez le contenu du fichier ZIP dans un dossier de votre choix.
 
-## Template Mod Download (GitHub Template)
+## Télécharger le Mod Patron (Github Template)
 
-To use the [GitHub template](https://github.com/QuiltMC/quilt-template-mod), visit the [GitHub repository](https://github.com/QuiltMC/quilt-template-mod) and click the `Use this template` button. Follow through the dialog and clone that repository using git. Then you can continue.
+Pour utiliser le [patron Github](https://github.com/QuiltMC/quilt-template-mod), ouvrez le [dépôt Github](https://github.com/QuiltMC/quilt-template-mod)
+puis cliquer sur le boutton `Use this template`. Suivez les instructions puis clonez le nouveau dépôt en utilisant git. Vous pouvez ensuite continuer.
 
-## Setting up with IntelliJ IDEA
+## Mise en place avec IntelliJ IDEA
 
-Now you need to set up your development environment. Open IntelliJ IDEA and follow through the initial setup dialog.
-Then, you need to open the project:
+Maintenant il faut que vous mettiez en place votre environnement de développement.
+Ouvrez IntelliJ IDEA et suivez les instructions de mise en place initiale. Vous pouvez ensuite ouvrir le projet :
 
-If you downloaded the template mod and extracted it into a folder,
-import the project by pressing the `Open` button in the project listing.
+Si vous avez téléchargé le mod patron et l'avez extrait dans un dossier,
+importez le projet en cliquant sur le boutton `Open` dans la liste de projets.
 
-If you made a GitHub repository with the template, use the `Get from VCS` button.
+Si vous avez créé un dépôt Github avec le patron, cliquez sur le boutton `Get from VCS`.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="/introduction/setting-up-2-dark.png">
   <img alt="IntelliJ IDEA projects window" src="/introduction/setting-up-2-light.png">
 </picture>
 
-If you get a window asking if you trust the folder, press `Trust Project`.
+Si vous avez une fenêtre vous demandant `Trust and Open project ?`, cliquez sur `Trust Project`.
 
-There is a plugin that adds additional support for Minecraft modding projects
-that is highly recommended. You can get it here:
+Il y a un plugin qui ajoute du support additionnel pour les projets de mods
+pour Minecraft qui est hautement recommandé. Vous pouvez l'obtenir ici :
 <https://plugins.jetbrains.com/plugin/8327-minecraft-development>
 
-## An Overview Over IDEA
+## Un Apperçu d'IDEA
 
-After you opened the project, you should see a window looking roughly like this:
+Après avoir ouvert le projet, vous devriez voir une fenêtre qui ressemblre vaguement à ça :
 
 TODO: Embed screenshot
 

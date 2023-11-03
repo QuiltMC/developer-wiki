@@ -1,0 +1,5 @@
+{
+	"title": "Erreur {{placeholder}}",
+	"not-translated": "Cette page du wiki n'est pas encore traduite en {{placeholder}}",
+	"not-found": "Aucune page du wiki n'a été trouvé à l'adresse : `{{placeholder}}`"
+}

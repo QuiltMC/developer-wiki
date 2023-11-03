@@ -1,0 +1,98 @@
+{
+	"blocks": {
+		"title": "Blocs",
+		"first-block": {
+			"title": "Ajouter un Bloc Simple"
+		},
+		"oriented-block": {
+			"title": "Ajouter un Bloc avec Orientation"
+		},
+		"redstone-interaction": {
+			"title": "Ajouter des fonctionnalités Redstone à votre Bloc"
+		}
+	},
+	"concepts": {
+		"title": "Concepts",
+		"events": {
+			"title": "Les Événements"
+		},
+		"libraries": {
+			"title": "Liste de Librairies Tiers"
+		},
+		"lifecycles-ticks": {
+			"title": "Cycles de Vie et Ticks"
+		},
+		"minecraft-code-structure": {
+			"title": "La Structure du Code de Minecraft"
+		},
+		"mixins": {
+			"title": "Les Mixins"
+		},
+		"nbt": {
+			"title": "Le NBT et la Donnée dans Minecaft"
+		},
+		"networking": {
+			"title": "La Mise en Réseau"
+		},
+		"qsl-qfapi": {
+			"title": "Aperçu de QSL et de la QFAPI"
+		},
+		"registries": {
+			"title": "Les Registres"
+		},
+		"sideness": {
+			"title": "Côté Serveur et Côté Client"
+		}
+	},
+	"data": {
+		"title": "Donnée",
+		"adding-recipes": {
+			"title": "Ajouter des Recettes"
+		},
+		"rea": {
+			"title": "Utiliser le 'Registry Entry Attachments' (REA)"
+		},
+		"recipe-api": {
+			"title": "L'API de Recettes"
+		},
+		"recipe-type": {
+			"title": "Ajouter un Type de Recette"
+		},
+		"resource-loader": {
+			"title": "Le Chargeur de Resources"
+		}
+	},
+	"introduction": {
+		"title": "Introduction",
+		"get-started": {
+			"title": "Débuter avec Quilt"
+		},
+		"setting-up": {
+			"title": "Mettre en place un Environement de Développement"
+		}
+	},
+	"items": {
+		"title": "Objets",
+		"armor": {
+			"title": "Ajouter une Armure"
+		},
+		"first-item": {
+			"title": "Créer son premier objet"
+		},
+		"food": {
+			"title": "Ajouter de la Nourriture"
+		},
+		"tools": {
+			"title": "Ajouter des Outils Personnalisés"
+		}
+	},
+	"misc": {
+		"title": "Divers",
+		"commands": {
+			"title": "Ajouter des Commandes"
+		},
+		"sounds": {
+			"title": "Ajouter des Sons"
+		}
+	}
+}

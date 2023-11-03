@@ -1,0 +1,12 @@
+{
+	"title": "Wiki pour Développeurs de Quilt :P",
+	"dev-notice": "Attention : Ce site est encore en cours de développement. Veuillez signaler les problèmes (en anglais) ici : <{{placeholder}}>",
+	"draft-notice": "Cette page du wiki est prévue mais n'a pas encore été implémentée. Vous pouvez participer à la création de ce wiki ici : <{{placeholder}}>",
+	"sidebar": {
+		"menu": "Menu",
+		"articles": "Articles"
+	},
+	"lang-dropdown": {
+		"language": "Langue"
+	}
+}

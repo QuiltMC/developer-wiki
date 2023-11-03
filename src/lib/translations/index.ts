@@ -10,7 +10,8 @@ export const config: Config<{ placeholder?: string }> = {
 	fallbackLocale: "en",
 	parser: parser(),
 	translations: {
-		en: { lang }
+		en: { lang },
+		fr: { lang }
 	},
 	loaders: [
 		{
@@ -27,6 +28,21 @@ export const config: Config<{ placeholder?: string }> = {
 			locale: "en",
 			key: "wiki",
 			loader: async () => (await import("./en/wiki.json")).default
+		},
+		{
+			locale: "fr",
+			key: "application",
+			loader: async () => (await import("./fr/application.json")).default
+		},
+		{
+			locale: "fr",
+			key: "error",
+			loader: async () => (await import("./fr/error.json")).default
+		},
+		{
+			locale: "fr",
+			key: "wiki",
+			loader: async () => (await import("./fr/wiki.json")).default
 		}
 	]
 };
