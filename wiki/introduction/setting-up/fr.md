@@ -43,7 +43,7 @@ Si vous avez créé un dépôt Github avec le patron, cliquez sur le boutton `Ge
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="/introduction/setting-up-2-dark.png">
-  <img alt="IntelliJ IDEA projects window" src="/introduction/setting-up-2-light.png">
+  <img alt="La fenêtre de projet d'IntelliJ IDEA" src="/introduction/setting-up-2-light.png">
 </picture>
 
 Si vous avez une fenêtre vous demandant `Trust and Open project ?`, cliquez sur `Trust Project`.
@@ -58,27 +58,46 @@ Après avoir ouvert le projet, vous devriez voir une fenêtre qui ressemblre vag
 
 TODO: Embed screenshot
 
-On the right and left side there are sidebars with icons to toggle different "Tool Windows". There are a few that you should know about: First, the folder icon in the top left toggles your `Project` tool window. With it, you can select the different files in your project. In the bottom left, there are the buttons for the `Terminal` and `Version Control System`. Additionally, after you tested your mod, there should also be a `Run` and a `Build` button. To the right are the `Notifications` and `Gradle` tool windows.
+Vous pouvez voir des barres latérales de chaque côté de la fenêtre avec des icônes pour accéder à différents outils.
+Voici quelques'uns qui vous seront utils :
+D'abord, l'icône de dossier en haut à gauche permet d'activer/désactiver l'outil `Project`
+qui vous donne accès à l'arborescence de fichiers de votre projet.
+En bas à gauche, vous pouvez entre autre trouver les boutons pour le `Terminal`,
+qui vous donne accès à une interface de lignes de commandes,
+et le `Version Control System`.
+Après avoir lancé votre mod une première fois vous pourrez aussi y trouver les boutons `Run` et `Build`.
+Dans la barre latérale de droite, vous pouvez trouvez les boutons pour les `Notifications` et l'outil `Gradle`.
 
-When you open a file, it should open a new tab in the editor in the middle. ^
-Additionally, there are some things you might find not straight away: If you want to rename something, be it a file or a name of a variable or function, you can do so in the context menu under `Refactor > Rename`
+Ouvrir un fichier devrait ouvrir un nouvel onglet dans l'éditeur au milieu de la fenêtre.
+De plus, il y a des choses que vous pourriez avoir du mal à trouver :
+Par exemple pour renomer quelque-chose, que ce soit un fichier, une variable ou une fonction,
+vous pouvez le faire en faisant un click droit sur l'élément que vous voulez renommer
+plus en cliquant sur `Refactor > Rename` dans le menu contextuel.
 
-## Making the Mod Yours
+## Vous Approprier le Mod
 
-First you'll need to make up a name for your mod. For this tutorial, we will use the mod name `Bingus Mod`.
+D'abord vous allez devoir trouver un nom pour votre mod. Pour ce tutoriel, nous utiliserons le nom `Bingus Mod`.
 
-Based on the name, you also need a mod id. It should be composed of lowercase characters from the alphabet and underlines. Usually, you mod id should be your mod name, but with underscores instead of spaces, hyphens or other special characters. Additionally, there shouldn't be a mod already using that id. For a mod named `Bingus Mod`, it would be `bingus_mod`.
+Il vous faut également un ID pour le mod. Il ne devrait contenir que des lettres minuscules et des underscores (ou tirets du 8).
+En général l'ID d'un mod est son nom avec des unserscores à la place des espaces, des espaces et autres caractères spéciaux.
+De plus, votre ID de mod ne devrait pas déjà être utilisé par un autre mod.
+Pour notre mod `Bingus Mod`, nous utiliserons l'ID `bingus_mod`.
 
-Lastly you need to decide on a maven group. It is used to identify the developer of the mod in a machine-readable scheme and is designed to be unique. It should be a domain you own in reversed. So if you own `bingus.example.com`, your maven group would be `com.example.bingus`. If you don't have a domain (or don't know what it is), but have a GitHub account, you can use `io.github.your_github_username`, replace all special characters with underscores again.
+Enfin, il faut que vous vous trouviez un groupe maven. Il sert à identifier l'auteur d'un mod d'une manière compréhensible par une machine et devrait être unique.
+Il devrait correspondre à un domaine qui vous appartient à l'envers. Par exemple si le domain `bingus.example.com` vous appartient,
+votre groupe serait `com.example.bingus`. Si vous n'avez pas de domaine (ou que vous ne le connaissez pas), mais que vous avez un compte Github,
+vous pouvez utiliser `io.github.votre_pseudo_github`, en prenant soin de remplacer tous les caractères spéciaux par des underscores encore une fois.
 
 ---
 
-Now that you have decided on these things, you can update your mod's metadata:
+Après avoir décider de ces éléments, vous pouvez mettre à jour les métadonnées de votre mod :
 
-First, update the `gradle.properties` file directly in your project folder to use your Maven group and mod ID.
+D'abord, modifier le fichier `gradle.properties` dans le dossier racine de votre mod
+afin qu'il utilise votre groupe maven et l'ID de votre mod.
 
-Change the line beginning with `maven_group =` to use your mod maven group instead of `com.example`
-Set `archives_base_name` to your mod's ID similarly and ignore all other properties for now. Here is an example how the result might look:
+Modifiez la ligne commençant par `maven_group =` pour qu'elle utilise votre group maven à la place de `com.example`.
+Changer la valeur de `archives_base_name` avec l'ID de votre mod et ignorez les autres propriétés pour l'instant.
+Voici un example de ce à quoi pourrait ressembler le résultat :
 
 ```gradle
 # Gradle Properties
@@ -93,28 +112,37 @@ archives_base_name = bingus-mod
 
 ---
 
-Next, update the `quilt.mod.json` file in the `src/main/resources` folder. The `quilt.mod.json` defines your mod's metadata, like mod name, author, description, website, but also more development focused metadata such as dependencies, version, mod ID and [mod initializers](../concepts/sideness#on-mod-initializers).
+Ensuite, mettez à jour le fichier `quilt.mod.json` dans le dossier `src/main/resources`.
+Ce fichier définie les métadonnées de votre mod, comme son nom, saon auteur.ice, sa description, son site web,
+mais aussi des métadonnées qui concernent plus directement le développement du mod
+tel que les dépendances, la version, l'ID du mod et les '[mod initializers](../concepts/sideness#les-mod-initializers)'.
 
-You'll need to update a few things under `"quilt_loader"`, see below for a finalized example:
+Vous aurez besoin de modifier quelques éléments du champs `"quilt_loader"`,
+vous pouvez trouver un exemple finalisé ci-dessous :
 
-1. `"group"` should be set to the Maven group you specified in your `gradle.properties`.
-2. `"id"` should be set to your mod's ID. This should be your mod's name in all lowercase
-   with underscores instead of spaces.
+1. `"group"` devrait correspondre au groupe maven spécifié dans le fichier `gradle.properties`.
+2. `"id"` devrait correspondre à l'ID de votre mod.
+   Cela devrait correspondre au nom de votre mod en minuscule avec des underscores à la place des espaces.
 3. `"metadata"`:
-   1. `"name"` should be your mod's name. This does not require any special formatting,
-      unlike your mod's ID.
-   2. `"description"` should be a short description of your mod.
-   3. `"contributors"` can contain entries for anything. Use your name as the key
-      and `"Developer"` as the value if you don't know what to put here.
-   4. `"contact"` can contain entries for anything similar to `""contributors"`,
-      but typically people put a `"homepage"`, a `"sources"`, and a `"issues"` entry with a valid URL here.
-   5. Replace `example_mod` with your mod's ID in `"icon"`.
-4. In `"entrypoints"`, replace `com.example.example_mod` with your Maven group and mod ID,
-   and the `ExampleMod` at the end should be the Java class name for your mod. The Java class name usually is your mod's name, written in `UpperCamelCase` (So new words simply start by using a uppercase letter and the initial latter is also upper case)
-   For example, `io.github.bingus.bingus_mod.BingusMod`.
-5. In `"mixin"`, replace `example_mod` in the file name to your mod's ID.
+   1. `"name"` devrait correspondre au nom de votre mod.
+      Pas besoin de format spécifique, contrairement à l'ID de votre mod.
+      . `"description"` devrait correspondre à une courte description de votre mod.
+   2. `"contributors"` devrait contenir une liste des perssones ayant partcipé à la création du mod, accompagnées de leur rôle.
+      Ce champs n'a pas de structure spécifique, vous pouvez y mettre ce que vous voulez.
+      Si vous ne savez pas quoi mettre vous pouvez simplement mettre votre nom comme clé
+      avec la valeur `"Owner"`.
+   3. `"contact"` n'a pas de structure spécifique, comme `"contributors"`.
+      Cependant les gens y mettent en général des champs `"homepage"`, `"sources"` et
+      `"issues"` avec comme valeur des URL vers les pages correspondantes.
+   4. Remplacez `example_mod` avec l'ID de votre mod dans `"icon"`.
+4. Dans `"entrypoints"`, remplacez `com.example.example_mod` par votre groupe maven suivit de l'ID de votre mod,
+   et le `ExampleMod` à la fin devrait correspondre au nom de la classe Java pour votre Mod.
+   Le nom de la classe Java correspond généralement au nom du mod, écrit en `UpperCamelCase`
+   (sans espaces entre les mots et chaque mot commence avec une Majuscule).
+   Par exemple dans notre cas on utiliserait `io.github.bingus.bingus_mod.BingusMod`.
+5. Dans `"mixin"`, remplacez `example_mod` dans le nom du fichier par l'ID de votre mod.
 
-Your `quilt.mod.json` should not have any traces of "example" in them anymore.
+Votre fichier `quilt.mod.json` ne devrait plus contenir la moindre trace de "example" maintenant.
 
 ```json
 {
@@ -148,64 +176,64 @@ Your `quilt.mod.json` should not have any traces of "example" in them anymore.
 
 ---
 
-Create a `LICENSE` for your mod. If you don't know which license to use, check out this
-link: <https://choosealicense.com/>. Note that GPL-3.0 and AGPL-3.0 are both incompatible
-with Minecraft, so don't use them. Once you've chosen a license, put the license's plain text
-in a file named exactly `LICENSE`.
+Créé un fichier `LICENSE` pour votre mod. Si vous ne savez pas quelle license choisir,
+vous pouvez vous aider de cet outil : <https://choosealicense.com/>.
+Notez que les licenses GPL-3.0 et AGPL-3.0 ne sont pas compatible avec Minecraft, donc ne les utilisez pas.
+Après avoir choisi votre license, copiez son texte dans votre fichier `LICENSE`.
 
-Delete the `LICENSE-TEMPLATE.md` file. It's not necessary to have since it's the license for
-the template, not your mod.
+Vous pouvez maintenant supprimer le fichier `LICENSE-TEMPLATE.md`.
 
 ---
 
-Change the name of the directories in the `src/main/java` folder to reflect your mod.
-For example, if your Maven group is `io.github.bingus` and your mod's ID is `bingus_mod`,
-you should have four directories in total. IntelliJ IDEA should make this step easier for
-you when you rename the directories; just change the whole line to match your group and ID.
+Changez le nom des dossiers dans le dossier `src/main/java` afin qu'ils correspondent à votre mod.
+Par exemple, si votre groupe maven est `io.github.bingus` et que l'ID de votre mod est `bingus_mod`,
+vous devriez avoir 4 dossiers en tout. IntelliJ IDEA devrait rendre cette étape plus facile pour vous,
+en renommant les dossier, changez simplement toute la ligne pour correspondre à votre groupe et ID.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="/introduction/setting-up-3-dark.png">
-  <img alt="IntelliJ IDEA rename packages dialog" src="/introduction/setting-up-3-light.png">
+  <img alt="Le dialogue de renomage de paquet d'IntelliJ IDEA" src="/introduction/setting-up-3-light.png">
 </picture>
 
-Delete the `com.example` directories.
+Supprimez les dossiers `com.example`.
 
-Rename `ExampleMod` to your mod's name using Java class naming conventions. Check that the
-`package` declaration at the top is correct!
+Renommez `ExampleMod` pour correspondre au nom de classe Java que vous avez utilisé
+dans votre fichier `quilt.mod.json` plsu tôt. Vérifiez que la déclaration `package`
+correspond bien au dossier actuel de la classe !
 
-In the `resources` folder, change `example_mod.mixins.json` to the file name you set in
-`quilt.mod.json`. Change the name of the folder inside `assets` to be your mod's ID.
+Dans le dossier `resources`, changez `example_mod.mixins.json` au nom de fichier que vous
+avez utilisé dans le fichiers `quilt.mod.json` pour le champs `"mixin"`.
+Changez le nom du dossier dans `assets` pour qu'il corresponde à l'ID de votre mod.
 
-Your directories and file names should not have any traces of "example" in them anymore.
+Les nom de vos fichiers et dossiers ne devraient plus contenir la moindre trace de "example" maintenant.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="/introduction/setting-up-4-dark.png">
-  <img alt="Directory structure" src="/introduction/setting-up-4-light.png">
+  <img alt="Structure de dossiers" src="/introduction/setting-up-4-light.png">
 </picture>
 
 ---
 
-If the versions in `gradle/libs.versions.toml` are out of date, replace the old version
-number with the new ones obtained from this link: <https://lambdaurora.dev/tools/import_quilt.html>
+Si les versions dans `gradle/libs.versions.toml` sont dépassées, remplacez les par des versions
+plus récentes que vous pouvez trouver ici : <https://lambdaurora.dev/tools/import_quilt.html>
 
 ---
 
-We're almost done! The last step is to generate the Minecraft sources with Vineflower.
-This is so you can view Minecraft's code with the power of Quilt's decompiler.
-In the Gradle menu, go to the `fabric` category and run the `genSourcesWithVineflower`
-task.
+On en a presque fini ! La dernière étape est de générer les fichiers source de Minecraft avec Vineflower.
+Cela vous permettra de consulter le code de Minecraft grace au decompiler de Quilt.
+Dans le menu Gradle, allez à la categorie `fabric` puis lancez la tâche `genSourcesWithVineflower`.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="/introduction/setting-up-5-dark.png">
-  <img alt="Gradle window with genSourcesWithVineflower highlighted" src="/introduction/setting-up-5-light.png">
+  <img alt="La fenêtre Gradle avec genSourcesWithVineflower surligné" src="/introduction/setting-up-5-light.png">
 </picture>
 
-Finally, reload the Gradle project by pressing this button in the Gradle menu:
+Enfin, rechargez le projet Gradle en appuyant sur ce bouton dans le menu Gradle :
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="/introduction/setting-up-6-dark.png">
-  <img alt="Gradle window with the 'reload project' button highlighted" src="/introduction/setting-up-6-light.png">
+  <img alt="La fenêtre Gradle avec le bouton 'reload project' surligné" src="/introduction/setting-up-6-light.png">
 </picture>
 
-Once you're done with all of these steps, your mod is ready to be worked on!
-You can start by [Creating your First Item](../items/first-item)
+Après avoir complété toutes ces étapes, vous pouvez maintenant travaillez sur votre mod !
+Vous pouvez commencer par [Créer votre Premier Objet](../items/first-item).

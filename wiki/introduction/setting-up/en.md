@@ -59,7 +59,7 @@ TODO: Embed screenshot
 
 On the right and left side there are sidebars with icons to toggle different "Tool Windows". There are a few that you should know about: First, the folder icon in the top left toggles your `Project` tool window. With it, you can select the different files in your project. In the bottom left, there are the buttons for the `Terminal` and `Version Control System`. Additionally, after you tested your mod, there should also be a `Run` and a `Build` button. To the right are the `Notifications` and `Gradle` tool windows.
 
-When you open a file, it should open a new tab in the editor in the middle. ^
+When you open a file, it should open a new tab in the editor in the middle.
 Additionally, there are some things you might find not straight away: If you want to rename something, be it a file or a name of a variable or function, you can do so in the context menu under `Refactor > Rename`
 
 ## Making the Mod Yours
