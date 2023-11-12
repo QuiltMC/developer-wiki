@@ -37,7 +37,7 @@ export async function load({ params }: LayoutServerLoadEvent) {
 				})
 				// exlude draft pages
 				.filter((page) => !page.draft)
-				.toSorted((a, b) => a.index - b.index);
+				.sort((a, b) => a.index - b.index);
 
 			// get the metadata of each category from their yaml file
 			const category_metadata = YAML.parse(
@@ -56,7 +56,7 @@ export async function load({ params }: LayoutServerLoadEvent) {
 		})
 		// exckude categories with no pages
 		.filter((category) => category.pages.length)
-		.toSorted((a, b) => a.index - b.index);
+		.sort((a, b) => a.index - b.index);
 
 	return { category: params.category, slug: params.slug, categories };
 }
