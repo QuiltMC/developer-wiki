@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import { page } from "$app/stores";
-	import { t, locales } from "$lib/translations";
+	import { t, locales, locale } from "$lib/translations";
 
 	let is_dropdown_active = false;
 	function toggleNavbar() {
@@ -23,11 +22,11 @@
 	}
 
 	const selectLocale = (selected_locale: string) => {
-		let current_route = $page.url.pathname;
-		// Removes any locale from the route
-		$locales.forEach((locale) => {
-			current_route = current_route.replace(`/${locale}`, "");
-		});
+		// Removes the locale from the route
+		const current_route = window.location.pathname.replace(
+			new RegExp(`^/${locale.get()}(/.+)?$`),
+			"$1"
+		);
 
 		goto(`/${selected_locale}${current_route}`);
 	};
