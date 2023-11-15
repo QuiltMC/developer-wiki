@@ -7,7 +7,7 @@
 	import Header from "$lib/Header.svelte";
 	import HtmlHead from "$lib/HtmlHead.svelte";
 	import Sidebar from "$lib/Sidebar.svelte";
-	import { t, locale } from "$lib/translations/index.js";
+	import { t, locale, locales } from "$lib/translations/index.js";
 
 	onMount(() => {
 		const lowContrast = document.getElementById("low-contrast") as HTMLInputElement;

@@ -1,20 +1,7 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { locale, locales, t } from '$lib/translations';
-	import { onDestroy } from 'svelte';
-	import type { Unsubscriber } from 'svelte/store';
-
-	let unsubscriber: Unsubscriber;
-	onDestroy(() => unsubscriber && unsubscriber());
-
-	if (browser) {
-		const user_locale: string = window.localStorage.getItem('lang') || window.navigator.language;
-		if ($locales.includes(user_locale)) {
-			$locale = user_locale;
-		}
-
-		unsubscriber = locale.subscribe((locale) => localStorage.setItem('lang', locale));
-	}
+	import { goto } from "$app/navigation";
+	import { page } from "$app/stores";
+	import { t, locales } from "$lib/translations";
 
 	let is_dropdown_active = false;
 	function toggleNavbar() {
@@ -36,7 +23,13 @@
 	}
 
 	const selectLocale = (selected_locale: string) => {
-		$locale = selected_locale;
+		let current_route = $page.url.pathname;
+		// Removes any locale from the route
+		$locales.forEach((locale) => {
+			current_route = current_route.replace(`/${locale}`, "");
+		});
+
+		goto(`/${selected_locale}${current_route}`);
 	};
 </script>
 
@@ -44,7 +37,7 @@
 	class="navbar-item has-dropdown {is_dropdown_active ? 'is-active' : ''}"
 	on:click={toggleNavbar}
 	on:keypress={(event) => {
-		if (event.key === 'Enter') {
+		if (event.key === "Enter") {
 			toggleNavbar();
 		}
 	}}
@@ -55,7 +48,7 @@
 >
 	<span class="navbar-link has-icon">
 		<span class="icon"><i class="fas fa-language fa-xl" /></span>
-		<span class="is-hidden-desktop">{$t('application.lang-dropdown.language')}</span>
+		<span class="is-hidden-desktop">{$t("application.lang-dropdown.language")}</span>
 	</span>
 
 	<div class="navbar-dropdown">
@@ -64,7 +57,7 @@
 				class="navbar-item is-clickable"
 				on:click={() => selectLocale(locale)}
 				on:keypress={(event) => {
-					if (event.key === 'Enter') {
+					if (event.key === "Enter") {
 						selectLocale(locale);
 					}
 				}}

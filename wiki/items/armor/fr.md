@@ -193,10 +193,10 @@ Si vous voulez, vous pouvez utiliser cette texture d'exemple comme un patron.
 Les différentes parties d'armure utilisent différentes couleurs pour vous aider à les différencier.
 
 `assets/minecraft/models/armor/example_item_layer_1.png`:  
-![Texture layer 1 d'une armure d'exemple](example_item_layer_1.png)<br><a href="example_item_layer_1.png" target="_blank">example_item_layer_1.png</a>
+![Texture layer 1 d'une armure d'exemple](/items/example_item_layer_1.png)<br><a href="/items/example_item_layer_1.png" target="_blank">example_item_layer_1.png</a>
 
 `assets/minecraft/models/armor/example_item_layer_2.png`:  
-![Texture layer 2 d'une armure d'exemple](example_item_layer_2.png)<br><a href="example_item_layer_2.png" target="_blank">example_item_layer_2.png</a>
+![Texture layer 2 d'une armure d'exemple](/items/example_item_layer_2.png)<br><a href="/items/example_item_layer_2.png" target="_blank">example_item_layer_2.png</a>
 
 Remplacez `example_item` par le nom de votre matériaux dans le chemin du fichier.
 Veuillez à ce que les modèles soient bien dans le namespace `minecraft`.

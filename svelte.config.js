@@ -10,7 +10,9 @@ import rehypeSlug from "rehype-slug";
 export default {
 	kit: {
 		adapter: adapter(),
-
+		prerender: {
+			entries: ["/", "/en", "/fr"]
+		},
 		alias: {
 			$wiki: "wiki"
 		}

@@ -35,7 +35,7 @@ ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries 
 
 Le nom de l'objet devrait être le même que celui du bloc.
 
-Pour plus d'information sur ce que ça fait, voir l'article [Créez votre Premier Objet](../items/first-item#registering-the-item).
+Pour plus d'information sur ce que ça fait, voir l'article [Créez votre Premier Objet](../items/first-item#enregistrer-lobjet).
 
 ## Ajouter un Modèle pour le Bloc
 

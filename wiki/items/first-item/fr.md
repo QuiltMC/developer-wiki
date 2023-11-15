@@ -54,9 +54,9 @@ Comment réparer ça ?
 
 Les `ItemGroup`s, ou groupes d'objets, représentent les onglets du menu du mode créatif.
 À cause de changements faits en 1.19.3, vous ne pouvez plus ajouter d'objets à des groupes d'objets
-en utilisant seulement la [Quilt Standard Libraries](../concepts/qsl-qfapi#quilt-standard-libraries)
-(qu'on appelera désromais QSL). Cependant, la [Fabric API](../concepts/qsl-qfapi#fabric-api) a une API pour ça.
-Grâce à la [Quilted Fabric API](../concepts/qsl-qfapi#quilted-fabric-api), qui est inclue dans le mod patron
+en utilisant seulement les [Quilt Standard Libraries](../concepts/qsl-qfapi#les-quilt-standard-libraries)
+(qu'on appelera désromais QSL). Cependant, la [Fabric API](../concepts/qsl-qfapi#la-fabric-api) a une API pour ça.
+Grâce à la [Quilted Fabric API](../concepts/qsl-qfapi#la-quilted-fabric-api), qui est inclue dans le mod patron
 et est téléchargée par les utilisateurs avec la QSL, on peut aussi l'utiliser avec Quilt :
 
 ```java

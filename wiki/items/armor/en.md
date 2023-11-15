@@ -162,10 +162,10 @@ Shoes, Helmet, and Chestplate use the `layer_1` texture (and have a lot more dis
 If you want, you can use this example texture as a template. The different armor parts use different tones to try help differentiating them.
 
 `assets/minecraft/models/armor/example_item_layer_1.png`:  
-![An example armor layer 1 texture](example_item_layer_1.png)<br><a href="example_item_layer_1.png" target="_blank">example_item_layer_1.png</a>
+![An example armor layer 1 texture](/items/example_item_layer_1.png)<br><a href="/items/example_item_layer_1.png" target="_blank">example_item_layer_1.png</a>
 
 `assets/minecraft/models/armor/example_item_layer_2.png`:  
-![An example armor layer 2 texture](example_item_layer_2.png)<br><a href="example_item_layer_2.png" target="_blank">example_item_layer_2.png</a>
+![An example armor layer 2 texture](/items/example_item_layer_2.png)<br><a href="/items/example_item_layer_2.png" target="_blank">example_item_layer_2.png</a>
 
 Replace use your armor material's name for instead of `example_item` in the path. It is important that the models are located in the `minecraft` namespace.
 

@@ -10,13 +10,13 @@ export async function load({ params }: PageLoadEvent) {
 	try {
 		// get the metadata from the yaml file instead of the makdown file header
 		const post_metadata = YAML.parse(
-			(await import(`../../../../wiki/${params.category}/${params.slug}/+page.yml?raw`)).default
+			(await import(`../../../../../wiki/${params.category}/${params.slug}/+page.yml?raw`)).default
 		);
 
 		try {
 			// the makrdown file only contains the content of the page
 			const post = await import(
-				`../../../../wiki/${params.category}/${params.slug}/${get(locale)}.md`
+				`../../../../../wiki/${params.category}/${params.slug}/${get(locale)}.md`
 			);
 
 			return {

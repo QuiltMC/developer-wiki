@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Category } from "./types";
 
-	import { t } from "$lib/translations";
+	import { t, locale, locales } from "$lib/translations";
 
 	export let categories: Category[] = [];
 	export let url: string;
@@ -29,9 +29,17 @@
 							{#each category.pages as page}
 								<li>
 									<a
-										href={`/${category.slug}/${page.slug}`}
-										class:is-active={url === `${category.slug}/${page.slug}`}>{$t(page.title)}</a
+										href={`/${$locale}/${category.slug}/${page.slug}`}
+										class:is-active={url === `/${$locale}${category.slug}/${page.slug}`}
 									>
+										{$t(page.title)}
+									</a>
+									{#each $locales as locale}
+										<!-- Needed to tell SvelteKit to generate the non english pages of the wiki -->
+										<a class="is-hidden" href={`/${locale}/${category.slug}/${page.slug}`}>
+											{$t(page.title)}
+										</a>
+									{/each}
 								</li>
 							{/each}
 						</ul>

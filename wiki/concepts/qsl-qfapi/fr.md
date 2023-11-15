@@ -21,7 +21,7 @@ tandis que les APIs sont parfois dans un paquet `api`.
 
 La Fabric API (FAPI pour faire court) est l'API de Fabric et fournit plusieurs APIs utiles que les Quilt Standard Libraries ne fournissent pas,
 tel que la majorité des APIs de rendu, l'API de groupe d'objets and l'API de key bind.
-Pour Quilt, la [Quilted Fabric API](#quilted-fabric-api) est une implémentation alternative, qui utilise les Quilt Standard Libraries dès que possible.
+Pour Quilt, la [Quilted Fabric API](#la-quilted-fabric-api) est une implémentation alternative, qui utilise les Quilt Standard Libraries dès que possible.
 
 ## Les Quilt Standard Libraries
 
@@ -54,7 +54,7 @@ La Quilted Fabric API à deux utilisations principales :
 
 - Elle fournit un niveau de compatibilité pour que les mods Fabric puissent être chargées avec Quilt.
 - Et elle permet d'utiliser les API de Fabric quand les QSL ne fournit pas encore d'APIs correspondantent.
-  C'est le cas par exemple pour les [groupes d'objets](../items/first-item#ajouter-lobjet-a-un-groupe).
+  C'est le cas par exemple pour les [groupes d'objets](../items/first-item#ajouter-lobjet-à-un-groupe).
 
 Comme la QFAPI dépend des QSL et à besoin de connaitre l'implémentation de Fabric,
 elle sera toujours mise à jour après que la Fabric API et les QSL aient été misent à jour.

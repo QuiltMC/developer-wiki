@@ -3,7 +3,7 @@ import YAML from "yaml";
 import fs from "fs";
 
 import type { Category, Page } from "$lib/types";
-import type { LayoutServerLoadEvent } from "./$types";
+import type { LayoutServerLoadEvent } from "../$types";
 
 export async function load({ params }: LayoutServerLoadEvent) {
 	const wiki_path = `${process.cwd()}/wiki/`;
