@@ -7,8 +7,13 @@ export function load({ params }) {
 	if (params.locale && locales.get().includes(params.locale)) {
 		locale.set(params.locale);
 	} else if (browser) {
-		if (window.navigator.language && locales.get().includes(window.navigator.language)) {
-			throw redirect(308, `/${window.navigator.language}${window.location.pathname}`);
+		// Get the first supported locale in the user's browser's selected languages
+		const navigator_language = window.navigator.languages.find((navigator_language) =>
+			locales.get().includes(navigator_language)
+		);
+
+		if (navigator_language) {
+			throw redirect(308, `/${navigator_language}${window.location.pathname}`);
 		} else {
 			throw redirect(308, `/en${window.location.pathname}`);
 		}
