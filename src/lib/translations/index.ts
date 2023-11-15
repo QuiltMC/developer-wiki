@@ -1,13 +1,17 @@
-import lang from "./lang.json";
+import lang from "./lang.js";
 
 import i18n from "@sveltekit-i18n/base";
 import parser from "@sveltekit-i18n/parser-default";
 
 import type { Config } from "@sveltekit-i18n/parser-default";
 
+import { dev } from "$app/environment";
+
+const defaultLocale = "en";
+
 export const config: Config<{ placeholder?: string }> = {
-	initLocale: "en",
-	fallbackLocale: "en",
+	initLocale: defaultLocale,
+	fallbackLocale: defaultLocale,
 	parser: parser(),
 	translations: {
 		en: { lang },
@@ -44,7 +48,8 @@ export const config: Config<{ placeholder?: string }> = {
 			key: "wiki",
 			loader: async () => (await import("./fr/wiki.json")).default
 		}
-	]
+	],
+	log: { level: dev ? "warn" : "error" }
 };
 
-export const { t, loading, locales, locale, loadTranslations } = new i18n(config);
+export const { t, locale, locales, setLocale, translations } = new i18n(config);

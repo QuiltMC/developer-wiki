@@ -1,6 +1,16 @@
 <script lang="ts">
-	import { goto } from "$app/navigation";
+	import { browser } from "$app/environment";
+	import { page } from "$app/stores";
 	import { t, locales, locale } from "$lib/translations";
+
+	$: regex = new RegExp(`/${$locale}(/.+)?`);
+
+	// Removes the current locale from the current route
+	// (only if the current route does contain the locale)
+	let current_route = "";
+	$: current_route = regex.test($page.url.pathname)
+		? $page.url.pathname.replace(new RegExp(`/${$locale}(/.+)?`), "$1")
+		: current_route;
 
 	let is_dropdown_active = false;
 	function toggleNavbar() {
@@ -20,20 +30,12 @@
 			is_dropdown_active = false;
 		}
 	}
-
-	const selectLocale = (selected_locale: string) => {
-		// Removes the locale from the route
-		const current_route = window.location.pathname.replace(
-			new RegExp(`^/${locale.get()}(/.+)?$`),
-			"$1"
-		);
-
-		goto(`/${selected_locale}${current_route}`);
-	};
 </script>
 
 <div
-	class="navbar-item has-dropdown {is_dropdown_active ? 'is-active' : ''}"
+	class="navbar-item has-dropdown"
+	class:is-active={is_dropdown_active}
+	class:is-hoverable={!browser}
 	on:click={toggleNavbar}
 	on:keypress={(event) => {
 		if (event.key === "Enter") {
@@ -52,20 +54,14 @@
 
 	<div class="navbar-dropdown">
 		{#each $locales as locale}
-			<span
-				class="navbar-item is-clickable"
-				on:click={() => selectLocale(locale)}
-				on:keypress={(event) => {
-					if (event.key === "Enter") {
-						selectLocale(locale);
-					}
-				}}
+			<a
+				class="navbar-item"
+				href={`/${locale}${current_route}`}
+				data-sveltekit-preload-data="tap"
 				on:blur={handleBlur}
-				role="button"
-				tabindex="0"
 			>
 				{$t(`lang.${locale}`)}
-			</span>
+			</a>
 		{/each}
 	</div>
 </div>

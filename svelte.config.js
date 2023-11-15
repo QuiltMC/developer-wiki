@@ -1,3 +1,5 @@
+import lang from "./src/lib/translations/lang.js";
+
 import sectionize from "@hbsnow/rehype-sectionize";
 import toc from "@jsdevtools/rehype-toc";
 import adapter from "@sveltejs/adapter-static";
@@ -7,11 +9,13 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeRewrite from "rehype-rewrite";
 import rehypeSlug from "rehype-slug";
 
+const supportedLocales = Object.keys(lang);
+
 export default {
 	kit: {
 		adapter: adapter(),
 		prerender: {
-			entries: ["/", "/en", "/fr"]
+			entries: supportedLocales.reduce((acc, locale) => [...acc, `/${locale}`], ["/"])
 		},
 		alias: {
 			$wiki: "wiki"

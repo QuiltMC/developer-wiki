@@ -3,9 +3,8 @@ import YAML from "yaml";
 import fs from "fs";
 
 import type { Category, Page } from "$lib/types";
-import type { LayoutServerLoadEvent } from "../$types";
 
-export async function load({ params }: LayoutServerLoadEvent) {
+export async function load({ params }) {
 	const wiki_path = `${process.cwd()}/wiki/`;
 
 	const categories: Category[] = fs

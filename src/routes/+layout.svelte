@@ -4,12 +4,12 @@
 	import SvelteMarkdown from "svelte-markdown";
 
 	import Footer from "$lib/Footer.svelte";
-	import Header from "$lib/Header.svelte";
 	import HtmlHead from "$lib/HtmlHead.svelte";
+	import Header from "$lib/Header.svelte";
 	import Sidebar from "$lib/Sidebar.svelte";
-	import { t, locale, locales } from "$lib/translations/index.js";
+	import { locale, t } from "$lib/translations/index";
 
-	onMount(() => {
+	onMount(async () => {
 		const lowContrast = document.getElementById("low-contrast") as HTMLInputElement;
 		const lowContrastState = localStorage.getItem("lowContrast");
 
@@ -28,11 +28,11 @@
 <HtmlHead />
 
 <input id="low-contrast" type="checkbox" class="is-hidden" />
-<input id="language-switcher" type="checkbox" class="is-hidden" />
 <input id="toggle-navbar" type="checkbox" class="is-hidden" />
 <input id="toggle-sidebar" type="checkbox" class="is-hidden" />
 
 <Header />
+
 <div class="section" style="padding: 0.5rem;">
 	<article class="message is-danger mx-3 mt-3 mb-3">
 		<div class="message-body has-text-centered">

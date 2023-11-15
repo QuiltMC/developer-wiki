@@ -1,11 +1,13 @@
 import { redirect } from "@sveltejs/kit";
 
 import { browser } from "$app/environment";
-import { locale, locales } from "$lib/translations/index";
+import { locales, setLocale } from "$lib/translations/index";
 
-export function load({ params }) {
-	if (params.locale && locales.get().includes(params.locale)) {
-		locale.set(params.locale);
+export async function load({ params }) {
+	// We know that the locale is valid thanks to the
+	// /src/params/locale matcher
+	if (params.locale) {
+		await setLocale(params.locale);
 	} else if (browser) {
 		// Get the first supported locale in the user's browser's selected languages
 		const navigator_language = window.navigator.languages.find((navigator_language) =>

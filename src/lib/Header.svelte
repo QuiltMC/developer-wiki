@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import NavbarLangDropdown from "./NavbarLangDropdown.svelte";
 	import { locale } from "$lib/translations/index";
 </script>
@@ -10,14 +10,6 @@
 
 			<span class="ml-2">DevWiki</span>
 		</a>
-
-		<label
-			class="navbar-item px-2 has-tooltip-arrow has-tooltip-bottom is-hidden"
-			for="language-switcher"
-			data-tooltip="Switch Language"
-		>
-			<i class="fas fa-language fa-2xl" />
-		</label>
 
 		<label
 			class="navbar-item px-2 has-tooltip-arrow has-tooltip-bottom"
