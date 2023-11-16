@@ -1,5 +1,5 @@
 {
 	"title": "Error {{placeholder}}",
-	"not-translated": "This wiki page isn't yet translated in {{placeholder}}",
-	"not-found": "No wiki page found at: `{{placeholder}}`"
+	"404": "No page found at: `{{placeholder}}`",
+	"500": "The server encoutered an internal error, please try again"
 }

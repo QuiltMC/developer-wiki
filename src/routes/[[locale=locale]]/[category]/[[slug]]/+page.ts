@@ -10,6 +10,11 @@ export async function load({ params }): Promise<{
 	title: string;
 	warningMessage: { key: string; placeholder: string } | false;
 }> {
+	// Throws a 404 error if the route doesn't contain a slug
+	if (!params.slug) {
+		throw error(404);
+	}
+
 	try {
 		// get the metadata from the yaml file instead of the makdown file header
 		const post_metadata = YAML.parse(
@@ -43,7 +48,7 @@ export async function load({ params }): Promise<{
 				return {
 					title: post_metadata.title,
 					warningMessage: {
-						key: "error.not-translated",
+						key: "wiki.not-translated",
 						placeholder: t.get(`lang.${params.locale}`)
 					}
 				};
@@ -64,10 +69,7 @@ export async function load({ params }): Promise<{
 		}
 	} catch (err) {
 		if (err instanceof Error && err.message.match(/^Unknown variable dynamic import.+$/)) {
-			throw error(
-				404,
-				t.get("error.not-found", { placeholder: `/${params.category}/${params.slug}` })
-			);
+			throw error(404);
 		} else {
 			throw err;
 		}

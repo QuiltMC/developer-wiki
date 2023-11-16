@@ -7,7 +7,7 @@ import type { Config } from "@sveltekit-i18n/parser-default";
 
 import { dev } from "$app/environment";
 
-const defaultLocale = "en";
+export const defaultLocale = "en";
 
 export const config: Config<{ placeholder?: string }> = {
 	initLocale: defaultLocale,

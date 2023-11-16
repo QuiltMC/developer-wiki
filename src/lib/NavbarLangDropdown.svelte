@@ -3,14 +3,16 @@
 	import { page } from "$app/stores";
 	import { t, locales, locale } from "$lib/translations";
 
-	$: regex = new RegExp(`/${$locale}(/.+)?`);
-
 	// Removes the current locale from the current route
 	// (only if the current route does contain the locale)
 	let current_route = "";
-	$: current_route = regex.test($page.url.pathname)
-		? $page.url.pathname.replace(new RegExp(`/${$locale}(/.+)?`), "$1")
-		: current_route;
+	$: {
+		const routeExtractor = new RegExp(`^/${$locale}(/.+)?$`);
+
+		if (routeExtractor.test($page.url.pathname)) {
+			current_route = $page.url.pathname.replace(routeExtractor, "$1");
+		}
+	}
 
 	let is_dropdown_active = false;
 	function toggleNavbar() {
