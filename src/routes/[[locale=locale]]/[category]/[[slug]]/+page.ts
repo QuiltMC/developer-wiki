@@ -3,7 +3,7 @@ import YAML from "yaml";
 
 import type { ComponentType, SvelteComponent } from "svelte";
 
-import { t } from "$lib/translations";
+import { defaultLocale, t } from "$lib/translations";
 
 export async function load({ params }): Promise<{
 	content?: ComponentType<SvelteComponent>;
@@ -24,7 +24,7 @@ export async function load({ params }): Promise<{
 		try {
 			// the makrdown file only contains the content of the page
 			const post = await import(
-				`../../../../../wiki/${params.category}/${params.slug}/${params.locale}.md`
+				`../../../../../wiki/${params.category}/${params.slug}/${params.locale || defaultLocale}.md`
 			);
 
 			return {

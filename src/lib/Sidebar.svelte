@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Category } from "./types";
 
-	import { t, locale, locales } from "$lib/translations";
+	import { t, locale, locales, defaultLocale } from "$lib/translations";
 
 	export let categories: Category[] = [];
 	export let url: string;
@@ -35,10 +35,17 @@
 										{$t(page.title)}
 									</a>
 									{#each $locales as locale}
-										<!-- Needed to tell SvelteKit to generate the non english pages of the wiki -->
-										<a class="is-hidden" href={`/${locale}/${category.slug}/${page.slug}`}>
-											{$t(page.title)}
-										</a>
+										{#if locale !== defaultLocale}
+											<!-- Needed to tell SvelteKit to generate the non english pages of the wiki -->
+											<a class="is-hidden" href={`/${locale}/${category.slug}/${page.slug}`}>
+												{$t(page.title)}
+											</a>
+										{:else}
+											<!-- Needed to tell SvelteKit to generate the wiki page with no locale set (with the default locale) -->
+											<a class="is-hidden" href={`/${category.slug}/${page.slug}`}>
+												{$t(page.title)}
+											</a>
+										{/if}
 									{/each}
 								</li>
 							{/each}

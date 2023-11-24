@@ -7,10 +7,20 @@
 	// (only if the current route does contain the locale)
 	let current_route = "";
 	$: {
-		const routeExtractor = new RegExp(`^/${$locale}(/.+)?$`);
+		const routeExtractor = new RegExp(`^(/${$locale})?(/.+)?$`);
 
-		if (routeExtractor.test($page.url.pathname)) {
-			current_route = $page.url.pathname.replace(routeExtractor, "$1");
+		const routeMatch = $page.url.pathname.match(routeExtractor);
+		// prettier-ignore
+		if (
+			routeMatch &&
+			(
+				// We match the locale
+				routeMatch[1] ||
+				// We don't match the locale and a locale isn't in the route
+				routeMatch[2] && !$locales.includes(routeMatch[2].replace(/^\/([^/]+)(\/.+)?$/, "$1"))
+			)
+		) {
+			current_route = routeMatch[2] || "";
 		}
 	}
 
