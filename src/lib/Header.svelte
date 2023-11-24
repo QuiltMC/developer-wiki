@@ -17,11 +17,11 @@
 			data-tooltip="Toggle Low Contrast"
 		>
 			<span id="theme-normal-contrast">
-				<i class="fas fa-circle-half-stroke fa-xl" />
+				<div class="i-fa6-solid-circle-half-stroke i-xl" />
 			</span>
 
 			<span id="theme-low-contrast">
-				<i class="fal fa-circle-half-stroke fa-xl" />
+				<div class="i-tabler-circle-half i-xl" />
 			</span>
 		</label>
 
@@ -30,7 +30,7 @@
 			href="https://quiltmc.org/"
 			data-tooltip="Website Home"
 		>
-			<i class="fas fa-home fa-lg" />
+			<div class="i-fa6-solid-house i-xl" />
 		</a>
 
 		<label class="navbar-burger" for="toggle-navbar" aria-label="menu">
@@ -51,7 +51,7 @@
 				class="navbar-item has-icon"
 				target="_blank"
 			>
-				<span class="icon"><i class="fab fa-github fa-xl" /></span>
+				<span class="icon"><div class="i-fa6-brands-github i-xl" /></span>
 				<span class="is-hidden-desktop">GitHub</span>
 			</a>
 		</div>

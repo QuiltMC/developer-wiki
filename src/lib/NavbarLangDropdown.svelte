@@ -50,7 +50,7 @@
 	tabindex="0"
 >
 	<span class="navbar-link has-icon">
-		<span class="icon"><i class="fas fa-language fa-xl" /></span>
+		<span class="icon"><span class="i-fa6-solid-language i-2xl" /></span>
 		<span class="is-hidden-desktop">{$t("application.lang-dropdown.language")}</span>
 	</span>
 
@@ -67,3 +67,12 @@
 		{/each}
 	</div>
 </div>
+
+<style>
+	/* Removes the set height and width
+		 of the navbar link's icon */
+	.icon {
+		height: unset;
+		width: unset;
+	}
+</style>

@@ -10,7 +10,7 @@
 <div class="column is-narrow">
 	<div class="is-hidden-tablet">
 		<label class="button is-primary" for="toggle-sidebar">
-			<span class="icon"><i class="fas fa-ellipsis-h" /></span>
+			<span class="icon"><div class="i-fa6-solid-ellipsis" /></span>
 			<span>{$t("application.sidebar.menu")}</span>
 		</label>
 
