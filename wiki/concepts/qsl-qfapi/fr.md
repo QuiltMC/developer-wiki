@@ -9,7 +9,7 @@ Dans le contexte du moddage de Minecraft, les APIs fournissent en général des 
 Par exemple, nombreux des gros mods que vous connaissez ont une API qui permet à d'autres mods d'améliorer leur compatibilité avec eux.
 
 En plus de ce genre d'API, il y a les bibliothèques. Les bibliothèques en elles-même n'ajoutent aucun contenu au jeu,
-mais elles implémentent des API pour rendre l'implémentation de certaines fonctionnalités plus simple pour d'autres dévelopeurs.
+mais elles implémentent des API pour rendre l'implémentation de certaines fonctionnalités plus simple pour d'autres dévelopeur·euse·s.
 La Fabric API et les Quilt Standard Libraries sont des exemples de bibliothèques officielles publiées par un loader de mod particulier.
 
 Il est imporant de noter qu'une API ne définie que la _façon_ d'interagir avec un programme spécifique et son _comportement correspondant_,

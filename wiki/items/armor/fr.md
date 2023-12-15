@@ -154,7 +154,7 @@ ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
 ## Ajouter des Textures à l'Armure
 
 Maintenant que l'armure est enregistrée, les seules choses manquantes sont les textures et les traductions.
-Pour les armures, vous devez fournir deux textures, Une pour les items en eux-mêmes et une pour le rendu de l'armure sur le modèle du joueur.
+Pour les armures, vous devez fournir deux textures, Une pour les items en eux-mêmes et une pour le rendu de l'armure sur le modèle de lae joueur·euse.
 
 <!-- TODO: the desectionization fails if nested like this. See svelte.config.json -->
 <!-- ### Adding the texture to the Item-->
@@ -184,9 +184,9 @@ et ajouter les textures correspondantes.
 
 Maintenant l'armure devrait avoir l'air normale dans l'inventaire, mais quand vous la mettrez, vous vous rendrez compte qu'il manque les textures de l'armure quand on la porte.
 Pour que cela marche il faut également ajouter le modèle d'armure.
-Le modèle d'amure contient globalement deux textures organisées comme un skin de joueur.
+Le modèle d'amure contient globalement deux textures organisées comme un skin de joueur·euse.
 Cependant, différentes parties de l'armure n'utilisent que certaines parties de cette texture.
-Les bottes, le casque et le plastron utilisent la texture `layer_1` (et ont beaucoup plus de distance entre eux et le skin de lae joueureuse)
+Les bottes, le casque et le plastron utilisent la texture `layer_1` (et ont beaucoup plus de distance entre eux et le skin de lae joueur·euse)
 et le pantalon utilise la texture `layer_2`.
 Si vous voulez, vous pouvez utiliser cette texture d'exemple comme un patron.
 Les différentes parties d'armure utilisent différentes couleurs pour vous aider à les différencier.

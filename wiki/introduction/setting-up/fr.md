@@ -83,7 +83,7 @@ En général l'identifiant d'un mod est son nom en minuscule avec des unserscore
 De plus, votre identifiant de mod ne devrait pas déjà être utilisé par un autre mod.
 Pour notre mod `Bingus Mod`, nous utiliserons l'identifiant `bingus_mod`.
 
-Enfin, il faut que vous vous trouviez un groupe maven. Il sert à identifier l'auteurice d'un mod d'une manière compréhensible par une machine et devrait être unique.
+Enfin, il faut que vous vous trouviez un groupe maven. Il sert à identifier l'auteur·ice d'un mod d'une manière compréhensible par une machine et devrait être unique.
 Il devrait correspondre, quand il est renversé, à un domaine qui vous appartient. Par exemple si le domain `bingus.example.com` vous appartient,
 votre groupe serait `com.example.bingus`. Si vous n'avez pas de domaine (ou que vous ne le connaissez pas), mais que vous avez un compte Github,
 vous pouvez utiliser `io.github.votre_pseudo_github`, en prenant soin de remplacer tous les caractères spéciaux par des underscores encore une fois.
@@ -113,7 +113,7 @@ archives_base_name = bingus-mod
 ---
 
 Ensuite, mettez à jour le fichier `quilt.mod.json` dans le dossier `src/main/resources`.
-Ce fichier définie les métadonnées de votre mod, comme son nom, saon auteurice, sa description, son site web,
+Ce fichier définie les métadonnées de votre mod, comme son nom, son auteur·ice, sa description, son site web,
 mais aussi des métadonnées qui concernent plus directement le développement du mod
 telles que les dépendances, la version, l'identifiant du mod et les '[mod initializers](../concepts/sideness#les-mod-initializers)'.
 

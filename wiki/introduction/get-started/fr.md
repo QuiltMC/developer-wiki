@@ -19,7 +19,7 @@ TODO: Create example code repository and put it here
 Ce wiki contient des pages qu'il vaut mieux lire dans l'ordre. Nombre de ces articles, surtout ceux au début, suggèrent d'autres articles avec lesquels continuer.
 La plupart des pages contiennent des extraits de code, et des exemples complets de mods sont prévus. (ça n'est pas encore fait)
 
-Vous pourrez rencontrer des lignes qui commencent avec `TODO: `. Ce sont des notes pour les rédacteurs du wiki sur le travail qu'il reste à faire.
+Vous pourrez rencontrer des lignes qui commencent avec `TODO: `. Ce sont des notes pour les rédacteur·ice·s du wiki sur le travail qu'il reste à faire.
 Vous pouvez les ignorer pour l'instant, sachez simplement que plus de contenu sera inséré à leur place plus tard.
 
 TODO: Give an outline of all of the wiki articles once they're ready
