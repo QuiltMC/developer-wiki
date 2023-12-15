@@ -6,7 +6,7 @@ Vous aurez besoin de deux choses avant de commencer.
   Les Kits de Développement Temurin Adoptium sont facilement disponibles et recommandés.
   Vous pouvez les télécharger ici : <https://adoptium.net/releases.html>
 - Une identifiantE pour Java, comme [IntelliJ Idea](https://www.jetbrains.com/idea/) ou [Eclipse](https://www.eclipse.org/ide/).
-  - Nous recommandons d'utiliser IntelliJ identifiantEA car il possède plus d'intégrations et est plus facile à utiliser.
+  - Nous recommandons d'utiliser IntelliJ IDEA car il possède plus d'intégrations et est plus facile à utiliser.
 
 Ensuite, vous devez décider si vous voulez [télécharger le zip du mod d'exemple](#télécharger-le-mod-dexemple-fichier-zip) ou
 [utiliser le template Github](#télécharger-le-mod-dexemple-github-template). Si vous ne savez pas utiliser git, utilisez la première méthode.
@@ -31,10 +31,10 @@ Extrayez le contenu du fichier ZIP dans un dossier de votre choix.
 Pour utiliser le [template Github](https://github.com/QuiltMC/quilt-template-mod), ouvrez le [dépôt Github](https://github.com/QuiltMC/quilt-template-mod)
 puis cliquez sur le bouton `Use this template`. Suivez les instructions puis clonez le nouveau dépôt en utilisant git. Vous pouvez ensuite continuer.
 
-## Mise en place avec IntelliJ identifiantEA
+## Mise en place avec IntelliJ IDEA
 
 Maintenant il faut que vous mettiez en place votre environnement de développement.
-Ouvrez IntelliJ identifiantEA et suivez les instructions de mise en place initiale. Vous pouvez ensuite ouvrir le projet :
+Ouvrez IntelliJ IDEA et suivez les instructions de mise en place initiale. Vous pouvez ensuite ouvrir le projet :
 
 Si vous avez téléchargé le mod d'exemple et que l'avez extrait dans un dossier,
 importez le projet en cliquant sur le bouton `Open` dans la liste des projets.
@@ -43,7 +43,7 @@ Si vous avez créé un dépôt Github avec le template, cliquez sur le boutton `
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="/introduction/setting-up-2-dark.png">
-  <img alt="La fenêtre de projet d'IntelliJ identifiantEA" src="/introduction/setting-up-2-light.png">
+  <img alt="La fenêtre de projet d'IntelliJ IDEA" src="/introduction/setting-up-2-light.png">
 </picture>
 
 Si vous avez une fenêtre vous demandant `Trust and Open project ?`, cliquez sur `Trust Project`.
@@ -52,7 +52,7 @@ Il y a un plugin qui ajoute du support additionnel pour les projets de mods
 pour Minecraft qui est hautement recommandé. Vous pouvez l'obtenir ici :
 <https://plugins.jetbrains.com/plugin/8327-minecraft-development>
 
-## Un Apperçu d'identifiantEA
+## Un Apperçu d'IDEA
 
 Après avoir ouvert le projet, vous devriez voir une fenêtre qui ressembler vaguement à ça :
 
@@ -187,12 +187,12 @@ Vous pouvez maintenant supprimer le fichier `LICENSE-TEMPLATE.md`.
 
 Changez le nom des dossiers dans le dossier `src/main/java` afin qu'ils correspondent à votre mod.
 Par exemple, si votre groupe maven est `io.github.bingus` et que l'identifiant de votre mod est `bingus_mod`,
-vous devriez avoir 4 dossiers en tout. IntelliJ identifiantEA devrait rendre cette étape plus facile pour vous,
+vous devriez avoir 4 dossiers en tout. IntelliJ IDEA devrait rendre cette étape plus facile pour vous,
 en renommant les dossier, changez simplement toute la ligne pour correspondre à votre groupe et identifiant.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="/introduction/setting-up-3-dark.png">
-  <img alt="Le dialogue de renomage de paquet d'IntelliJ identifiantEA" src="/introduction/setting-up-3-light.png">
+  <img alt="Le dialogue de renomage de paquet d'IntelliJ IDEA" src="/introduction/setting-up-3-light.png">
 </picture>
 
 Supprimez les dossiers `com.example`.
