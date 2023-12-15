@@ -1,6 +1,6 @@
 # Ajouter un Bloc Simple
 
-Créer un bloc est assez similaire à [créer un objet](../items/first-item), mais en utilisant maintenant le registre des blocs _et_ des objets,
+Créer un bloc est assez similaire à [créer un item](../items/first-item), mais en utilisant maintenant le registre des blocs _et_ des items,
 ainsi qu'un procecédé plus complexe pour la création d'un modèle.
 
 ## Créer et Enregistrer un Bloc
@@ -21,8 +21,8 @@ Remplacez `example_block` avec le nom de votre bloc. Ecrivez tout en minuscule e
 
 ## Ajouter un Objet pour le Bloc
 
-Après avoir fait ça, on peut placer le bloc dans Minecraft avec la command `setblock` mais, en ouvrant le menu du mode créatif,
-on ne trouvera pas d'objet correspondant au bloc. Pour réparer ça, il faut enregistrer un `BlockItem` pour le bloc et l'ajouter à un groupe d'objets,
+Après avoir fait ça, on peut placer le bloc dans Minecraft avec la commande `setblock` mais, en ouvrant le menu du mode créatif,
+on ne trouvera pas d'item correspondant au bloc. Pour réparer ça, il faut enregistrer un `BlockItem` pour le bloc et l'ajouter à un groupe d'items,
 `BUILDING_BLOCKS` dans notre cas :
 
 ```java
@@ -33,9 +33,9 @@ ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries 
 });
 ```
 
-Le nom de l'objet devrait être le même que celui du bloc.
+Le nom de l'item devrait être le même que celui du bloc.
 
-Pour plus d'information sur ce que ça fait, voir l'article [Créez votre Premier Objet](../items/first-item#enregistrer-lobjet).
+Pour plus d'information sur ce que ça fait, voir l'article [Créez votre Premier Objet](../items/first-item#enregistrer-litem).
 
 ## Ajouter un Modèle pour le Bloc
 
@@ -79,10 +79,10 @@ Cela utilisera la texture située à l'adresse `assets/simple_block_mod/textures
 
 ---
 
-L'objet correspondant à notre bloc a également besoin d'un modèle,
-mais au lieu d'utiliser simplement une texture comme l'a fait pour le [tutoriel d'ajout d'objet](../items/first-item),
-nous allons déclarer le modèle d'un bloc comme le parent du modèle de notre objet.
-Cela donnera à l'objet une apparence identique à celle du bloc dans le jeu.
+L'item correspondant à notre bloc a également besoin d'un modèle,
+mais au lieu d'utiliser simplement une texture comme on l'a fait pour le [tutoriel d'ajout d'item](../items/first-item),
+nous allons déclarer le modèle d'un bloc comme le parent du modèle de notre item.
+Cela donnera à l'item une apparence identique à celle du bloc dans le jeu.
 
 `assets/simple_block_mod/models/item/example_block.json`
 
@@ -97,7 +97,7 @@ Remplacez `simple_block_mod` et `example_block` comme à l'étape précédente.
 ## Ajouter une Traduction pour le Bloc
 
 Dernier mais pas des moindres, il faut ajouter une traduction pour le bloc.
-Cela sera aussi automatiquement utilisé pour l'objet du bloc.
+Cela sera aussi automatiquement utilisé pour l'item du bloc.
 
 `assets/simple_block_mod/lang/en_us.json`:
 
@@ -112,5 +112,5 @@ Remplacez `simple_block_mod` et `example_block` comme à l'étape précédente.
 ## Et Après ?
 
 Maintenant que vous avez ajouté un bloc à Minecraft, vous pouvez continuer par [Ajouter un Bloc avec Orientation](oriented-block),
-[Ajouter des fonctionnalités Redstone à votre Bloc](redstone-interaction) ou ajouter des objets avancés tels que
+[Ajouter des fonctionnalités Redstone à votre Bloc](redstone-interaction) ou ajouter des items avancés tels que
 [une armure](../items/armor), [de la nourriture](../items/food) ou [des outils](../items/tools).

@@ -1,10 +1,10 @@
 # Ajouter de la Nourriture
 
-Ce tutoriel par du principe que vous savez déjà [Créer votre Premier Objet](first-item).
+Ce tutoriel part du principe que vous savez déjà [Créer votre Premier Objet](first-item).
 
-Ajouter un `FoodComponent` aux paramètres d'un objet fait de cet objet de la nourriture.
+Ajouter un `FoodComponent` aux paramètres d'un item fait de cet item de la nourriture.
 Un `FoodComponent` peut être créé en utilisant un `FoodComponent.Bulder`.
-Essayez d'utiliser la documentation intégrées (Javadoc) du builder pour comprendre comment il fonctionne,
+Essayez d'utiliser la documentation intégrée (Javadoc) du builder pour comprendre comment il fonctionne,
 ou continuez à lire pour une explication :
 
 ```java
@@ -23,7 +23,7 @@ public static final Item EXAMPLE_FOOD = new Item(new QuiltItemSettings().food(
 Maintenant que vous avez bien lu la Javadoc _tousse, tousse_, voici une explication alternative :
 
 1. On instancie un nouveau builder. Grâce à cela, on peut configurer le `FoodComponent` avant de vraiment l'instancier.
-   Notez que toutes les valeurs suivantes sont par défaut 0, `false` ou vide.
+   Notez que toutes les valeurs suivantes sont par défaut 0, `false` ou `null`.
 2. On passe sa valeur de faim à 2, ce qui correspond à un des 10 indicateurs de faim dans minecraft.
 3. On donne une valeur au modificateur de saturation, qui, multiplié par la valeur de hunger et 2, est ajouté à la saturation.
 4. On en fait un snack, ce qui signifie qu'il pourra être mangé rapidement, comme les algues séchées.
@@ -34,4 +34,4 @@ Maintenant que vous avez bien lu la Javadoc _tousse, tousse_, voici une explicat
 
 ## Et Après ?
 
-Si vous voulez continuer à ajouter des objets, voyez [Armure](armor) ou [Outils](tools).
+Si vous voulez continuer à ajouter des items, voyez [Armure](armor) ou [Outils](tools).
