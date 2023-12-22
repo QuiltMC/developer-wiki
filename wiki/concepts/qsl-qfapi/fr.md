@@ -54,7 +54,7 @@ La Quilted Fabric API a deux utilisations principales :
 
 - Elle fournit un niveau de compatibilité pour que les mods Fabric puissent être chargées avec Quilt.
 - Et elle permet d'utiliser les API de Fabric quand les QSL ne fournit pas encore d'APIs correspondantes.
-  C'est le cas par exemple pour les [groupes d'objets](../items/first-item#ajouter-lobjet-à-un-groupe).
+  C'est le cas par exemple pour les [groupes d'objets](../items/first-item#ajouter-litem-à-un-groupe).
 
 Comme la QFAPI dépend des QSL et a besoin de connaitre l'implémentation de Fabric,
 elle sera toujours mise à jour après que la Fabric API et les QSL aient été mises à jour.
