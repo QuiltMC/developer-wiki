@@ -31,11 +31,6 @@
 	<link rel="stylesheet" href={styles_dark} media="(prefers-color-scheme:dark)" />
 	<link rel="stylesheet" href={styles_light} media="(prefers-color-scheme:light)" />
 
-	<script async src="https://kit.fontawesome.com/b1b70f724e.js" crossorigin="anonymous"></script>
-	<noscript>
-		<link href="https://quiltmc.org/assets/fontawesome/css/all.min.css" rel="stylesheet" />
-	</noscript>
-
 	<style global>
 		.token.number {
 			background-color: initial;

@@ -1,4 +1,0 @@
----
-title: Mixins
-draft: true
----
