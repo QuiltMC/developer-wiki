@@ -109,7 +109,7 @@ You'll need to update a few things under `"quilt_loader"`, see below for a final
       but typically people put a `"homepage"`, a `"sources"`, and a `"issues"` entry with a valid URL here.
    5. Replace `example_mod` with your mod's ID in `"icon"`.
 4. In `"entrypoints"`, replace `com.example.example_mod` with your Maven group and mod ID,
-   and the `ExampleMod` at the end should be the Java class name for your mod. The Java class name usually is your mod's name, written in `UpperCamelCase` (So new words simply start by using an uppercase letter and the initial latter is also upper case)
+   and the `ExampleMod` at the end should be the Java class name for your mod. The Java class name usually is your mod's name, written in `UpperCamelCase`. This means that instead of using spaces to separate words, each word starts with an uppercase letter. In contrast to `lowerCamelCase`, the first letter should be uppercase.
    For example, `io.github.bingus.bingus_mod.BingusMod`.
 5. In `"mixin"`, replace `example_mod` in the file name to your mod's ID.
 
