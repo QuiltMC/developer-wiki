@@ -24,11 +24,11 @@ In the next article, you will set up your first mod to get started with mod deve
 
 After that, it is recommended to look into [Creating your First Item](../items/first-item). Then, you are ready for [adding blocks](../blocks/first-block), or creating advanced items, like [food](../items/food), [tools](../items/tools) and [armor](../items/armor).
 
-For more abstract content, you can look into the concepts category:
+For more general explanations, you can look into the Concepts category:
 
 - In [QSL and QFAPI Overview](../concepts/qsl-qfapi) you get an overview on Quilt Standard Libraries and Quilted Fabric API, Quilt's official APIs.
 
-Many more articles, are planned, but not done yet ([Issue #69](https://github.com/QuiltMC/developer-wiki/issues/69)). This section will be updated later.
+Many more articles are planned, but not done yet ([Issue #69](https://github.com/QuiltMC/developer-wiki/issues/69)). This section will be updated later.
 
 <!-- TODO: Give an outline of all of the wiki articles once they're ready. -->
 
@@ -42,7 +42,7 @@ Asking questions properly, whether it is on our forum or on Discord, is an essen
 skill to have. Never be afraid to ask questions, we're always willing to help, and we
 don't judge.
 
-When asking questions, try to include the necessary context in your first message, and [do not ask to ask](https://dontasktoask.com/). State your problem, what you have already tried to solve it, and how those attempts failed. Make sure to avoid the [XY problem](https://xyproblem.info/) by not only asking for help for one specific part of a solution to your problem, but also stating the actual problem you are trying to solve. When debugging, include your `latest.log` and when your game crashes, a crash log. Additionally, full access to your source code can be really helpful, ideally uploaded to a version control system such as GitHub.
+When asking questions, try to include the necessary context in your first message, and [do not ask to ask](https://dontasktoask.com/). State your problem, what you have already tried to solve it, and how those attempts failed. Make sure to avoid the [XY problem](https://xyproblem.info/) by not only asking for help for one specific part of a solution to your problem, but also stating the actual problem you are trying to solve. When debugging, include your `latest.log` and when your game crashes, a crash log. Additionally, full access to your source code can be really helpful, ideally uploaded to a website such as GitHub.
 
 You can ask development related questions in our [Forum](https://forum.quiltmc.org/), as well as in the [mod-dev-help](https://discord.com/channels/817576132726620200/1047429688521396325) forum channel in our [Discord](https://discord.quiltmc.org/)
 
@@ -52,7 +52,8 @@ examples of how to do things in open source repositories and sometimes "steal" c
 Open source repositories are there for you to learn from and use, don't be afraid of
 them!
 
-There are many topics in modding where you quickly will find yourself at a point where tutorials are missing. In those cases you'll usually either have to understand the relevant Minecraft code, or look at other mods and see how they got similar things done.
+There are many topics in modding where you quickly will find yourself at a point where there are no tutorials to help. In those cases you'll usually either have to understand the relevant Minecraft code, or look at other mods and see how they got similar things done.
+If you want to look into the Minecraft source code, run the `genSourcesWithVineflower` Gradle task in the `fabric` category or open any Minecraft source file and click the download sources button in IntelliJ IDEA.
 
 <!-- TODO: Is this todo fixed?: Levi write your thing about stealing code here -->
 
