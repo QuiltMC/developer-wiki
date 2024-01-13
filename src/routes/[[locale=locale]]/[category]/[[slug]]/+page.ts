@@ -12,7 +12,7 @@ export async function load({ params }): Promise<{
 }> {
 	// Throws a 404 error if the route doesn't contain a slug
 	if (!params.slug) {
-		throw error(404);
+		error(404);
 	}
 
 	try {
@@ -69,7 +69,7 @@ export async function load({ params }): Promise<{
 		}
 	} catch (err) {
 		if (err instanceof Error && err.message.match(/^Unknown variable dynamic import.+$/)) {
-			throw error(404);
+			error(404);
 		} else {
 			throw err;
 		}
