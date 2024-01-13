@@ -1,0 +1,100 @@
+{
+	"not-translated": "此wiki页面尚未被翻译为{{placeholder}}",
+	"not-found": "未找到页面：`{{placeholder}}`",
+	"blocks": {
+		"title": "方块",
+		"first-block": {
+			"title": "添加一个简单方块"
+		},
+		"oriented-block": {
+			"title": "添加一个定向方块"
+		},
+		"redstone-interaction": {
+			"title": "添加红石功能到你的方块"
+		}
+	},
+	"concepts": {
+		"title": "概念",
+		"events": {
+			"title": "事件"
+		},
+		"libraries": {
+			"title": "第三方库列表"
+		},
+		"lifecycles-ticks": {
+			"title": "Lifecycles and Ticks"
+		},
+		"minecraft-code-structure": {
+			"title": "Minecraft’s Code Structure"
+		},
+		"mixins": {
+			"title": "Mixins"
+		},
+		"nbt": {
+			"title": "NBT and Data in Minecaft"
+		},
+		"networking": {
+			"title": "Networking"
+		},
+		"qsl-qfapi": {
+			"title": "QSL和QFAPI概述"
+		},
+		"registries": {
+			"title": "Registries"
+		},
+		"sideness": {
+			"title": "Server-Side and Client-Side"
+		}
+	},
+	"data": {
+		"title": "Data",
+		"adding-recipes": {
+			"title": "Adding Recipes"
+		},
+		"rea": {
+			"title": "Using Registry Entry Attachments (REA)"
+		},
+		"recipe-api": {
+			"title": "Recipe API"
+		},
+		"recipe-type": {
+			"title": "Adding a Recipe Type"
+		},
+		"resource-loader": {
+			"title": "Resource Loader"
+		}
+	},
+	"introduction": {
+		"title": "介绍",
+		"get-started": {
+			"title": "Quilt开发入门"
+		},
+		"setting-up": {
+			"title": "配置开发环境"
+		}
+	},
+	"items": {
+		"title": "物品",
+		"armor": {
+			"title": "添加盔甲"
+		},
+		"first-item": {
+			"title": "创建你的第一个物品"
+		},
+		"food": {
+			"title": "添加食物"
+		},
+		"tools": {
+			"title": "添加自定义工具"
+		}
+	},
+	"misc": {
+		"title": "Misc",
+		"commands": {
+			"title": "Adding Commands"
+		},
+		"sounds": {
+			"title": "Adding Sounds"
+		}
+	}
+}

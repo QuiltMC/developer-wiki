@@ -15,7 +15,8 @@ export const config: Config<{ placeholder?: string }> = {
 	parser: parser(),
 	translations: {
 		en: { lang },
-		fr: { lang }
+		fr: { lang },
+		zh_cn: { lang }
 	},
 	loaders: [
 		{
@@ -47,6 +48,21 @@ export const config: Config<{ placeholder?: string }> = {
 			locale: "fr",
 			key: "wiki",
 			loader: async () => (await import("./fr/wiki.json")).default
+		},
+		{
+			locale: "zh_cn",
+			key: "application",
+			loader: async () => (await import("./zh_cn/application.json")).default
+		},
+		{
+			locale: "zh_cn",
+			key: "error",
+			loader: async () => (await import("./zh_cn/error.json")).default
+		},
+		{
+			locale: "zh_cn",
+			key: "wiki",
+			loader: async () => (await import("./zh_cn/wiki.json")).default
 		}
 	],
 	log: { level: dev ? "warn" : "error" }

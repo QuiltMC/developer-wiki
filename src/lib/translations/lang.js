@@ -1,4 +1,5 @@
 export default {
 	en: "English",
-	fr: "Français"
+	fr: "Français",
+	zh_cn: "简体中文"
 };
