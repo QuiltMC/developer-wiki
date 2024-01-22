@@ -6,7 +6,7 @@ You'll need a couple of things before you can get started.
   Temurin Adoptium JDKs are easily available and recommended.
   You can download them here: <https://adoptium.net/releases.html>
 - Any Java IDE, like [IntelliJ Idea](https://www.jetbrains.com/idea/) or [Eclipse](https://www.eclipse.org/ide/).
-  [Visual Studio Code](https://www.eclipse.org/ide/) can work, but it takes extra work to get set up.
+  [Visual Studio Code](https://code.visualstudio.com/) can work, but it takes extra work to get set up.
   - We recommend using IntelliJ IDEA as it has the most integrations and is the easiest to use.
 
 Next, you need to decide on whether you want to [download the template mod zip](#template-mod-download-zip-file) or [use the GitHub template](#template-mod-download-github-template). If you don't know how to use git, use the first method. However, it is recommended for you to have at least a GitHub account to get started and familiarize yourself with git quickly.
