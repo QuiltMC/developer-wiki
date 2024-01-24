@@ -9,9 +9,9 @@
   [Visual Studio Code](https://code.visualstudio.com/)可以工作, 但需要额外的操作来设置。
 - 我们建议使用IntelliJ IDEA，因为它集成的功能多且容易使用。
 
-接下来，你需要决定是[下载模板模组压缩包](#template-mod-download-zip-file)还是[使用GitHub模板](#template-mod-download-github-template)。如果你不知道如何使用Git，请使用第一种方法。但还是建议你拥有一个GitHub帐户，以便快速入门并熟悉Git。
+接下来，你需要决定是[下载模板模组压缩包](#模板模组下载压缩包)还是[使用GitHub模板](#模板模组下载GitHub模板)。如果你不知道如何使用Git，请使用第一种方法。但还是建议你拥有一个GitHub帐户，以便快速入门并熟悉Git。
 
-## 模板模组下载 (压缩包)
+## 模板模组下载（压缩包）
 
 你可以从[quilt-template-mod](https://github.com/QuiltMC/quilt-template-mod)仓库中下载模板模组。  
 
@@ -25,7 +25,7 @@
 
 然后，提取ZIP文件的内容到你选择的文件夹中。
 
-## 模板模组下载 (GitHub模板)
+## 模板模组下载（GitHub模板）
 
 要使用[GitHub模板](https://github.com/QuiltMC/quilt-template-mod)，请访问[GitHub仓库](https://github.com/QuiltMC/quilt-template-mod)，然后点击`Use this template`按钮。按照对话框进行操作，然后使用Git克隆该存储库。做完这一切后，你可以继续了。  
 
