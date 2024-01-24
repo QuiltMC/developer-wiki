@@ -63,27 +63,27 @@ Additionally, there are some things you might find not straight away: If you wan
 
 ## Making the Mod Yours
 
-First you'll need to make up a name for your mod. For this tutorial, we will use the mod name `Bingus Mod`.
+首先，你需要为你的模组取一个名字。在本教程中，我们将使用`Bingus Mod`这个模组名。
 
-Based on the name, you also need a mod id. It should be composed of lowercase characters from the alphabet and underlines. Usually, you mod id should be your mod name, but with underscores instead of spaces, hyphens or other special characters. Additionally, there shouldn't be a mod already using that id. For a mod named `Bingus Mod`, it would be `bingus_mod`.
+根据名字，你还需要一个MODID，它由小写字母和下划线组成。通常情况下，你的MODID应该是你的模组名字，但用下划线代替空格、连接字符或其他特殊字符。此外，此MODID不能与其他模组重复。比如名为`Bingus Mod`的模组，它的MODID应是`bingus_mod`。
 
-Lastly you need to decide on a maven group. It is used to identify the developer of the mod in a machine-readable scheme and is designed to be unique. It should be a domain you own in reversed. So if you own `bingus.example.com`, your maven group would be `com.example.bingus`. If you don't have a domain (or don't know what it is), but have a GitHub account, you can use `io.github.your_github_username`, replace all special characters with underscores again.
+最后，你需要决定你的maven group。它用于在机器可读的方案中识别mod的开发者，且被设计为唯一的。它应该是你拥有的域名颠倒过来。因此，如果你拥有`bingus.example.com`，你的maven group将是`com.example.bingus`。如果你没有域名（或者不知道它是什么），但有一个GitHub帐户，你可以使用`io.github.your_github_username`，再用下划线替换所有特殊字符。
 
 ---
 
-Now that you have decided on these things, you can update your mod's metadata:
+现在你已经决定了这些事情，你可以更新你的模组元数据：
 
-First, update the `gradle.properties` file directly in your project folder to use your Maven group and mod ID.
+首先，直接更新在项目文件夹中的`gradle.properties`中的Maven group和MODID。
 
 Change the line beginning with `maven_group =` to use your mod maven group instead of `com.example`
 Set `archives_base_name` to your mod's ID similarly and ignore all other properties for now. Here is an example how the result might look:
 
 ```gradle
-# Gradle Properties
+# Gradle属性
 org.gradle.jwmargs = -Xmx1G
 org.gradle.parallel = true
 
-# Mod Properties
+# 模组属性
 version = 1.0.0
 maven_group = io.github.bingus
 archives_base_name = bingus-mod
