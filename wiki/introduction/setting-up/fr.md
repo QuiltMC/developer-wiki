@@ -5,7 +5,8 @@ Vous aurez besoin de deux choses avant de commencer.
 - Un Kit de Développement Java (JDK) pour Java 17 (recommandé) ou supérieur.
   Les Kits de Développement Temurin Adoptium sont facilement disponibles et recommandés.
   Vous pouvez les télécharger ici : <https://adoptium.net/releases.html>
-- Une identifiantE pour Java, comme [IntelliJ Idea](https://www.jetbrains.com/idea/) ou [Eclipse](https://www.eclipse.org/ide/).
+- Un IDE pour Java, comme [IntelliJ Idea](https://www.jetbrains.com/idea/) ou [Eclipse](https://www.eclipse.org/ide/).
+  [Visual Studio Code](https://code.visualstudio.com/) peut fonctionner, mais cela demande plus de travail pour le mettre en place.
   - Nous recommandons d'utiliser IntelliJ IDEA car il possède plus d'intégrations et est plus facile à utiliser.
 
 Ensuite, vous devez décider si vous voulez [télécharger le zip du mod d'exemple](#télécharger-le-mod-dexemple-fichier-zip) ou
@@ -97,6 +98,8 @@ afin qu'il utilise votre groupe maven et l'identifiant de votre mod.
 
 Modifiez la ligne commençant par `maven_group =` pour qu'elle utilise votre group maven à la place de `com.example`.
 Changer la valeur de `archives_base_name` avec l'identifiant de votre mod et ignorez les autres propriétés pour l'instant.
+Notez que comme maven [utilise des tirets pour séparer les mots](https://maven.apache.org/maven-conventions.html),
+vous devriez remplacer les underscores dans l'ID de votre mod.
 Voici un exemple de ce à quoi pourrait ressembler le résultat :
 
 ```gradle
