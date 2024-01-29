@@ -3,6 +3,7 @@ title: Adding a Custom World Preset
 ---
 
 # Adding custom world presets
+If your mod completely overhauls Minecraft's worldgen, you'll want to create a custom worldtype so you give people the option to use your worldgen or MC's vanilla worldgen.
 To add your custom world preset(s), you have to navigate to your mod/datapack's `resources/data` folder.
 
 Make a file titled `example_mod_preset.json` in `../example_mod/worldgen/world_preset` and populate it with the following:
