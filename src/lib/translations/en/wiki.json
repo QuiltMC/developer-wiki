@@ -1,0 +1,100 @@
+{
+	"not-translated": "This wiki page isn't yet translated in {{placeholder}}",
+	"not-found": "No wiki page found at: `{{placeholder}}`",
+	"blocks": {
+		"title": "Blocks",
+		"first-block": {
+			"title": "Adding a Simple Block"
+		},
+		"oriented-block": {
+			"title": "Adding an Oriented Block"
+		},
+		"redstone-interaction": {
+			"title": "Adding Redstone Functionality to your Block"
+		}
+	},
+	"concepts": {
+		"title": "Concepts",
+		"events": {
+			"title": "Events"
+		},
+		"libraries": {
+			"title": "List of Third Party Libraries"
+		},
+		"lifecycles-ticks": {
+			"title": "Lifecycles and Ticks"
+		},
+		"minecraft-code-structure": {
+			"title": "Minecraft’s Code Structure"
+		},
+		"mixins": {
+			"title": "Mixins"
+		},
+		"nbt": {
+			"title": "NBT and Data in Minecaft"
+		},
+		"networking": {
+			"title": "Networking"
+		},
+		"qsl-qfapi": {
+			"title": "QSL and QFAPI Overview"
+		},
+		"registries": {
+			"title": "Registries"
+		},
+		"sideness": {
+			"title": "Server-Side and Client-Side"
+		}
+	},
+	"data": {
+		"title": "Data",
+		"adding-recipes": {
+			"title": "Adding Recipes"
+		},
+		"rea": {
+			"title": "Using Registry Entry Attachments (REA)"
+		},
+		"recipe-api": {
+			"title": "Recipe API"
+		},
+		"recipe-type": {
+			"title": "Adding a Recipe Type"
+		},
+		"resource-loader": {
+			"title": "Resource Loader"
+		}
+	},
+	"introduction": {
+		"title": "Introduction",
+		"get-started": {
+			"title": "Getting Started with Quilt"
+		},
+		"setting-up": {
+			"title": "Setting Up a Development Environment"
+		}
+	},
+	"items": {
+		"title": "Items",
+		"armor": {
+			"title": "Adding an Armor Set"
+		},
+		"first-item": {
+			"title": "Creating your First Item"
+		},
+		"food": {
+			"title": "Adding Food"
+		},
+		"tools": {
+			"title": "Adding Custom Tools"
+		}
+	},
+	"misc": {
+		"title": "Misc",
+		"commands": {
+			"title": "Adding Commands"
+		},
+		"sounds": {
+			"title": "Adding Sounds"
+		}
+	}
+}

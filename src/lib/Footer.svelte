@@ -3,13 +3,13 @@
 
 	// prettier-ignore
 	const buttons = [
-		{ title: "Discord", style: "is-discord", href: "https://discord.quiltmc.org", icon: "fab fa-discord" },
-		{ title: "Forum", style: "is-gradle", href: "https://forum.quiltmc.org", icon: "fab fa-discourse" },
-		{ title: "GitHub", style: "is-github", href: "https://github.com/QuiltMC", icon: "fab fa-github" },
-		{ title: "Twitter", style: "is-twitter", href: "https://twitter.com/quilt_mc", icon: "fab fa-twitter" },
-		{ title: "Mastodon", style: "is-mastodon", href: "https://tech.lgbt/@quiltmc", icon: "fab fa-mastodon" },
-		{ title: "Twitch", style: "is-primary", href: "https://twitch.tv/quiltmc", icon: "fab fa-twitch" },
-		{ title: "RSS", style: "is-rss", href: "https://quiltmc.org/feed.xml", icon: "fa-solid fa-rss" },
+		{ title: "Discord", style: "is-discord", href: "https://discord.quiltmc.org", icon: "i-fa6-brands-discord" },
+		{ title: "Forum", style: "is-gradle", href: "https://forum.quiltmc.org", icon: "i-fa6-brands-discourse" },
+		{ title: "GitHub", style: "is-github", href: "https://github.com/QuiltMC", icon: "i-fa6-brands-github" },
+		{ title: "Twitter", style: "is-twitter", href: "https://twitter.com/quilt_mc", icon: "i-fa6-brands-twitter" },
+		{ title: "Mastodon", style: "is-mastodon", href: "https://tech.lgbt/@quiltmc", icon: "i-fa6-brands-mastodon" },
+		{ title: "Twitch", style: "is-primary", href: "https://twitch.tv/quiltmc", icon: "i-fa6-brands-twitch" },
+		{ title: "RSS", style: "is-rss", href: "https://quiltmc.org/feed.xml", icon: "i-fa6-solid-rss" },
 	];
 </script>
 
