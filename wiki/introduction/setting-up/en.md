@@ -53,7 +53,7 @@ that is highly recommended. You can get it here:
 
 ## An Overview Over IDEA
 
-After you opened the project, you should see a window looking roughly like this:
+After you open the project, you should see a window looking roughly like this:
 
 TODO: Embed screenshot
 
@@ -76,8 +76,8 @@ Now that you have decided on these things, you can update your mod's metadata:
 
 First, update the `gradle.properties` file directly in your project folder to use your Maven group and mod ID.
 
-Change the line beginning with `maven_group =` to use your mod maven group instead of `com.example`
-Set `archives_base_name` to your mod's ID similarly and ignore all other properties for now. Here is an example how the result might look:
+Change the line beginning with `maven_group =` to use your mod maven group instead of `com.example`.
+Set `archives_base_name` to your mod's ID similarly and ignore all other properties for now. Note that since maven [uses hyphens to separate words](https://maven.apache.org/maven-conventions.html), you should change the underscores in your mod ID to hyphens accordingly. Here is an example of how the result might look:
 
 ```gradle
 # Gradle Properties
