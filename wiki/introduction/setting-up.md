@@ -159,7 +159,7 @@ the template, not your mod.
 
 ---
 
-Change the name of the directories in `src/main/java` folder to reflect your new mod ID.
+Change the name of the directories in the `src/main/java` folder to reflect your mod.
 For example, if your Maven group is `io.github.bingus` and your mod's ID is `bingus_mod`,
 you should have four directories in total. IntelliJ IDEA should make this step easier for
 you when you rename the directories; just change the whole line to match your group and ID.
