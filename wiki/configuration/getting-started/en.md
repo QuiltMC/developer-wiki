@@ -1,8 +1,3 @@
----
-title: Getting Started with Quilt Config
-index: 1
----
-
 # Getting started with Quilt Config
 
 [Quilt Config](https://github.com/QuiltMC/quilt-config) is Quilt's advanced configuration API. It allows developers (that's you!) to easily set up values that can be changed by the user in order to change the behaviour of your mod. It's built into [Quilt Loader](https://github.com/QuiltMC/quilt-loader) to allow any Quilt mod to leverage it without having to pull in new dependencies or run any setup.
