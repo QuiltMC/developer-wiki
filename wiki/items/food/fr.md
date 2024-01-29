@@ -3,7 +3,7 @@
 Ce tutoriel part du principe que vous savez déjà [Créer votre Premier Objet](first-item).
 
 Ajouter un `FoodComponent` aux paramètres d'un item fait de cet item de la nourriture.
-Un `FoodComponent` peut être créé en utilisant un `FoodComponent.Bulder`.
+Un `FoodComponent` peut être créé en utilisant un `FoodComponent.Builder`.
 Essayez d'utiliser la documentation intégrée (Javadoc) du builder pour comprendre comment il fonctionne,
 ou continuez à lire pour une explication :
 
