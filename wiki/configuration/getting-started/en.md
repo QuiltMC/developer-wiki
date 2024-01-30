@@ -5,7 +5,7 @@
 ## Setting up your config
 
 In this tutorial, we're going to be building a simple mod that prints a line of text to the console when it's initialized. Keep in mind that this is an example, and your mod can use config values anywhere you want! You can view of the final source code of this tutorial [on GitHub](https://github.com/ix0rai/quilt-config-example-mod).
-
+<!-- TODO: Add code project into wiki -->
 To begin with Quilt Config, you'll need a dedicated class for holding your config. For an extremely configurable mod, you may want to break up your config into multiple files inside a `config` package, but for this tutorial and most mods we're going to put everything in one file.
 
 Let's create a new file for our config, in the same directory as our mod initializer. We'll call it `ExampleModConfig`, but you can call it whatever you want. This new config class will extend the `ReflectiveConfig` API, which will provide everything we need to get the config working.
