@@ -42,7 +42,7 @@ If you want your world preset to show when you go to make a new world, make a fi
 ```json
 {
   "values": [
-    "example_mod:example_world_type"
+    "example_mod:example_mod_preset"
   ]
 }
 ```
