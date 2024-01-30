@@ -37,7 +37,7 @@ This will tell Minecraft to show your world preset when you go to create a new w
 ```json
 {
   "values": [
-    "example_mod:example_world_type"
+    "example_mod:example_mod_preset"
   ]
 }
 ```
