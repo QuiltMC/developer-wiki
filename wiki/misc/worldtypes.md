@@ -33,10 +33,6 @@ Make a file titled `example_mod_preset.json` in `../example_mod/worldgen/world_p
 
 For more information, please check out the Minecraft Wiki page about [custom world presets](https://minecraft.wiki/w/Custom_world_preset)
 
-
-Make a file titled `normal.json` in `../minecraft/tags/worldgen/world_preset` and populate it with the following:
-This will tell Minecraft to show your world preset when you go to create a new world.
-
 If you want your world preset to show when you go to make a new world, make a file titled `normal.json` and populate it with the following, if you want to have your worldtype show if you're holding `ALT`, do the same thing except name the file `extended.json`.
 
 ```json
