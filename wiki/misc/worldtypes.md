@@ -29,6 +29,9 @@ Make a file titled `example_mod_preset.json` in `../example_mod/worldgen/world_p
 - `"minecraft:overworld"`: This is required right after `"dimensions:"`, otherwise your world preset will not work.
 - `"type"`: What biome generation to use in this preset.
 - `"generator"`: Various settings to tell Minecraft how to generate the terrain found in this dimension.
+  - `minecraft:noise`: Configurable noise generator.
+  - `minecraft:debug`: Generates a debug world.
+  - `minecraft:flat`: Generates a superflat world.
 - `"settings"`: What perlin noise to use for worldgen in this dimension.
 
 For more information, please check out the Minecraft Wiki page about [custom world presets](https://minecraft.wiki/w/Custom_world_preset)
