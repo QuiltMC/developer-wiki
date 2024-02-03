@@ -61,7 +61,7 @@ On the right and left side there are sidebars with icons to toggle different "To
 When you open a file, it should open a new tab in the editor in the middle.
 Additionally, there are some things you might find not straight away: If you want to rename something, be it a file or a name of a variable or function, you can do so in the context menu under `Refactor > Rename`
 
-## Making the Mod Yours
+## 让模组成为你的
 
 首先，你需要为你的模组取一个名字。在本教程中，我们将使用`Bingus Mod`这个模组名。
 
@@ -75,8 +75,8 @@ Additionally, there are some things you might find not straight away: If you wan
 
 首先，直接更新在项目文件夹中的`gradle.properties`中的Maven group和MODID。
 
-Change the line beginning with `maven_group =` to use your mod maven group instead of `com.example`
-Set `archives_base_name` to your mod's ID similarly and ignore all other properties for now. Here is an example how the result might look:
+将以`maven_group =`开头的行更改为使用你模组的maven group，而不是`com.example`。
+类似地，将`archives_base_name`设置为你的MODID，暂时忽略所有其他属性。这里是结果的示例：
 
 ```gradle
 # Gradle属性
@@ -91,7 +91,7 @@ archives_base_name = bingus-mod
 
 ---
 
-Next, update the `quilt.mod.json` file in the `src/main/resources` folder. The `quilt.mod.json` defines your mod's metadata, like mod name, author, description, website, but also more development focused metadata such as dependencies, version, mod ID and [mod initializers](../concepts/sideness#on-mod-initializers).
+接下来，更新在`src/main/resources`文件夹中的`quilt.mod.json`文件。The `quilt.mod.json` defines your mod's metadata, like mod name, author, description, website, but also more development focused metadata such as dependencies, version, mod ID and [mod initializers](../concepts/sideness#on-mod-initializers).
 
 You'll need to update a few things under `"quilt_loader"`, see below for a finalized example:
 
@@ -137,7 +137,7 @@ Your `quilt.mod.json` should not have any traces of "example" in them anymore.
    "init": "io.github.bingus.bingus_mod.BingusMod"
   },
   "depends": [
-   // ...
+   // ……
   ]
  },
  "mixin": "bingus_mod.mixins.json"
