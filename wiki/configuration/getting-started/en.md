@@ -16,7 +16,7 @@ We'll start with this code:
 
 ```java
 public class ExampleModConfig extends ReflectiveConfig {
-	public static final ExampleModConfig INSTANCE = QuiltConfig.create(ExampleMod.MOD_ID, ExampleMod.MOD_ID, ExampleModConfig.class);
+    public static final ExampleModConfig INSTANCE = QuiltConfig.create(ExampleMod.MOD_ID, ExampleMod.MOD_ID, ExampleModConfig.class);
 }
 ```
 
@@ -35,8 +35,8 @@ That's it! We now have a config that we can access anywhere in our project. Prob
 
 ```java
 public class ExampleModConfig extends ReflectiveConfig {
-	// ...
-	public final TrackedValue<String> message = this.value("rai minecraft :thumbsup:");
+    // ...
+    public final TrackedValue<String> message = this.value("rai minecraft :thumbsup:");
 }
 ```
 
@@ -51,12 +51,12 @@ Phew. We got through it! That'll be the final big information dump of this tutor
 
 ```java
 public class ExampleMod implements ModInitializer {
-	// ...
-	
-	@Override
-	public void onInitialize(ModContainer mod) {
-		LOGGER.info(ExampleModConfig.message.value());
-	}
+    // ...
+
+    @Override
+    public void onInitialize(ModContainer mod) {
+        LOGGER.info(ExampleModConfig.message.value());
+    }
 }
 ```
 
@@ -72,9 +72,9 @@ Let's add a second field. Here we're going to get fancy with it, using both a ne
 
 ```java
 public class ExampleModConfig extends ReflectiveConfig {
-	// ...
-	@IntegerRange(min = 0, max = 10)
-	public final TrackedValue<Integer> timesToPrint = this.value(1);
+    // ...
+    @IntegerRange(min = 0, max = 10)
+    public final TrackedValue<Integer> timesToPrint = this.value(1);
 }
 ```
 
@@ -90,9 +90,9 @@ Anyway. New value!
 
 ```java
 public class ExampleModConfig extends ReflectiveConfig {
-	// ...
-	@Comment("Whether to print the message at all.")
-	public final TrackedValue<Boolean> print = this.value(true);
+    // ...
+    @Comment("Whether to print the message at all.")
+    public final TrackedValue<Boolean> print = this.value(true);
 }
 ```
 
@@ -104,11 +104,11 @@ Finally, we're going to use one more annotation to tie it all together. By defau
 
 ```java
 public class ExampleModConfig extends ReflectiveConfig {
-	// ...
-	@IntegerRange(min = 0, max = 10)
+    // ...
+    @IntegerRange(min = 0, max = 10)
     @SerializedName("times_to_print")
-	public final TrackedValue<Integer> timesToPrint = this.value(1);
-	// ...
+    public final TrackedValue<Integer> timesToPrint = this.value(1);
+    // ...
 }
 ```
 
@@ -124,13 +124,13 @@ Starting with maps, `ReflectiveConfig` provides us a handy `map` method to help 
 
 ```java
 public class ExampleModConfig extends ReflectiveConfig {
-	// ...
-	@Comment("When a key in this map shows up in the message, it'll be replaced with the corresponding value.")
-	public final TrackedValue<ValueMap<String>> replacements = this.map("")
-		.put("oro armor", "rai minecraft")
-		.put("lambda aurora", "rai minecraft")
-		.put("tib s", "rai minecraft")
-		.build();
+    // ...
+    @Comment("When a key in this map shows up in the message, it'll be replaced with the corresponding value.")
+    public final TrackedValue<ValueMap<String>> replacements = this.map("")
+        .put("oro armor", "rai minecraft")
+        .put("lambda aurora", "rai minecraft")
+        .put("tib s", "rai minecraft")
+        .build();
 }
 ```
 
@@ -143,10 +143,10 @@ Now that we know how to use maps, onward to lists!
 
 ```java
 public class ExampleModConfig extends ReflectiveConfig {
-	// ...
-	@Comment("This isn't actually used by the mod, but I was completely out of ideas for things to add.")
+    // ...
+    @Comment("This isn't actually used by the mod, but I was completely out of ideas for things to add.")
     @SerializedName("types_of_soup")
-	public final TrackedValue<ValueList<String>> typesOfSoup = this.list("", "tomato", "borscht", "chicken noodle", "ramen", "STEW", "mushroom");
+    public final TrackedValue<ValueList<String>> typesOfSoup = this.list("", "tomato", "borscht", "chicken noodle", "ramen", "STEW", "mushroom");
 }
 ```
 

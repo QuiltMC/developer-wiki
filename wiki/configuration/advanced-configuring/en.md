@@ -124,13 +124,11 @@ public class Vec3i implements ConfigSerializableObject<ValueMap<Integer>> {
 }
 ```
 
-Here we leverage a `ValueMap` instead of a `String` as the serialized type. This allows us to easily distinguish between the `x`, `y`, and `z` fields, and is the data type you'll nearly always use when serializing complex objects like this.  
-
-todo: vec2i example
+Here we leverage a `ValueMap` instead of a `String` as the serialized type. This allows us to easily distinguish between the `x`, `y`, and `z` fields, and is the data type you'll nearly always use when serializing complex objects like this. We're not going to go in depth here, as the code is fairly self-explanatory now that we understand the `ConfigSerializableObject<T>` interface.
 
 ## Using processors
 
-introduce processors
+Now that we've learned all about values, let's learn how to do evil things: introducing `Processor`s.
 
 ## Adding multiple files
 
