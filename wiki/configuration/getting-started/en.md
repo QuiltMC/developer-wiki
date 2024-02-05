@@ -1,6 +1,6 @@
 # Getting started with Quilt Config
 
-[Quilt Config](https://github.com/QuiltMC/quilt-config) is Quilt's advanced configuration API. It allows developers (that's you!) to easily set up values that can be changed by the user in order to change the behaviour of your mod. It's built into [Quilt Loader](https://github.com/QuiltMC/quilt-loader) to allow any Quilt mod to leverage it without having to pull in new dependencies or run any setup.
+[Quilt Config](https://github.com/QuiltMC/quilt-config) is Quilt's powerful configuration API. It allows developers (that's you!) to easily set up values that can be changed by the user in order to change the behaviour of your mod. It's built into [Quilt Loader](https://github.com/QuiltMC/quilt-loader) to allow any Quilt mod to leverage it without having to pull in new dependencies or run any setup.
 
 ## Setting up your config
 
@@ -21,7 +21,7 @@ public class ExampleModConfig extends ReflectiveConfig {
 ```
 
 Now that big line in the middle may seem intimidating, but we're going to break it down.
-- First, `public static final` means that the value never changes (though data *stored* in the config can), and `instance` is a fancy programmer word that just means it's an object of a class.
+- First, `public static final` means that the value never changes (though data *stored* in the config can), and `instance` is a fancy programmer word that just means it's an object of a class. We create the object in this way since it's the only instance of the config we'll ever be making.
 - Second, we're calling the method `QuiltConfig.create(String family, String id, Class<C> configCreatorClass)`. As you can see, it takes three parameters:
   - The string `family`, which indicates the directory that your config file will be stored in, relative to the global config directory (usually `<your instance directory>/config`). We're using our mod ID as the directory, and that's the best practice.
   - A second string, `id`, which will be the name of the configuration file (before the file extension is added, which changes depending on the format you choose). Here we use our mod ID once again, but if you have a complicated config with multiple files you'll want to use a different name.
@@ -41,7 +41,7 @@ public class ExampleModConfig extends ReflectiveConfig {
 ```
 
 We're introducing a bunch of things with one line again. Lovely! Let's dig into it:
-- This value is `public final`, which means that instead of being accessible by anything you need an instance of `ExampleModConfig` first. Since we defined our `INSTANCE` field already, we'll be able to access this from anywhere via `ExampleModConfig.INSTANCE.message`.
+- This value is `public final`, which means that instead of being accessible by anything you need an instance of `ExampleModConfig` first. Note that you *must* use `public final` whenever creating a config value using Quilt Config. Since we defined our `INSTANCE` field already, we'll be able to access this from anywhere via `ExampleModConfig.INSTANCE.message`.
 - The type is `TrackedValue<String>`. The angle brackets (`<>`) allow us to use what's called *generics*, which in Java are a way to adapt a class to your specific use case. Here, the `TrackedValue` class allows us to adapt the type of object it holds, so we use it to store a `String`. Thanks to the generics, we could put another type inside those brackets later to store a different kind of value! This is foreshadowing. We're going to store some different values. Get ready.
 - We call the `value` method, which comes from the `ReflectiveConfig` class we're extending. This method takes one parameter, which will be the default value of that config field. Here, the author of this tutorial is using it to self-advertise.
 
