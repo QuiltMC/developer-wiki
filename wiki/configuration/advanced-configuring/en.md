@@ -15,7 +15,7 @@ A flat file of dozens of values can get hard to navigate fast, and not to mentio
 
 ```java
 public class ExampleModConfig extends ReflectiveConfig {
-	// ...
+    // ...
     @Comment("Advanced settings for advanced users.")
     @SerializedName("advanced_settings")
 	public final AdvancedSettings advancedSettings = new AdvancedSettings();
