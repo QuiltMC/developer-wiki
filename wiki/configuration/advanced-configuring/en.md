@@ -18,13 +18,13 @@ public class ExampleModConfig extends ReflectiveConfig {
     // ...
     @Comment("Advanced settings for advanced users.")
     @SerializedName("advanced_settings")
-	public final AdvancedSettings advancedSettings = new AdvancedSettings();
+    public final AdvancedSettings advancedSettings = new AdvancedSettings();
 
-	public static class AdvancedSettings extends Section {
-		@Comment("Whether to automatically append newlines to every message printed.")
-		@SerializedName("print_newlines")
-		public final TrackedValue<Boolean> printNewlines = this.value(true);
-	}
+    public static class AdvancedSettings extends Section {
+        @Comment("Whether to automatically append newlines to every message printed.")
+        @SerializedName("print_newlines")
+        public final TrackedValue<Boolean> printNewlines = this.value(true);
+    }
 }
 ```
 
@@ -43,45 +43,45 @@ Enough with the explanations: let's see an example!
 
 ```java
 public class ExampleModConfig extends ReflectiveConfig {
-	// ...
-	public static class AdvancedSettings extends Section {
-		// ...
-		@Comment("What stream to print the message to.")
-		@SerializedName("print_stream")
-		public final TrackedValue<PrintStreamOption> printStream = this.value(PrintStreamOption.SYSTEM_OUT);
+    // ...
+    public static class AdvancedSettings extends Section {
+        // ...
+        @Comment("What stream to print the message to.")
+        @SerializedName("print_stream")
+        public final TrackedValue<PrintStreamOption> printStream = this.value(PrintStreamOption.SYSTEM_OUT);
 
-		@SuppressWarnings("unused") // IDEs won't understand that all options in this enum can be used via the config
-		public enum PrintStreamOption implements ConfigSerializableObject<String> {
-			SYSTEM_OUT(System.out),
-			SYSTEM_ERROR(System.err);
+        @SuppressWarnings("unused") // IDEs won't understand that all options in this enum can be used via the config
+        public enum PrintStreamOption implements ConfigSerializableObject<String> {
+            SYSTEM_OUT(System.out),
+            SYSTEM_ERROR(System.err);
 
-			private final PrintStream printStream;
+            private final PrintStream printStream;
 
-			PrintStreamOption(PrintStream stream) {
-				this.printStream = stream;
-			}
+            PrintStreamOption(PrintStream stream) {
+                this.printStream = stream;
+            }
 
-			public PrintStream getStream() {
-				return this.printStream;
-			}
+            public PrintStream getStream() {
+                return this.printStream;
+            }
 
-			@Override
-			public PrintStreamOption convertFrom(String representation) {
-				return valueOf(representation);
-			}
+            @Override
+            public PrintStreamOption convertFrom(String representation) {
+                return valueOf(representation);
+            }
 
-			@Override
-			public String getRepresentation() {
-				return this.name();
-			}
+            @Override
+            public String getRepresentation() {
+                return this.name();
+            }
 
-			@Override
-			public PrintStreamOption copy() {
-				// enum values cannot be duplicated
-				return this;
-			}
-		}
-	}
+            @Override
+            public PrintStreamOption copy() {
+                // enum values cannot be duplicated
+                return this;
+            }
+        }
+    }
 }
 ```
 
@@ -93,34 +93,34 @@ Let's say we want to store a point on a 3d grid in the config. We would need to 
 
 ```java
 public class Vec3i implements ConfigSerializableObject<ValueMap<Integer>> {
-	public final int x;
-	public final int y;
-	public final int z;
+    public final int x;
+    public final int y;
+    public final int z;
 
-	public Vec3i(int x, int y, int z) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
-	}
+    public Vec3i(int x, int y, int z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 
-	@Override
-	public Vec3i copy() {
-		return this;
-	}
+    @Override
+    public Vec3i copy() {
+        return this;
+    }
 
-	@Override
-	public Vec3i convertFrom(ValueMap<Integer> representation) {
-		return new Vec3i(representation.get("x"), representation.get("y"), representation.get("z"));
-	}
+    @Override
+    public Vec3i convertFrom(ValueMap<Integer> representation) {
+        return new Vec3i(representation.get("x"), representation.get("y"), representation.get("z"));
+    }
 
-	@Override
-	public ValueMap<Integer> getRepresentation() {
-		return ValueMap.builder(0)
-				.put("x", this.x)
-				.put("y", this.y)
-				.put("z", this.z)
-				.build();
-	}
+    @Override
+    public ValueMap<Integer> getRepresentation() {
+        return ValueMap.builder(0)
+                .put("x", this.x)
+                .put("y", this.y)
+                .put("z", this.z)
+                .build();
+    }
 }
 ```
 
