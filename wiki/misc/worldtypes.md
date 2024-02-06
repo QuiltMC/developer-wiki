@@ -18,8 +18,10 @@ Valid dimensions are `minecraft:overworld`, `minecraft:nether` and `minecraft:th
     }
   }
 ```
+
 </br>
 </br>
+
 `generator` is where you specify how the worldgen in your world preset behaves. The `type` is a "generator ID" and the valid IDs are `noise`, `flat`, or `debug`.
 
 `biome_source` is where you specify how biomes generate. The `type` parameter here is what kind of biome generation will be used.
@@ -48,8 +50,10 @@ The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about
   }
 }
 ```
+
 </br>
 </br>
+
 If you specified `minecraft:flat` in the generator type, `settings` is where you'll configure your superflat generation settings.
 ```json
 "dimensions": {
