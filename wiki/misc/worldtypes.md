@@ -48,6 +48,8 @@ The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about
 }
 ```
 
+
+If you specified `minecraft:flat` in the generator type, `settings` is where you'll configure your superflat generation settings.
 ```json
 "dimensions": {
   "minecraft:overworld": {
@@ -58,7 +60,7 @@ The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about
         "type": "minecraft:multi_noise",
         "preset": "minecraft:overworld"
       },
-      "settings": "example_mod:example_mod_noise"
+      "settings": 
     }
   }
 }
