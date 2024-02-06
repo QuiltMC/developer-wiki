@@ -79,6 +79,12 @@
 </div>
 
 <style>
+	/* Aligns the language icon with the
+		 text on smaller screens */
+	.navbar-link.has-icon {
+		display: flex;
+		align-items: center;
+	}
 	/* Removes the set height and width
 		 of the navbar link's icon */
 	.icon {
