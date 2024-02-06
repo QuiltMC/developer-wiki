@@ -59,7 +59,7 @@ The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about
 </br>
 </br>
 
-If you specified `minecraft:flat` in the generator type, `settings` is where you'll configure your superflat generation settings.
+If you specified `minecraft:flat` in the generator type, `settings` is where you'll configure your superflat generation settings. More info about world presets using `settings` can be found [here](https://minecraft.wiki/w/Custom_world_preset#World_presets_with_settings).
 ```json
 "dimensions": {
   "minecraft:overworld": {
