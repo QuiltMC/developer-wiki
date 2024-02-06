@@ -4,7 +4,6 @@
     "type": "minecraft:overworld"
     }
   }
-}
 ```
 
 ```json
