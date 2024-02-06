@@ -19,6 +19,20 @@ Valid dimensions are `minecraft:overworld`, `minecraft:nether` and `minecraft:th
   }
 ```
 
+`generator` is where you specify how the worldgen in your world preset behaves. The `type` is a "generator ID" and the valid IDs are `noise`, `flat`, or `debug`.
+
+`biome_source` is where you specify how biomes generate. The `type` parameter here is what kind of biome generation will be used.
+Valid generation types:
+```
+multi_noise
+fixed
+checkerboard, if you want to play checkers in MC
+the_end which generates similarly to MC's end dimension
+```
+
+If the biome source `type` happens to be `minecraft:multi_noise`, Minecraft will use 3D biomes in the overworld and the nether.
+The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about this can be found [here](https://minecraft.wiki/w/Custom_dimension#Multi-noise_biome_source_parameter_list).
+
 ```json
 "dimensions": {
   "minecraft:overworld": {
