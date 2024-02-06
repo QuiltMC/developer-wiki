@@ -22,7 +22,12 @@ Valid dimensions are `minecraft:overworld`, `minecraft:nether` and `minecraft:th
 </br>
 </br>
 
-`generator` is where you specify how the worldgen in your world preset behaves. The `type` is a "generator ID" and the valid IDs are `noise`, `flat`, or `debug`.
+`generator` is where you specify how the worldgen in your world preset behaves. The `type` is a "generator ID" and the following are valid generator IDs:
+```
+noise
+flat
+debug
+```
 
 `biome_source` is where you specify how biomes generate. The `type` parameter here is what kind of biome generation will be used.
 Valid generation types:
