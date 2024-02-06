@@ -5,7 +5,7 @@ You'll need a couple of things before you can get started.
 - A Java Development Kit (JDK) for Java 17 (recommended) or newer.
   Temurin Adoptium JDKs are easily available and recommended.
   You can download them here: <https://adoptium.net/releases.html>
-- Any Java IDE, like [IntelliJ Idea](https://www.jetbrains.com/idea/) or [Eclipse](https://www.eclipse.org/ide/).
+- Any Java IDE, like [IntelliJ IDEA](https://www.jetbrains.com/idea/) or [Eclipse](https://www.eclipse.org/ide/).
   [Visual Studio Code](https://code.visualstudio.com/) can work, but it takes extra work to get set up.
   - We recommend using IntelliJ IDEA as it has the most integrations and is the easiest to use.
 
@@ -109,7 +109,7 @@ You'll need to update a few things under `"quilt_loader"`, see below for a final
       but typically people put a `"homepage"`, a `"sources"`, and a `"issues"` entry with a valid URL here.
    5. Replace `example_mod` with your mod's ID in `"icon"`.
 4. In `"entrypoints"`, replace `com.example.example_mod` with your Maven group and mod ID,
-   and the `ExampleMod` at the end should be the Java class name for your mod. The Java class name usually is your mod's name, written in `UpperCamelCase` (So new words simply start by using a uppercase letter and the initial latter is also upper case)
+   and the `ExampleMod` at the end should be the Java class name for your mod. The Java class name usually is your mod's name, written in `UpperCamelCase`. This means that instead of using spaces to separate words, each word starts with an uppercase letter. In contrast to `lowerCamelCase`, the first letter should be uppercase.
    For example, `io.github.bingus.bingus_mod.BingusMod`.
 5. In `"mixin"`, replace `example_mod` in the file name to your mod's ID.
 
