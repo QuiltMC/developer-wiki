@@ -41,6 +41,8 @@ The interface works via generics, just like `TrackedValue`. The `<T>` in `Config
 
 Enough with the explanations: let's see an example!
 
+`src/main/com/example/example_mod/ExampleModConfig`:
+
 ```java
 public class ExampleModConfig extends ReflectiveConfig {
     // ...
@@ -129,10 +131,79 @@ Here we leverage a `ValueMap` instead of a `String` as the serialized type. This
 ## Using processors
 
 Now that we've learned all about values, let's learn how to do evil things: introducing `Processor`s.
+This devious annotation allows you to configure your configs and their values, as well as add modification callbacks, which allow you to run code when the value is changed.
+The annotation works via allowing you to point to code that will be called as the config is built.
+First we'll set up a simple processor that prints to the console when the config starts to be loaded.
+
+`src/main/com/example/example_mod/ExampleModConfig`:
+
+```java
+@Processor("processConfig")
+public class ExampleModConfig extends ReflectiveConfig {
+    public void processConfig(Config.Builder builder) {
+        System.out.println("Loading config!");
+    }
+
+    // ...
+}
+```
+
+With that, our config will print "Loading config!" before any of its values are deserialized. Note despite the method name passed to `@Processor` not coming with any parameter information, we still had to put a `Config.Builder` on our method: what's up with that?
+Processors can be attached to three different types: tracked values, config sections, and config classes. For each, the parameter will be different, as documented in `Processor`'s Javadoc:
+- When used on a tracked value, the processor method will take a `TrackedValue.Builder` as its parameter.
+- When used on a section, the processor method will take a `SectionBuilder` as its parameter.
+- When used on a config class, the processor method will take a `Config.Builder` as its parameter.
+
+But there's more that we can do with processors than just printing nonsense to the command line! Let's see what we can do with that `Builder` object we're being offered.
+On both tracked values and config classes, we're able to leverage a method called `callback` to set up code that runs when the config is changed!
+
+`src/main/com/example/example_mod/ExampleModConfig`:
+
+```java
+@Processor("processConfig")
+public class ExampleModConfig extends ReflectiveConfig {
+    public void processConfig(Config.Builder builder) {
+        System.out.println("Loading config!");
+        builder.callback(config -> System.out.println("Updated!"));
+    }
+
+    // ...
+}
+```
+
+With that line, we've expanded our logging to now tell us whenever a config value is updated! Neat, but what else can we do with callbacks?
+
+One example of a callback usage is syncing a value between your config field and another. This could be needed for many reasons: your config value is complicated, and you want to make it easier to access, or maybe you need to update the configuration of one of the libraries you depend on when the value is changed ([enigma](<https://github.com/QuiltMC/enigma>) does just that!).
+We're going to set up a shortcut to accessing the print stream made available in `printStream`, that doesn't force you to go through two separate getters to use. To do that, we can use a processor applied to the field!
+
+`src/main/com/example/example_mod/ExampleModConfig`:
+
+```java
+@Processor("processConfig")
+public class ExampleModConfig extends ReflectiveConfig {
+    // ...
+    public static class AdvancedSettings extends Section {
+        // ...
+        @Processor("processPrintStream")
+        public final TrackedValue<PrintStreamOption> printStream = this.value(PrintStreamOption.SYSTEM_OUT);
+        public PrintStream activeStream = printStream.value().getStream();
+
+        public void processPrintStream(TrackedValue.Builder<PrintStreamOption> builder) {
+            builder.callback(value -> activeStream = printStream.value().getStream());
+        }
+		
+        // ...
+    }
+}
+```
+
+Using our callback, we update the `activeStream` variable each time that the print stream is changed. This keeps it perfectly in sync with the `printStream` field at all times!
+Now instead of dealing with `ExampleModConfig.INSTANCE.advancedSettings.printStream.value().getStream()` we can simply do `ExampleModConfig.INSTANCE.advancedSettings.activeStream`, simplifying our lives a little when interacting with the config. The power of processors, in action.
 
 ## Adding multiple files
 
-g
+For massive mods, a single config file, even organised into sections, can become unwieldy. Luckily, Quilt Config is designed to easily support adding multiple config files!
+
 
 ## Changing the config format
 
