@@ -1,5 +1,6 @@
 ---
 title: Adding a Custom World Preset
+index: 0
 ---
 
 # Adding custom world presets
