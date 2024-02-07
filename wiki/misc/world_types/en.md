@@ -10,8 +10,8 @@ Now, what is a custom worldtype you may ask? World types define world generation
 <br/>
 <br/>
 
-Here is where you specify which dimensions your world preset will apply to. It does require a `minecraft:overworld` dimension or your world preset will not work.
-Valid dimensions are `minecraft:overworld`, `minecraft:nether` and `minecraft:the_end`.
+Here is where you specify which dimensions your world preset will apply to. In `"dimension"`, a `"minecraft:overworld"` object is required.
+The dimension `type` can be a built-in preset or a custom dimension preset you implement in your mod.
 
 
 `src/main/resources/data/minecraft/example_mod/worldgen/world_preset`
@@ -19,7 +19,7 @@ Valid dimensions are `minecraft:overworld`, `minecraft:nether` and `minecraft:th
 {
 	"dimensions": {
 		"minecraft:overworld": {
-			"type": "minecraft:overworld"
+			"type": "example_mod:example_mod_dimension_type"
 		}
 	}
 }
