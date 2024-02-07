@@ -6,8 +6,8 @@ title: Adding a Custom World Preset
 If your mod completely overhauls Minecraft's worldgen, you'll likely want to create a custom worldtype to offer users the option to use your worldgen or MC's vanilla worldgen.
 Now, what is a custom worldtype you may ask? World types define world generation options for Minecraft worlds. They let you change the make-up of your Minecraft worlds by configuring how world generation behaves.
 
-</br>
-</br>
+
+
 
 Here is where you specify which dimensions your world preset will apply to. It does require a `minecraft:overworld` dimension or your world preset will not work.
 Valid dimensions are `minecraft:overworld`, `minecraft:nether` and `minecraft:the_end`.
@@ -22,8 +22,8 @@ Valid dimensions are `minecraft:overworld`, `minecraft:nether` and `minecraft:th
   }
 ```
 
-</br>
-</br>
+
+
 
 `generator` is where you specify how the worldgen in your world preset behaves. The `type` is a "generator ID" and the following are valid generator IDs:
 ```
@@ -55,8 +55,8 @@ The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about
 }
 ```
 
-</br>
-</br>
+
+
 
 In order for your world preset to show in the "create a new world" screen, you will need to make a file called `normal.json` in `resources/data/minecraft/tags/worldgen/world_preset` and populate it with the following.
 
