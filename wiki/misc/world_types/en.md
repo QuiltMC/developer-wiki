@@ -16,11 +16,13 @@ Valid dimensions are `minecraft:overworld`, `minecraft:nether` and `minecraft:th
 
 `src/main/resources/data/minecraft/example_mod/worldgen/world_preset`
 ```json
-"dimensions": {
-  "minecraft:overworld": {
-    "type": "minecraft:overworld"
-    }
-  }
+{
+	"dimensions": {
+		"minecraft:overworld": {
+			"type": "minecraft:overworld"
+		}
+	}
+}
 ```
 
 <br/>
@@ -42,17 +44,19 @@ The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about
 
 `src/main/resources/data/minecraft/example_mod/worldgen/world_preset/example_mod_preset.json`
 ```json
-"dimensions": {
-  "minecraft:overworld": {
-    "type": "minecraft:overworld",
-    "generator": {
-      "type": "minecraft:noise",
-      "biome_source": {
-        "type": "minecraft:multi_noise",
-        "preset": "minecraft:overworld"
-      }
-    }
-  }
+{
+	"dimensions": {
+		"minecraft:overworld": {
+			"type": "minecraft:overworld",
+			"generator": {
+				"type": "minecraft:noise",
+				"biome_source": {
+					"type": "minecraft:multi_noise",
+					"preset": "minecraft:overworld"
+				}
+			}
+		}
+	}
 }
 ```
 
@@ -64,9 +68,9 @@ In order for your world preset to show in the "create a new world" screen, you w
 `src/main/resources/data/minecraft/tags/worldgen/world_preset/normal.json`
 ```json
 {
-  "values": [
-    "example_mod:example_mod_preset"
-  ]
+	"values": [
+		"example_mod:example_mod_preset"
+	]
 }
 ```
 
