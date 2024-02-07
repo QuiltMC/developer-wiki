@@ -79,6 +79,7 @@ If you specified `minecraft:flat` in the generator type, `settings` is where you
 </br>
 </br>
 
+In order for your world preset to show in the "create a new world" screen, you will need to make a file called `normal.json` in `resources/data/minecraft/tags/worldgen/world_preset` and populate it with the following.
 ```json
 {
   "values": [
@@ -86,6 +87,5 @@ If you specified `minecraft:flat` in the generator type, `settings` is where you
   ]
 }
 ```
-In order for your world preset to show in the "create a new world" screen, you will need to make a file called `normal.json` in `resources/data/minecraft/tags/worldgen/world_preset` and populate it with the following.
 
 Alternatively, if you want your world preset to only show as an option while the user is holding down ALT, make a file called `extended.json` in the same directory as your `normal.json` file.
