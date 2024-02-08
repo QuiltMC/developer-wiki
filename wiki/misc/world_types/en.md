@@ -58,8 +58,7 @@ The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about
 }
 ```
 
-<br/>
-<br/>
+---
 
 In order for your world preset to show in the "create a new world" screen, you will need to make a file called `normal.json` in `resources/data/minecraft/tags/worldgen/world_preset` and populate it with the following.
 
