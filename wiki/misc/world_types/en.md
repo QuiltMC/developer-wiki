@@ -25,8 +25,7 @@ The dimension `type` can be a built-in preset or a custom dimension preset you i
 }
 ```
 
-<br/>
-<br/>
+---
 
 `generator` is where you specify how the worldgen in your world preset behaves. The `type` is a "generator ID" and the following are valid generator IDs:
 ```
