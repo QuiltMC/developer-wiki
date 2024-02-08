@@ -31,9 +31,7 @@ The dimension `type` can be a built-in preset or a custom dimension preset you i
 
 `biome_source` is where you specify how biomes generate. The `type` parameter here is what kind of biome generation will be used.
 Valid generation types:
-```
-multi_noise
-```
+ - `multi_noise`
 
 If the biome source `type` happens to be `minecraft:multi_noise`, Minecraft will use 3D biomes in the overworld and the nether.
 The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about this can be found [here](https://minecraft.wiki/w/Custom_dimension#Multi-noise_biome_source_parameter_list).
