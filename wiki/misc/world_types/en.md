@@ -7,8 +7,7 @@ index: 0
 If your mod completely overhauls Minecraft's worldgen, you'll likely want to create a custom worldtype to offer users the option to use your worldgen or MC's vanilla worldgen.
 Now, what is a custom worldtype you may ask? World types define world generation options for Minecraft worlds. They let you change the make-up of your Minecraft worlds by configuring how world generation behaves.
 
-<br/>
-<br/>
+---
 
 Here is where you specify which dimensions your world preset will apply to. In `"dimension"`, a `"minecraft:overworld"` object is required.
 The dimension `type` can be a built-in preset or a custom dimension preset you implement in your mod.
