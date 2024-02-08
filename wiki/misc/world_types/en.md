@@ -27,9 +27,7 @@ The dimension `type` can be a built-in preset or a custom dimension preset you i
 ---
 
 `generator` is where you specify how the worldgen in your world preset behaves. The `type` is a "generator ID" and the following are valid generator IDs:
-```
-noise
-```
+ - `noise`
 
 `biome_source` is where you specify how biomes generate. The `type` parameter here is what kind of biome generation will be used.
 Valid generation types:
