@@ -10,6 +10,7 @@ Now, what is a custom worldtype you may ask? World types define world generation
 Some examples of world types already built into MC are "Amplified", "Super Flat", "Single Biome", and "Large Biomes".
 
 ---
+## Specifying which dimensions your worldtype applies to
 
 The following block shows how to specify which dimensions your world preset will apply to. In `"dimension"`, a `"minecraft:overworld"` object is required.
 The dimension `type` can be a built-in preset or a custom dimension preset you implement in your mod.
@@ -27,6 +28,7 @@ The dimension `type` can be a built-in preset or a custom dimension preset you i
 ```
 
 ---
+## Configuring how the worldgen works in your worldtype
 
 `generator` is where you specify how the worldgen in your world preset behaves. The `type` is a "generator ID" and the following are valid generator IDs:
  - `noise`
@@ -57,6 +59,7 @@ The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about
 ```
 
 ---
+## Making your worldtype accessible
 
 In order for your world preset to show in the "create a new world" screen, you will need to make a file called `normal.json` in `resources/data/minecraft/tags/worldgen/world_preset` and populate it with the following.
 
