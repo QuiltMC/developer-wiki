@@ -9,7 +9,6 @@ Now, what is a custom worldtype you may ask? World types define world generation
 
 Some examples of world types already built into MC are "Amplified", "Super Flat", "Single Biome", and "Large Biomes".
 
----
 ## Specifying which dimensions your worldtype applies to
 
 The following block shows how to specify which dimensions your world preset will apply to. In `"dimension"`, a `"minecraft:overworld"` object is required.
