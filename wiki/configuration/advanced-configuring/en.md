@@ -20,7 +20,7 @@ Via sections, you can use indentation to visually differentiate parts of the con
 typesOfSoup = ["tomato", "borscht", "chicken noodle", "ramen", "STEW", "mushroom"]
 
 # Advanced settings for advanced users.
-[advanced_ettings]
+[advanced_settings]
     # Whether to automatically append newlines to every message printed.
     # default: true
     printNewlines = true
