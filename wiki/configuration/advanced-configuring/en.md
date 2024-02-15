@@ -3,13 +3,30 @@ title: Advanced Configuring
 index: 2
 ---
 
-# Advanced configuring - WORK IN PROGRESS
+# Advanced configuring
 
 Simple values are nice and all, but if you have a lot of them it can begin to get unwieldy. In this tutorial, we'll discuss how to organise your config and use processors to get the most out of it.
 
 ## Using sections
 
-A flat file of dozens of values can get hard to navigate fast, and not to mention confusion. Luckily we can organise it into sections using Quilt Config! This is super simple to get up and running:
+A flat file of dozens of values can get hard to navigate fast, and not to mention confusion. Luckily we can organise it into sections using Quilt Config! This is super simple to get up and running.
+
+Via sections, you can use indentation to visually differentiate parts of the config file for users reading. We're going to add an example section that looks like this in TOML:
+
+```toml
+# ...
+
+# This isn't actually used by the mod, but I was completely out of ideas for things to add.
+typesOfSoup = ["tomato", "borscht", "chicken noodle", "ramen", "STEW", "mushroom"]
+
+# Advanced settings for advanced users.
+[advanced_ettings]
+    # Whether to automatically append newlines to every message printed.
+    # default: true
+    printNewlines = true
+```
+
+To do that, we'll create a section inside our code:
 
 `src/main/com/example/example_mod/ExampleModConfig`:
 
@@ -186,7 +203,7 @@ public class ExampleModConfig extends ReflectiveConfig {
         // ...
         @Processor("processPrintStream")
         public final TrackedValue<PrintStreamOption> printStream = this.value(PrintStreamOption.SYSTEM_OUT);
-        public PrintStream activeStream = printStream.value().getStream();
+        public transient PrintStream activeStream = printStream.value().getStream();
 
         public void processPrintStream(TrackedValue.Builder<PrintStreamOption> builder) {
             builder.callback(value -> activeStream = printStream.value().getStream());
@@ -197,18 +214,57 @@ public class ExampleModConfig extends ReflectiveConfig {
 }
 ```
 
-Using our callback, we update the `activeStream` variable each time that the print stream is changed. This keeps it perfectly in sync with the `printStream` field at all times!
+Using our callback, we update the `activeStream` variable each time that the print stream is changed. This keeps it perfectly in sync with the `printStream` field at all times! Note that we mark it as `transient`, a keyword which tells Java (and subsequently Quilt Config!) not to serialize the value.
 Now instead of dealing with `ExampleModConfig.INSTANCE.advancedSettings.printStream.value().getStream()` we can simply do `ExampleModConfig.INSTANCE.advancedSettings.activeStream`, simplifying our lives a little when interacting with the config. The power of processors, in action.
-
-## Adding multiple files
-
-For massive mods, a single config file, even organised into sections, can become unwieldy. Luckily, Quilt Config is designed to easily support adding multiple config files!
-
 
 ## Changing the config format
 
-Let's get into how you choose a file format to save to. Quilt Config currently only provides two serializers: `json5`, an extension of the JSON format to allow cleaner syntax and comments, and `toml`, which is the default format it serializes to. If you want to switch to `json5`, we can do that using a `Processor`!
+Let's get into how you choose a file format to save to. Quilt Config currently only provides two serializers: `json5`, an extension of the JSON format to allow cleaner syntax and comments, and `toml`, with the default being `toml`. If you want to switch to `json5`, we can do that using a `Processor`!
+We'll need to apply this processor globally to our config, since the way we'll be changing the format is via the `Config.Builder` object a config class processor will provide.
 
 This processor needs to run before the config is read, so we're going to place it directly on the class:
 
-https://github.com/hibiii/BlindMe/blob/main/src/main/java/hibi/blind_me/Config.java use processor to run builder.format
+`src/main/com/example/example_mod/ExampleModConfig`:
+
+```java
+@Processor("processConfig")
+public class ExampleModConfig extends ReflectiveConfig {
+	public void processConfig(Config.Builder builder) {
+		// ...
+        builder.format("json5");
+	}
+
+	// ...
+}
+```
+
+With our knowledge of processors, this is simple! You can also use the config builder to add new fields, new sections, and update metadata (TODO LINK TO METADATA PAGE), on top of changing the format and using callbacks as we've already covered.
+
+## Adding multiple files
+
+For massive mods, a single config file, even organised into sections, can become unwieldy.
+Luckily, Quilt Config is designed to easily support adding multiple config files!
+To add a second config file, we must make another config class: let's call this one `ExampleModConfig2`.
+We'll also have to update the name of our original config file to be more specific:
+
+`src/main/com/example/example_mod/ExampleModConfig`:
+
+```java
+public class ExampleModConfig extends ReflectiveConfig {
+    public static final ExampleModConfig INSTANCE = QuiltConfig.create(ExampleMod.MOD_ID, "main", ExampleModConfig.class);
+}
+```
+
+Instead of using the mod ID as the name of our class, we call our original config `main` instead.
+Now let's create a second config:
+
+`src/main/com/example/example_mod/ExampleModConfig2`:
+
+```java
+public class ExampleModConfig2 extends ReflectiveConfig {
+    public static final ExampleModConfig2 INSTANCE = QuiltConfig.create(ExampleMod.MOD_ID, "secondary", ExampleModConfig2.class);
+}
+```
+
+Just the same thing as our original, but using the `ExampleModConfig2` class instead of `ExampleModConfig` everywhere. We also name it `secondary`, to go along with the `main` name of our original config.
+Now you can add whatever fields you'd like! With Quilt Config, you can repeat this process as much as you like, as long as no configs have duplicate names.
