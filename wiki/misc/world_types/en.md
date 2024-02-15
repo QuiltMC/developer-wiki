@@ -15,7 +15,7 @@ The following block shows how to specify which dimensions your world preset will
 The dimension `type` can be a built-in preset or a custom dimension preset you implement in your mod.
 
 
-`src/main/resources/data/minecraft/example_mod/worldgen/world_preset`
+`src/main/resources/data/minecraft/example_mod/worldgen/world_preset`:
 ```json
 {
 	"dimensions": {
