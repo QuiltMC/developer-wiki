@@ -38,7 +38,7 @@ Valid generation types:
 If the biome source `type` happens to be `minecraft:multi_noise`, Minecraft will use 3D biomes in the overworld and the nether.
 The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about this can be found [here](https://minecraft.wiki/w/Custom_dimension#Multi-noise_biome_source_parameter_list).
 
-`src/main/resources/data/minecraft/example_mod/worldgen/world_preset/example_mod_preset.json`
+`src/main/resources/data/minecraft/example_mod/worldgen/world_preset/example_mod_preset.json`:
 ```json
 {
 	"dimensions": {
