@@ -243,8 +243,8 @@ With our knowledge of processors, this is simple! You can also use the config bu
 ## Adding multiple files
 
 For massive mods, a single config file can become unwieldy, even when organized into sections.
-Luckily, Quilt Config is designed to easily support adding multiple config files!
-To add a second config file, we must make another config class: let's call this one `ExampleModConfig2`.
+Luckily, Quilt Config is designed to easily support adding multiple config files: by default, your config files are all placed into their own directory.
+To add a second config file inside that directory, we must make another config class: let's call this one `ExampleModConfig2`.
 We'll also have to update the name of our original config file to be more specific:
 
 `src/main/com/example/example_mod/ExampleModConfig`:
