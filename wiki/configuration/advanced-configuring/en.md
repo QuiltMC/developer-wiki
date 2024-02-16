@@ -5,11 +5,11 @@ index: 2
 
 # Advanced configuring
 
-Simple values are nice and all, but if you have a lot of them it can begin to get unwieldy. In this tutorial, we'll discuss how to organise your config and use processors to get the most out of it.
+Simple values are nice and all, but if you have a lot of them it can begin to get unwieldy. In this tutorial, we'll discuss how to organize your config and use processors to get the most out of it.
 
 ## Using sections
 
-A flat file of dozens of values can get hard to navigate fast, and not to mention confusion. Luckily we can organise it into sections using Quilt Config! This is super simple to get up and running.
+A flat file of dozens of values can get hard to navigate fast, not to mention confusing. Luckily we can organize it into sections using Quilt Config! This is super simple to get up and running.
 
 Via sections, you can use indentation to visually differentiate parts of the config file for users reading. We're going to add an example section that looks like this in TOML:
 
@@ -108,7 +108,7 @@ This may look like a lot of code, but we've already covered most of it! We're us
 
 The implementation of `ConfigSerializableObject<T>`'s methods is incredibly simple here: since the values in our enum already have names, we just use the methods `name` and `valueOf(String)` to serialize and deserialize respectively. Cute! Let's look at another example of a custom object that can't be represented in an enum.
 
-Let's say we want to store a point on a 3d grid in the config. We would need to store both an `x` coordinate, a `y` coordinate, and a `z` coordinate for that value. Let's do that! This is simply an example, and won't be used in our mod.
+Let's say we want to store a point on a 3d grid in the config. We would need to store an `x` coordinate, a `y` coordinate, and a `z` coordinate for that value. Let's do that! This is simply an example, and won't be used in our mod.
 
 ```java
 public class Vec3i implements ConfigSerializableObject<ValueMap<Integer>> {
@@ -231,7 +231,7 @@ This processor needs to run before the config is read, so we're going to place i
 public class ExampleModConfig extends ReflectiveConfig {
 	public void processConfig(Config.Builder builder) {
 		// ...
-        builder.format("json5");
+		builder.format("json5");
 	}
 
 	// ...
@@ -242,7 +242,7 @@ With our knowledge of processors, this is simple! You can also use the config bu
 
 ## Adding multiple files
 
-For massive mods, a single config file, even organised into sections, can become unwieldy.
+For massive mods, a single config file can become unwieldy, even when organized into sections.
 Luckily, Quilt Config is designed to easily support adding multiple config files!
 To add a second config file, we must make another config class: let's call this one `ExampleModConfig2`.
 We'll also have to update the name of our original config file to be more specific:
