@@ -49,10 +49,10 @@ Adds a piece of `String` metadata that's used as the name that will be serialize
 
 ## `@SerializedNameConvention`
 
-- Usable on config classes
+- Usable on config classes, sections and fields
 - Can only be applied once per class
 
-Adds name convention metadata to each field inside the config class, which dictates a casing to be used when saving to the config. This will transform the default name of the field to apply the casing stored in the metadata. If the field has a serial name, that name will take priority over the transformed name from this annotation. Casing options are provided and documented in `NamingSchemes`.
+Adds name convention metadata to each field inside the config class, which dictates a casing to be used when saving to the config. This will transform the default name of the field to apply the casing stored in the metadata. If the field has a serial name, that name will take priority over the transformed name from this annotation. Casing options are provided and documented in `NamingSchemes`. When used under a parent that also has this annotation, overwrites for that element only (for example, if a class is annotated with a certain scheme and a field inside the class is annotated with a different scheme, the field will take the scheme it's annotated with).
 
 ## `@Alias`
 
