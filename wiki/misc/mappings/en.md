@@ -65,6 +65,11 @@ git commit -m "Blabla" # add those changes into a new commit (replace "blabla" w
 git push # upload your changes to your fork of QM. You might need to add `origin <minecraft version>` at the end if git complains about a missing upstream branch
 ```
 
+Once you pushed your changes to your fork, go to [QM's Pull Requests tab](https://github.com/QuiltMC/quilt-mappings/pulls),
+and click the "Compare & Pull Request" button in the note about your recent changes. Fill in the title and description of
+your PR, submit it, and wait for your changes to be reviewed and accepted. Again, there's a more in-depth explanation of
+the PR process in [CONTRIBUTING.md](https://github.com/QuiltMC/quilt-mappings/blob/HEAD/CONTRIBUTING.md).
+
 ## Using the edited mappings
 
 Once you have finished and saved your changes, you can run `./gradlew publishToMavenLocal` to make the required files
