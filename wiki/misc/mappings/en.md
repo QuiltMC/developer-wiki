@@ -25,9 +25,9 @@ have an intermediate mapping set, you have to do some extra processing to use th
 Luckily, Loom does this process for you, so you don't have to worry about that and can easily replace the mappings used
 in your mod for Mojang's oficial ones.
 
-There a few different formats to store mappings, and as of the time this article was written, we are developing a new
-one with a bunch of improvements. In our ecosystem, the most used format is [Tiny V2], which uses a single `.tiny` file
-to store mappings, and places fields and methods as "children" of their parent class.
+There are a few different formats to store mappings, and as of the time this article was written, we are developing a
+new one with a bunch of improvements. In our ecosystem, the most used format is [Tiny V2], which uses a single `.tiny`
+file to store mappings, and places fields and methods as "children" of their parent class.
 Another format we often use is the Enigma format, which uses a directory tree with a file for each top-level class, and
 organizes the entries in a tree-like structure, placing each field, method and class as a child of another class or a
 top level one.
