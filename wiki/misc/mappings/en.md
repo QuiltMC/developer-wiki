@@ -26,8 +26,8 @@ Luckily, Loom does this process for you, so you don't have to worry about that a
 in your mod for Mojang's oficial ones.
 
 There a few different formats to store mappings, and as of the time this article was written, we are developing a new
-one with a bunch of improvements. In our ecosystem, the most used format is [Tiny V2](https://fabricmc.net/wiki/documentation:tiny2),
-which uses a single `.tiny` file to store mappings, and places fields and methods as "children" of their parent class.
+one with a bunch of improvements. In our ecosystem, the most used format is [Tiny V2], which uses a single `.tiny` file
+to store mappings, and places fields and methods as "children" of their parent class.
 Another format we often use is the Enigma format, which uses a directory tree with a file for each top-level class, and
 organizes the entries in a tree-like structure, placing each field, method and class as a child of another class or a
 top level one.
@@ -45,22 +45,20 @@ decompile the game.
 If you want to add or change a wrong or bad name, or add documentation to the code, you can start by picking which
 mapping set you'll work on top of. In this article, we'll use QM, though the process for Yarn is almost identical.
 If you want to work on top of Mojang's mappings, you'll have to do some extra work which we won't cover here. If you
-are going to work on QM, we highly suggest taking a look at its [CONTRIBUTING.md](https://github.com/QuiltMC/quilt-mappings/blob/HEAD/CONTRIBUTING.md)
-and contributing your changes to the repository. You'll need some very basic Git knowledge, but it should be fairly
-easy if you've ever worked with Git before.
+are going to work on QM, we highly suggest taking a look at its [contributing documentation][QM CONTRIBUTING.md] and
+contributing your changes to the repository. You'll need some very basic Git knowledge, but it should be fairly easy
+to do if you've ever worked with Git before.
 
-To get started, clone or download [Quilt Mappings](https://github.com/QuiltMC/quilt-mappings) (if you want to
-contribute, [fork the repo](https://github.com/QuiltMC/quilt-mappings/fork) and clone said fork), and run
-`./gradlew mappings` in your command prompt or terminal. This will launch [Enigma](https://github.com/QuiltMC/enigma),
-our tool to edit and write mappings. Rai wrote a really [great guide on how to edit mappings in Enigma](https://github.com/QuiltMC/quilt-mappings/blob/HEAD/GUIDE.md),
-so you can take a look and start mapping! Once you have finished editing, don't forget to save your changes before
-closing Enigma.
+To get started, clone or download [Quilt Mappings] (if you want to contribute, [fork the repo][fork qm] and clone said
+fork), and run `./gradlew mappings` in your command prompt or terminal. This will launch [Enigma], our tool to edit and
+write mappings. Rai wrote a really [great guide on how to edit mappings in Enigma][Enigma guide], so you can take a look
+and start mapping! Once you have finished editing, don't forget to save your changes before closing Enigma.
 
 ### Contributing the changes back to Quilt
 
 To contribute your changes, you have to add and commit your changes, and then push the changes to your fork of QM. This
-is really easy to do with an IDE, as described in [the Setting Up article](/en/introduction/setting-up), but you can
-also do it from the command prompt or terminal with these commands.
+is really easy to do with an IDE, as described in [the Setting Up article][setting-up], but you can also do it from the
+command prompt or terminal with these commands.
 ```bash
 git add . # tell git to track all your changes in the current directory
 
@@ -69,10 +67,10 @@ git commit -m "Blabla" # add those changes into a new commit (replace "blabla" w
 git push # upload your changes to your fork of QM. You might need to add `origin <minecraft version>` at the end if git complains about a missing upstream branch
 ```
 
-Once you pushed your changes to your fork, go to [QM's Pull Requests tab](https://github.com/QuiltMC/quilt-mappings/pulls),
-and click the "Compare & Pull Request" button in the note about your recent changes. Fill in the title and description of
-your PR, submit it, and wait for your changes to be reviewed and accepted. Again, there's a more in-depth explanation of
-the PR process in [CONTRIBUTING.md](https://github.com/QuiltMC/quilt-mappings/blob/HEAD/CONTRIBUTING.md).
+Once you pushed your changes to your fork, go to [QM's Pull Requests tab][QM PRs], and click the "Compare & Pull
+Request" button in the note about your recent changes. Fill in the title and description of your PR, submit it, and wait
+for your changes to be reviewed and accepted. Again, there's a more in-depth explanation of the PR process in
+[the contributing documentation][QM CONTRIBUTING.md].
 
 ### Using the edited mappings
 
@@ -102,3 +100,16 @@ their documentation or code to verify the version you want.
 
 That's it! You can now reload gradle through your IDE to apply these changes, and use your new mappings when reading
 Minecraft's code.
+
+
+<!-- Links -->
+[Quilt Mappings]: https://github.com/QuiltMC/quilt-mappings
+[QM CONTRIBUTING.md]: https://github.com/QuiltMC/quilt-mappings/blob/HEAD/CONTRIBUTING.md
+[Fork QM]: https://github.com/QuiltMC/quilt-mappings/fork
+[QM PRs]: https://github.com/QuiltMC/quilt-mappings/pulls
+[Enigma]: https://github.com/QuiltMC/enigma
+[Enigma guide]: https://github.com/QuiltMC/quilt-mappings/blob/HEAD/GUIDE.md
+
+[setting-up]: /en/introduction/setting-up
+
+[Tiny V2]: https://fabricmc.net/wiki/documentation:tiny2
