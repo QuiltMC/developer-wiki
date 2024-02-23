@@ -23,7 +23,7 @@ Fabric's intermediary instead, which uses `class_`, `field_` and `method_`, foll
 official mappings, often called Mojmap (short for Moj(ang)-map(pings)), for every version after 1.14. Since they don't
 have an intermediate mapping set, you have to do some extra processing to use them where you'd use other mappings.
 Luckily, Loom does this process for you, so you don't have to worry about that and can easily replace the mappings used
-in your mod for Mojang's oficial ones.
+in your mod for Mojang's official ones.
 
 There are a few different formats to store mappings, and as of the time this article was written, we are developing a
 new one with a bunch of improvements. In our ecosystem, the most used format is [Tiny V2], which uses a single `.tiny`
@@ -42,7 +42,7 @@ names. It gets worse with method parameters: since they are really prone to inco
 (usually) don't have intermediate names, thus the names you see in the code depend on the tooling that you used to
 decompile the game.
 
-If you want to add or change a wrong or bad name, or add documentation to the code, you can start by picking which
+If you want to add a name or change a wrong or bad one, or add documentation to the code, you can start by picking which
 mapping set you'll work on top of. In this article, we'll use QM, though the process for Yarn is almost identical.
 If you want to work on top of Mojang's mappings, you'll have to do some extra work which we won't cover here. If you
 are going to work on QM, we highly suggest taking a look at its [contributing documentation][QM CONTRIBUTING.md] and
