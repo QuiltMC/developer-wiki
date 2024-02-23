@@ -4,8 +4,8 @@
 
 Before a new Minecraft version jar is published to Mojang's servers, it goes through a process called *obfuscation*,
 where the human-readable class, field and method names are simplified to just a few letters, mainly to optimize the file
-size. In addition, obfuscation makes code very difficult to understand, because most names are replaced by a few random
-letters. This is where mappings come into play.
+size. In addition, obfuscation makes code very difficult to understand, because those simplified names aren't just
+contractions of the real names, they're completely random letters. This is where mappings come into play.
 
 A mapping is just a change from one name to another, in most cases an obfuscated name to a human readable one. Each
 mapping may also have extra metadata, like documentation. A set of mappings is called a "mapping set" or more often
@@ -20,16 +20,17 @@ be solved with intermediate mappings, that convert those obfuscated names to nam
 but still aren't readable in english. Quilt uses Hashed Mojmap, in which every class, field, and method is prefixed by
 `C_`, `f_` and `m_` respectively, followed by an 8-letter hash. While developing mods, most of the time you'll see
 Fabric's intermediary instead, which uses `class_`, `field_` and `method_`, followed by a number. Mojang also publishes
-official mappings, often called Mojmap (short for Moj(ang)-map(pings)), for every version after 1.14, but, since they don't use
-intermediate mappings, you have to do some extra processing to use them where you'd use other mapping sets. Luckily, Loom
-does this process for you, so you don't have to worry about that and can easily replace the mappings used in your mod for
-Mojang's oficial ones.
+official mappings, often called Mojmap (short for Moj(ang)-map(pings)), for every version after 1.14. Since they don't
+have an intermediate mapping set, you have to do some extra processing to use them where you'd use other mappings.
+Luckily, Loom does this process for you, so you don't have to worry about that and can easily replace the mappings used
+in your mod for Mojang's oficial ones.
 
 There a few different formats to store mappings, and as of the time this article was written, we are developing a new
-one with a bunch of improvements. In our ecosystem, the most used format is Tiny V2, which uses a single `.tiny` file to
-store mappings, and places fields and methods as "children" of their parent class. Another format we often use is the
-Enigma format, which uses a directory tree with a file for each top-level class, and organize the entries in a
-tree-like structure, placing each field, method and class as a child of another class or a top level one.
+one with a bunch of improvements. In our ecosystem, the most used format is [Tiny V2](https://fabricmc.net/wiki/documentation:tiny2),
+which uses a single `.tiny` file to store mappings, and places fields and methods as "children" of their parent class.
+Another format we often use is the Enigma format, which uses a directory tree with a file for each top-level class, and
+organizes the entries in a tree-like structure, placing each field, method and class as a child of another class or a
+top level one.
 
 ## Editing your mappings
 
@@ -49,10 +50,13 @@ and contributing your changes to the repository. You'll need some very basic Git
 easy if you've ever worked with Git before.
 
 To get started, clone or download [Quilt Mappings](https://github.com/QuiltMC/quilt-mappings) (if you want to
-contribute, [fork the repo] and clone it), and run `./gradlew mappings` in your command prompt or terminal. This will
-launch [Enigma](https://github.com/QuiltMC/enigma), our tool to edit and write mappings. Rai wrote a really
-[great guide on how to edit mappings in Enigma](https://github.com/QuiltMC/quilt-mappings/blob/HEAD/GUIDE.md), so you
-can take a look and start mapping!
+contribute, [fork the repo](https://github.com/QuiltMC/quilt-mappings/fork) and clone said fork), and run
+`./gradlew mappings` in your command prompt or terminal. This will launch [Enigma](https://github.com/QuiltMC/enigma),
+our tool to edit and write mappings. Rai wrote a really [great guide on how to edit mappings in Enigma](https://github.com/QuiltMC/quilt-mappings/blob/HEAD/GUIDE.md),
+so you can take a look and start mapping! Once you have finished editing, don't forget to save your changes before
+closing Enigma.
+
+### Contributing the changes back to Quilt
 
 To contribute your changes, you have to add and commit your changes, and then push the changes to your fork of QM. This
 is really easy to do with an IDE, as described in [the Setting Up article](/en/introduction/setting-up), but you can
@@ -70,11 +74,12 @@ and click the "Compare & Pull Request" button in the note about your recent chan
 your PR, submit it, and wait for your changes to be reviewed and accepted. Again, there's a more in-depth explanation of
 the PR process in [CONTRIBUTING.md](https://github.com/QuiltMC/quilt-mappings/blob/HEAD/CONTRIBUTING.md).
 
-## Using the edited mappings
+### Using the edited mappings
 
-Once you have finished and saved your changes, you can run `./gradlew publishToMavenLocal` to make the required files
-available to other projects in your computer. You can now head to the project where you want to apply these mappings,
-and edit the `build.gradle` file to add `mavenLocal()` to the `repositories` block, if it isn't already there.
+If you don't want to contribute your changes back to Quilt, or want to try them out in a development environment, you
+can run `./gradlew publishToMavenLocal` to make the required files available to other projects in your computer. You can
+now head to the project where you want to apply these mappings, and edit the `build.gradle` file to add `mavenLocal()`
+to the `repositories` block, if it isn't already there.
 
 ```gradle
 repositories {
