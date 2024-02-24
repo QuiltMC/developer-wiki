@@ -34,7 +34,7 @@ top level one.
 
 ## Editing your mappings
 
-Mapping sets don't have to contain a mapping for every class, field or method in a jar to be valid; in fact most mapping
+Mapping sets don't have to contain a mapping for every class, field or method in a jar to be valid; in fact, most mapping
 sets aren't complete. For instance, Quilt Mappings (QM for short) has reached 99% completion at most. In a development
 environment, unmapped things will use their intermediary name instead of the obfuscated one, so if you have ever browsed
 Minecraft's code with QM or Fabric's Yarn applied, it's very likely you have seen quite a few intermediary names.
