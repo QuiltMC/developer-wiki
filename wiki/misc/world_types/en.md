@@ -55,6 +55,7 @@ The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about
 	}
 }
 ```
+This will generate a world relatively similar to MC's default overworld generation.
 
 ## Making your worldtype accessible
 
