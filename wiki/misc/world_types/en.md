@@ -69,5 +69,6 @@ In order for your world preset to show in the "create a new world" screen, you w
 	]
 }
 ```
+This will make your world preset show up in the world creation screen.
 
 Alternatively, if you want your world preset to only show as an option while the user is holding down ALT, make a file called `extended.json` in the same directory as your `normal.json` file.
