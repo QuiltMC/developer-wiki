@@ -88,6 +88,21 @@
 			"title": "Adding Custom Tools"
 		}
 	},
+	"configuration": {
+		"title": "Configuration",
+		"getting-started": {
+			"title": "Getting Started with Quilt Config"
+		},
+		"advanced-configuring": {
+			"title": "Advanced Configuring"
+		},
+		"config-screen": {
+			"title": "Setting up a Config Screen"
+		},
+		"metadata": {
+			"title": "Annotations and Metadata Reference"
+		}
+	},
 	"misc": {
 		"title": "Misc",
 		"commands": {
