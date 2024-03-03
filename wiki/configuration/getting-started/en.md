@@ -150,4 +150,4 @@ public class ExampleModConfig extends ReflectiveConfig {
 }
 ```
 
-This is pretty similar to building a list. Instead of chaining `put` calls on a builder, we simply add as many values as we want directly in the constructor. Again, the first argument is unused and is to help Quilt Config infer the type. With that, we've made an excellent little config for our mod! If you want to know more, let's move on to the [Advanced Configuring tutorial](https://wiki.quiltmc.org/en/configuration/advanced-configuring).
+This is pretty similar to building a map. Here, instead of chaining `put` calls on a builder, we simply add as many values as we want directly in the constructor. Again, the first argument is unused and is to help Quilt Config infer the type. With that, we've made an excellent little config for our mod! If you want to know more, let's move on to the [Advanced Configuring tutorial](https://wiki.quiltmc.org/en/configuration/advanced-configuring).
