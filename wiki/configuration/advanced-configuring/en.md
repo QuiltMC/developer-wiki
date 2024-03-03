@@ -238,7 +238,7 @@ public class ExampleModConfig extends ReflectiveConfig {
 }
 ```
 
-With our knowledge of processors, this is simple! You can also use the config builder to add new fields, new sections, and update metadata (TODO LINK TO METADATA PAGE), on top of changing the format and using callbacks as we've already covered.
+With our knowledge of processors, this is simple! You can also use the config builder to add new fields, new sections, and update [metadata](https://wiki.quiltmc.org/en/configuration/metadata), on top of changing the format and using callbacks as we've already covered.
 
 ## Adding multiple files
 
