@@ -5,7 +5,7 @@ index: 0
 
 # Adding custom world presets
 If your mod completely overhauls Minecraft's worldgen, you'll likely want to create a custom worldtype to offer users the option to use your worldgen or MC's vanilla worldgen.
-Now, what is a custom worldtype you may ask? World types define world generation options for Minecraft worlds. They let you change the make-up of your Minecraft worlds by configuring how world generation behaves.
+Now, what is a custom worldtype or world preset you may ask? World types/world presets define world generation options for Minecraft worlds. They let you change the make-up of your Minecraft worlds by configuring how world generation behaves.
 
 Some examples of world types already built into MC are "Amplified", "Super Flat", "Single Biome", and "Large Biomes".
 
@@ -33,7 +33,10 @@ The dimension `type` can be a built-in preset or a custom dimension preset you i
 
 In `biome_source`, you specify how biomes generate. The `type` parameter here is what kind of biome generation will be used.
 Valid generation types:
- - `multi_noise`
+ - `multi_noise` (Similar to overworld generation)
+ - `fixed` (Like selecting "Single Biome" in world creation)
+ - `the_end` (This is the generation the end dimension uses, not really applicable to what we're doing here)
+ - `checkerboard` (Places biomes in a checkerboard style)
 
 If the biome source `type` happens to be `minecraft:multi_noise`, Minecraft will use 3D biomes in the overworld and the nether.
 The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about this can be found [here](https://minecraft.wiki/w/Custom_dimension#Multi-noise_biome_source_parameter_list).
