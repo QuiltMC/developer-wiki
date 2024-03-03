@@ -38,7 +38,7 @@ Processors allow you to do a large variety of things, including:
 - Adding new values and sections programmatically
 - Dynamically updating metadata
 
-You can see example processors and a more in-depth look at their usage in the [advanced configuring tutorial](TODO LINK).
+You can see example processors and a more in-depth look at their usage in the [advanced configuring tutorial](https://wiki.quiltmc.org/en/configuration/advanced-configuring).
 
 ## `@SerializedName`
 
