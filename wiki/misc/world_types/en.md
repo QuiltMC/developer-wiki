@@ -5,7 +5,7 @@ index: 0
 
 # Adding custom world presets
 If your mod completely overhauls Minecraft's worldgen, you'll likely want to create a custom worldtype to offer users the option to use your worldgen or MC's vanilla worldgen.
-Now, what is a custom worldtype or world preset you may ask? World types/world presets define world generation options for Minecraft worlds. They let you change the make-up of your Minecraft worlds by configuring how world generation behaves.
+Now, what is a custom world type you may ask? *World types*, also called *world presets* define world generation options for Minecraft worlds. They let you change the make-up of your Minecraft worlds by configuring how world generation behaves.
 
 Some examples of world types already built into MC are "Amplified", "Super Flat", "Single Biome", and "Large Biomes".
 
