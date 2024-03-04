@@ -1,17 +1,17 @@
 ---
-title: Adding a Custom World Preset
+title: Adding a Custom World Type
 index: 0
 ---
 
-# Adding custom world presets
+# Adding custom world types
 If your mod completely overhauls Minecraft's worldgen, you'll likely want to create a custom worldtype to offer users the option to use your worldgen or MC's vanilla worldgen.
 Now, what is a custom world type you may ask? *World types*, also called *world presets* define world generation options for Minecraft worlds. They let you change the make-up of your Minecraft worlds by configuring how world generation behaves.
 
 Some examples of world types already built into MC are "Amplified", "Super Flat", "Single Biome", and "Large Biomes".
 
-## Specifying which dimensions your worldtype applies to
+## Specifying which dimensions your world type applies to
 
-The following block shows how to specify which dimensions your world preset will apply to. In `"dimension"`, a `"minecraft:overworld"` object is required.
+The following block shows how to specify which dimensions your world type will apply to. In `"dimension"`, a `"minecraft:overworld"` object is required.
 The dimension `type` can be a built-in preset or a custom dimension preset you implement in your mod.
 
 
@@ -28,8 +28,11 @@ The dimension `type` can be a built-in preset or a custom dimension preset you i
 
 ## Configuring how the worldgen works in your worldtype
 
-`generator` is where you specify how the worldgen in your world preset behaves. The `type` is a "generator ID" and the following are valid generator IDs:
+`generator` is where you specify how the worldgen in your world type behaves. The `type` is a "generator ID" and the following are valid generator IDs:
  - `noise`
+ - `flat` (Creates a superflat world)
+ - `debug` (Creates a debug world)
+Note: `flat` and `debug` generator IDs are not applicable to what we're doing.
 
 In `biome_source`, you specify how biomes generate. The `type` parameter here is what kind of biome generation will be used.
 Valid generation types:
@@ -62,7 +65,7 @@ This will generate a world relatively similar to that of MC's default overworld 
 
 ## Making your worldtype accessible
 
-In order for your world preset to show in the "create a new world" screen, you will need to make a file called `normal.json` in `resources/data/minecraft/tags/worldgen/world_preset` and populate it with the following.
+In order for your world type to show in the "create a new world" screen, you will need to make a file called `normal.json` in `resources/data/minecraft/tags/worldgen/world_preset` and populate it with the following.
 
 `src/main/resources/data/minecraft/tags/worldgen/world_preset/normal.json`:
 ```json
@@ -72,6 +75,6 @@ In order for your world preset to show in the "create a new world" screen, you w
 	]
 }
 ```
-This will make your world preset show up in the world creation screen.
+This will make your world type show up in the world creation screen.
 
-Alternatively, if you want your world preset to only show as an option while the user is holding down ALT, make a file called `extended.json` in the same directory as your `normal.json` file.
+Alternatively, if you want your world type to only show as an option while the user is holding down ALT, make a file called `extended.json` in the same directory as your `normal.json` file.
