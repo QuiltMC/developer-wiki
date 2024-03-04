@@ -1,0 +1,13 @@
+{
+	"title": "Quilt开发Wiki :P",
+	"dev-notice": "注意：本网站仍在开发中。请在<{{placeholder}}>中报告发现的问题",
+	"translation-notice": "请注意，此wiki的原始语言为英语，翻译版本可能与英语版本不同步",
+	"draft-notice": "你已访问到Wiki中已计划但尚未实现的页面。如果你想帮助编写此页面，请访问<{{placeholder}}>",
+	"sidebar": {
+		"menu": "菜单",
+		"articles": "文章"
+	},
+	"lang-dropdown": {
+		"language": "语言"
+	}
+}
