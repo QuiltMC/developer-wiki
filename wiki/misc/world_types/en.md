@@ -11,7 +11,7 @@ Some examples of world types already built into MC are "Amplified", "Super Flat"
 
 ## Specifying which dimensions your world type applies to
 
-The following block shows how to specify which dimensions your world type will apply to. In `"dimension"`, a `"minecraft:overworld"` object is required.
+The following block shows how to specify which dimensions your world type will apply to. In `dimensions`, a `minecraft:overworld` object is required.
 The dimension `type` can be a built-in preset or a custom dimension preset you implement in your mod.
 
 
