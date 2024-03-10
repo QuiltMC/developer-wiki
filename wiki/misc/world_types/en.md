@@ -35,10 +35,10 @@ The dimension `type` can be a built-in preset or a custom dimension preset you i
 
 In `biome_source`, you specify how biomes generate. The `type` parameter here is what kind of biome generation will be used.
 Valid generation types:
- - `multi_noise` (Similar to overworld generation)
- - `fixed` (Like selecting "Single Biome" in world creation)
- - `the_end` (This is the generation the end dimension uses, not really applicable to what we're doing here)
- - `checkerboard` (Places biomes in a checkerboard style)
+ - `multi_noise`: Similar to overworld generation
+ - `fixed`: Like selecting "Single Biome" in world creation
+ - `the_end`: This is the generation the end dimension uses (not really applicable here)
+ - `checkerboard`: Places biomes in a checkerboard style
 
 If the biome source `type` happens to be `minecraft:multi_noise`, Minecraft will use 3D biomes in the overworld and the nether.
 The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about this can be found [in the article about custom dimensions in the Minecraft wiki](https://minecraft.wiki/w/Custom_dimension#Multi-noise_biome_source_parameter_list).
