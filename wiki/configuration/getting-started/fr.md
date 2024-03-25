@@ -66,7 +66,7 @@ public class ExampleMod implements ModInitializer {
 
 Comme le champ `message` est une `TrackedValue<String>` et pas un simple `String`, nous devons appeler sa méthode `value` pour récupérer sa valeur et pouvoir l'écrire dasn la console. Nous pourrons aussi utiliser la méthode `setValue` pour changer la valeur depuis le code.
 
-Maintenant notre mod écrit un message personalisé dans la console au démarage ! Bien que cela nous permettrait facilement d'obtenir 1 million de téléchargements, Quilt Config nous permet de faire beaucoup plus que ça.
+Maintenant notre mod écrit un message personnalisé dans la console au démarage ! Bien que cela nous permettrait facilement d'obtenir 1 million de téléchargements, Quilt Config nous permet de faire beaucoup plus que ça.
 
 ## Utiliser des annotations
 
@@ -87,7 +87,7 @@ Nous n'allons pas montrer les changements dans le code pour utiliser chacune de 
 - `IntegerRange` est une annotation : elle ajoute un nouvelle fonctionnalité à notre champ, au délà de la déclaration normale. `IntegerRange` nous permet de limiter les valeurs possibles de notre champ `Integer`, pour qu'elles soient contenues entre `min` et `max` (de manière inclusive).
 - Nous avons changé le type de `String` à `Integer`. Pourquoi `Integer` au lieu de `int` comme nous l'utiliserions pour un champ numérique normal ? `int` est un _type primitif_, ce qui signifie que ce n'est pas une classe ! Comme les generics ne peuvent prendre que des classes, Java fournit des classes pour chaque primitive. `boolean` devient `Boolean`, `float` devient `Float`, `double` devient `Double`, `char` devient `Character`, etc, etc.
 
-Quelque chose de primordial à ne pas oublier est que vous ne pouvez pas simplement mettre n'importe quelle classe dans les generics de `TrackedValue` : Quilt Config doit savoir comment le serialiser. Par défaut, tous les [types primitifs](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) sont serialisables ainsi que la classe `String`. Nous expliquerons comment dire à Quilt Config comment serialiser une classe plus tard mais d'abord : plus de fun avec des annotations !
+Quelque chose de primordial à ne pas oublier est que vous ne pouvez pas simplement mettre n'importe quelle classe dans les generics de `TrackedValue` : Quilt Config doit savoir comment le sérialiser. Par défaut, tous les [types primitifs](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) sont sérialisables ainsi que la classe `String`. Nous expliquerons comment dire à Quilt Config comment sérialiser une classe plus tard mais d'abord : plus de fun avec des annotations !
 
 Nouvelle valeur !
 
@@ -121,7 +121,7 @@ Problème résolu ! Maintenant notre champ suit la convention de Java dans le co
 
 ## Maps and lists
 
-Deux des structures de données les plus communes utilisées en Java sont les `Map` et les `List`. Quilt Config fournit des versions pratiques et serialisables de ces structures de données avec `ValueMap` et `ValueList` !
+Deux des structures de données les plus communes utilisées en Java sont les `Map` et les `List`. Quilt Config fournit des versions pratiques et sérialisables de ces structures de données avec `ValueMap` et `ValueList` !
 
 En commençant avec les maps, `ReflectiveConfig` nous fournit une méthode `map` pour nous aider à créer une valeur par défaut facilement.
 

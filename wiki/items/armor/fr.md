@@ -58,7 +58,7 @@ public int getEnchantability() {
 ---
 
 Nous allons maintenant définir le son d'équipement de l'armure.
-Si vous voulez ajouter un son personalisé, référez vous à [Ajouter des Sons](../misc/sounds).
+Si vous voulez ajouter un son personnalisé, référez vous à [Ajouter des Sons](../misc/sounds).
 Si vous voulez utiliser un son existant, vous pouvez utiliser `SoundEvents.ITEM_ARMOR_EQUIP_GENERIC`,
 comme dans l'exemple ci-dessous.
 
