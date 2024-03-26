@@ -8,7 +8,7 @@ Pour commencer à modder Minecraft, vous aurez besoins de deux choses.
   la programmation orientée objet et quelques patrons de conception essentiels.
 - Des connaissances de base sur [Git](https://git-scm.com). Bien que techniquement non essentiel,
   c'est un outil qui vous facilitera grandement la vie. Cela inclut de savoir comment cloner des
-  dépôts et comment faire des commits. De bonnes ressources pour débuter sont la [documentation de Git](https://git-scm.com/doc) et la [documentation de GitHub](https://docs.github.com/en/get-started)
+  dépôts et comment faire des commits. De bonnes ressources pour débuter sont la [documentation de Git](https://git-scm.com/doc) et la [documentation de GitHub](https://docs.github.com/en/get-started).
 
 <!-- TODO: Is there anything more to be described here? -->
 
@@ -28,7 +28,7 @@ Une fois cela fais, il est recommandé d'apprendre à [Créer votre Premier Item
 
 Pour des ecplications plus générales, vous pouvez regarder dans la catégorie "Concepts" :
 
- - Dans [Aperçu des QSL et de la QFAPI](../concepts/qsl-qfapi) vous avez un apperçu des Quilt Standard Libraries et de la Quilted Fabric API, les APIs officielles de Quilt.
+- Dans [Aperçu des QSL et de la QFAPI](../concepts/qsl-qfapi) vous avez un apperçu des Quilt Standard Libraries et de la Quilted Fabric API, les APIs officielles de Quilt.
 
 De nombreux autres articles sont prévus mais pas encore réalisés ([Issue #69](https://github.com/QuiltMC/developer-wiki/issues/69)). Cette section sera mise à jour plus tard.
 
@@ -46,7 +46,7 @@ prêts à aider, et on ne juge pas.
 
 Quand vous posez des questions, essayez d'inclure le contexte nécessaire dans le premier message et [ne demandez pas si vous pouvez poser une question](https://dontasktoask.com/). Décrivez votre problème, ce que vous avez déjà essayé pour le résoudre, et comment ces tentatives ont échouées. Assurez vous de ne pas poser de questions sur une partie spécifique d'une solution à votre problème mais de bien expliquer le problème en lui même (voir [XY problem](https://xyproblem.info/)). Quand vous déboguez, incluez votre `latest.log` et quand votre jeu crash, un crash log. De plus, un accès complet à votre code source peut vraiment aider, idéalement disponible en ligne sur un site tel que GitHub.
 
-Vous pouvez demander des questions liées au développement dans notre [Forum](https://forum.quiltmc.org/), ainsi que sur le salon de forum [mod-dev-help](https://discord.com/channels/817576132726620200/1047429688521396325) de notre [Discord](https://discord.quiltmc.org/)
+Vous pouvez demander des questions liées au développement dans notre [Forum](https://forum.quiltmc.org/), ainsi que sur le salon de forum [mod-dev-help](https://discord.com/channels/817576132726620200/1047429688521396325) de notre [Discord](https://discord.quiltmc.org/).
 
 De nombreux problèmes liés au moddage ont déjà été résolus et sont disponibles publiquement
 afin que vous puissiez les voir et les réutiliser car la plupart des mods pour Quilt

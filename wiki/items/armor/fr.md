@@ -133,7 +133,7 @@ donc on passe les paramètres par défaut.
 
 ---
 
-Ensuite, on enregistre l'armure dans notre 'mod initializer' et on l'ajoute dans le groupe d'item de combat.
+Ensuite, on enregistre l'armure dans notre `ModInitializer` et on l'ajoute dans le groupe d'item de combat.
 Il y a deux choses à noter par rapport à ça :
 
 1. On nomme les items d'armure par le nom du matériau avec leur emplacement d'armure.

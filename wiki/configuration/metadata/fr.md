@@ -14,7 +14,7 @@ Vous permet d'attacher des commentaires à vos champs qui sont sauvegardés comm
 - Utilisables sur les champs de configuration de type `Float` et `Integer` respectivement
 - Ne peut être utilisée qu'une fois par élément
 
-Au démarage et quand les champs avec ces annotations sont modifiés, vérifie si les valeurs des champs sont bien contenues entre les `min` et `max` fournient, de manière inclusive. Si ce n'est pas le cas, lance une erreur `TrackedValueException`.
+Au démarrage et quand les champs avec ces annotations sont modifiés, vérifie si les valeurs des champs sont bien contenues entre les `min` et `max` fournient, de manière inclusive. Si ce n'est pas le cas, lance une erreur `TrackedValueException`.
 
 ## `@Matches`
 

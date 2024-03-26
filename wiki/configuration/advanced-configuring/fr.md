@@ -4,9 +4,9 @@ Les valeurs simples c'est sympa mais si vous en avez beaucoup ça peut rapidemen
 
 ## Utiliser des sections
 
-Un simple fichiers avec dizaines de valeurs à la suite peut rapidement devenir complexe à comprendre et à utiliser. Heureusement on peut l'organiser en plusieurs sections en utilisant Quilt Config ! C'est très simple à réaliser.
+Un simple fichier avec dizaines de valeurs à la suite peut rapidement devenir complexe à comprendre et à utiliser. Heureusement on peut l'organiser en plusieurs sections en utilisant Quilt Config ! C'est très simple à réaliser.
 
-Avec des sections, vous pouvez utiliser de l'indentation pour differencier visuellement les parties de votre fichiers de configuration pour faciliter la lecture des utilisateur·ice·s. Nous allons ajouter une section d'exemple qui ressemblera )à ça dans le fichier TOML :
+Avec des sections, vous pouvez utiliser de l'indentation pour differencier visuellement les parties de votre fichiers de configuration pour faciliter la lecture des utilisateur·ice·s. Nous allons ajouter une section d'exemple qui ressemblera à ça dans le fichier TOML :
 
 ```toml
 # ...
@@ -44,7 +44,7 @@ Nous ajoutons simplement une nouvelle classe, dans notre classe de configuration
 
 ## Sérialiser des valeurs personnalisées
 
-En Java, vous pouvez écrire dans plusieurs flux de sortie dans la console. Ce ne sont pas des objets entier ou float basiques donc on ne peut pas simplement les contenir dans notre config ! C'est là que l'interface `ConfigSerializableObject<T>` intervient. En implémentant ses trois méthodes, on peut mettre en place n'importe quelle classe pour pouvoir les utiliser comme objet de configuration.
+En Java, vous pouvez écrire dans plusieurs flux de sortie dans la console. Ce ne sont pas des objets serialisables basiques comme des entiers ou des `String` donc on ne peut pas simplement les contenir dans notre config ! C'est là que l'interface `ConfigSerializableObject<T>` intervient. En implémentant ses trois méthodes, on peut mettre en place n'importe quelle classe pour pouvoir les utiliser comme objet de configuration.
 
 L'interface fonctionne avec des generics, comme `TrackedValue`. Le `<T>` dans `ConfigSerializableObject<T>` peut être remplacé par n'importe quelle classe sérialisable (par défaut ce sont les types primitifs, `String`, `ValueList` et `ValueMap`) et la valeur de votre objet sera traduit en ce type pour être sauvegardé en dur puis sera reconverti en votre objet personnalisé en étant lu. Pour faire cette traduction, nous devons implémenter trois méthodes :
 
@@ -216,7 +216,7 @@ Maintenant au lieu de se casser la tête avec `ExampleModConfig.INSTANCE.advance
 
 ## Changer le format de la config
 
-Voyons comment choisir un format de fichier pour sauvegarder votre config. Quilt Config ne fournit pour l'instant que deux sérialisateurs : `json5`, une extension du format JSON qui permet une syntax plus propre et des commentaire, et `toml`, qui est la valeur par défaut. Si vous voulez utiliser `json5`, nous pouvons le faire en utilisant un `Processor` !
+Voyons comment choisir un format de fichier pour sauvegarder votre config. Quilt Config ne fournit pour l'instant que deux sérialisateurs : `json5`, une extension du format JSON qui permet une syntax plus propre et des commentaires, et `toml`, qui est la valeur par défaut. Si vous voulez utiliser `json5`, nous pouvons le faire en utilisant un `Processor` !
 Nous aurons besoin d'appliquer ce processeur globalement à notre configuration comme nous allons changer le format via l'objet `Config.Builder` fournit par un processeur de classe de configuration.
 
 Ce processeur a besoin d'être appelé avant que la config soit lue donc nous allons le mettre directement sur la classe :

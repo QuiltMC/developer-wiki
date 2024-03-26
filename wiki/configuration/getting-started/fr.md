@@ -8,9 +8,9 @@ Dans ce tutorial, nous allons constuire un mod simple qui écrit une ligne de te
 
 <!-- TODO: Add code project into wiki -->
 
-Pour débuter avec Quilt Config, vous aurez besoin d'une classe dédiée pour contenir votre config. Pour un mod extrémement configurable, vous pourriez vouloir séparer votre config dans plusieurs fichiers dans un package `config` mais pour ce tutoriel et la majorité des mods nous allons tout mettre dans un seul fichier.
+Pour débuter avec Quilt Config, vous aurez besoin d'une classe dédiée pour contenir votre config. Pour un mod extrémement configurable, vous pourriez vouloir séparer votre config dans plusieurs fichiers dans un package `config`, mais pour ce tutoriel et la majorité des mods nous allons tout mettre dans un seul fichier.
 
-Créons un nouveau fichier pour notre config, dans le même dossier que notre 'mod initializer'. Nous l'appelerons `ExampleModConfig`, mais vous pouvez l'appeler comme vous voulez. Cette nouvelle classe de configuration hérite de l'API `ReflectiveConfig` qui fournit tout ce dont nous avons besoin pour faire fonctionner la config.
+Créons un nouveau fichier pour notre config, dans le même dossier que notre `ModInitializer`. Nous l'appelerons `ExampleModConfig`, mais vous pouvez l'appeler comme vous voulez. Cette nouvelle classe de configuration hérite de l'API `ReflectiveConfig` qui fournit tout ce dont nous avons besoin pour faire fonctionner la config.
 
 Nous commencerons avec ce code :
 
@@ -32,7 +32,7 @@ Cette grosse ligne au milieu peut sembler intimidante alors on va l'expliquer mo
 
 ## Ajouter des valeurs
 
-Voilà ! Nous avons maintenant une config à laquelle nous pouvons accéder partout dans notre projet. Le problème étant, on n'a aucune raison d'y accéder parce qu'il n'y y a rien. Réglons ce problème en ajoutant une valeur ! Notre mod d'exemple écrit une ligne de texte dans la console au démarage : pourquoi pas permettre à l'utilisateur·ice de choisir quelle est cette ligne. Ajoutons un deuxième champ dans notre config :
+Voilà ! Nous avons maintenant une config à laquelle nous pouvons accéder partout dans notre projet. Le problème étant, on n'a aucune raison d'y accéder parce qu'il n'y a rien. Réglons ce problème en ajoutant une valeur ! Notre mod d'exemple écrit une ligne de texte dans la console au démarage : pourquoi pas permettre à l'utilisateur·ice de choisir quelle est cette ligne. Ajoutons un deuxième champ dans notre config :
 
 `src/main/com/example/example_mod/ExampleModConfig`:
 
@@ -49,7 +49,7 @@ On présente encore plein de choses avec cette seule ligne ! Regardons tout ça 
 - Le type est `TrackedValue<String`. Les chevrons (`<>`) nous permettent d'utiliser des _generics_, une méthode d'adapter une classe à votre besoin spécifique en Java. Ici, la classe `TrackedValue` nous permet d'adapter le type d'objet qu'elle contient, donc nous l'utilisons pour contenir un `String`. Grâce aux generics, nous pourrions mettre un autre type dans ces chevrons plus tard pour contenir un autre type de valeur ! C'est du foreshadowing. Nous allons stocker d'autres valeurs. Soyez prêt·e·s.
 - Nous appelons la méthode `value`, qui vient de la classe `ReflectiveConfig` dont on hérite. Cette méthode prend un paramètre, qui sera la valeur par défaut d'une valeur de configuration. Ici, l'autrice originale de ce tutoriel l'utilise pour pour faire sa promo.
 
-Ouf. On s'en est sorti ! C'était le dernier gros afflux d'informations de ce tutoriel et on peut commencer à s'amuser un peu. Maintenant qu'on a un champ dans notre config, on peut retourner à notre 'mod initializer' et commencer à l'utiliser !
+Ouf. On s'en est sorti ! C'était le dernier gros afflux d'informations de ce tutoriel et on peut commencer à s'amuser un peu. Maintenant qu'on a un champ dans notre config, on peut retourner à notre `ModInitializer` et commencer à l'utiliser !
 
 `src/main/com/example/example_mod/ExampleMod`:
 

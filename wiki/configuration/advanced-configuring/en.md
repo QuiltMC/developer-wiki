@@ -44,7 +44,7 @@ We simply create a new class, inside our config class, that extends `ReflectiveC
 
 ## Serializing custom values
 
-In Java, you can print to different output streams in the console. These aren't basic integer or float objects, so we can't just save them in our config! This is where the `ConfigSerializableObject<T>` interface comes in. By implementing its three methods, we can set up any class to be usable as a config object.
+In Java, you can print to different output streams in the console. These aren't basic serializable objects like integers or `String`, so we can't just save them in our config! This is where the `ConfigSerializableObject<T>` interface comes in. By implementing its three methods, we can set up any class to be usable as a config object.
 
 The interface works via generics, just like `TrackedValue`. The `<T>` in `ConfigSerializableObject<T>` can be swapped out with any serializable class (remember, by default that's primitive types, `String`, `ValueList`, and `ValueMap`), and the value of your object will be translated into that type to be saved to disk, and then converted back into your custom object when read. To do that translating, we need to implement three methods:
 
