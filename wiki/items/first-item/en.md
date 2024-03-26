@@ -50,7 +50,7 @@ public class ExampleModItems {
 - The `Item` to register. Here, we pass in the item we declared earlier.
 
 Finally, we need to make sure that the `register()` method is called as the game boots up.
-We do so by putting this into the mod's `ModInitializer` ([read more about mod initializers here!](../concepts/sideness#on-mod-initializers)) in the `onInitialize` method:
+We do so by putting the method call into the mod's `ModInitializer` ([read more about mod initializers here!](../concepts/sideness#on-mod-initializers)) in the `onInitialize` method:
 
 `src/main/com/example/example_mod/ExampleMod`:
 
