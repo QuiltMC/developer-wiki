@@ -8,7 +8,7 @@ In order to start modding Minecraft, you'll need to know a couple of things.
   programming, and some essential design patterns.
 - Basic [Git](https://git-scm.com/) knowledge. While technically not necessary, it'll
   make your life a lot easier. This includes understanding how to clone repositories
-  and make commits. Some great resources include the [Git docs](https://git-scm.com/doc) and the [GitHub docs](https://docs.github.com/en/get-started)
+  and make commits. Some great resources include the [Git docs](https://git-scm.com/doc) and the [GitHub docs](https://docs.github.com/en/get-started).
 
 <!-- TODO: Is there anything more to be described here? -->
 
