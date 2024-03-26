@@ -1,11 +1,13 @@
-# Getting started with Quilt Config
+# Getting Started with Quilt Config
 
 [Quilt Config](https://github.com/QuiltMC/quilt-config) is Quilt's powerful configuration API. It allows developers (that's you!) to easily set up values that can be changed by the user in order to change the behaviour of your mod. It's built into [Quilt Loader](https://github.com/QuiltMC/quilt-loader) to allow any Quilt mod to leverage it without having to pull in new dependencies or run any setup.
 
 ## Setting up your config
 
 In this tutorial, we're going to be building a simple mod that prints a line of text to the console when it's initialized. Keep in mind that this is an example, and your mod can use config values anywhere you want! You can view of the final source code of this tutorial [on GitHub](https://github.com/ix0rai/quilt-config-example-mod).
+
 <!-- TODO: Add code project into wiki -->
+
 To begin with Quilt Config, you'll need a dedicated class for holding your config. For an extremely configurable mod, you may want to break up your config into multiple files inside a `config` package, but for this tutorial and most mods we're going to put everything in one file.
 
 Let's create a new file for our config, in the same directory as our mod initializer. We'll call it `ExampleModConfig`, but you can call it whatever you want. This new config class will extend the `ReflectiveConfig` API, which will provide everything we need to get the config working.
@@ -21,7 +23,8 @@ public class ExampleModConfig extends ReflectiveConfig {
 ```
 
 Now that big line in the middle may seem intimidating, but we're going to break it down.
-- First, `public static final` means that the value never changes (though data *stored* in the config can), and `instance` is a fancy programmer word that just means it's an object of a class. We create the object in this way since it's the only instance of the config we'll ever be making.
+
+- First, `public static final` means that the value never changes (though data _stored_ in the config can), and `instance` is a fancy programmer word that just means it's an object of a class. We create the object in this way since it's the only instance of the config we'll ever be making.
 - Second, we're calling the method `QuiltConfig.create(String family, String id, Class<C> configCreatorClass)`. As you can see, it takes three parameters:
   - The string `family`, which indicates the directory that your config file will be stored in, relative to the global config directory (usually `<your instance directory>/config`). We're using our mod ID as the directory, and that's the best practice.
   - A second string, `id`, which will be the name of the configuration file (before the file extension is added, which changes depending on the format you choose). Here we use our mod ID once again, but if you have a complicated config with multiple files you'll want to use a different name.
@@ -41,8 +44,9 @@ public class ExampleModConfig extends ReflectiveConfig {
 ```
 
 We're introducing a bunch of things with one line again. Lovely! Let's dig into it:
-- This value is `public final`, which means that instead of being accessible by anything you need an instance of `ExampleModConfig` first. Note that you *must* use `public final` whenever creating a config value using Quilt Config. Since we defined our `INSTANCE` field already, we'll be able to access this from anywhere via `ExampleModConfig.INSTANCE.message`.
-- The type is `TrackedValue<String>`. The angle brackets (`<>`) allow us to use what's called *generics*, which in Java are a way to adapt a class to your specific use case. Here, the `TrackedValue` class allows us to adapt the type of object it holds, so we use it to store a `String`. Thanks to the generics, we could put another type inside those brackets later to store a different kind of value! This is foreshadowing. We're going to store some different values. Get ready.
+
+- This value is `public final`, which means that instead of being accessible by anything you need an instance of `ExampleModConfig` first. Note that you _must_ use `public final` whenever creating a config value using Quilt Config. Since we defined our `INSTANCE` field already, we'll be able to access this from anywhere via `ExampleModConfig.INSTANCE.message`.
+- The type is `TrackedValue<String>`. The angle brackets (`<>`) allow us to use what's called _generics_, which in Java are a way to adapt a class to your specific use case. Here, the `TrackedValue` class allows us to adapt the type of object it holds, so we use it to store a `String`. Thanks to the generics, we could put another type inside those brackets later to store a different kind of value! This is foreshadowing. We're going to store some different values. Get ready.
 - We call the `value` method, which comes from the `ReflectiveConfig` class we're extending. This method takes one parameter, which will be the default value of that config field. Here, the author of this tutorial is using it to self-advertise.
 
 Phew. We got through it! That'll be the final big information dump of this tutorial, and we can begin having some fun. Now that we have a field in our config, we can pop back over to our mod initializer and start using it!
@@ -79,8 +83,9 @@ public class ExampleModConfig extends ReflectiveConfig {
 ```
 
 We're not going to show the changes to the code to use each one of these values, but remember you can see how they're used in the [final code](https://github.com/ix0rai/quilt-config-example-mod). Let's get back on our bullet points to explain this snippet!
+
 - `IntegerRange` is an annotation: it adds new functionality to our field, outside the normal declaration. `IntegerRange` allows us to limit the allowed values of our `Integer` field, to between `min` and `max` (inclusively).
-- We've changed the type from `String` to `Integer`. Now, why `Integer` instead of `int` like we would use for a normal number field? `int` is a *primitive type*, which means that it isn't actually a class! Since generics can only take classes, Java provides class versions of each primitive. `boolean` becomes `Boolean`, `float` becomes `Float`, `double` becomes `Double`, `char` becomes `Character`, etc etc.
+- We've changed the type from `String` to `Integer`. Now, why `Integer` instead of `int` like we would use for a normal number field? `int` is a _primitive type_, which means that it isn't actually a class! Since generics can only take classes, Java provides class versions of each primitive. `boolean` becomes `Boolean`, `float` becomes `Float`, `double` becomes `Double`, `char` becomes `Character`, etc etc.
 
 Something incredibly important to remember is that you can't just send any class into `TrackedValue`'s generics: Quilt Config has to know how to serialize it. By default, all [primitive types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) are serializable, as well as the `String` class. We'll cover how to explain to Quilt Config how to serialize a class later, but first: more fun with annotations!
 
@@ -116,7 +121,7 @@ Problem solved! Now it'll follow the Java conventions in the Java code, and the 
 
 ## Maps and lists
 
-Two of the most common data structures used in Java programming are `Map` and `List`. Quilt Config provides convenient serializable versions of both of these in the for of `ValueMap` and `ValueList`!
+Two of the most common data structures used in Java programming are `Map` and `List`. Quilt Config provides convenient serializable versions of both of these in the form of `ValueMap` and `ValueList`!
 
 Starting with maps, `ReflectiveConfig` provides us a handy `map` method to help us easily make a default value.
 
@@ -135,6 +140,7 @@ public class ExampleModConfig extends ReflectiveConfig {
 ```
 
 There are a few things of note here:
+
 - We have to pass an empty string (`""`) to the `map` method, in order for it to understand that the map stores values of the type `String`. This value is not used beyond checking the type, so you can put whatever you'd like there.
 - `ValueMap` always uses `String` as the type for its keys, instead of having you pick like most Java `Map` implementations.
 - We can put as many values in the default map as we'd like. If the author wanted to replace every single Quilt developer with herself instead of just the admins, that would be possible!
@@ -150,4 +156,4 @@ public class ExampleModConfig extends ReflectiveConfig {
 }
 ```
 
-This is pretty similar to building a map. Here, instead of chaining `put` calls on a builder, we simply add as many values as we want directly in the constructor. Again, the first argument is unused and is to help Quilt Config infer the type. With that, we've made an excellent little config for our mod! If you want to know more, let's move on to the [Advanced Configuring tutorial](https://wiki.quiltmc.org/en/configuration/advanced-configuring).
+This is pretty similar to building a map. Here, instead of chaining `put` calls on a builder, we simply add as many values as we want directly in the constructor. Again, the first argument is unused and is to help Quilt Config infer the type. With that, we've made an excellent little config for our mod! If you want to know more, let's move on to the [Advanced Configuring tutorial](../configuration/advanced-configuring).

@@ -29,16 +29,18 @@ On startup and when the annotated field is changed, checks if the `String` value
 - Can only be applied once per member
 
 Allows you to set up methods that will run before the config is initialized. Takes a `String` parameter that matches the method name of a method inside your class: this method will be run before config initialization. You must give the method one parameter corresponding to the type annotated with `@Processor`:
+
 - When used on a tracked value, the processor method will take a `TrackedValue.Builder` as its parameter.
 - When used on a section, the processor method will take a `SectionBuilder` as its parameter.
 - When used on a config class, the processor method will take a `Config.Builder` as its parameter.
 
 Processors allow you to do a large variety of things, including:
+
 - Running custom code when values are edited
 - Adding new values and sections programmatically
 - Dynamically updating metadata
 
-You can see example processors and a more in-depth look at their usage in the [advanced configuring tutorial](https://wiki.quiltmc.org/en/configuration/advanced-configuring).
+You can see example processors and a more in-depth look at their usage in the [advanced configuring tutorial](../configuration/advanced-configuring#using-processors).
 
 ## `@SerializedName`
 
