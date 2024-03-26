@@ -20,7 +20,7 @@ In theory, we could skip this step and declare the item as we register it, but h
 
 ```java
 public class ExampleModItems {
-	public static final Item EXAMPLE_ITEM = new Item(new QuiltItemSettings());
+    public static final Item EXAMPLE_ITEM = new Item(new QuiltItemSettings());
 }
 ```
 
@@ -30,16 +30,16 @@ Our new instance of `Item` takes in an instance of `QuiltItemSettings` as an arg
 
 ---
 
-Now that we've declared the item, we need to register it in order to put it into the game. We're going to set up a new method in your items class to hold the registrations for all your items.
+Now that we've declared the item, we need to register it in order to put it into the game. We're going to set up a new method in your items class to hold the registrations for all your items. Note that we take the mod's `ModContainer` as a parameter, so that we can get the mod ID from it.
 
 `src/main/com/example/example_mod/ExampleModItems`:
 
 ```java
 public class ExampleModItems {
-	// ...
-    public static void register() {
-		Registry.register(Registries.ITEM, new Identifier(mod.metadata().id(), "example_item"), EXAMPLE_ITEM);
-	}
+    // ...
+    public static void register(ModContainer mod) {
+        Registry.register(Registries.ITEM, new Identifier(mod.metadata().id(), "example_item"), EXAMPLE_ITEM);
+    }
 }
 ```
 
@@ -60,7 +60,7 @@ public class ExampleMod implements ModInitializer {
     @Override
     public void onInitialize(ModContainer mod) {
         // ...
-        ExampleModItems.register();
+        ExampleModItems.register(mod);
     }
 }
 ```
