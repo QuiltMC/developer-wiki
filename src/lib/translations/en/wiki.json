@@ -105,6 +105,9 @@
 	},
 	"misc": {
 		"title": "Misc",
+		"codecs": {
+			"title": "Codecs"
+		},
 		"commands": {
 			"title": "Adding Commands"
 		},
