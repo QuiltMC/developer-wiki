@@ -110,6 +110,9 @@
 		},
 		"sounds": {
 			"title": "Adding Sounds"
+		},
+		"mappings": {
+			"title": "Customizing your Mappings"
 		}
 	}
 }
