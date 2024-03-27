@@ -110,6 +110,9 @@
 		},
 		"sounds": {
 			"title": "Adding Sounds"
+		},
+		"world_types": {
+			"title": "Adding World Types"
 		}
 	}
 }
