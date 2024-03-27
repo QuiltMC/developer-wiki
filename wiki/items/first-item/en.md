@@ -10,7 +10,7 @@ The first thing we need to do is register the item so that the game knows to add
 
 ---
 
-First, we need to set up a place for our mod's items. Make a new class called `ExampleModItems`, replacing `ExampleMod` with your mod's name, in the same package as your main class.
+First, we need to set up a place for our mod's items. Make a new class called `ExampleModItems`, replacing `ExampleMod` with your mod's name, in the same package as your main class. This will help as stay organised if our mod expands beyond just one item.
 
 Next, we'll declare an instance of `net.minecraft.item.Item` with the parameters for our item.
 
