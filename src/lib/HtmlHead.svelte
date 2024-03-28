@@ -5,7 +5,7 @@
 	import styles_light from "quilt-bulma/dist/style-light.min.css?url";
 	import { onMount } from "svelte";
 
-	let userPrefersDarkMode: boolean;
+	let userPrefersDarkMode: boolean = false;
 	onMount(function () {
 		userPrefersDarkMode =
 			window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
