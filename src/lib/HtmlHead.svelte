@@ -3,11 +3,25 @@
 	import prism_light from "prismjs/themes/prism.min.css?url";
 	import styles_dark from "quilt-bulma/dist/style-dark.min.css?url";
 	import styles_light from "quilt-bulma/dist/style-light.min.css?url";
+	import { onMount } from "svelte";
+
+	let userPrefersDarkMode: boolean;
+	onMount(function () {
+		userPrefersDarkMode =
+			window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+			userPrefersDarkMode = e.matches;
+		});
+	});
 </script>
 
 <svelte:head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	{#if userPrefersDarkMode}
+		<meta name="darkreader-lock" />
+	{/if}
 
 	<link rel="preconnect" href="https://quiltmc.org" />
 	<link rel="preconnect" href="https://fonts.bunny.net" />
