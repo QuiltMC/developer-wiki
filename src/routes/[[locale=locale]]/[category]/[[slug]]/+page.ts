@@ -3,7 +3,7 @@ import YAML from "yaml";
 
 import type { ComponentType, SvelteComponent } from "svelte";
 
-import { defaultLocale, t } from "$lib/translations";
+import { defaultLocale } from "$lib/translations";
 
 export async function load({ params }): Promise<{
 	content?: ComponentType<SvelteComponent>;
@@ -49,7 +49,7 @@ export async function load({ params }): Promise<{
 					title: post_metadata.title,
 					warningMessage: {
 						key: "wiki.not-translated",
-						placeholder: t.get(`lang.${params.locale}`)
+						placeholder: `/en/${params.category}/${params.slug}`
 					}
 				};
 			} else if (post_metadata.draft) {
