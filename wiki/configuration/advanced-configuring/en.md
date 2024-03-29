@@ -1,9 +1,4 @@
----
-title: Advanced Configuring
-index: 2
----
-
-# Advanced configuring
+# Advanced Configuring
 
 Simple values are nice and all, but if you have a lot of them it can begin to get unwieldy. In this tutorial, we'll discuss how to organize your config and use processors to get the most out of it.
 
@@ -49,9 +44,10 @@ We simply create a new class, inside our config class, that extends `ReflectiveC
 
 ## Serializing custom values
 
-In Java, you can print to different output streams in the console. These aren't basic integer or float objects, so we can't just save them in our config! This is where the `ConfigSerializableObject<T>` interface comes in. By implementing its three methods, we can set up any class to be usable as a config object.
+In Java, you can print to different output streams in the console. These aren't basic serializable objects like integers or `String`, so we can't just save them in our config! This is where the `ConfigSerializableObject<T>` interface comes in. By implementing its three methods, we can set up any class to be usable as a config object.
 
 The interface works via generics, just like `TrackedValue`. The `<T>` in `ConfigSerializableObject<T>` can be swapped out with any serializable class (remember, by default that's primitive types, `String`, `ValueList`, and `ValueMap`), and the value of your object will be translated into that type to be saved to disk, and then converted back into your custom object when read. To do that translating, we need to implement three methods:
+
 - `T getRepresentation()`: here, your value is converted to the serializable class that you specified in the generics (represented by `T`) so that it can be saved.
 - `YourSerializableClass convertFrom(T)`: this one is called when reading the config file, and converts the representation created by `getRepresentation` back to its original type.
 - `YourSerializableClass copy()`: makes a copy of the value, which Quilt Config uses internally.
@@ -167,6 +163,7 @@ public class ExampleModConfig extends ReflectiveConfig {
 
 With that, our config will print "Loading config!" before any of its values are deserialized. Note despite the method name passed to `@Processor` not coming with any parameter information, we still had to put a `Config.Builder` on our method: what's up with that?
 Processors can be attached to three different types: tracked values, config sections, and config classes. For each, the parameter will be different, as documented in `Processor`'s Javadoc:
+
 - When used on a tracked value, the processor method will take a `TrackedValue.Builder` as its parameter.
 - When used on a section, the processor method will take a `SectionBuilder` as its parameter.
 - When used on a config class, the processor method will take a `Config.Builder` as its parameter.
@@ -190,7 +187,7 @@ public class ExampleModConfig extends ReflectiveConfig {
 
 With that line, we've expanded our logging to now tell us whenever a config value is updated! Neat, but what else can we do with callbacks?
 
-One example of a callback usage is syncing a value between your config field and another. This could be needed for many reasons: your config value is complicated, and you want to make it easier to access, or maybe you need to update the configuration of one of the libraries you depend on when the value is changed ([enigma](<https://github.com/QuiltMC/enigma>) does just that!).
+One example of a callback usage is syncing a value between your config field and another. This could be needed for many reasons: your config value is complicated, and you want to make it easier to access, or maybe you need to update the configuration of one of the libraries you depend on when the value is changed ([enigma](https://github.com/QuiltMC/enigma) does just that!).
 We're going to set up a shortcut to accessing the print stream made available in `printStream`, that doesn't force you to go through two separate getters to use. To do that, we can use a processor applied to the field!
 
 `src/main/com/example/example_mod/ExampleModConfig`:
@@ -208,7 +205,7 @@ public class ExampleModConfig extends ReflectiveConfig {
         public void processPrintStream(TrackedValue.Builder<PrintStreamOption> builder) {
             builder.callback(value -> activeStream = printStream.value().getStream());
         }
-		
+
         // ...
     }
 }
@@ -238,7 +235,7 @@ public class ExampleModConfig extends ReflectiveConfig {
 }
 ```
 
-With our knowledge of processors, this is simple! You can also use the config builder to add new fields, new sections, and update [metadata](https://wiki.quiltmc.org/en/configuration/metadata), on top of changing the format and using callbacks as we've already covered.
+With our knowledge of processors, this is simple! You can also use the config builder to add new fields, new sections, and update [metadata](../configuration/metadata), on top of changing the format and using callbacks as we've already covered.
 
 ## Adding multiple files
 
