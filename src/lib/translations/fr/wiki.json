@@ -1,5 +1,5 @@
 {
-	"not-translated": "Cette page du wiki n'a pas encore été traduite en français. [Accéder à la version anglaise]({{placeholder}})",
+	"not-translated": "Cette page du wiki n'a pas encore été traduite en français. [Accéder à la version anglaise]({{placeholder}}).",
 	"not-found": "Aucune page du wiki trouvée à l'adresse : `{{placeholder}}`.",
 	"blocks": {
 		"title": "Blocs",
