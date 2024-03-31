@@ -5,10 +5,12 @@
 	import styles_light from "quilt-bulma/dist/style-light.min.css?url";
 	import { onMount } from "svelte";
 
+	//
+	// userPrefersDarkMode is simple, It's true if the user has dark mode enabled in their browser.
+	//
 	let userPrefersDarkMode: boolean = false;
 	onMount(function () {
-		userPrefersDarkMode =
-			window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+		userPrefersDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
 			userPrefersDarkMode = e.matches;
 		});
@@ -20,6 +22,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	{#if userPrefersDarkMode}
+		<!--
+			adding a darkreader-lock here makes the "darkreader"
+			extension realize that this is a dark mode site and
+			doesn't apply it's own dark mode above the one already
+			applied to this site.
+
+			see: https://github.com/darkreader/darkreader/blob/main/CONTRIBUTING.md#disabling-dark-reader-on-your-site
+
+		-->
 		<meta name="darkreader-lock" />
 	{/if}
 
