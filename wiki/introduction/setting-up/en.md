@@ -209,4 +209,4 @@ Finally, reload the Gradle project by pressing this button in the Gradle menu:
 </picture>
 
 Once you're done with all of these steps, your mod is ready to be worked on!
-You can start by adding content via the [Creating your First Item](../items/first-item) and [Creating your First Block](../items/first-block) tutorials.
+You can start by adding content via the [Creating your First Item](../items/first-item) and [Creating your First Block](../blocks/first-block) tutorials.
