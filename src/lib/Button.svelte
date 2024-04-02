@@ -8,7 +8,7 @@
 <a {title} {href} class="button is-rounded {style}" target="_blank">
 	{#if icon}
 		<span class="icon-text">
-			<i class={icon} />
+			<div class={icon} />
 			<slot />
 		</span>
 	{:else}

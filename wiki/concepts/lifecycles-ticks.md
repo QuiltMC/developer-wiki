@@ -1,3 +1,0 @@
----
-title: Lifecycles and Ticks
----

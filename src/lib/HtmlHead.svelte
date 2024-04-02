@@ -3,11 +3,36 @@
 	import prism_light from "prismjs/themes/prism.min.css?url";
 	import styles_dark from "quilt-bulma/dist/style-dark.min.css?url";
 	import styles_light from "quilt-bulma/dist/style-light.min.css?url";
+	import { onMount } from "svelte";
+
+	//
+	// userPrefersDarkMode is simple, It's true if the user has dark mode enabled in their browser.
+	//
+	let userPrefersDarkMode: boolean = false;
+	onMount(function () {
+		userPrefersDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+			userPrefersDarkMode = e.matches;
+		});
+	});
 </script>
 
 <svelte:head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	{#if userPrefersDarkMode}
+		<!--
+			adding a darkreader-lock here makes the "darkreader"
+			extension realize that this is a dark mode site and
+			doesn't apply it's own dark mode above the one already
+			applied to this site.
+
+			see: https://github.com/darkreader/darkreader/blob/main/CONTRIBUTING.md#disabling-dark-reader-on-your-site
+
+		-->
+		<meta name="darkreader-lock" />
+	{/if}
 
 	<link rel="preconnect" href="https://quiltmc.org" />
 	<link rel="preconnect" href="https://fonts.bunny.net" />
@@ -31,11 +56,6 @@
 	<link rel="stylesheet" href={styles_dark} media="(prefers-color-scheme:dark)" />
 	<link rel="stylesheet" href={styles_light} media="(prefers-color-scheme:light)" />
 
-	<script async src="https://kit.fontawesome.com/b1b70f724e.js" crossorigin="anonymous"></script>
-	<noscript>
-		<link href="https://quiltmc.org/assets/fontawesome/css/all.min.css" rel="stylesheet" />
-	</noscript>
-
 	<style global>
 		.token.number {
 			background-color: initial;
@@ -51,6 +71,7 @@
 			.table-of-contents {
 				float: right;
 				width: 340px;
+				margin-left: 0.9rem;
 			}
 		}
 	</style>
