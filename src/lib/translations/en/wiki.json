@@ -111,5 +111,14 @@
 		"sounds": {
 			"title": "Adding Sounds"
 		}
+	},
+	"qmj": {
+		"title": "quilt.mod.json",
+		"format-reference": {
+			"title": "Format Reference"
+		},
+		"your-first-qmj": {
+			"title": "Your First quilt.mod.json"
+		}
 	}
 }
