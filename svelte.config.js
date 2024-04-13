@@ -3,7 +3,7 @@ import lang from "./src/lib/translations/lang.js";
 import sectionize from "@hbsnow/rehype-sectionize";
 import toc from "@jsdevtools/rehype-toc";
 import adapter from "@sveltejs/adapter-static";
-import { vitePreprocess } from "@sveltejs/kit/vite";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import { mdsvex } from "mdsvex";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeRewrite from "rehype-rewrite";

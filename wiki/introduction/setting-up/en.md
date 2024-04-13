@@ -5,8 +5,8 @@ You'll need a couple of things before you can get started.
 - A Java Development Kit (JDK) for Java 17 (recommended) or newer.
   Temurin Adoptium JDKs are easily available and recommended.
   You can download them here: <https://adoptium.net/releases.html>
-- Any Java IDE, like [IntelliJ Idea](https://www.jetbrains.com/idea/) or [Eclipse](https://www.eclipse.org/ide/).
-  [Visual Studio Code](https://www.eclipse.org/ide/) can work, but it takes extra work to get set up.
+- Any Java IDE, like [IntelliJ IDEA](https://www.jetbrains.com/idea/) or [Eclipse](https://www.eclipse.org/ide/).
+  [Visual Studio Code](https://code.visualstudio.com/) can work, but it takes extra work to get set up.
   - We recommend using IntelliJ IDEA as it has the most integrations and is the easiest to use.
 
 Next, you need to decide on whether you want to [download the template mod zip](#template-mod-download-zip-file) or [use the GitHub template](#template-mod-download-github-template). If you don't know how to use git, use the first method. However, it is recommended for you to have at least a GitHub account to get started and familiarize yourself with git quickly.
@@ -53,7 +53,7 @@ that is highly recommended. You can get it here:
 
 ## An Overview Over IDEA
 
-After you opened the project, you should see a window looking roughly like this:
+After you open the project, you should see a window looking roughly like this:
 
 TODO: Embed screenshot
 
@@ -76,8 +76,8 @@ Now that you have decided on these things, you can update your mod's metadata:
 
 First, update the `gradle.properties` file directly in your project folder to use your Maven group and mod ID.
 
-Change the line beginning with `maven_group =` to use your mod maven group instead of `com.example`
-Set `archives_base_name` to your mod's ID similarly and ignore all other properties for now. Here is an example how the result might look:
+Change the line beginning with `maven_group =` to use your mod maven group instead of `com.example`.
+Set `archives_base_name` to your mod's ID similarly and ignore all other properties for now. Note that since maven [uses hyphens to separate words](https://maven.apache.org/maven-conventions.html), you should change the underscores in your mod ID to hyphens accordingly. Here is an example of how the result might look:
 
 ```gradle
 # Gradle Properties
@@ -109,7 +109,7 @@ You'll need to update a few things under `"quilt_loader"`, see below for a final
       but typically people put a `"homepage"`, a `"sources"`, and a `"issues"` entry with a valid URL here.
    5. Replace `example_mod` with your mod's ID in `"icon"`.
 4. In `"entrypoints"`, replace `com.example.example_mod` with your Maven group and mod ID,
-   and the `ExampleMod` at the end should be the Java class name for your mod. The Java class name usually is your mod's name, written in `UpperCamelCase` (So new words simply start by using a uppercase letter and the initial latter is also upper case)
+   and the `ExampleMod` at the end should be the Java class name for your mod. The Java class name usually is your mod's name, written in `UpperCamelCase`. This means that instead of using spaces to separate words, each word starts with an uppercase letter. In contrast to `lowerCamelCase`, the first letter should be uppercase.
    For example, `io.github.bingus.bingus_mod.BingusMod`.
 5. In `"mixin"`, replace `example_mod` in the file name to your mod's ID.
 

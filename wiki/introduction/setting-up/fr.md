@@ -5,7 +5,8 @@ Vous aurez besoin de deux choses avant de commencer.
 - Un Kit de Développement Java (JDK) pour Java 17 (recommandé) ou supérieur.
   Les Kits de Développement Temurin Adoptium sont facilement disponibles et recommandés.
   Vous pouvez les télécharger ici : <https://adoptium.net/releases.html>
-- Une identifiantE pour Java, comme [IntelliJ Idea](https://www.jetbrains.com/idea/) ou [Eclipse](https://www.eclipse.org/ide/).
+- Un IDE pour Java, comme [IntelliJ IDEA](https://www.jetbrains.com/idea/) ou [Eclipse](https://www.eclipse.org/ide/).
+  [Visual Studio Code](https://code.visualstudio.com/) peut fonctionner, mais cela demande plus de travail pour le mettre en place.
   - Nous recommandons d'utiliser IntelliJ IDEA car il possède plus d'intégrations et est plus facile à utiliser.
 
 Ensuite, vous devez décider si vous voulez [télécharger le zip du mod d'exemple](#télécharger-le-mod-dexemple-fichier-zip) ou
@@ -97,6 +98,8 @@ afin qu'il utilise votre groupe maven et l'identifiant de votre mod.
 
 Modifiez la ligne commençant par `maven_group =` pour qu'elle utilise votre group maven à la place de `com.example`.
 Changer la valeur de `archives_base_name` avec l'identifiant de votre mod et ignorez les autres propriétés pour l'instant.
+Notez que comme maven [utilise des tirets pour séparer les mots](https://maven.apache.org/maven-conventions.html),
+vous devriez remplacer les underscores dans l'ID de votre mod.
 Voici un exemple de ce à quoi pourrait ressembler le résultat :
 
 ```gradle
@@ -126,19 +129,18 @@ vous pouvez trouver un exemple finalisé ci-dessous :
 3. `"metadata"`:
    1. `"name"` devrait correspondre au nom de votre mod.
       Pas besoin de format spécifique, contrairement à l'identifiant de votre mod.
-      . `"description"` devrait correspondre à une courte description de votre mod.
-   2. `"contributors"` devrait contenir une liste des personnes ayant partcipé à la création du mod, accompagnées de leurs rôles.
+   2. `"description"` devrait correspondre à une courte description de votre mod.
+   3. `"contributors"` devrait contenir une liste des personnes ayant partcipé à la création du mod, accompagnées de leurs rôles.
       Ce champ n'a pas de structure spécifique, vous pouvez y mettre ce que vous voulez.
       Si vous ne savez pas quoi mettre vous pouvez simplement mettre votre nom comme clé
       avec la valeur `"Owner"`.
-   3. `"contact"` n'a pas de structure spécifique, comme `"contributors"`.
+   4. `"contact"` n'a pas de structure spécifique, comme `"contributors"`.
       Cependant les gens y mettent en général des champs `"homepage"`, `"sources"` et
       `"issues"` avec comme valeur des URLs vers les pages correspondantes.
-   4. Remplacez `example_mod` par l'identifiant de votre mod dans `"icon"`.
+   5. Remplacez `example_mod` par l'identifiant de votre mod dans `"icon"`.
 4. Dans `"entrypoints"`, remplacez `com.example.example_mod` par votre groupe maven suivit de l'identifiant de votre mod,
    et le `ExampleMod` à la fin devrait correspondre au nom de la classe Java principale de votre Mod.
-   Le nom de la classe Java correspond généralement au nom du mod, écrit en `UpperCamelCase`
-   (sans espaces entre les mots et chaque mot commence avec une Majuscule).
+   Le nom de la classe Java correspond généralement au nom du mod, écrit en `UpperCamelCase`. Cela signifie qu'au lieu d'utiliser des espaces pour séparer les mots, chaque mot commence par une majuscule. Contrairement au `lowerCamelCase`, la première lettre devrait assui être une majuscule.
    Par exemple dans notre cas on utiliserait `io.github.bingus.bingus_mod.BingusMod`.
 5. Dans `"mixin"`, remplacez `example_mod` dans le nom du fichier par l'identifiant de votre mod.
 

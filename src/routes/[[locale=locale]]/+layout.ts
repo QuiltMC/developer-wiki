@@ -15,9 +15,9 @@ export async function load({ params }) {
 		);
 
 		if (navigator_language) {
-			throw redirect(308, `/${navigator_language}${window.location.pathname}`);
+			redirect(308, `/${navigator_language}${window.location.pathname}`);
 		} else {
-			throw redirect(308, `/en${window.location.pathname}`);
+			redirect(308, `/en${window.location.pathname}`);
 		}
 	}
 }
