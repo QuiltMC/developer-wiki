@@ -1,6 +1,6 @@
 {
-	"not-translated": "This wiki page isn't yet translated in {{placeholder}}",
-	"not-found": "No wiki page found at: `{{placeholder}}`",
+	"not-translated": "This wiki page isn't yet translated in your language. [Go to the english version]({{placeholder}}).",
+	"not-found": "No wiki page found at: `{{placeholder}}`.",
 	"blocks": {
 		"title": "Blocks",
 		"first-block": {

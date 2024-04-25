@@ -1,4 +1,5 @@
 <script lang="ts">
+	import NoPreloadLink from "$lib/svelte-markdown/NoPreloadLink.svelte";
 	import { t } from "$lib/translations/index.js";
 	import SvelteMarkdown from "svelte-markdown";
 
@@ -15,6 +16,7 @@
 			<h1>
 				<SvelteMarkdown
 					source={$t(data.warningMessage.key, { placeholder: data.warningMessage.placeholder })}
+					renderers={{ link: NoPreloadLink }}
 				/>
 			</h1>
 		</div>
