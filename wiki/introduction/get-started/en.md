@@ -14,11 +14,9 @@ In order to start modding Minecraft, you'll need to know a couple of things.
 
 ## How to Use this Wiki
 
-TODO: Create example code repository and put it here ([Issue #68](https://github.com/QuiltMC/developer-wiki/issues/68))
+<!-- TODO: Create example code repository and put it here ([Issue #68](https://github.com/QuiltMC/developer-wiki/issues/68)) -->
 
 This wiki contains pages that are best read in order. Many of the articles, especially at the beginning, suggest other articles sensible to continue with. Most pages will contain code snippets, with full examples planned to be provided in example mods. (This is not done yet)
-
-Additionally, you might account lines prefixed with `TODO: `. Those are notes for people working on the wiki what still needs to be done. For now, you can ignore them. Just know that there is more content to be inserted there.
 
 In the next article, you will set up your first mod to get started with mod development.
 
@@ -56,10 +54,3 @@ There are many topics in modding where you quickly will find yourself at a point
 If you want to look into the Minecraft source code, run the `genSourcesWithVineflower` Gradle task in the `fabric` category or open any Minecraft source file and click the download sources button in IntelliJ IDEA.
 
 <!-- TODO: Is this todo fixed?: Levi write your thing about stealing code here -->
-
-## Differences between Fabric and Quilt
-
-Quilt is a fork of the Fabric mod loader. However, there are some key differences with
-Quilt when compared with Fabric.
-
-TODO: Levi write your thing here
