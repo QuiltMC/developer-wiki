@@ -34,8 +34,6 @@ export async function load({ params }) {
 						draft: page_metadata.draft || false
 					};
 				})
-				// exlude draft pages
-				.filter((page) => !page.draft)
 				.sort((a, b) => a.index - b.index);
 
 			// get the metadata of each category from their yaml file
@@ -50,6 +48,7 @@ export async function load({ params }) {
 						? category_metadata.index
 						: Number.MAX_SAFE_INTEGER, // Put the categories with no index last
 				name: category_metadata.name,
+				draft: pages.length === pages.filter((page) => page.draft).length,
 				pages: pages
 			};
 		})
