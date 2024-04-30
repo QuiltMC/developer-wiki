@@ -4,10 +4,10 @@ index: 0
 ---
 
 # Adding custom world types
-If your mod completely overhauls Minecraft's worldgen, you'll likely want to create a custom worldtype to offer users the option to use your worldgen or MC's vanilla worldgen.
+If your mod completely overhauls Minecraft's worldgen, you'll likely want to create a custom worldtype to offer users the option to use your worldgen or vanilla Minecraft's world generation.
 Now, what is a custom world type you may ask? *World types*, also called *world presets*, define world generation options for Minecraft worlds. They let you change the make-up of your Minecraft worlds by configuring how world generation behaves.
 
-Some examples of world types already built into MC are "Amplified", "Super Flat", "Single Biome", and "Large Biomes".
+Some examples of world types already built into Minecraft are "Amplified", "Super Flat", "Single Biome", and "Large Biomes".
 
 ## Specifying which dimensions your world type applies to
 
@@ -60,7 +60,9 @@ The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about
 	}
 }
 ```
-This will generate a world relatively similar to that of MC's default overworld generation.
+This will generate a world relatively similar to that of 's default overworld generation.
+
+On a dedicated server, you navigate to your `server.properties` file and find `level-type`. It will have `minecraft\:normal` as the default value.
 
 ## Making your worldtype accessible
 
