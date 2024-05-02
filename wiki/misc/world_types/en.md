@@ -62,7 +62,7 @@ The `preset` can be `minecraft:overworld` or `minecraft:nether`. More info about
 ```
 This will generate a world relatively similar to that of 's default overworld generation.
 
-On a dedicated server, you navigate to your `server.properties` file and find `level-type`. It will have `minecraft\:normal` as the default value.
+On a dedicated server, you navigate to your `server.properties` file and find the `level-type` field. By default, the value is `minecraft:normal`. Changing this to the ID for your world type (`example_mod:example_mod_preset`) will use that instead.
 
 ## Making your worldtype accessible
 
