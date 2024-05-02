@@ -1,6 +1,6 @@
 {
-	"not-translated": "Cette page du wiki n'est pas encore été traduite en {{placeholder}}",
-	"not-found": "Aucune page du wiki trouvée à l'adresse : `{{placeholder}}`",
+	"not-translated": "Cette page du wiki n'a pas encore été traduite en français. [Accéder à la version anglaise]({{placeholder}}).",
+	"not-found": "Aucune page du wiki trouvée à l'adresse : `{{placeholder}}`.",
 	"blocks": {
 		"title": "Blocs",
 		"first-block": {
@@ -79,13 +79,28 @@
 			"title": "Ajouter une Armure"
 		},
 		"first-item": {
-			"title": "Créez votre Premier Item"
+			"title": "Créer votre Premier Item"
 		},
 		"food": {
 			"title": "Ajouter de la Nourriture"
 		},
 		"tools": {
 			"title": "Ajouter des Outils Personnalisés"
+		}
+	},
+	"configuration": {
+		"title": "Configuration",
+		"getting-started": {
+			"title": "Débuter avec Quilt Config"
+		},
+		"advanced-configuring": {
+			"title": "Configuration Avancée"
+		},
+		"config-screen": {
+			"title": "Mettre en place un Écran de Configuration"
+		},
+		"metadata": {
+			"title": "Référence pour les Annotations et les Métadonnées"
 		}
 	},
 	"misc": {

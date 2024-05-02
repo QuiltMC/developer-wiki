@@ -7,7 +7,9 @@
 	import HtmlHead from "$lib/HtmlHead.svelte";
 	import Header from "$lib/Header.svelte";
 	import Sidebar from "$lib/Sidebar.svelte";
+	import NoPreloadLink from "$lib/svelte-markdown/NoPreloadLink.svelte";
 	import { locale, t } from "$lib/translations/index";
+	import { current_route } from "$lib/stores.js";
 
 	onMount(async () => {
 		const lowContrast = document.getElementById("low-contrast") as HTMLInputElement;
@@ -49,7 +51,10 @@
 		<article class="message is-danger mx-3 mt-3 mb-3">
 			<div class="message-body has-text-centered">
 				<h1>
-					{$t("application.translation-notice")}
+					<SvelteMarkdown
+						source={$t("application.translation-notice", { placeholder: `/en${$current_route}` })}
+						renderers={{ link: NoPreloadLink }}
+					/>
 				</h1>
 			</div>
 		</article>

@@ -1,6 +1,6 @@
 {
-	"not-translated": "This wiki page isn't yet translated in {{placeholder}}",
-	"not-found": "No wiki page found at: `{{placeholder}}`",
+	"not-translated": "This wiki page isn't yet translated in your language. [Go to the english version]({{placeholder}}).",
+	"not-found": "No wiki page found at: `{{placeholder}}`.",
 	"blocks": {
 		"title": "Blocks",
 		"first-block": {
@@ -88,6 +88,21 @@
 			"title": "Adding Custom Tools"
 		}
 	},
+	"configuration": {
+		"title": "Configuration",
+		"getting-started": {
+			"title": "Getting Started with Quilt Config"
+		},
+		"advanced-configuring": {
+			"title": "Advanced Configuring"
+		},
+		"config-screen": {
+			"title": "Setting up a Config Screen"
+		},
+		"metadata": {
+			"title": "Annotations and Metadata Reference"
+		}
+	},
 	"misc": {
 		"title": "Misc",
 		"commands": {
@@ -96,8 +111,11 @@
 		"sounds": {
 			"title": "Adding Sounds"
 		},
-		"world_types": {
+		"mappings": {
+			"title": "Customizing your Mappings"
+		},
+    "world_types": {
 			"title": "Adding World Types"
-		}
+    }
 	}
 }

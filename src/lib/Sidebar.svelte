@@ -23,11 +23,11 @@
 			<p class="menu-label">{$t("application.sidebar.articles")}</p>
 			<ul class="menu-list">
 				{#each categories as category}
-					<li>
+					<li class:is-hidden={category.draft}>
 						{$t(category.name)}
 						<ul>
 							{#each category.pages as page}
-								<li>
+								<li class:is-hidden={page.draft}>
 									<a
 										href={`/${$locale}/${category.slug}/${page.slug}`}
 										class:is-active={url === `/${$locale}${category.slug}/${page.slug}`}
