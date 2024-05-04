@@ -9,5 +9,6 @@ export interface Category {
 	slug: string;
 	index: number;
 	name: string;
+	draft: boolean;
 	pages: Page[];
 }

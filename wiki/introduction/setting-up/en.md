@@ -55,8 +55,10 @@ that is highly recommended. You can get it here:
 
 After you open the project, you should see a window looking roughly like this:
 
-TODO: Embed screenshot
-
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="/introduction/template-mod-intellij-dark.png">
+  <img alt="IntelliJ IDEA open to the template mod" src="/introduction/template-mod-intellij-light.png">
+</picture>
 On the right and left side there are sidebars with icons to toggle different "Tool Windows". There are a few that you should know about: First, the folder icon in the top left toggles your `Project` tool window. With it, you can select the different files in your project. In the bottom left, there are the buttons for the `Terminal` and `Version Control System`. Additionally, after you tested your mod, there should also be a `Run` and a `Build` button. To the right are the `Notifications` and `Gradle` tool windows.
 
 When you open a file, it should open a new tab in the editor in the middle.
@@ -207,4 +209,4 @@ Finally, reload the Gradle project by pressing this button in the Gradle menu:
 </picture>
 
 Once you're done with all of these steps, your mod is ready to be worked on!
-You can start by [Creating your First Item](../items/first-item)
+You can start by adding content via the ["Creating your First Item"](../items/first-item) and ["Creating your First Block"](../blocks/first-block) tutorials.

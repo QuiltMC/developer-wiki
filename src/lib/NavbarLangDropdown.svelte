@@ -1,28 +1,7 @@
 <script lang="ts">
 	import { browser } from "$app/environment";
-	import { page } from "$app/stores";
-	import { t, locales, locale } from "$lib/translations";
-
-	// Removes the current locale from the current route
-	// (only if the current route does contain the locale)
-	let current_route = "";
-	$: {
-		const routeExtractor = new RegExp(`^(/${$locale})?(/.+)?$`);
-
-		const routeMatch = $page.url.pathname.match(routeExtractor);
-		// prettier-ignore
-		if (
-			routeMatch &&
-			(
-				// We match the locale
-				routeMatch[1] ||
-				// We don't match the locale and a locale isn't in the route
-				routeMatch[2] && !$locales.includes(routeMatch[2].replace(/^\/([^/]+)(\/.+)?$/, "$1"))
-			)
-		) {
-			current_route = routeMatch[2] || "";
-		}
-	}
+	import { t, locales } from "$lib/translations";
+	import { current_route } from "./stores";
 
 	let is_dropdown_active = false;
 	function toggleNavbar() {
@@ -68,8 +47,8 @@
 		{#each $locales as locale}
 			<a
 				class="navbar-item"
-				href={`/${locale}${current_route}`}
-				data-sveltekit-preload-data="tap"
+				href={`/${locale}${$current_route ?? ""}`}
+				data-sveltekit-preload-data="false"
 				on:blur={handleBlur}
 			>
 				{$t(`lang.${locale}`)}
