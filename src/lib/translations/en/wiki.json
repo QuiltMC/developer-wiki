@@ -113,6 +113,9 @@
 		},
 		"mappings": {
 			"title": "Customizing your Mappings"
-		}
+		},
+    "world_types": {
+			"title": "Adding World Types"
+    }
 	}
 }
