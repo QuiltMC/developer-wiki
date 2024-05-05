@@ -35,7 +35,7 @@
 
 <Header />
 
-<div class="section" style="padding: 0.5rem;">
+<div class="section p-12">
 	<article class="message is-danger mx-3 mt-3 mb-3">
 		<div class="message-body has-text-centered">
 			<h1>
