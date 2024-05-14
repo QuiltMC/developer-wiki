@@ -77,7 +77,7 @@ Because of a change in 1.19.3, you can't add items to item groups using only [Qu
 ```java
 public class ExampleModItems {
     // ...
-    public static void register() {
+    public static void register(ModContainer mod) {
         //...
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.addItem(EXAMPLE_ITEM);
