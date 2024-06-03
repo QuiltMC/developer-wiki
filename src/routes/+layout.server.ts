@@ -4,6 +4,8 @@ import fs from "fs";
 
 import type { Category, Page } from "$lib/types";
 
+import { supportedLocales } from "$l10n";
+
 export async function load({ params }) {
 	const wiki_path = `${process.cwd()}/wiki/`;
 
@@ -25,19 +27,24 @@ export async function load({ params }) {
 					fs.existsSync(`${wiki_path}${category_slug}/${directory_name}/+page.yml`)
 				)
 				.map((page_slug) => {
-					// get the metadata of each file from their yaml file
+					// get the metadata of each page from their yaml file
 					const page_metadata = YAML.parse(
 						fs.readFileSync(`${wiki_path}${category_slug}/${page_slug}/+page.yml`, "utf-8")
+					);
+
+					// get the available locales for each page
+					const available_locales = supportedLocales.filter((locale) =>
+						fs.existsSync(`${wiki_path}${category_slug}/${page_slug}/${locale}.md`)
 					);
 
 					return {
 						slug: page_slug,
 						index:
-							page_metadata.index && typeof page_metadata.index === "number"
+							page_metadata?.index && typeof page_metadata.index === "number"
 								? page_metadata.index
 								: Number.MAX_SAFE_INTEGER, // Put the pages with no index last
-						title: page_metadata.title,
-						draft: page_metadata.draft || false
+						draft: page_metadata?.draft ?? false,
+						availableLocales: available_locales
 					};
 				})
 				.sort((a, b) => a.index - b.index);
@@ -50,10 +57,9 @@ export async function load({ params }) {
 			return {
 				slug: category_slug,
 				index:
-					category_metadata.index && typeof category_metadata.index === "number"
+					category_metadata?.index && typeof category_metadata.index === "number"
 						? category_metadata.index
 						: Number.MAX_SAFE_INTEGER, // Put the categories with no index last
-				name: category_metadata.name,
 				draft: pages.length === pages.filter((page) => page.draft).length,
 				pages: pages
 			};
@@ -62,5 +68,9 @@ export async function load({ params }) {
 		.filter((category) => category.pages.length)
 		.sort((a, b) => a.index - b.index);
 
-	return { category: params.category, slug: params.slug, categories };
+	return {
+		category: params.category,
+		slug: params.article,
+		categories
+	};
 }

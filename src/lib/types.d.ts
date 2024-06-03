@@ -1,14 +1,15 @@
+import type { Locale } from "$l10n";
+
 export interface Page {
 	slug: string;
 	index: number;
-	title: string;
 	draft: boolean;
+	availableLocales: Locale[];
 }
 
 export interface Category {
 	slug: string;
 	index: number;
-	name: string;
 	draft: boolean;
 	pages: Page[];
 }

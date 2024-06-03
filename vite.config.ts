@@ -1,3 +1,4 @@
+import svelteFluent from "@nubolab-ffwd/svelte-fluent/rollup-plugin";
 import { sveltekit } from "@sveltejs/kit/vite";
 import extractorSvelte from "@unocss/extractor-svelte";
 import UnoCSS from "unocss/vite";
@@ -8,6 +9,7 @@ export default defineConfig({
 		UnoCSS({
 			extractors: [extractorSvelte()]
 		}),
+		svelteFluent(),
 		sveltekit()
 	],
 	server: {

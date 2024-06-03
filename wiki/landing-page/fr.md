@@ -1,4 +1,4 @@
-# Wiki pour Développeur·euse·s Quilt :P
+# Wiki pour Développeur·euse·s Quilt
 
 Ce contient de la documentation pour le développement de projets dans l'écosystème Quilt très expérimentale.
 Vérifiez la barre latérale pour voir quels articles sont actullement disponibles !

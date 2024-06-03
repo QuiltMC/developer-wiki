@@ -1,7 +1,7 @@
 import type { ParamMatcher } from "@sveltejs/kit";
 
-import { locales } from "$lib/translations";
+import { isLocale } from "$l10n";
 
 export const match: ParamMatcher = (param) => {
-	return locales.get().includes(param);
+	return isLocale(param);
 };
