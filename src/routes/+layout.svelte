@@ -27,6 +27,9 @@
 	export let data;
 </script>
 
+<!-- Needed to tell unocss that the link icon is indeed used -->
+<div class="i-fa6-solid-link is-hidden" />
+
 <HtmlHead />
 
 <input id="low-contrast" type="checkbox" class="is-hidden" />

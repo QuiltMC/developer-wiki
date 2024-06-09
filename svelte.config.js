@@ -38,13 +38,13 @@ export default {
 						content: {
 							type: "element",
 							tagName: "span",
-							properties: { className: "icon header-anchor-container pl-3" },
+							properties: { className: "header-anchor-container pl-2" },
 							children: [
 								{
 									type: "element",
 									tagName: "i",
 									properties: {
-										className: "header-anchor fas fa-lg fa-link has-text-link is-size-5"
+										className: "header-anchor icon i-fa6-solid-link has-text-link is-size-5"
 									}
 								}
 							]
