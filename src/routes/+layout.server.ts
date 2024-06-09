@@ -12,12 +12,18 @@ export async function load({ params }) {
 		.readdirSync(wiki_path)
 		// remove files with extensions (not directories)
 		.filter((file_name) => !file_name.match(/.+\..+/))
+		// remove directories that don't contain a `+category.yml` file
+		.filter((directory_name) => fs.existsSync(`${wiki_path}${directory_name}/+category.yml`))
 		.map((category_slug) => {
 			const pages: Page[] = fs
 				// get the name if each file in this category's folder
 				.readdirSync(`${wiki_path}${category_slug}/`)
 				// remove files with extensions (not directories)
 				.filter((file_name) => !file_name.match(/.+\..+/))
+				// remove directories that don't contain a `+page.yml` file
+				.filter((directory_name) =>
+					fs.existsSync(`${wiki_path}${category_slug}/${directory_name}/+page.yml`)
+				)
 				.map((page_slug) => {
 					// get the metadata of each file from their yaml file
 					const page_metadata = YAML.parse(
