@@ -1,0 +1,5 @@
+{
+	"title": "Error {{placeholder}}",
+	"404": "未找到页面：`{{placeholder}}`",
+	"500": "The server encoutered an internal error, please try again"
+}
