@@ -1,11 +1,12 @@
 <script lang="ts">
 	import NavbarLangDropdown from "./NavbarLangDropdown.svelte";
-	import { locale } from "$lib/translations/index";
+
+	import { currentLocale } from "$l10n";
 </script>
 
 <nav class="navbar is-dark" aria-label="main navigation" data-controller="navbar">
 	<div class="navbar-brand no-style">
-		<a class="navbar-item navbar-logo" href={`/${$locale}`}>
+		<a class="navbar-item navbar-logo" href={`/${$currentLocale}`}>
 			<img src="https://quiltmc.org/assets/img/logo.svg" alt="Quilt Logo" height="28" width="28" />
 
 			<span class="ml-2">DevWiki</span>

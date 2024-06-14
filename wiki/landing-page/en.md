@@ -1,4 +1,4 @@
-# Quilt Developer Wiki :P
+# Quilt Developer Wiki
 
 This site houses heavily work-in-progress documentation for developing with projects in the Quilt ecosystem.
 Check the sidebar to see what articles are currently available!

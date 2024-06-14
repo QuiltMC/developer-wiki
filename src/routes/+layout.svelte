@@ -1,15 +1,14 @@
 <script lang="ts">
+	import { FluentProvider } from "@nubolab-ffwd/svelte-fluent";
+	import { Overlay } from "@nubolab-ffwd/svelte-fluent";
 	import { onMount } from "svelte";
 
-	import SvelteMarkdown from "svelte-markdown";
-
+	import { currentLocale, currentBundle } from "$l10n";
 	import Footer from "$lib/Footer.svelte";
-	import HtmlHead from "$lib/HtmlHead.svelte";
 	import Header from "$lib/Header.svelte";
+	import HtmlHead from "$lib/HtmlHead.svelte";
 	import Sidebar from "$lib/Sidebar.svelte";
-	import NoPreloadLink from "$lib/svelte-markdown/NoPreloadLink.svelte";
-	import { locale, t } from "$lib/translations/index";
-	import { current_route } from "$lib/stores.js";
+	import { currentRoute } from "$lib/stores.js";
 
 	onMount(async () => {
 		const lowContrast = document.getElementById("low-contrast") as HTMLInputElement;
@@ -27,47 +26,59 @@
 	export let data;
 </script>
 
-<!-- Needed to tell unocss that the link icon is indeed used -->
-<div class="i-fa6-solid-link is-hidden" />
+<!-- Provides the fluent bundle for all children elements so that they can use the fluent translations -->
+<FluentProvider bundles={[$currentBundle]}>
+	<!-- Needed to tell unocss that the link icon is indeed used -->
+	<div class="i-fa6-solid-link is-hidden" />
 
-<HtmlHead />
+	<HtmlHead />
 
-<input id="low-contrast" type="checkbox" class="is-hidden" />
-<input id="toggle-navbar" type="checkbox" class="is-hidden" />
-<input id="toggle-sidebar" type="checkbox" class="is-hidden" />
+	<input id="low-contrast" type="checkbox" class="is-hidden" />
+	<input id="toggle-navbar" type="checkbox" class="is-hidden" />
+	<input id="toggle-sidebar" type="checkbox" class="is-hidden" />
 
-<Header />
+	<Header />
 
-<div class="section p-12">
-	<article class="message is-danger mx-3 mt-3 mb-3">
-		<div class="message-body has-text-centered">
-			<h1>
-				<SvelteMarkdown
-					source={$t("application.dev-notice", {
-						placeholder: "https://github.com/QuiltMC/developer-wiki"
-					})}
-				/>
-			</h1>
-		</div>
-	</article>
-	{#if $locale !== "en"}
+	<div class="section p-12">
 		<article class="message is-danger mx-3 mt-3 mb-3">
 			<div class="message-body has-text-centered">
 				<h1>
-					<SvelteMarkdown
-						source={$t("application.translation-notice", { placeholder: `/en${$current_route}` })}
-						renderers={{ link: NoPreloadLink }}
-					/>
+					<Overlay
+						id="dev-notice"
+						args={{ wiki_source: "https://github.com/QuiltMC/developer-wiki" }}
+					>
+						<a data-l10n-name="link" href="https://github.com/QuiltMC/developer-wiki">
+							<!-- Translated content is inserted here -->
+						</a>
+					</Overlay>
 				</h1>
 			</div>
 		</article>
-	{/if}
-	<div class="columns">
-		<Sidebar categories={data.categories} url={data.category + "/" + data.slug} />
+		{#if $currentLocale !== "en"}
+			<article class="message is-danger mx-3 mt-3 mb-3">
+				<div class="message-body has-text-centered">
+					<h1>
+						<Overlay id="translation-notice">
+							<a
+								data-l10n-name="link"
+								href={`/en${$currentRoute}`}
+								data-sveltekit-preload-data="false"
+							>
+								<!-- Translated content is inserted here -->
+							</a>
+						</Overlay>
+					</h1>
+				</div>
+			</article>
+		{/if}
+		<div class="columns">
+			<Sidebar categories={data.categories} url={data.category + "/" + data.slug} />
 
-		<main class="column container">
-			<slot />
-		</main>
+			<main class="column container">
+				<slot />
+			</main>
+		</div>
 	</div>
-</div>
-<Footer />
+
+	<Footer />
+</FluentProvider>

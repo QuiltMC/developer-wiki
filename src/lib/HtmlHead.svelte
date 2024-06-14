@@ -1,20 +1,30 @@
 <script lang="ts">
+	import { onMount } from "svelte";
+	import { currentDir } from "$l10n";
+	import { browser } from "$app/environment";
+
 	import prism_dark from "prismjs/themes/prism-tomorrow.min.css?url";
 	import prism_light from "prismjs/themes/prism.min.css?url";
 	import styles_dark from "quilt-bulma/dist/style-dark.min.css?url";
 	import styles_light from "quilt-bulma/dist/style-light.min.css?url";
-	import { onMount } from "svelte";
+	import styles_dark_rtl from "quilt-bulma/dist/style-dark-rtl.min.css?url";
+	import styles_light_rtl from "quilt-bulma/dist/style-light-rtl.min.css?url";
 
 	//
 	// userPrefersDarkMode is simple, It's true if the user has dark mode enabled in their browser.
 	//
-	let userPrefersDarkMode: boolean = false;
+	let userPrefersDarkMode = false;
 	onMount(function () {
-		userPrefersDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+		userPrefersDarkMode =
+			window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
 			userPrefersDarkMode = e.matches;
 		});
 	});
+
+	$: if (browser) {
+		document.dir = $currentDir;
+	}
 </script>
 
 <svelte:head>
@@ -53,8 +63,16 @@
 	/>
 	<link rel="shortcut icon" href="https://quiltmc.org/favicon/favicon.ico" />
 
-	<link rel="stylesheet" href={styles_dark} media="(prefers-color-scheme:dark)" />
-	<link rel="stylesheet" href={styles_light} media="(prefers-color-scheme:light)" />
+	{#if $currentDir === "rtl"}
+		<link rel="stylesheet" href={styles_dark_rtl} media="(prefers-color-scheme:dark)" />
+		<link rel="stylesheet" href={styles_light_rtl} media="(prefers-color-scheme:light)" />
+	{:else}
+		<link rel="stylesheet" href={styles_dark} media="(prefers-color-scheme:dark)" />
+		<link rel="stylesheet" href={styles_light} media="(prefers-color-scheme:light)" />
+	{/if}
+
+	<link rel="stylesheet" href={prism_dark} media="(prefers-color-scheme:dark)" />
+	<link rel="stylesheet" href={prism_light} media="(prefers-color-scheme:light)" />
 
 	<style global>
 		.token.number {
@@ -75,6 +93,4 @@
 			}
 		}
 	</style>
-	<link rel="stylesheet" href={prism_dark} media="(prefers-color-scheme:dark)" />
-	<link rel="stylesheet" href={prism_light} media="(prefers-color-scheme:light)" />
 </svelte:head>

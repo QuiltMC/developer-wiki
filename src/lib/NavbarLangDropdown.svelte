@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { currentRoute } from "./stores";
+
+	import { Localized } from "@nubolab-ffwd/svelte-fluent";
+
 	import { browser } from "$app/environment";
-	import { t, locales } from "$lib/translations";
-	import { current_route } from "./stores";
+	import { supportedLocales } from "$l10n";
 
 	let is_dropdown_active = false;
 	function toggleNavbar() {
@@ -40,18 +43,20 @@
 >
 	<span class="navbar-link has-icon">
 		<span class="icon"><span class="i-fa6-solid-language i-2xl" /></span>
-		<span class="is-hidden-desktop">{$t("application.lang-dropdown.language")}</span>
+		<span class="is-hidden-desktop">
+			<Localized id="language" />
+		</span>
 	</span>
 
 	<div class="navbar-dropdown">
-		{#each $locales as locale}
+		{#each supportedLocales as locale}
 			<a
 				class="navbar-item"
-				href={`/${locale}${$current_route ?? ""}`}
+				href={`/${locale}${$currentRoute}`}
 				data-sveltekit-preload-data="false"
 				on:blur={handleBlur}
 			>
-				{$t(`lang.${locale}`)}
+				<Localized id={locale} />
 			</a>
 		{/each}
 	</div>
