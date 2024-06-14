@@ -13,13 +13,20 @@ Les blocs, les entités, les items, les sons, les particules... tous ces différ
 
 ---
 
-Premièrement, nous devons créer une instance de `net.minecraft.item.Item` avec les paramètres de notre item.
+Premièrement, il faut que nous mettions en place un endroit pour les objets de notre mod. Créez une nouvelle classe nommée `ExampleModItems`, en renplaçant `ExampleMod` par le nom de votre mod, dans le même package que votre classe principale.
+Cela nous aidera à rester organiser si jamais notre mod s'aggrandit et ajoute plus d'un item.
 
-En théorie, nous pourrions faire ça directement dans la même ligne où nous enregistrons l'item,
+Ensuite, on va déclarer une instance de `net.minecraft.item.Item` avec les paramètres pour notre item.
+
+En théorie, nous pourrions passer cette étape et déclarer l'item en même temps qu'on lenregistre,
 mais l'avoir dans une variable séparée nous permet d'y faire référence à d'autres endroit pour d'autres usages.
 
+`src/main/com/example/example_mod/ExampleModItems`:
+
 ```java
-public static final Item EXAMPLE_ITEM = new Item(new QuiltItemSettings());
+public class ExampleModItems {
+	public static final Item EXAMPLE_ITEM = new Item(new QuiltItemSettings());
+}
 ```
 
 Ici, le `public static final` permet d'acceder à l'item ailleurs sans que l'on puisse changer la valeur de la variable en elle même,
@@ -32,11 +39,19 @@ mais dans notre cas nous utilisons simplement les paramètres par défaut.
 
 ---
 
-Après avoir déclaré l'item, nous devons dire au registre des items du jeu de l'inclure dans ce dernier.
-Pour ce faire nous ajoutons la ligne suivante dans le `ModInitializer` du mod (([Plus d'information sur les 'mod initializers' ici](../concepts/sideness#les-mod-initializers))) dans la méthode `onInitialize` :
+Après avoir déclaré l'item, nous devons l'enregistrer pour l'inclure dans le jeu.
+Nous allons mettre en place une méthode dans votre classe pour items responsable de l'enregistrement de tous vos items.
+Vous pouvez voir que l'on prend le `ModContainer` du mod comme paramètre pour que l'on puisse l'utiliser pour récupérer l'ID du mod.
+
+`src/main/com/example/example_mod/ExampleModItems`:
 
 ```java
-Registry.register(Registries.ITEM, new Identifier(mod.metadata().id(), "example_item"), EXAMPLE_ITEM);
+public class ExampleModItems {
+	// ...
+	public static void register(ModContainer mod) {
+		Registry.register(Registries.ITEM, new Identifier(mod.metadata().id(), "example_item"), EXAMPLE_ITEM);
+	}
+}
 ```
 
 `Registry.register()` prend trois arguments :
@@ -45,6 +60,22 @@ Registry.register(Registries.ITEM, new Identifier(mod.metadata().id(), "example_
 - L'`Identifier` utilisé pour cet item. Il doit être unique. La première partie est le 'namespace' (qui devrait correspondre à l'identifiant du mod)
   suivi du nom de l'item en lui même. Seules les lettres minuscules, les chiffres, les underscores, les tirets, les points et les slashs sont autorisés.
 - L'`Item` à enregistrer. Ici, on passe l'item déclaré plus tôt.
+
+Enfin, nous devons nous assurer que la méthode `register()` est bien appelée pendant le démarrage du jeu.
+On peut accomplir cela en appelant la méthode dans le `ModInitializer` du mod ([plus d'informations sur les mod initializers ici!](../concepts/sideness#les-mod-initializers)) dans la méthode `onInitialize`:
+
+`src/main/com/example/example_mod/ExampleMod`:
+
+```java
+public class ExampleMod implements ModInitializer {
+	// ...
+	@Override
+	public void onInitialize(ModContainer mod) {
+		// ...
+		ExampleModItems.register(mod);
+	}
+}
+```
 
 Une fois que vous avez fait tout ça, si on lance le jeu on peut voir que l'on peut se donner l'item avec la commande give : `/give @s simple_item_mod:example_item` !
 Mais il n'apparait pas dans le menu du mode créatif, et il n'a pas de texture, et son nom n'a pas de traduction.
@@ -59,10 +90,18 @@ en utilisant seulement les [Quilt Standard Libraries](../concepts/qsl-qfapi#les-
 Grâce à la [Quilted Fabric API](../concepts/qsl-qfapi#la-quilted-fabric-api), qui est inclue dans le mod patron
 et est téléchargée par les utilisateurs avec la QSL, on peut aussi l'utiliser avec Quilt :
 
+`src/main/com/example/example_mod/ExampleModItems`:
+
 ```java
-ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
-	entries.addItem(EXAMPLE_ITEM);
-});
+public class ExampleModItems {
+	// ...
+	public static void register(ModContainer mod) {
+		// ...
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register (entries -> {
+			entries.addItem(EXAMPLE_ITEM);
+		});
+	}
+}
 ```
 
 Ici on utilise l'API `ItemGroupEvents`. On récupère l'[événement](../concepts/events)
@@ -100,6 +139,8 @@ donc dans notre cas : `assets/simple_item_mod/textures/item/example_item.png`.
 
 Enfin, on a besoin d'ajouter une traduction.
 Mettez ceci dans `assets/simple_item_mod/lang/en_us.json`, en remplaçant l'identifiant du mod et le nom de l'item comme avant :
+
+`assets/simple_item_mod/lang/en_us.json`;
 
 ```json
 {

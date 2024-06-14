@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { isRtl } from "$l10n";
 	import { localize } from "@nubolab-ffwd/svelte-fluent";
+
+	import { isRtl } from "$l10n";
 
 	export let data;
 </script>
