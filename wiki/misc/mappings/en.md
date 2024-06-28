@@ -2,7 +2,7 @@
 
 ## What are mappings?
 
-Before a new Minecraft version jar is published to Mojang's servers, it goes through a process called *obfuscation*,
+Before a new Minecraft version jar is published to Mojang's servers, it goes through a process called _obfuscation_,
 where the human-readable class, field and method names are simplified to just a few letters, mainly to optimize the file
 size. In addition, obfuscation makes code very difficult to understand, because those simplified names aren't just
 contractions of the real names, they're completely random letters. This is where mappings come into play.
@@ -60,7 +60,7 @@ closing Enigma.
 ### Contributing the changes back to Quilt
 
 To contribute your changes, you have to add and commit your changes, then push the changes to your fork of QM. This is
-really easy to do with an IDE, as described in [the Setting Up article][setting-up], but if you want you can also do it
+really easy to do with an IDE, as described in [the Setting Up article](../introduction/setting-up), but if you want you can also do it
 from the command prompt or terminal with these commands.
 
 ```bash
@@ -105,15 +105,12 @@ their documentation or code to verify the version you want.
 That's it! You can now reload gradle through your IDE to apply these changes, and use your new mappings when reading
 Minecraft's code.
 
-
 <!-- Links -->
+
 [Quilt Mappings]: https://github.com/QuiltMC/quilt-mappings
 [QM CONTRIBUTING.md]: https://github.com/QuiltMC/quilt-mappings/blob/HEAD/CONTRIBUTING.md
 [Fork QM]: https://github.com/QuiltMC/quilt-mappings/fork
 [QM PRs]: https://github.com/QuiltMC/quilt-mappings/pulls
 [Enigma]: https://github.com/QuiltMC/enigma
 [Enigma guide]: https://github.com/QuiltMC/quilt-mappings/blob/HEAD/GUIDE.md
-
-[setting-up]: /en/introduction/setting-up
-
 [Tiny V2]: https://fabricmc.net/wiki/documentation:tiny2

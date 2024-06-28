@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { currentLocale, isRtl } from "$l10n";
 	import { Localized, Overlay, localize } from "@nubolab-ffwd/svelte-fluent";
+
+	import { currentLocale, isRtl } from "$l10n";
 
 	export let data;
 </script>

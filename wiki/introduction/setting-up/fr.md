@@ -57,7 +57,10 @@ pour Minecraft qui est hautement recommandé. Vous pouvez l'obtenir ici :
 
 Après avoir ouvert le projet, vous devriez voir une fenêtre qui ressembler vaguement à ça :
 
-TODO: Embed screenshot
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="/introduction/template-mod-intellij-dark.png">
+  <img alt="IntelliJ IDEA open to the template mod" src="/introduction/template-mod-intellij-light.png">
+</picture>
 
 Vous pouvez voir des barres latérales de chaque côté de la fenêtre avec des icônes pour accéder à différents outils.
 En voici quelques uns qui vous seront utiles :
@@ -238,4 +241,4 @@ Enfin, rechargez le projet Gradle en appuyant sur ce bouton dans le menu Gradle 
 </picture>
 
 Après avoir complété toutes ces étapes, vous pouvez maintenant travailler sur votre mod !
-Vous pouvez commencer par [Créer votre Premier Item](../items/first-item).
+Vous pouvez commencer par ajouter du contenu avec les tutoriels ["Créer votre Premier Item"](../items/first-item) et [Ajouter un Bloc Simple](../blocks/first-block).
