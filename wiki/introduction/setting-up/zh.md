@@ -61,7 +61,7 @@ On the right and left side there are sidebars with icons to toggle different "To
 When you open a file, it should open a new tab in the editor in the middle.
 Additionally, there are some things you might find not straight away: If you want to rename something, be it a file or a name of a variable or function, you can do so in the context menu under `Refactor > Rename`
 
-## 让模组成为你的
+## 定制你的模组
 
 首先，你需要为你的模组取一个名字。在本教程中，我们将使用`Bingus Mod`这个模组名。
 
@@ -91,28 +91,23 @@ archives_base_name = bingus-mod
 
 ---
 
-接下来，更新在`src/main/resources`文件夹中的`quilt.mod.json`文件。The `quilt.mod.json` defines your mod's metadata, like mod name, author, description, website, but also more development focused metadata such as dependencies, version, mod ID and [mod initializers](../concepts/sideness#on-mod-initializers).
+接下来，更新在`src/main/resources`文件夹中的`quilt.mod.json`文件。
+`quilt.mod.json` 定义了你的模组的元数据，如模组名称、模组作者、模组描述和官方网站。还定义了开发相关的元数据，如依赖项、版本、MODID和[mod initializers](../concepts/sideness#on-mod-initializers)。
 
-You'll need to update a few things under `"quilt_loader"`, see below for a finalized example:
+你需要在 `"quilt_loader"` 下更新一些内容：
 
-1. `"group"` should be set to the Maven group you specified in your `gradle.properties`.
-2. `"id"` should be set to your mod's ID. This should be your mod's name in all lowercase
-   with underscores instead of spaces.
-3. `"metadata"`:
-   1. `"name"` should be your mod's name. This does not require any special formatting,
-      unlike your mod's ID.
-   2. `"description"` should be a short description of your mod.
-   3. `"contributors"` can contain entries for anything. Use your name as the key
-      and `"Developer"` as the value if you don't know what to put here.
-   4. `"contact"` can contain entries for anything similar to `""contributors"`,
-      but typically people put a `"homepage"`, a `"sources"`, and a `"issues"` entry with a valid URL here.
-   5. Replace `example_mod` with your mod's ID in `"icon"`.
-4. In `"entrypoints"`, replace `com.example.example_mod` with your Maven group and mod ID,
-   and the `ExampleMod` at the end should be the Java class name for your mod. The Java class name usually is your mod's name, written in `UpperCamelCase` (So new words simply start by using a uppercase letter and the initial latter is also upper case)
-   For example, `io.github.bingus.bingus_mod.BingusMod`.
-5. In `"mixin"`, replace `example_mod` in the file name to your mod's ID.
+1. `"group"` 应设置为你在 `gradle.properties` 中指定的 Maven group。
+2. `"id"` 应设置为你的MODID。这里应该是模组名称的小写形式，且用下划线代替空格。
+3. `"metadata"`：
+   1. `"name"` 应为你模组的名称。与MODID不同，这里不需要特殊格式。
+   2. `"description"` 应为你模组的简短描述。
+   3. `"contributors"` 可以包含任何条目。如果不知道要放什么，可以将你的名字作为键，值设为 `"Developer"`。
+   4. `"contact"` 可以包含与 `"contributors"` 类似的条目，通常包括 `"homepage"`、`"sources"` 和 `"issues"` 条目，其中的值为有效的URL。
+   5. 在 `"icon"` 中用你的MODID替换 `example_mod`。
+4. 在 `"entrypoints"` 中，用你的 Maven group 和MODID替换 `com.example.example_mod`，末尾的 `ExampleMod` 应为你模组的Java类名。Java类名通常使用 `UpperCamelCase`，例如 `io.github.bingus.bingus_mod.BingusMod`。
+5. 在 `"mixin"` 中，用你的MODID替换文件名中的 `example_mod`。
 
-Your `quilt.mod.json` should not have any traces of "example" in them anymore.
+修改后你的 `quilt.mod.json` 中不应出现 “example” 这个单词，详见下面的最终示例：
 
 ```json
 {
