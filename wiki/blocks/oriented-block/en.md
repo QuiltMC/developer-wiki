@@ -8,7 +8,7 @@ Blocks such as Oak, Spruce and Birch logs are an example of an oriented block. T
 with "Glowing Blackwood Log" being the example block.
 
 
-First off, you will want to make a blockstate json like the following:
+First off, you will want to make two block model json like the following:
 The X, Y, and Z are your blockstate's axis.
 
 `src/main/resources/assets/yeefpineapple/blockstates/glowing_blackwood.json`:
@@ -16,7 +16,7 @@ The X, Y, and Z are your blockstate's axis.
 {
     "variants": {
         "axis=x": {
-            "model": "yeefpineapple:block/glowing_blackwood_horizontal",
+            "model": "yeefpineapple:block/glowing_blackwood",
             "x": 90,
             "y": 90
         },
@@ -24,7 +24,7 @@ The X, Y, and Z are your blockstate's axis.
             "model": "yeefpineapple:block/glowing_blackwood"
         },
         "axis=z": {
-            "model": "yeefpineapple:block/glowing_blackwood_horizontal",
+            "model": "yeefpineapple:block/glowing_blackwood",
             "x": 90
         }
     }
@@ -33,7 +33,30 @@ The X, Y, and Z are your blockstate's axis.
 
 Then you will need to create a class file for the block you're adding. In this example, the file will be called "GlowingBlackwood.java".
 
-`src/main/com/example/yeefpineapple/blocks/YeefPineapple.java`:
+`src/main/com/example/yeefpineapple/blocks/GlowingBlackwood.java`:
 ```java
-    public static final PillarBlock GLOWING_BLACKWOOD = new PillarBlock(QuiltBlockSettings.create());
+public class BeamBlock extends PillarBlock {
+	// The following deals with block rotation
+	@Override
+	public BlockState rotate(BlockState state, BlockRotation rotation) {
+		return changeRotation(state, rotation);
+	}
+	
+	public static BlockState changeRotation(BlockState state, BlockRotation rotation) {
+		return switch (rotation) {
+			case COUNTERCLOCKWISE_90, CLOCKWISE_90 -> switch (state.get(AXIS)) {
+				case X -> state.with(AXIS, Direction.Axis.Z);
+				case Z -> state.with(AXIS, Direction.Axis.X);
+				default -> state;
+			};
+			default -> state;
+		};
+	}
+	
+	// Deals with placing the block properly in accordance to direction.
+	@Override
+	public BlockState getPlacementState(ItemPlacementContext context) {
+		return this.getDefaultState().with(AXIS, context.getSide().getAxis());
+	}
+}
 ```
