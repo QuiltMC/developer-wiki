@@ -1,6 +1,6 @@
 # Codecs
 
-WARNING: This tutorial expects a strong understanding of both Java basics and generics.
+**WARNING**: This tutorial expects a strong understanding of both Java basics and generics.
 
 The `Codec` class from [DataFixerUpper](https://github.com/Mojang/DataFixerUpper) is the backbone of content serialization and deserialization.
 It provides an abstraction layer between Java Objects and serialization types, such as `json`, `nbt`, and more.
@@ -63,7 +63,7 @@ Codec.BOOL.decode(
 The `decode` method on a codec takes two values, an `ops` and an `input`.
 As shown in the comments above, the type of the input and a generic parameter on `ops` must match.
 This is because the `ops` needs to know about how the `input` functions.
-In this example, we use `com.mojang.serialization.JsonOps.INSTANCE`, which operates on json elements from `gson`.
+In this example, we use `com.mojang.serialization.JsonOps.INSTANCE`, which operates on JSON elements from `gson`.
 We then pass in a `JsonPrimitive` with a value of `true` for this example.
 
 Finally, the `com.mojang.serialization.DataResult<Pair<A, T>>` type allows us to encode more information than just the result.
@@ -92,9 +92,11 @@ We use `get` to unbox the `Option`. Generally this is unsafe to do, an IntelliJ 
 In this case we know that it is safe due to the simplicity of the example.
 Then finally, we call `getFirst` on `com.mojang.datafixers.util.Pair` to get the first half of the pair
 
-Wow. That sure was a lot.
-Now, I know this may seem like the `Codec` system is complicated right now, but unfortunately we have only scratched the surface.
-Yep. That's right, it gets so much worse.
+Wow. That sure was a lot. Fortunately, most of time you only need to provide the `Codec`, and Minecraft will do the (de)serialization for you.
+
+
+Now, this may seem like the `Codec` system is complicated right now, and you would be right. We have only scratched the surface of how powerful codecs are. However, I hope you are beginning to see the masterpiece that they are.
+
 Let's step back and look at some more `Codec` types.
 </div>
 
@@ -105,14 +107,37 @@ These collection `Codec`s are fairly straight forward, and each has a constructo
 
 <!-- TODO: Use the static methods instead of the classes -->
 
-- `ListCodec<T>`: A codec for `List<T>`. You can also make a list by calling `listOf` on a `Codec`.
-- `SimpleMapCodec<K, V>`: A codec for `Map<K, V>` with a known set of `K`s. This known set is an additional parameter.
-- `UnboundedMapCodec<K, V>`: A codec for `Map<K, V>`.
-- `PairCodec<F, S>`: A codec of a `Pair<F, S>`.
-- `EitherCodec<L, R>`: A codec of `Either<L, R>`.
+### `ListCodec<T>`
+A codec for a `List<T>`. 
+You can make a `ListCodec<T>` by calling
+- `listOf()` on an instance of `Codec<T>`.
+- `Codec.list(Codec<T>)` with the codec for the element type.
+
+There are also methods that allow you to set a minimum and maximum size for the list.
+
+### `SimpleMapCodec<K, V>`
+A codec for a `Map<K, V>` with a known set of keys of type `K`. This known set is an additional parameter. Because of this, we usually recommend using `UnboundedMapCodec<K, V>`
+
+You create a `SimpleMapCodec<K, V>` by calling `Codec.simpleMap(Codec<K>, Codec<V>, Keyable)`.
+
+### `UnboundedMapCodec<K, V>`
+A codec for a `Map<K, V>`.
+
+You create a `UnboundedMapCodec<K, V>` by calling `Codec.unboundedMap(Codec<K>, Codec<V>)`.
+
+### `PairCodec<F, S>`
+A codec of a `Pair<F, S>`. This is fairly rare as it isn't too often you have just two values you want to serialize together without names for the fields. 
+
+You create a `PairCodec<F, S>` by calling `Codec.pair(Codec<F>, Codec<S>)`.
+
+### `EitherCodec<L, R>`
+A codec of an `Either<L, R>`. This is part of the strength of `Codec`s. This allows you to represent one value with multiple different serializers, and it will choose the correct one based on the type. For example, if you want something to serialize to either a `String` or and `Integer`, you would use an `EitherCodec<String, Integer>`. We will cover this more in depth later on, as there are still a few more concepts to go over before the full use of `EitherCodec<L, R>` becomes apparant.
+
+You create a `EitherCodec<L, R>` by calling `Codec.either(Codec<L>, Codec<R>)`.
+
 
 ## The `RecordCodecBuilder`
-Oh no. There is an explicit type name in a header. This is going to get crazy.
+Oh no. There a full type name from DFU in a header. This is going to get crazy.
 
 Let's start it off simple: a `RecordCodecBuilder` creates a `Codec` that can directly serialize and deserialize a Java object.
 While it has the name `Record` in it, this isnt specific to the `record`s in Java, but it's often a good idea to use `record`s.
@@ -126,7 +151,7 @@ record Foo(int bar, List<Boolean> baz, String qux) {
                 instance.group(
                     Codec.INT.fieldOf("bar").forGetter(Foo::bar),
                     Codec.BOOL.listOf().fieldOf("baz").forGetter(Foo::baz),
-                    Codec.STRING.optionalFieldOf("qux", "default string").forGetter(Foo::qux)
+                    Codec.STRING.optionalFieldOf("qux", "default").forGetter(Foo::qux)
                 ).apply(instance, Foo::new)
         );
 }
@@ -134,7 +159,7 @@ record Foo(int bar, List<Boolean> baz, String qux) {
 
 Ok, thats not too bad. 
 One nice thing about this is that Mojang did a lot of magic behind the scene to make this feel nice.
-Trust me, I (OroArmor) once wrote a similar library and partially gave up on doing the right thing.
+Trust us, there have been a few Quilt developers who have tried making a similar library (OroArmor) and gave up on doing the right thing.
 
 Now, `RecordBuilder.create` takes a lambda, providing an `instance` parameter.
 The main bulk of this lambda is the `group` method.
@@ -152,6 +177,10 @@ Then, you can call one of two methods:
 
 Finally, you call `forGetter`, which takes a `Function<O, T>`, with `O` being the object you are trying to serialize, and `T` being the type of the field on the object.
 
+Once you have finished calling group, the next thing to do is chain an `apply` call. The first parameter is always `instance`, and the second parameter is usually the method handle to constructor for the object you are making the `Codec` for. One thing that is important is to make sure that the order of the constructor parameters and the order of the fields in the group match, as this could cause either runtime or compile time errors.
+
+
+### Serialization
 Now, let's see a serialized `new Foo(8, List.of(true, false, true), "string")` in json:
 ```json
 {
@@ -168,4 +197,4 @@ Now, since we had an optional field, let's see what this json looks like:
     "baz": []
 }
 ```
-Once deserialized, we get an object equal to `new Foo(-2, List.of(), "default string")`
+Once deserialized, we get an object equal to `new Foo(-2, List.of(), "default")`
