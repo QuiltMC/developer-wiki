@@ -5,11 +5,11 @@ WARNING: This tutorial expects a strong understanding of both Java basics and ge
 The `Codec` class from [DataFixerUpper](https://github.com/Mojang/DataFixerUpper) is the backbone of content serialization and deserialization.
 It provides an abstraction layer between Java Objects and serialization types, such as `json`, `nbt`, and more.
 Each `Codec` is made of a `Encoder` and a `Decoder`, but you rarely need to create a raw `Codec` from scratch.
-Let's start off with the primative `Codec`s.
+Let's start off with the primitive `Codec`s.
 
 <!-- TODO: Is this div needed? The basic example is getting pushed to the bottom of the page for some reason -->
 <div>
-## Primative Codecs
+## Primitive Codecs
 
 Mojang thankfully builds in many default `Codec` implementations, making our lives easier as most objects are composed of these few types.
 We will cover building `Codec`s composed of other `Codec`s later on.
@@ -64,7 +64,7 @@ The `decode` method on a codec takes two values, an `ops` and an `input`.
 As shown in the comments above, the type of the input and a generic parameter on `ops` must match.
 This is because the `ops` needs to know about how the `input` functions.
 In this example, we use `com.mojang.serialization.JsonOps.INSTANCE`, which operates on json elements from `gson`.
-We then pass in a `JsonPrimative` with a value of `true` for this example.
+We then pass in a `JsonPrimitive` with a value of `true` for this example.
 
 Finally, the `com.mojang.serialization.DataResult<Pair<A, T>>` type allows us to encode more information than just the result.
 First off, the `A` type is the output of the `Codec`, which is `Boolean` in this case, and the `T` is the same as the input.
@@ -72,7 +72,7 @@ First off, the `A` type is the output of the `Codec`, which is `Boolean` in this
 Let's look more into the `DataResult`:
 ```java
 ...
-.result() // Option<Pair<Boolean, JsonElement>>
+.result() // Optional<Pair<Boolean, JsonElement>>
 ...
 ```
 
