@@ -153,7 +153,7 @@ record Foo(int bar, List<Boolean> baz, String qux) {
                     Codec.BOOL.listOf().fieldOf("baz").forGetter(Foo::baz),
                     Codec.STRING.optionalFieldOf("qux", "default").forGetter(Foo::qux)
                 ).apply(instance, Foo::new)
-        );
+        ).codec();
 }
 ```
 
@@ -175,10 +175,11 @@ Then, you can call one of two methods:
     By default this represents an `Optional<T>`, with `T` being the `Codec` type. 
     There is a method overload, like used in the example, which allows you to provide a default value and not have to store an `Optional<T>`.
 
-Finally, you call `forGetter`, which takes a `Function<O, T>`, with `O` being the object you are trying to serialize, and `T` being the type of the field on the object.
+Next, you call `forGetter`, which takes a `Function<O, T>`, with `O` being the object you are trying to serialize, and `T` being the type of the field on the object.
 
 Once you have finished calling group, the next thing to do is chain an `apply` call. The first parameter is always `instance`, and the second parameter is usually the method handle to constructor for the object you are making the `Codec` for. One thing that is important is to make sure that the order of the constructor parameters and the order of the fields in the group match, as this could cause either runtime or compile time errors.
 
+Finally, you call `.codec()` on the returned value, since the returned value would be a `MapCodec` otherwise. Even though it sounds like it, a `MapCodec` isn't like a Java `Map`. While we won't cover `MapCodec`s much, they do have their uses which will be explained later.
 
 ### Serialization
 Now, let's see a serialized `new Foo(8, List.of(true, false, true), "string")` in json:
@@ -198,3 +199,57 @@ Now, since we had an optional field, let's see what this json looks like:
 }
 ```
 Once deserialized, we get an object equal to `new Foo(-2, List.of(), "default")`
+
+## `Codec.dispatch`
+
+Dispatched `Codec`s are probably both the most complex feature of `Codec`, but also the most elegant and powerful. What if I told you that something you already deserialized could change the rest of the deserialization? An example will probably be the best way to start off:
+
+```java
+interface Dispatched {
+    String type();
+
+    Map<String, MapCodec<? extends Dispatched>> TYPES = Map.of(
+        "a", A.CODEC,
+        "b", B.CODEC
+    );
+
+    Codec<Dispatched> CODEC = Codec.STRING.dispatch(
+        Dispatched::type,
+        TYPES::get
+    );
+}
+
+record A(int a) implements Dispatched {
+    public static MapCodec<A> CODEC = 
+        RecordCodecBuilder.create(
+            instance ->
+                instance.group(
+                    Codec.INT.fieldOf("a").forGetter(A::a)
+                ).apply(instance, A::new)
+        );
+
+    public String type() { return "a"; }
+}
+
+record B(String b) implements Dispatched {
+    public static MapCodec<B> CODEC = 
+        RecordCodecBuilder.create(
+            instance ->
+                instance.group(
+                    Codec.STRING.fieldOf("b").forGetter(B::b)
+                ).apply(instance, B::new)
+        );
+
+    public String type() { return "b"; }
+}
+```
+
+Alright, thats a *lot* of code, but most of it is fairly straight forward. First we have an interface that defines one method, `String type()`. This is so that we can know the types of any implementing classes. We then have a `TYPES` map which is a map of the type of object to its `Codec`. Next, we have the dispatch `Codec`. Since our type's type is `String`, we start off with `Codec.STRING`, since this is how to serialize/deserialize the type. Then we call `dispatch`. The first parameter is a `Function` that takes in the object (a `Dispatched`), and returns the type (a `String`), and here we use the method reference. The second parameter is another `Function`, but takes in a `String` and returns a `MapCodec` (explained shortly). Here we use a method reference to `TYPES.get(s)` to keep the code cleaner.
+
+Finally, we have two different records implementing `Dispatched` with their own `MapCodec`s. Now, `MapCodec`s can be thought of like `Map<String, Codec>`, where the keys are field names. While it's certainly more flexible than that, this covers 90+% of use cases. The reason we use a `MapCodec` is because a `MapCodec` can be inlined into a larger object. I can't put a `Codec.BOOL` into an object without some form of name for it. 
+
+Now, lets look at some serializations:
+| Java | JSON |
+|:---:|:---:|
+| `new A(10)` | `{"type": "a", "a": 10}` |
+| `new B("str")` | `{"type": "b", "b": "str"}` |
