@@ -3,10 +3,10 @@
 在开始之前，你需要准备以下东西。
 
 - Java 17（推荐）或更新版本的Java开发工具包（JDK）。
-  Temurin Adoptium JDK 很容易获得并推荐使用。
+  Temurin Adoptium JDK 易于使用。
   你可以在这里下载它：<https://adoptium.net/releases.html>
-- 任何Java IDE，如[IntelliJ Idea](https://www.jetbrains.com/zh-cn/idea/)和[Eclipse](https://www.eclipse.org/ide/).
-  [Visual Studio Code](https://code.visualstudio.com/)可以工作, 但需要额外的操作来设置。
+- 任何Java IDE，如 [IntelliJ Idea](https://www.jetbrains.com/zh-cn/idea/) 和 [Eclipse](https://www.eclipse.org/ide/)。
+   [Visual Studio Code](https://code.visualstudio.com/) 可以工作, 但需要设置的操作更繁琐。
 - 我们建议使用IntelliJ IDEA，因为它集成的功能多且容易使用。
 
 接下来，你需要决定是[下载模板模组压缩包](#模板模组下载压缩包)还是[使用GitHub模板](#模板模组下载GitHub模板)。如果你不知道如何使用Git，请使用第一种方法。但还是建议你拥有一个GitHub帐户，以便快速入门并熟悉Git。
@@ -141,20 +141,13 @@ archives_base_name = bingus-mod
 
 ---
 
-Create a `LICENSE` for your mod. If you don't know which license to use, check out this
-link: <https://choosealicense.com/>. Note that GPL-3.0 and AGPL-3.0 are both incompatible
-with Minecraft, so don't use them. Once you've chosen a license, put the license's plain text
-in a file named exactly `LICENSE`.
+为你的模组创建一个 `LICENSE` 文件。如果你不确定使用哪个开源协议，可在此链接查看主流开源协议的详细介绍：<https://choosealicense.com/>。请注意，GPL-3.0 和 AGPL-3.0 与 Minecraft 不兼容，不要使用这两种开源协议。选择好后，需要该开源协议的纯文本内容放入名为 `LICENSE` 的文件中。
 
-Delete the `LICENSE-TEMPLATE.md` file. It's not necessary to have since it's the license for
-the template, not your mod.
+删除 `LICENSE-TEMPLATE.md` 文件。因为这是模板的开源协议，而不是你模组的开源协议。
 
 ---
 
-Change the name of the directories in the `src/main/java` folder to reflect your mod.
-For example, if your Maven group is `io.github.bingus` and your mod's ID is `bingus_mod`,
-you should have four directories in total. IntelliJ IDEA should make this step easier for
-you when you rename the directories; just change the whole line to match your group and ID.
+将 `src/main/java` 文件夹中的目录名称更改的与你的模组相符。例如，如果你的 Maven Gruop 是 `io.github.bingus` 且 MODID 是 `bingus_mod`，那么你应该总共有四个目录。IntelliJ IDEA 在重命名这些目录时会更简单：将整行名称更改为与你的 Maven Gruop 和 MODID 匹配的名称即可。
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="/introduction/setting-up-3-dark.png">
