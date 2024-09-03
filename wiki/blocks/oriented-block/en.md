@@ -13,20 +13,20 @@ with "Glowing Blackwood Log" being the example block.
 First off, you will want to make two block model json like the following:
 The X, Y, and Z are your blockstate's axis.
 
-`src/main/resources/assets/yeefpineapple/blockstates/glowing_blackwood.json`:
+`src/main/resources/assets/example_mod/blockstates/glowing_blackwood.json`:
 ```json
 {
     "variants": {
         "axis=x": {
-            "model": "yeefpineapple:block/glowing_blackwood",
+            "model": "example_mod:block/glowing_blackwood",
             "x": 90,
             "y": 90
         },
         "axis=y": {
-            "model": "yeefpineapple:block/glowing_blackwood"
+            "model": "example_mod:block/glowing_blackwood"
         },
         "axis=z": {
-            "model": "yeefpineapple:block/glowing_blackwood",
+            "model": "example_mod:block/glowing_blackwood",
             "x": 90
         }
     }
@@ -35,7 +35,7 @@ The X, Y, and Z are your blockstate's axis.
 
 Then you will need to create a class file for the block you're adding. In this example, the file will be called "GlowingBlackwood.java".
 
-`src/main/com/example/yeefpineapple/blocks/GlowingBlackwood.java`:
+`src/main/com/example/example_mod/blocks/GlowingBlackwood.java`:
 ```java
 public class BeamBlock extends PillarBlock {
 	// The following deals with block rotation
