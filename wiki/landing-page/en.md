@@ -4,6 +4,7 @@ This site houses heavily work-in-progress documentation for developing with proj
 Check the sidebar to see what articles are currently available!
 
 If you are looking to contribute, [this is a great place to start as it lists missing and partially completed wiki articles](https://github.com/QuiltMC/developer-wiki/issues/69).
+If you are looking to translate the wiki to your native language, open a translation PR on the [wiki's GitHUb repo](https://github.com/QuiltMC/developer-wiki/compare).
 
 Keep in mind that when modding with Quilt, this isn't the only source of documentation you can use.
 Here are a few other places to look if you're not seeing what you need:
