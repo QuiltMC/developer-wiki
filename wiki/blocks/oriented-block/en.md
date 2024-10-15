@@ -7,7 +7,7 @@ index: 0
 Orientable blocks are blocks that are placed in different directions based on where you click to place said block and which direction you're facing when placing said block.
 
 Blocks such as Oak, Spruce and Birch logs are an example of an oriented block. The following example will show you how to make your own oriented block
-with "Glowing Blackwood Log" being the example block.
+with the "Glowing Blackwood Log" as an example block.
 
 
 First off, you will want to make two block model json like the following:
