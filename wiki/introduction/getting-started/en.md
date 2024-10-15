@@ -48,7 +48,7 @@ examples of how to do things in open source repositories and sometimes "steal" c
 Open source repositories are there for you to learn from and use, don't be afraid of
 them!
 
-There are many topics in modding where you may quickly find there are many topics in modding lacking relevant tutorials. In those cases you may have to read the relevant Minecraft code, or look at other mods and see how they implemented similar ideas, methods or solutions.
+There are many topics in modding lacking relevant tutorials. In those cases you may have to read the relevant Minecraft code, or look at other mods and see how they implemented similar ideas, methods or solutions. Don't be afraid to ask for help with understanding how Minecraft's systems work!
 If you want to look into the Minecraft source code, run the `genSourcesWithVineflower` Gradle task in the `fabric` category or open any Minecraft source file and click the download sources button in IntelliJ IDEA.
 
 <!-- TODO: Is this todo fixed?: Levi write your thing about stealing code here -->
