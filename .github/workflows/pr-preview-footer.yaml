@@ -9,11 +9,11 @@ jobs:
 
     name: Add preview footer to PR
     steps:
-    - name: Add preview footer to PR
-      uses: devindford/Append_PR_Comment@v1.1.2
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        body-template: |
-          ---
-          See preview on Cloudflare Pages: https://preview-${{ github.event.number }}.developer-wiki.pages.dev
-        body-update-action: 'suffix'
+      - name: Add preview footer to PR
+        uses: devindford/Append_PR_Comment@v1.1.2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          body-template: |
+            ---
+            See preview on Cloudflare Pages: https://preview-${{ github.event.number }}.developer-wiki.pages.dev
+          body-update-action: "suffix"

@@ -19,7 +19,7 @@ Registry.register(Registries.BLOCK, new Identifier(mod.metadata().id(), "example
 
 Remplacez `example_block` avec le nom de votre bloc. Ecrivez tout en minuscule et séparez les mots avec des underscores (tirets du 8).
 
-## Ajouter un Objet pour le Bloc
+## Ajouter un Item pour le Bloc
 
 Après avoir fait ça, on peut placer le bloc dans Minecraft avec la commande `setblock` mais, en ouvrant le menu du mode créatif,
 on ne trouvera pas d'item correspondant au bloc. Pour réparer ça, il faut enregistrer un `BlockItem` pour le bloc et l'ajouter à un groupe d'items,
@@ -35,7 +35,7 @@ ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries 
 
 Le nom de l'item devrait être le même que celui du bloc.
 
-Pour plus d'information sur ce que ça fait, voir l'article [Créez votre Premier Objet](../items/first-item#enregistrer-litem).
+Pour plus d'information sur ce que ça fait, voir l'article [Créez votre Premier Item](../items/first-item#enregistrer-litem).
 
 ## Ajouter un Modèle pour le Bloc
 
