@@ -4,6 +4,11 @@ export default defineConfig({
 	presets: [
 		presetIcons({
 			// Collections are automatically imported from inconify packages
+			collections: {
+				"fa6-brands": () => import("@iconify-json/fa6-brands/icons.json").then((i) => i.default),
+				"fa6-solid": () => import("@iconify-json/fa6-solid/icons.json").then((i) => i.default),
+				tabler: () => import("@iconify-json/tabler/icons.json").then((i) => i.default)
+			},
 			customizations: {
 				iconCustomizer(collection, icon, props) {
 					// Makes the empty cut in half circle slightly larger

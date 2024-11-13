@@ -1,13 +1,16 @@
 <script lang="ts">
-	import { Localized, Overlay, localize } from "@nubolab-ffwd/svelte-fluent";
+	import { Localized, Overlay, getFluentContext } from "@nubolab-ffwd/svelte-fluent";
 
-	import { currentLocale, isRtl } from "$l10n";
+	import { localesDir } from "$l10n";
+	import current from "$lib/current.svelte";
 
-	export let data;
+	const { localize } = getFluentContext();
+
+	let { data } = $props();
 </script>
 
 <svelte:head>
-	<title>{$localize(data.title)}</title>
+	<title>{localize(data.title)}</title>
 </svelte:head>
 
 {#if data.draft}
@@ -18,9 +21,11 @@
 					id="draft-notice"
 					args={{ wiki_source: "https://github.com/QuiltMC/developer-wiki" }}
 				>
-					<a data-l10n-name="link" href="https://github.com/QuiltMC/developer-wiki">
-						<!-- Translated content is inserted here -->
-					</a>
+					{#snippet children()}
+						<a data-l10n-name="link" href="https://github.com/QuiltMC/developer-wiki">
+							<!-- Translated content is inserted here -->
+						</a>
+					{/snippet}
 				</Overlay>
 			</h1>
 		</div>
@@ -34,8 +39,8 @@
 				<Localized
 					id="article-not-translated-notice"
 					args={{
-						current_locale: $localize($currentLocale),
-						fallback_locale: $localize(data.fallbackLocale)
+						current_locale: localize(current.locale),
+						fallback_locale: localize(data.fallbackLocale)
 					}}
 				/>
 			</h1>
@@ -46,10 +51,10 @@
 {#if data.content}
 	{#if !data.translated}
 		<!-- Display the article in the correct direction for the fallback locale -->
-		<div dir={isRtl(data.fallbackLocale) ? "rtl" : "ltr"}>
-			<svelte:component this={data.content} />
+		<div dir={localesDir[data.fallbackLocale]}>
+			<data.content />
 		</div>
 	{:else}
-		<svelte:component this={data.content} />
+		<data.content />
 	{/if}
 {/if}
