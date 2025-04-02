@@ -83,7 +83,7 @@ Set `archives_base_name` to your mod's ID similarly and ignore all other propert
 
 ```gradle
 # Gradle Properties
-org.gradle.jwmargs = -Xmx1G
+org.gradle.jvmargs = -Xmx1G
 org.gradle.parallel = true
 
 # Mod Properties
