@@ -13,7 +13,7 @@ Les blocs, les entités, les items, les sons, les particules... tous ces différ
 
 ---
 
-Premièrement, il faut que nous mettions en place un endroit pour les objets de notre mod. Créez une nouvelle classe nommée `ExampleModItems`, en renplaçant `ExampleMod` par le nom de votre mod, dans le même package que votre classe principale.
+Premièrement, il faut que nous mettions en place un endroit pour les items de notre mod. Créez une nouvelle classe nommée `ExampleModItems`, en renplaçant `ExampleMod` par le nom de votre mod, dans le même package que votre classe principale.
 Cela nous aidera à rester organiser si jamais notre mod s'aggrandit et ajoute plus d'un item.
 
 Ensuite, on va déclarer une instance de `net.minecraft.item.Item` avec les paramètres pour notre item.

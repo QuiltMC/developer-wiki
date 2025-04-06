@@ -72,7 +72,7 @@ introduction = Introduction
 # Items
 items = Items
     .armor = Ajouter une Armure
-    .first-item = Créer votre Premier Ite
+    .first-item = Créer votre Premier Item
     .food = Ajouter de la Nourriture
     .tools = Ajouter des Outils Personnalisés
 

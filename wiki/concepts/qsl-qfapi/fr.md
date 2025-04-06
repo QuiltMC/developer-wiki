@@ -20,7 +20,7 @@ tandis que les APIs sont souvent dans un paquet `api`.
 ## La Fabric API
 
 La Fabric API (FAPI pour faire court) est l'API de Fabric et fournit plusieurs APIs utiles que les Quilt Standard Libraries ne fournissent pas,
-telles que la majorité des APIs de rendu, l'API de groupe d'objets et l'API de key bind.
+telles que la majorité des APIs de rendu, l'API de groupe d'items et l'API de key bind.
 Pour Quilt, la [Quilted Fabric API](#la-quilted-fabric-api) est une implémentation alternative, qui utilise les Quilt Standard Libraries dès que possible.
 
 ## Les Quilt Standard Libraries
@@ -33,7 +33,7 @@ Quelques fonctionnalités fournies par les QSL sont :
 - Les [entrypoints principaux](sideness#les-mod-initializers) pour les mods.
 - Charger les dossiers `assets` et `data` de votre mod avec le [chargeur de ressources](../data/resource-loader).
 - De nombreux [événements](events) tel que l'événement de tick du monde.
-- Des classes et interfaces d'extension pour de nombreux blocs, objets, entités et plus.
+- Des classes et interfaces d'extension pour de nombreux blocs, items, entités et plus.
 
 Bien que vous pouvez ne faire votre mod qu'avec des [mixin](mixins), les QSL font une grosse partie du travai
 et s'assure que des fonctionnalités communes de mods ne causent pas de conflits entre eux.
@@ -54,7 +54,7 @@ La Quilted Fabric API a deux utilisations principales :
 
 - Elle fournit un niveau de compatibilité pour que les mods Fabric puissent être chargées avec Quilt.
 - Et elle permet d'utiliser les API de Fabric quand les QSL ne fournit pas encore d'APIs correspondantes.
-  C'est le cas par exemple pour les [groupes d'objets](../items/first-item#ajouter-litem-à-un-groupe).
+  C'est le cas par exemple pour les [groupes d'items](../items/first-item#ajouter-litem-à-un-groupe).
 
 Comme la QFAPI dépend des QSL et a besoin de connaitre l'implémentation de Fabric,
 elle sera toujours mise à jour après que la Fabric API et les QSL aient été mises à jour.

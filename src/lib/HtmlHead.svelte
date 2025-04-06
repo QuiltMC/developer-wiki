@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	import prism_dark from "prismjs/themes/prism-tomorrow.min.css?url";
 	import prism_light from "prismjs/themes/prism.min.css?url";
 	import styles_dark_rtl from "quilt-bulma/dist/style-dark-rtl.min.css?url";
@@ -8,13 +7,13 @@
 	import styles_light from "quilt-bulma/dist/style-light.min.css?url";
 	import { onMount } from "svelte";
 
-	import { browser } from "$app/environment";
-	import { currentDir } from "$l10n";
+	import { localesDir } from "$l10n";
+	import current from "$lib/current.svelte";
 
 	//
 	// userPrefersDarkMode is simple, It's true if the user has dark mode enabled in their browser.
 	//
-	let userPrefersDarkMode = false;
+	let userPrefersDarkMode = $state(false);
 	onMount(function () {
 		userPrefersDarkMode =
 			window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -23,9 +22,10 @@
 		});
 	});
 
-	$: if (browser) {
-		document.dir = $currentDir;
-	}
+	// $effect only runs in the browser
+	$effect(() => {
+		document.dir = localesDir[current.locale];
+	});
 </script>
 
 <svelte:head>
@@ -64,7 +64,7 @@
 	/>
 	<link rel="shortcut icon" href="https://quiltmc.org/favicon/favicon.ico" />
 
-	{#if $currentDir === "rtl"}
+	{#if localesDir[current.locale] === "rtl"}
 		<link rel="stylesheet" href={styles_dark_rtl} media="(prefers-color-scheme:dark)" />
 		<link rel="stylesheet" href={styles_light_rtl} media="(prefers-color-scheme:light)" />
 	{:else}

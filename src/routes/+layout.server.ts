@@ -1,6 +1,7 @@
 import YAML from "yaml";
 
-import fs from "fs";
+import fs from "node:fs";
+import process from "node:process";
 
 import type { Category, Page } from "$lib/types";
 
