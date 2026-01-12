@@ -1,11 +1,9 @@
-import translationsEn from "./en.ftl?raw";
-import translationsFr from "./fr.ftl?raw";
+// @ts-expect-error the svelte-fluent vite plugin allows to import ftl files
+import resourceEn from "./en.ftl";
+// @ts-expect-error but it seams like typescript dosn´t know that
+import resourceFr from "./fr.ftl";
 
-import { FluentResource, FluentBundle } from "@fluent/bundle";
-import { negotiateLanguages } from "@fluent/langneg";
-import { derived, writable, type Readable, type Writable } from "svelte/store";
-
-import { browser } from "$app/environment";
+import { FluentResource } from "@fluent/bundle";
 
 /**
  * List of all supported locales
@@ -21,65 +19,33 @@ export function isLocale(maybeLocale: string): maybeLocale is Locale {
 
 export const defaultLocale: Locale = "en";
 
-export const currentLocale: Writable<Locale> = writable(defaultLocale);
-
 /**
- * List of supported locales that are rtl (none for now)
+ * The text direction of each supported locale
  */
-const rtlLocales: Locale[] = [];
-
-export function isRtl(locale: Locale): boolean {
-	return rtlLocales.includes(locale);
-}
-
-export const currentDir: Readable<"ltr" | "rtl"> = derived(currentLocale, ($currentLocale, set) => {
-	set(isRtl($currentLocale) ? "rtl" : "ltr");
-});
-
-/**
- * The prefered locales of the user
- * with the current locale as the first element
- */
-export const currentLocales: Readable<Locale[]> = derived(currentLocale, ($currentLocale, set) => {
-	if (browser) {
-		const fallbackLocales = negotiateLanguages(navigator.languages, supportedLocales, {
-			defaultLocale
-		}).filter((locale) => locale !== $currentLocale) as Locale[]; // Remove the current locale to not add it twice
-
-		set([
-			$currentLocale,
-			// Add the user's prefered languages as fallback
-			...fallbackLocales
-		]);
-	} else if ($currentLocale != defaultLocale) {
-		// Only add the default locale when generating on the server
-		set([$currentLocale, defaultLocale]);
-	} else {
-		set([defaultLocale]);
-	}
-});
-
-/**
- * All the translations as fluent resources
- */
-const resources: { [L in Locale]: FluentResource } = {
-	en: new FluentResource(translationsEn),
-	fr: new FluentResource(translationsFr)
+export const localesDir: Record<Locale, "ltr" | "rtl"> = {
+	en: "ltr",
+	fr: "ltr"
 };
 
 /**
- * The bundle with the translations resource
- * of the current locales
+ * The fluent resource for each locale
  */
-export const currentBundle: Readable<FluentBundle> = derived(
-	[currentLocales],
-	([$currentLocales], set) => {
-		const bundle = new FluentBundle($currentLocales);
+export const resources: Record<Locale, FluentResource> = {
+	en: resourceEn,
+	fr: resourceFr
+};
 
-		$currentLocales.forEach((locale) => {
-			bundle.addResource(resources[locale]);
-		});
+/**
+ * Removes the locale from the given pathname (if a locale is found)
+ */
+export function extractRoute(pathname: string): string {
+	const routeExtractor = new RegExp(`^/([^/]+)?(/.+)?$`);
 
-		set(bundle);
-	}
-);
+	const routeMatch = pathname.match(routeExtractor);
+
+	// Locale found, return path without the locale, defaulting to homepage
+	if (routeMatch && routeMatch[1] && isLocale(routeMatch[1])) return routeMatch[2] ?? "/";
+
+	// Just return the pathname in all other cases
+	return pathname;
+}

@@ -1,6 +1,6 @@
 # Ajouter une Armure
 
-Ce tutoriel part du principe que vous savez déjà [Créer votre Premier Objet](first-item).
+Ce tutoriel part du principe que vous savez déjà [Créer votre Premier Item](first-item).
 
 ## Créer un Materiaux d'Armure
 
@@ -72,7 +72,7 @@ public SoundEvent getEquipSound() {
 ---
 
 Ensuite vous devez spécifier l'ingrédient à utiliser pour réparer cette armure,
-dans notre cas nous utiliserons l'item d'exemple créé dans le tutoriel [Créez votre Premier Objet](first-item).
+dans notre cas nous utiliserons l'item d'exemple créé dans le tutoriel [Créez votre Premier Item](first-item).
 
 ```java
 @Override
@@ -110,7 +110,7 @@ public float getKnockbackResistance() {
 }
 ```
 
-## Ajouter les Objets en eux-mêmes
+## Ajouter les Items en eux-mêmes
 
 Maintenant que nous avons déclaré le matériau d'armure, ajoutons les items de l'armure en eux-mêmes :
 
