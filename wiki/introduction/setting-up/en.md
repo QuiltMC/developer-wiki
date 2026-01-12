@@ -4,7 +4,7 @@ You'll need a couple of things before you can get started.
 
 - A Java Development Kit (JDK) for Java 17 (recommended) or newer.
   Temurin Adoptium JDKs are easily available and recommended.
-  You can download them here: <https://adoptium.net/releases.html>
+  You can download them here: [Adoptium Temurin Releases](https://adoptium.net/temurin/releases)
 - Any Java IDE, like [IntelliJ IDEA](https://www.jetbrains.com/idea/) or [Eclipse](https://www.eclipse.org/ide/).
   [Visual Studio Code](https://code.visualstudio.com/) can work, but it takes extra work to get set up.
   - We recommend using IntelliJ IDEA as it has the most integrations and is the easiest to use.
