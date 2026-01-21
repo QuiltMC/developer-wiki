@@ -4,6 +4,8 @@ application-title = Wiki pour Développeur·euse·s Quilt
 
 en = Anglais
 fr = Français
+ru = Russe
+ua = Ukrainien
 
 ## Sidebar
 

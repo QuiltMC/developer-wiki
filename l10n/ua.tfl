@@ -1,0 +1,93 @@
+application-title = Вікі розробника Quilt
+
+## Локалізація
+
+en = Англійська
+fr = Французька
+ua = Українська
+ru = Російська
+
+## Бокова панель
+
+menu = Меню
+articles = Статті
+
+## Випадаючий список мови
+
+language = Мова
+
+## Повідомлення
+
+# $wiki_source (String) - URL репозиторію вікі
+dev-notice = Повідомлення: Цей сайт все ще в розробці. Будь ласка, повідомляйте про будь-які проблеми за посиланням <a data-l10n-name="link">{ $wiki_source }</a>.
+translation-notice = Зверніть увагу, що оригінальна мова цієї вікі — англійська, а перекладені версії можуть бути неактуальні порівняно з <a data-l10n-name="link">англійською версією</a>.
+# $wiki_source (String) - URL репозиторію вікі
+draft-notice = Ви перейшли за посиланням на статтю, яка запланована, але ще не реалізована. Якщо ви хочете допомогти у створенні цієї вікі, подивіться на <a data-l10n-name="link">{ $wiki_source }</a>.
+# $current_locale (String) - Перекладена назва поточної вибраної мови
+# $fallback_locale (String) - Перекладена назва вибраної резервної мови
+article-not-translated-notice = Ця стаття ще не переведена на { $current_locale }, але ми знайшли версію на { $fallback_locale }.
+
+## Помилки
+
+# $error_code (String) - Код помилки
+error-title = Помилка { $error_code }
+# $page_path (String) - Шлях до сторінки без урахування локалі
+not-found-error = Сторінка не знайдена за шляхом <code>{ $page_path }</code>.
+# $article_path (String) - Шлях до статті без урахування локалі
+article-not-found-error = Стаття не знайдена за шляхом <code>{ $article_path }</code>.
+server-error = Сталася внутрішня помилка на сервері, будь ласка, спробуйте знову.
+
+## Вікі
+
+# Блоки
+blocks = Блоки
+    .first-block = Додавання простого блоку
+    .oriented-block = Додавання орієнтованого блоку
+    .redstone-interaction = Додавання функціоналу редстоуну до блоку
+
+# Концепції
+concepts = Концепції
+    .events = Події
+    .libraries = Список сторонніх бібліотек
+    .lifecycles-ticks = Життєві цикли та тики
+    .minecraft-code-structure = Структура коду Minecraft
+    .mixins = Міксини
+    .nbt = NBT та дані в Minecraft
+    .networking = Мережеве взаємодія
+    .qsl-qfapi = Огляд QSL та QFAPI
+    .registries = Реєстри
+    .sideness = Серверна і клієнтська частина
+
+# Дані
+data = Дані
+    .adding-recipes = Додавання рецептів
+    .rea = Використання атрибутів запису реєстру (REA)
+    .recipe-api = API рецептів
+    .recipe-type = Додавання типу рецепту
+    .resource-loader = Завантажувач ресурсів
+
+# Вступ
+introduction = Вступ
+    .getting-started = Початок роботи з Quilt
+    .setting-up = Налаштування середовища розробки
+
+# Предмети
+items = Предмети
+    .armor = Додавання комплекту броні
+    .first-item = Створення першого предмета
+    .food = Додавання їжі
+    .tools = Додавання кастомних інструментів
+
+# Конфігурація
+configuration = Конфігурація
+    .getting-started = Початок роботи з конфігурацією Quilt
+    .advanced-configuring = Розширене налаштування
+    .config-screen = Налаштування екрану конфігурації
+    .metadata = Анотації та довідник по метаданим
+
+# Різне
+misc = Різне
+    .commands = Додавання команд
+    .sounds = Додавання звуків
+    .mappings = Кастомізація ваших відображень
+    .world_types = Додавання типів світів
