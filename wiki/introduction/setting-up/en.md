@@ -107,7 +107,7 @@ You'll need to update a few things under `"quilt_loader"`, see below for a final
    2. `"description"` should be a short description of your mod.
    3. `"contributors"` can contain entries for anything. Use your name as the key
       and `"Developer"` as the value if you don't know what to put here.
-   4. `"contact"` can contain entries for anything similar to `""contributors"`,
+   4. `"contact"` can contain entries for anything similar to `"contributors"`,
       but typically people put a `"homepage"`, a `"sources"`, and a `"issues"` entry with a valid URL here.
    5. Replace `example_mod` with your mod's ID in `"icon"`.
 4. In `"entrypoints"`, replace `com.example.example_mod` with your Maven group and mod ID,
