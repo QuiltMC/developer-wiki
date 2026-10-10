@@ -41,7 +41,7 @@
 
 	<div class="section p-12">
 		<article class="message is-danger mx-3 mt-3 mb-3">
-			<div class="message-body has-text-centered">
+			<div class="message-body has-text-centered notice-body">
 				<h1>
 					<Overlay
 						id="dev-notice"
@@ -56,7 +56,7 @@
 		</article>
 		{#if $currentLocale !== "en"}
 			<article class="message is-danger mx-3 mt-3 mb-3">
-				<div class="message-body has-text-centered">
+				<div class="message-body has-text-centered notice-body">
 					<h1>
 						<Overlay id="translation-notice">
 							<a
@@ -82,3 +82,9 @@
 
 	<Footer />
 </FluentProvider>
+
+<style>
+	.notice-body {
+		overflow-wrap: anywhere;
+	}
+</style>
